@@ -1,0 +1,32 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="MVM_31"
+config/features=PackedStringArray("4.6", "Mobile")
+config/icon="res://icon.svg"
+
+[autoload]
+
+FmodManager="*uid://cds10pm7hwn3p"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/fmod/plugin.cfg")
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"
+renderer/rendering_method="mobile"
