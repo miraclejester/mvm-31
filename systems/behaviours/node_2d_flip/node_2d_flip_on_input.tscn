@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d3thoe536xwf4"]
+
+[ext_resource type="Script" uid="uid://bmqi8p77sklhl" path="res://systems/behaviours/node_2d_flip/node_2d_flip_on_input.gd" id="1_7ebxa"]
+
+[node name="Node2dFlipOnInput" type="Node" unique_id=734874977]
+script = ExtResource("1_7ebxa")

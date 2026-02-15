@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b3f2qugo82euw"]
+
+[ext_resource type="Script" uid="uid://cb7ju07lnoclb" path="res://systems/state_machine/conditions/string_equals/string_equals.gd" id="1_m0lbx"]
+
+[node name="StringEquals" type="Node" unique_id=185236061]
+script = ExtResource("1_m0lbx")

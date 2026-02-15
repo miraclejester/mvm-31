@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://csme4n5aj5nu3"]
+
+[ext_resource type="Script" uid="uid://dkv8gcf4pyc3d" path="res://systems/state_machine/utils/string_retriever/last_animation_retriever/last_animation_retriever.gd" id="1_ngep5"]
+
+[node name="LastAnimationRetriever" type="Node" unique_id=1733489810]
+script = ExtResource("1_ngep5")

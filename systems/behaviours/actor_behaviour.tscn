@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://tthpm8c6xsb3"]
+
+[ext_resource type="Script" uid="uid://cv0425jojeca8" path="res://systems/behaviours/actor_behaviour.gd" id="1_bpghu"]
+
+[node name="ActorBehaviour" type="Node" unique_id=1200312524]
+script = ExtResource("1_bpghu")

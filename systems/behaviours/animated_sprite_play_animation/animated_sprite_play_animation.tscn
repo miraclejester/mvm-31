@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://rntir1lbpfxk"]
+
+[ext_resource type="Script" uid="uid://clpvt6awkg0jp" path="res://systems/behaviours/animated_sprite_play_animation/animated_sprite_play_animation.gd" id="1_rpj64"]
+
+[node name="AnimatedSpritePlayAnimation" type="Node" unique_id=1685052208]
+script = ExtResource("1_rpj64")

@@ -1,3 +1,12 @@
 [gd_scene format=3 uid="uid://b36m53l2v4cpo"]
 
+[ext_resource type="PackedScene" uid="uid://cjrr8xk5rl4ur" path="res://test_assets/tilemaps/caves/cave_tilemap.tmx" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://k0gilutiyigl" path="res://test_assets/test_player/test_player.tscn" id="2_0xm2m"]
+
 [node name="Main" type="Node2D" unique_id=895151578]
+
+[node name="cave_tilemap" parent="." unique_id=1142434451 instance=ExtResource("1_ig7tw")]
+position = Vector2(32, 80)
+
+[node name="TestPlayer" parent="." unique_id=1042347891 instance=ExtResource("2_0xm2m")]
+position = Vector2(350, 143)

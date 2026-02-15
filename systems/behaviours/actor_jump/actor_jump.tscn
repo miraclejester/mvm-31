@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://drlk8sb1yh6hn"]
+
+[ext_resource type="Script" uid="uid://bw0u7exmduf0e" path="res://systems/behaviours/actor_jump/actor_jump.gd" id="1_ybbmv"]
+
+[node name="ActorJump" type="Node" unique_id=1771844202]
+script = ExtResource("1_ybbmv")

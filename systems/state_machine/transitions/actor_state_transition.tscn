@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b4esk6pcjmjsv"]
+
+[ext_resource type="Script" uid="uid://q8mrop02ctqf" path="res://systems/state_machine/transitions/actor_state_transition.gd" id="1_ra4ue"]
+
+[node name="ActorStateTransition" type="Node" unique_id=306109941]
+script = ExtResource("1_ra4ue")

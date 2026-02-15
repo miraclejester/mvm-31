@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://be345138hbvre"]
+
+[ext_resource type="Script" uid="uid://cwf765ygcw821" path="res://systems/state_machine/conditions/body_is_on_floor/condition_body_is_on_floor.gd" id="1_8mh2y"]
+
+[node name="ConditionBodyIsOnFloor" type="Node" unique_id=234422326]
+script = ExtResource("1_8mh2y")

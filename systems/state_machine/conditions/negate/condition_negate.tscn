@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://m6msobg5ayht"]
+
+[ext_resource type="Script" uid="uid://yonfv8553pgg" path="res://systems/state_machine/conditions/negate/condition_negate.gd" id="1_8p0bl"]
+
+[node name="ConditionNegate" type="Node" unique_id=2124520631]
+script = ExtResource("1_8p0bl")
