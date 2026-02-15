@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://k0gilutiyigl"]
 
 [ext_resource type="Texture2D" uid="uid://dcepdavblv4rq" path="res://test_assets/test_player/test_player.png" id="1_1cqw7"]
-[ext_resource type="Script" uid="uid://cs8bhqaypv0lu" path="res://test_assets/test_player/player_state_machine.gd" id="1_unksh"]
-[ext_resource type="PackedScene" uid="uid://c6mqvr2kl1xj2" path="res://test_assets/test_player/states/idle/player_state_idle.tscn" id="3_8pyyg"]
+[ext_resource type="Script" uid="uid://cs8bhqaypv0lu" path="res://test_assets/test_player/player.gd" id="1_unksh"]
+[ext_resource type="PackedScene" uid="uid://bjoawgso0vy1g" path="res://systems/state_machine/actor_state_machine.tscn" id="3_8pyyg"]
+[ext_resource type="PackedScene" uid="uid://c6mqvr2kl1xj2" path="res://test_assets/test_player/states/idle/player_state_idle.tscn" id="4_k4foc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgfib"]
 size = Vector2(10, 29)
@@ -109,10 +110,9 @@ animations = [{
 "speed": 7.0
 }]
 
-[node name="TestPlayer" type="CharacterBody2D" unique_id=1042347891 node_paths=PackedStringArray("initial_state")]
+[node name="TestPlayer" type="CharacterBody2D" unique_id=1042347891]
 scale = Vector2(2, 2)
 script = ExtResource("1_unksh")
-initial_state = NodePath("States/PlayerStateIdle")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1087129646]
 position = Vector2(0, 2.5)
@@ -122,11 +122,11 @@ shape = SubResource("RectangleShape2D_rgfib")
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_t6pgc")
 animation = &"run"
-frame = 2
-frame_progress = 0.27669248
 
-[node name="States" type="Node" parent="." unique_id=1671695046]
+[node name="ActorStateMachine" parent="." unique_id=1386328368 node_paths=PackedStringArray("initial_state") instance=ExtResource("3_8pyyg")]
 unique_name_in_owner = true
+initial_state = NodePath("States/PlayerStateIdle")
 
-[node name="PlayerStateIdle" parent="States" unique_id=1048136627 instance=ExtResource("3_8pyyg")]
-state_id = "idle"
+[node name="PlayerStateIdle" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="0" unique_id=1048136627 instance=ExtResource("4_k4foc")]
+
+[editable path="ActorStateMachine"]

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://0sdn13hb32u4"]
+
+[ext_resource type="Script" uid="uid://bjhefjtpiapox" path="res://systems/state_machine/state/actor_state.gd" id="1_8l7ia"]
+
+[node name="ActorState" type="Node" unique_id=89059854]
+script = ExtResource("1_8l7ia")
+
+[node name="Transitions" type="Node" parent="." unique_id=1880744508]

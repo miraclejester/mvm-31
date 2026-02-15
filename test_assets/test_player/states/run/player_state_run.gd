@@ -1,7 +1,8 @@
-extends PlayerState
+extends ActorState
 class_name PlayerStateRun
 
-func on_enter(player: PlayerStateMachine) -> void:
-	player.animations.play("run")
+var player: Player
 
-#
+func on_enter(state_machine: ActorStateMachine) -> void:
+	player = state_machine.context as Player
+	player.animations.play("run")
