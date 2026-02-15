@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b5ka04bu3afdb"]
+
+[ext_resource type="Script" uid="uid://b8h6akym1rnms" path="res://systems/state_machine/conditions/input_action_just_pressed/input_action_just_pressed.gd" id="1_nofcj"]
+
+[node name="InputActionJustPressed" type="Node" unique_id=598140058]
+script = ExtResource("1_nofcj")

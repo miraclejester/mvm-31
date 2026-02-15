@@ -5,4 +5,17 @@
 [node name="ActorState" type="Node" unique_id=89059854]
 script = ExtResource("1_8l7ia")
 
-[node name="Transitions" type="Node" parent="." unique_id=1880744508]
+[node name="OnEnter" type="Node" parent="." unique_id=667290384]
+unique_name_in_owner = true
+
+[node name="OnExit" type="Node" parent="." unique_id=1496048418]
+unique_name_in_owner = true
+
+[node name="OnProcess" type="Node" parent="." unique_id=1317741512]
+unique_name_in_owner = true
+
+[node name="OnPhysicsProcess" type="Node" parent="." unique_id=544679106]
+unique_name_in_owner = true
+
+[node name="Transitions" type="Node" parent="." unique_id=1931116749]
+unique_name_in_owner = true

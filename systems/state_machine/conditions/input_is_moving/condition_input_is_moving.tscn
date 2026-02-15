@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cqjba3ufwm12m"]
+
+[ext_resource type="Script" uid="uid://d20legrux7vgk" path="res://systems/state_machine/conditions/input_is_moving/condition_input_is_moving.gd" id="1_pseb8"]
+
+[node name="ConditionInputIsMoving" type="Node" unique_id=872567382]
+script = ExtResource("1_pseb8")

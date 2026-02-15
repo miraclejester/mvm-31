@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dk3rixggw3qkb"]
+
+[ext_resource type="Script" uid="uid://bphpdo2v0h5hx" path="res://systems/state_machine/utils/string_retriever/string_retriever.gd" id="1_8ior0"]
+
+[node name="StringRetriever" type="Node" unique_id=181961304]
+script = ExtResource("1_8ior0")

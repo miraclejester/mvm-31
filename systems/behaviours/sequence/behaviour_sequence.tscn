@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://caqfq51gueoim"]
+
+[ext_resource type="Script" uid="uid://bxds426srt4lw" path="res://systems/behaviours/sequence/behaviour_sequence.gd" id="1_e1x6c"]
+
+[node name="BehaviourSequence" type="Node" unique_id=1550808993]
+script = ExtResource("1_e1x6c")
