@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c6mqvr2kl1xj2"]
+
+[ext_resource type="Script" uid="uid://bgbji6ekkqbkq" path="res://test_assets/test_player/states/idle/player_state_idle.gd" id="1_r6djk"]
+
+[node name="PlayerStateIdle" type="Node" unique_id=1048136627]
+script = ExtResource("1_r6djk")
