@@ -3,12 +3,12 @@
 importer="YATI"
 type="PackedScene"
 uid="uid://cjrr8xk5rl4ur"
-path="res://.godot/imported/cave_tilemap.tmx-7625f628d896a75b5a15ed27c8bc4c87.tscn"
+path="res://.godot/imported/test_room_001.tmx-27d2e56370eab4a26fb4a9f09e3071ba.tscn"
 
 [deps]
 
-source_file="res://test_assets/tilemaps/caves/cave_tilemap.tmx"
-dest_files=["res://.godot/imported/cave_tilemap.tmx-7625f628d896a75b5a15ed27c8bc4c87.tscn"]
+source_file="res://maps/tests/test_biome/test_room_001.tmx"
+dest_files=["res://.godot/imported/test_room_001.tmx-27d2e56370eab4a26fb4a9f09e3071ba.tscn"]
 
 [params]
 

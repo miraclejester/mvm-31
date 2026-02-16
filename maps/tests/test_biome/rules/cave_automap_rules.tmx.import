@@ -3,12 +3,12 @@
 importer="YATI"
 type="PackedScene"
 uid="uid://etqq2bal6p32"
-path="res://.godot/imported/cave_automap_rules.tmx-59f962b5baba64bfb1952c885ea89a4e.tscn"
+path="res://.godot/imported/cave_automap_rules.tmx-e7be3e0010c65ffe004a1e82d087df2a.tscn"
 
 [deps]
 
-source_file="res://test_assets/tilemaps/caves/rules/cave_automap_rules.tmx"
-dest_files=["res://.godot/imported/cave_automap_rules.tmx-59f962b5baba64bfb1952c885ea89a4e.tscn"]
+source_file="res://maps/tests/test_biome/rules/cave_automap_rules.tmx"
+dest_files=["res://.godot/imported/cave_automap_rules.tmx-e7be3e0010c65ffe004a1e82d087df2a.tscn"]
 
 [params]
 

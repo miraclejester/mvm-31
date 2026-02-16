@@ -1,0 +1,55 @@
+{
+    "activeFile": "tests/test_biome/test_room_002.tmx",
+    "expandedProjectPaths": [
+        "tests/test_room_001",
+        "tests",
+        "tests/tilesets",
+        "tests/test_biome",
+        ".",
+        "object_templates"
+    ],
+    "fileStates": {
+        "tests/test_biome/test_room_001.tmx": {
+            "expandedObjectLayers": [
+                20,
+                19
+            ],
+            "scale": 1.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 1188,
+                "y": 321.33333333333337
+            }
+        },
+        "tests/test_biome/test_room_002.tmx": {
+            "expandedObjectLayers": [
+                2,
+                4
+            ],
+            "scale": 4,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 71,
+                "y": 316.5
+            }
+        },
+        "tests/tilesets/BlockShapes.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tests/tilesets/CaveTileset.tsx": {
+            "scaleInDock": 1
+        }
+    },
+    "openFiles": [
+        "tests/test_biome/test_room_002.tmx",
+        "tests/test_biome/test_room_001.tmx",
+        "tests/tilesets/BlockShapes.tsx"
+    ],
+    "project": "mvm-13.tiled-project",
+    "recentFiles": [
+        "tests/tilesets/BlockShapes.tsx",
+        "tests/test_biome/test_room_001.tmx",
+        "tests/test_biome/test_room_002.tmx"
+    ]
+}

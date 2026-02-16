@@ -10,37 +10,41 @@
 script = ExtResource("1_p6wco")
 
 [node name="Layer1" type="Parallax2D" parent="." unique_id=1907424241]
-scroll_scale = Vector2(0.2, 1)
-repeat_size = Vector2(1280, 0)
+scroll_scale = Vector2(0.1, 1)
+repeat_size = Vector2(640, 0)
+limit_end = Vector2(10000000, 360)
 
 [node name="Sprite2D" type="Sprite2D" parent="Layer1" unique_id=714504557]
-scale = Vector2(1.335, 1.5)
+scale = Vector2(0.6666667, 0.75000006)
 texture = ExtResource("1_t0xg2")
 centered = false
 
 [node name="Layer2" type="Parallax2D" parent="." unique_id=1447818402]
-scroll_scale = Vector2(0.4, 1)
-repeat_size = Vector2(1280, 0)
+scroll_scale = Vector2(0.2, 1)
+repeat_size = Vector2(640, 0)
+limit_end = Vector2(10000000, 360)
 
 [node name="Sprite2D" type="Sprite2D" parent="Layer2" unique_id=412880131]
-scale = Vector2(1.335, 1.5)
+scale = Vector2(0.6666667, 0.75000006)
 texture = ExtResource("2_p6wco")
 centered = false
 
 [node name="Layer3" type="Parallax2D" parent="." unique_id=404405964]
-scroll_scale = Vector2(0.6, 1)
-repeat_size = Vector2(1280, 0)
+scroll_scale = Vector2(0.3, 1)
+repeat_size = Vector2(640, 0)
+limit_end = Vector2(10000000, 360)
 
 [node name="Sprite2D" type="Sprite2D" parent="Layer3" unique_id=293643210]
-scale = Vector2(1.335, 1.5)
+scale = Vector2(0.6666667, 0.75000006)
 texture = ExtResource("3_f884o")
 centered = false
 
 [node name="Layer4" type="Parallax2D" parent="." unique_id=2091630756]
-scroll_scale = Vector2(0.8, 1)
-repeat_size = Vector2(1280, 0)
+scroll_scale = Vector2(0.4, 1)
+repeat_size = Vector2(640, 0)
+limit_end = Vector2(10000000, 360)
 
 [node name="Sprite2D" type="Sprite2D" parent="Layer4" unique_id=613961747]
-scale = Vector2(1.335, 1.5)
+scale = Vector2(0.6666667, 0.75000006)
 texture = ExtResource("4_ce3m6")
 centered = false

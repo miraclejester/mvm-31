@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cakikgnrclleg"]
+
+[ext_resource type="Script" uid="uid://ckp7brd6igjky" path="res://systems/world/world_room.gd" id="1_onest"]
+
+[node name="WorldRoom" type="Node2D" unique_id=296712214]
+script = ExtResource("1_onest")
+
+[node name="Background" type="Node2D" parent="." unique_id=293293529]
+unique_name_in_owner = true
+
+[node name="Map" type="Node2D" parent="." unique_id=1739295390]
+unique_name_in_owner = true
+
+[node name="Doorways" type="Node2D" parent="." unique_id=398953463]
+unique_name_in_owner = true

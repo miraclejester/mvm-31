@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <object name="doorway">
+  <properties>
+   <property name="target_room" value="test_room_001"/>
+   <property name="target_spawn_point" value="right_entrance"/>
+  </properties>
+  <point/>
+ </object>
+</template>

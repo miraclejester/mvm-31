@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bjoawgso0vy1g" path="res://systems/state_machine/actor_state_machine.tscn" id="3_8pyyg"]
 [ext_resource type="Script" uid="uid://bui73g4fo1scy" path="res://systems/controllers/simple_animations/simple_animation_controller.gd" id="3_fsgr1"]
 [ext_resource type="PackedScene" uid="uid://b60yvaarvf2iu" path="res://systems/controllers/input/player_controller.tscn" id="3_rcghi"]
+[ext_resource type="PackedScene" uid="uid://byhh2fowtieuu" path="res://systems/interactables/doorways/doorway_detector.tscn" id="4_56x04"]
 [ext_resource type="PackedScene" uid="uid://dtq4wlupjnawu" path="res://systems/behaviours/actor_movement/actor_movement.tscn" id="4_o2riq"]
 [ext_resource type="PackedScene" uid="uid://0sdn13hb32u4" path="res://systems/state_machine/state/actor_state.tscn" id="4_oycdn"]
 [ext_resource type="PackedScene" uid="uid://d3thoe536xwf4" path="res://systems/behaviours/node_2d_flip/node_2d_flip_on_input.tscn" id="5_o2riq"]
@@ -86,6 +87,30 @@ region = Rect2(250, 37, 50, 37)
 [sub_resource type="AtlasTexture" id="AtlasTexture_v3lkl"]
 atlas = ExtResource("1_1cqw7")
 region = Rect2(300, 37, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhr4d"]
+atlas = ExtResource("1_1cqw7")
+region = Rect2(150, 111, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lykvf"]
+atlas = ExtResource("1_1cqw7")
+region = Rect2(200, 111, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7m13"]
+atlas = ExtResource("1_1cqw7")
+region = Rect2(250, 111, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56x04"]
+atlas = ExtResource("1_1cqw7")
+region = Rect2(300, 111, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ssrwr"]
+atlas = ExtResource("1_1cqw7")
+region = Rect2(0, 148, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mly3l"]
+atlas = ExtResource("1_1cqw7")
+region = Rect2(200, 0, 50, 37)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oev7u"]
 atlas = ExtResource("1_1cqw7")
@@ -175,6 +200,34 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_dhr4d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lykvf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p7m13")
+}],
+"loop": true,
+"name": &"slide",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56x04")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ssrwr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mly3l")
+}],
+"loop": false,
+"name": &"slide_stand",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_oev7u")
 }, {
 "duration": 1.0,
@@ -202,8 +255,12 @@ shape = SubResource("RectangleShape2D_rgfib")
 [node name="Animations" type="AnimatedSprite2D" parent="." unique_id=1447982666]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_t6pgc")
-animation = &"jump"
+animation = &"idle"
 script = ExtResource("3_fsgr1")
+
+[node name="CameraRemote" type="RemoteTransform2D" parent="." unique_id=1653809102]
+
+[node name="DoorwayDetector" parent="." unique_id=690771773 instance=ExtResource("4_56x04")]
 
 [node name="PlayerController" parent="." unique_id=1995312103 instance=ExtResource("3_rcghi")]
 available_actions = Array[String](["jump"])
