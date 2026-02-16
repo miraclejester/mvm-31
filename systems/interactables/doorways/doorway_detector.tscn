@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://byhh2fowtieuu"]
+
+[ext_resource type="Script" uid="uid://bjvcsgw3k4bb" path="res://systems/interactables/doorways/doorway_detector.gd" id="1_8qtsj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pydli"]
+size = Vector2(2, 2)
+
+[node name="DoorwayDetector" type="Area2D" unique_id=690771773]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_8qtsj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=992350183]
+shape = SubResource("RectangleShape2D_pydli")

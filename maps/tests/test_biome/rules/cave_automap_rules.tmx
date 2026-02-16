@@ -3,7 +3,7 @@
  <tileset firstgid="1" source=":/automap-tiles.tsx"/>
  <tileset firstgid="6" source="../../tilesets/BlockShapes.tsx"/>
  <tileset firstgid="20" source="../../tilesets/CaveTileset.tsx"/>
- <layer id="1" name="input_Level" width="30" height="20" opacity="0.8">
+ <layer id="1" name="input_level" width="30" height="20" opacity="0.8">
   <data encoding="csv">
    <chunk x="0" y="-16" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -97,7 +97,7 @@
 </chunk>
   </data>
  </layer>
- <layer id="2" name="output_out" width="30" height="20" opacity="0.5">
+ <layer id="2" name="output_level_out" width="30" height="20" opacity="0.5">
   <data encoding="csv">
    <chunk x="-16" y="-16" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

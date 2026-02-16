@@ -1,6 +1,8 @@
 extends Node
 class_name ActorController
 
+signal action_just_released(action: String)
+
 @export var available_actions: Array[String]
 
 var direction: Vector2 = Vector2.ZERO
@@ -22,13 +24,18 @@ func update_inputs() -> void:
 	get_movement_input()
 	for action in available_actions:
 		get_action_data(action)
-	direction.x = right_strength - left_strength
+	if not (right_strength > 0 and left_strength > 0):
+		direction.x = right_strength - left_strength
 	is_moving = direction.x != 0
 
 
 func is_action_just_pressed(action: String) -> bool:
 	var data: InputActionData = action_dict.get(action)
 	return data != null and data.just_pressed
+
+
+func send_action_just_released(action: String) -> void:
+	action_just_released.emit(action)
 
 
 func get_movement_input() -> void:
