@@ -6,6 +6,7 @@ signal doorway_triggered(data: DoorwayData)
 @onready var map_parent: Node2D = %Map
 @onready var background_parent: Node2D = %Background
 @onready var doorway_parent: Node2D = %Doorways
+@onready var projectile_parent: Node2D = %Projectiles
 
 var current_context: WorldContext
 var level_layer: TileMapLayer
@@ -20,6 +21,7 @@ func initialize(data: WorldRoomData, context: WorldContext) -> void:
 	load_background(data)
 	process_spawn_points(current_map.get_node("spawn_points"))
 	process_doorways()
+	clear_objects()
 	context.player.global_position = spawn_points.get(context.spawn)
 
 
@@ -84,3 +86,13 @@ func process_doorways() -> void:
 
 func on_doorway_triggered(data: DoorwayData) -> void:
 	doorway_triggered.emit(data)
+
+
+func on_projectile_shot(data: ProjectileShotData) -> void:
+	projectile_parent.add_child(data.projectile)
+	data.projectile.global_position = data.position
+
+
+func clear_objects() -> void:
+	for child in projectile_parent.get_children():
+		child.queue_free()

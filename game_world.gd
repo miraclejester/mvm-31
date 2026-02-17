@@ -14,7 +14,9 @@ func _ready() -> void:
 		"spawn": "initial_spawn"
 	})
 	current_room.initialize(world_data.default_starting_room, context)
+	
 	current_room.doorway_triggered.connect(enter_doorway)
+	EventBroadcaster.projectile_shot.connect(on_projectile_shot)
 
 
 func enter_doorway(data: DoorwayData) -> void:
@@ -23,3 +25,7 @@ func enter_doorway(data: DoorwayData) -> void:
 		"player": player,
 		"spawn": data.target_spawn_point
 	}))
+
+
+func on_projectile_shot(data: ProjectileShotData) -> void:
+	current_room.on_projectile_shot(data)

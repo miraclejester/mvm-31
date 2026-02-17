@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://bqb5fqmonqib1"]
-
-[ext_resource type="Script" uid="uid://bdgrt4ytajfyw" path="res://test_assets/test_player/states/fall/player_state_fall.gd" id="1_mhcm4"]
-
-[node name="PlayerStateFall" type="Node" unique_id=1999344171]
-script = ExtResource("1_mhcm4")

@@ -18,7 +18,7 @@ func run() -> void:
 
 func _process(delta: float) -> void:
 	current_state.run_on_process(delta)
-	var next_state = current_state.process_transitions(self)
+	var next_state = current_state.process_transitions()
 	if next_state != null:
 		enter_state(next_state)
 

@@ -1,7 +1,12 @@
 extends Node
 class_name ActorBehaviour
 
+@export var enable_on_ready: bool = true
+
 var enabled: bool = true
+
+func _ready() -> void:
+	set_enabled(enable_on_ready)
 
 func run(_delta: float) -> void:
 	pass

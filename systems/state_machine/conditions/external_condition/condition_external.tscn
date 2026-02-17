@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://djmto3b623xio"]
+
+[ext_resource type="Script" uid="uid://big2o8u1pi370" path="res://systems/state_machine/conditions/external_condition/condition_external.gd" id="1_mbk4i"]
+
+[node name="ConditionExternal" type="Node" unique_id=2049590081]
+script = ExtResource("1_mbk4i")

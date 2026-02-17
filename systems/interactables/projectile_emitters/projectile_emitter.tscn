@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bsvr0wv34fdju"]
+
+[ext_resource type="Script" uid="uid://dsd5s5kjntcuu" path="res://systems/interactables/projectile_emitters/projectile_emitter.gd" id="1_6hkv2"]
+
+[node name="ProjectileEmitter" type="Node2D" unique_id=836465356]
+script = ExtResource("1_6hkv2")
+
+[node name="Muzzle" type="Marker2D" parent="." unique_id=782941251]
+unique_name_in_owner = true
+
+[node name="FireRateTimer" type="Timer" parent="." unique_id=1223741517]
+unique_name_in_owner = true
+one_shot = true

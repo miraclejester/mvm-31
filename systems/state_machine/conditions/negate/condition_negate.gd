@@ -7,8 +7,8 @@ func _ready() -> void:
 	conditions.assign(get_children())
 
 
-func evaluate(state_machine: ActorStateMachine) -> bool:
+func evaluate() -> bool:
 	for condition in conditions:
-		if not condition.evaluate(state_machine):
+		if not condition.evaluate():
 			return true
 	return false

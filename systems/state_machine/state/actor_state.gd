@@ -21,9 +21,9 @@ func _ready() -> void:
 	transitions.assign(transitions_parent.get_children())
 
 
-func process_transitions(state_machine: ActorStateMachine) -> ActorState:
+func process_transitions() -> ActorState:
 	for transition in transitions:
-		if transition.evaluate(state_machine):
+		if transition.evaluate():
 			return transition.target_state
 	return null
 
@@ -39,12 +39,18 @@ func run_behaviour(behaviour: ActorBehaviour, delta: float) -> void:
 		behaviour.run(delta)
 
 func run_on_enter(delta: float) -> void:
+	for transition in transitions:
+		transition.state_entered()
 	run_behaviour(on_enter, delta)
 
 func run_on_exit(delta: float) -> void:
+	for transition in transitions:
+		transition.state_exited()
 	run_behaviour(on_exit, delta)
 
 func run_on_process(delta: float) -> void:
+	for transition in transitions:
+		transition.state_processed(delta)
 	run_behaviour(on_process, delta)
 
 func run_on_physics_process(delta: float) -> void:

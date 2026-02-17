@@ -13,3 +13,6 @@ unique_name_in_owner = true
 
 [node name="Doorways" type="Node2D" parent="." unique_id=398953463]
 unique_name_in_owner = true
+
+[node name="Projectiles" type="Node2D" parent="." unique_id=856809934]
+unique_name_in_owner = true
