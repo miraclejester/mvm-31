@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cnj582e0jrrhp"]
+
+[ext_resource type="Script" uid="uid://57o03skoxiu4" path="res://systems/interactables/projectiles/projectile.gd" id="1_c7qi2"]
+
+[node name="Projectile" type="CharacterBody2D" unique_id=1232689117]
+script = ExtResource("1_c7qi2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1093523711]

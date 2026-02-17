@@ -35,9 +35,12 @@ limit_right = 2560
 limit_bottom = 720
 
 [editable path="TestPlayer"]
+[editable path="TestPlayer/FlipTarget/TestGun"]
 [editable path="TestPlayer/ActorStateMachine"]
 [editable path="TestPlayer/ActorStateMachine/States/Idle"]
 [editable path="TestPlayer/ActorStateMachine/States/Run"]
 [editable path="TestPlayer/ActorStateMachine/States/Fall"]
 [editable path="TestPlayer/ActorStateMachine/States/InitJump"]
 [editable path="TestPlayer/ActorStateMachine/States/Jump"]
+[editable path="TestPlayer/ActorStateMachine/States/IdleShoot"]
+[editable path="TestPlayer/ActorStateMachine/States/IdleShoot/Transitions/ToIdle/ConditionConditionalTimer"]

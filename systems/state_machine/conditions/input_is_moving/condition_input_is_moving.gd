@@ -3,5 +3,5 @@ class_name ConditionInputIsMoving
 
 @export var controller: ActorController
 
-func evaluate(_state_machine: ActorStateMachine) -> bool:
+func evaluate() -> bool:
 	return controller.is_moving

@@ -2,6 +2,7 @@ extends Node
 class_name ActorController
 
 signal action_just_released(action: String)
+signal action_just_pressed(action: String)
 
 @export var available_actions: Array[String]
 
@@ -36,6 +37,10 @@ func is_action_just_pressed(action: String) -> bool:
 
 func send_action_just_released(action: String) -> void:
 	action_just_released.emit(action)
+
+
+func send_action_just_pressed(action: String) -> void:
+	action_just_pressed.emit(action)
 
 
 func get_movement_input() -> void:

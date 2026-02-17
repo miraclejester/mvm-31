@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://b1i0syj04pm6g"]
+
+[ext_resource type="PackedScene" uid="uid://cnj582e0jrrhp" path="res://systems/interactables/projectiles/projectile.tscn" id="1_jxnb1"]
+[ext_resource type="Texture2D" uid="uid://caqajn7pwvq1s" path="res://test_assets/projectiles/fire-sheet.png" id="2_i6rkn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6rkn"]
+atlas = ExtResource("2_i6rkn")
+region = Rect2(0, 0, 16, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6a2aq"]
+atlas = ExtResource("2_i6rkn")
+region = Rect2(16, 0, 16, 6)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nb4ls"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i6rkn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6a2aq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[node name="TestBullet" unique_id=449955664 instance=ExtResource("1_jxnb1")]
+
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=1093523711]
+sprite_frames = SubResource("SpriteFrames_nb4ls")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.5077113

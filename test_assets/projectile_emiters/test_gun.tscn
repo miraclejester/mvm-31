@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://wqvwwvwj828h"]
+
+[ext_resource type="PackedScene" uid="uid://bsvr0wv34fdju" path="res://systems/interactables/projectile_emitters/projectile_emitter.tscn" id="1_rij7k"]
+[ext_resource type="PackedScene" uid="uid://b1i0syj04pm6g" path="res://test_assets/projectiles/test_bullet.tscn" id="2_uhp2g"]
+[ext_resource type="Script" uid="uid://itll3wx11inm" path="res://systems/interactables/projectile_emitters/projectile_emiter_data.gd" id="3_wr61e"]
+
+[sub_resource type="Resource" id="Resource_2agov"]
+script = ExtResource("3_wr61e")
+projectile_scene = ExtResource("2_uhp2g")
+fire_rate = 0.32
+projectile_speed = 350.0
+metadata/_custom_type_script = "uid://itll3wx11inm"
+
+[node name="TestGun" unique_id=836465356 instance=ExtResource("1_rij7k")]
+emitter_data = SubResource("Resource_2agov")

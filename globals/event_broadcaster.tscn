@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bop3x6g66wjvr"]
+
+[ext_resource type="Script" uid="uid://ewqn2obgkk4n" path="res://globals/event_broadcaster.gd" id="1_v8t13"]
+
+[node name="EventBroadcaster" type="Node" unique_id=52729857]
+script = ExtResource("1_v8t13")
