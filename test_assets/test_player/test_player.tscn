@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cs8bhqaypv0lu" path="res://player/player.gd" id="1_unksh"]
 [ext_resource type="PackedScene" uid="uid://bjoawgso0vy1g" path="res://systems/state_machine/actor_state_machine.tscn" id="3_8pyyg"]
 [ext_resource type="Script" uid="uid://bui73g4fo1scy" path="res://systems/controllers/simple_animations/simple_animation_controller.gd" id="3_fsgr1"]
+[ext_resource type="Texture2D" uid="uid://dnaro4v3sfvd6" path="res://test_assets/test_player/test_player_swim.png" id="3_p7m13"]
 [ext_resource type="PackedScene" uid="uid://b60yvaarvf2iu" path="res://systems/controllers/input/player_controller.tscn" id="3_rcghi"]
 [ext_resource type="PackedScene" uid="uid://byhh2fowtieuu" path="res://systems/interactables/doorways/doorway_detector.tscn" id="4_56x04"]
 [ext_resource type="PackedScene" uid="uid://dtq4wlupjnawu" path="res://systems/behaviours/actor_movement/actor_movement.tscn" id="4_o2riq"]
@@ -24,6 +25,9 @@
 [ext_resource type="PackedScene" uid="uid://cflsrlihm1lsk" path="res://systems/state_machine/conditions/body_is_falling/body_is_falling.tscn" id="17_pd5ni"]
 [ext_resource type="PackedScene" uid="uid://de5ldo8mb0tna" path="res://systems/state_machine/conditions/conditional_timer/condition_conditional_timer.tscn" id="22_dhr4d"]
 [ext_resource type="PackedScene" uid="uid://djmto3b623xio" path="res://systems/state_machine/conditions/external_condition/condition_external.tscn" id="22_lykvf"]
+[ext_resource type="PackedScene" uid="uid://dkekvatgxcsnt" path="res://systems/behaviours/actor_enable_behaviour/actor_enable_behaviour.tscn" id="24_a6siw"]
+[ext_resource type="PackedScene" uid="uid://dm65o3s1q1y0l" path="res://systems/state_machine/conditions/bool_equals/bool_equals.tscn" id="25_p16wc"]
+[ext_resource type="PackedScene" uid="uid://dcjwut7tpbc4b" path="res://systems/state_machine/utils/bool_retriever/actor_tile_bool/actor_tile_bool_retriever.tscn" id="27_a6siw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgfib"]
 size = Vector2(10, 29)
@@ -167,6 +171,22 @@ region = Rect2(100, 74, 50, 37)
 [sub_resource type="AtlasTexture" id="AtlasTexture_pd5ni"]
 atlas = ExtResource("1_1cqw7")
 region = Rect2(150, 74, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7vv4j"]
+atlas = ExtResource("3_p7m13")
+region = Rect2(0, 0, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ioy6e"]
+atlas = ExtResource("3_p7m13")
+region = Rect2(50, 0, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ssd6y"]
+atlas = ExtResource("3_p7m13")
+region = Rect2(100, 0, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hnr7u"]
+atlas = ExtResource("3_p7m13")
+region = Rect2(150, 0, 50, 37)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_t6pgc"]
 animations = [{
@@ -319,6 +339,23 @@ animations = [{
 "loop": false,
 "name": &"start_jump",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7vv4j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ioy6e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ssd6y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hnr7u")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 8.0
 }]
 
 [node name="TestPlayer" type="CharacterBody2D" unique_id=1042347891]
@@ -334,7 +371,8 @@ shape = SubResource("RectangleShape2D_rgfib")
 [node name="Animations" type="AnimatedSprite2D" parent="FlipTarget" unique_id=1447982666]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_t6pgc")
-animation = &"shoot_run"
+animation = &"swim"
+frame_progress = 0.26285234
 script = ExtResource("3_fsgr1")
 
 [node name="TestGun" parent="FlipTarget" unique_id=836465356 instance=ExtResource("4_ssrwr")]
@@ -352,9 +390,12 @@ available_actions = Array[String](["jump", "attack"])
 [node name="Behaviours" type="Node" parent="." unique_id=112046428]
 unique_name_in_owner = true
 
-[node name="ActorMovement" parent="Behaviours" unique_id=655420935 node_paths=PackedStringArray("body", "controller") instance=ExtResource("4_o2riq")]
+[node name="ActorMovement" parent="Behaviours" unique_id=655420935 node_paths=PackedStringArray("body", "controller", "water_detector") instance=ExtResource("4_o2riq")]
 body = NodePath("../..")
 controller = NodePath("../../PlayerController")
+water_detector = NodePath("../../Data/IsInWaterRetriever")
+water_friction_factor = 0.1
+water_jump_force = -200.0
 
 [node name="Node2dFlipOnInput" parent="Behaviours" unique_id=734874977 node_paths=PackedStringArray("flip_target", "controller") instance=ExtResource("5_o2riq")]
 flip_target = NodePath("../../FlipTarget")
@@ -590,6 +631,35 @@ target_state = NodePath("../../../Fall")
 [node name="ShootTimer" parent="ActorStateMachine/States/AirShoot/Transitions/ToFall" unique_id=1276246992 node_paths=PackedStringArray("condition") instance=ExtResource("22_lykvf")]
 condition = NodePath("../../../../../../Data/ExternalConditions/ConditionShootTimer")
 
+[node name="Swim" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="8" unique_id=798264796 instance=ExtResource("4_oycdn")]
+
+[node name="BehaviourSequence" parent="ActorStateMachine/States/Swim/OnEnter" parent_id_path=PackedInt32Array(798264796, 667290384) index="0" unique_id=1632698810 instance=ExtResource("14_vrg71")]
+
+[node name="AnimatedSpritePlayAnimation" parent="ActorStateMachine/States/Swim/OnEnter/BehaviourSequence" unique_id=515206810 node_paths=PackedStringArray("animated_sprite") instance=ExtResource("5_wmsue")]
+animated_sprite = NodePath("../../../../../../FlipTarget/Animations")
+anim_key = "swim"
+
+[node name="DisableFlip" parent="ActorStateMachine/States/Swim/OnEnter/BehaviourSequence" unique_id=1778294583 node_paths=PackedStringArray("behaviour") instance=ExtResource("24_a6siw")]
+behaviour = NodePath("../../../../../../Behaviours/Node2dFlipOnInput")
+enable = false
+
+[node name="EnableFlip" parent="ActorStateMachine/States/Swim/OnExit" parent_id_path=PackedInt32Array(798264796, 1496048418) index="0" unique_id=1388675619 node_paths=PackedStringArray("behaviour") instance=ExtResource("24_a6siw")]
+behaviour = NodePath("../../../../../Behaviours/Node2dFlipOnInput")
+
+[node name="ToInitJump" parent="ActorStateMachine/States/Swim/Transitions" parent_id_path=PackedInt32Array(798264796, 1931116749) index="0" unique_id=1808208984 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+target_state = NodePath("../../../InitJump")
+
+[node name="ConditionNegate" parent="ActorStateMachine/States/Swim/Transitions/ToInitJump" unique_id=1453252128 instance=ExtResource("7_wcyp4")]
+
+[node name="IsInWater" parent="ActorStateMachine/States/Swim/Transitions/ToInitJump/ConditionNegate" unique_id=1443999790 node_paths=PackedStringArray("condition") instance=ExtResource("22_lykvf")]
+condition = NodePath("../../../../../../../Data/ExternalConditions/IsInWater")
+
+[node name="ToSwim" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="0" unique_id=1700507375 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+target_state = NodePath("../../States/Swim")
+
+[node name="IsInWater" parent="ActorStateMachine/AnyStateTransitions/ToSwim" unique_id=937262942 node_paths=PackedStringArray("condition") instance=ExtResource("22_lykvf")]
+condition = NodePath("../../../../Data/ExternalConditions/IsInWater")
+
 [node name="Data" type="Node" parent="." unique_id=257589254]
 
 [node name="ExternalConditions" type="Node" parent="Data" unique_id=1230396717]
@@ -617,8 +687,16 @@ key = "attack"
 [node name="ConditionInputIsMoving" parent="Data/ExternalConditions/ConditionIsNotMoving" unique_id=1171605195 node_paths=PackedStringArray("controller") instance=ExtResource("10_wvr7c")]
 controller = NodePath("../../../../PlayerController")
 
+[node name="IsInWater" parent="Data/ExternalConditions" unique_id=1373412581 node_paths=PackedStringArray("bool_retriever") instance=ExtResource("25_p16wc")]
+bool_retriever = NodePath("../../IsInWaterRetriever")
+compared_value = true
+
 [node name="LastAnimationRetriever" parent="Data" unique_id=1733489810 node_paths=PackedStringArray("animation_controller") instance=ExtResource("17_ixgpl")]
 animation_controller = NodePath("../../FlipTarget/Animations")
+
+[node name="IsInWaterRetriever" parent="Data" unique_id=590184828 node_paths=PackedStringArray("actor") instance=ExtResource("27_a6siw")]
+actor = NodePath("../..")
+key = "is_water"
 
 [editable path="FlipTarget/TestGun"]
 [editable path="ActorStateMachine"]
@@ -630,4 +708,5 @@ animation_controller = NodePath("../../FlipTarget/Animations")
 [editable path="ActorStateMachine/States/IdleShoot"]
 [editable path="ActorStateMachine/States/RunShoot"]
 [editable path="ActorStateMachine/States/AirShoot"]
+[editable path="ActorStateMachine/States/Swim"]
 [editable path="Data/ExternalConditions/ConditionShootTimer"]

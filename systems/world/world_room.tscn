@@ -16,3 +16,9 @@ unique_name_in_owner = true
 
 [node name="Projectiles" type="Node2D" parent="." unique_id=856809934]
 unique_name_in_owner = true
+
+[node name="WorldContent" type="Node2D" parent="." unique_id=1534971445]
+unique_name_in_owner = true
+
+[node name="Foreground" type="Node2D" parent="." unique_id=1981198786]
+unique_name_in_owner = true

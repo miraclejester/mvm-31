@@ -3,11 +3,15 @@ class_name ActorStateMachine
 
 @export var initial_state: ActorState
 
+@onready var any_state_transitions_parent: Node = %AnyStateTransitions
+
 var current_state: ActorState = null
+var any_transitions: Array[ActorStateTransition] = []
 
 func _ready() -> void:
 	set_process(false)
 	set_physics_process(false)
+	any_transitions.assign(any_state_transitions_parent.get_children())
 
 
 func run() -> void:
@@ -18,6 +22,12 @@ func run() -> void:
 
 func _process(delta: float) -> void:
 	current_state.run_on_process(delta)
+	
+	for transition in any_transitions:
+		if transition.evaluate():
+			enter_state(transition.target_state)
+			return
+	
 	var next_state = current_state.process_transitions()
 	if next_state != null:
 		enter_state(next_state)

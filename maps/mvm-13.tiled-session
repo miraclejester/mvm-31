@@ -9,28 +9,36 @@
         "object_templates"
     ],
     "fileStates": {
-        "tests/test_biome/test_room_001.tmx": {
-            "expandedObjectLayers": [
-                20,
-                19
-            ],
-            "scale": 1.5,
+        "tests/test_biome/rules/cave_automap_rules.tmx": {
+            "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1188,
-                "y": 321.33333333333337
+                "x": 491.3333333333333,
+                "y": 297.33333333333326
+            }
+        },
+        "tests/test_biome/test_room_001.tmx": {
+            "expandedObjectLayers": [
+                19,
+                20
+            ],
+            "scale": 0.5,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 761,
+                "y": 340
             }
         },
         "tests/test_biome/test_room_002.tmx": {
             "expandedObjectLayers": [
-                2,
-                4
+                4,
+                2
             ],
-            "scale": 4,
-            "selectedLayer": 1,
+            "scale": 0.75,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 71,
-                "y": 316.5
+                "x": 776.6666666666666,
+                "y": -478.66666666666663
             }
         },
         "tests/tilesets/BlockShapes.tsx": {
@@ -47,9 +55,10 @@
         "tests/tilesets/BlockShapes.tsx"
     ],
     "project": "mvm-13.tiled-project",
+    "property.type": "bool",
     "recentFiles": [
+        "tests/test_biome/test_room_002.tmx",
         "tests/tilesets/BlockShapes.tsx",
-        "tests/test_biome/test_room_001.tmx",
-        "tests/test_biome/test_room_002.tmx"
+        "tests/test_biome/test_room_001.tmx"
     ]
 }

@@ -2,30 +2,34 @@
 
 [ext_resource type="Script" uid="uid://bckn0pt6gpe5h" path="res://game_world.gd" id="1_bvgre"]
 [ext_resource type="PackedScene" uid="uid://cakikgnrclleg" path="res://systems/world/world_room.tscn" id="1_ea1x0"]
-[ext_resource type="Resource" uid="uid://cuq03g7r70yr8" path="res://maps/map_list/test_room_001.tres" id="2_e08lw"]
+[ext_resource type="Resource" uid="uid://duc0y0b8hui7c" path="res://maps/map_list/test_room_002.tres" id="2_e3xe6"]
 [ext_resource type="PackedScene" uid="uid://k0gilutiyigl" path="res://test_assets/test_player/test_player.tscn" id="3_e3xe6"]
 [ext_resource type="Script" uid="uid://builidtsrsj5f" path="res://systems/world/world_data.gd" id="3_e08lw"]
 
 [sub_resource type="Resource" id="Resource_e3xe6"]
 script = ExtResource("3_e08lw")
-default_starting_room = ExtResource("2_e08lw")
+default_starting_room = ExtResource("2_e3xe6")
+foreground_layer_names = Array[String](["near_foreground"])
 metadata/_custom_type_script = "uid://builidtsrsj5f"
 
 [node name="GameWorld" type="Node2D" unique_id=895151578 node_paths=PackedStringArray("player")]
 script = ExtResource("1_bvgre")
 world_data = SubResource("Resource_e3xe6")
-player = NodePath("TestPlayer")
+player = NodePath("WorldContent/TestPlayer")
 
 [node name="CurrentRoom" parent="." unique_id=296712214 instance=ExtResource("1_ea1x0")]
 unique_name_in_owner = true
 
-[node name="TestPlayer" parent="." unique_id=1042347891 instance=ExtResource("3_e3xe6")]
+[node name="WorldContent" type="Node2D" parent="." unique_id=967006973]
+unique_name_in_owner = true
+
+[node name="TestPlayer" parent="WorldContent" unique_id=1042347891 instance=ExtResource("3_e3xe6")]
 position = Vector2(350, 143)
 
-[node name="CameraRemote" parent="TestPlayer" index="2" unique_id=1653809102]
+[node name="CameraRemote" parent="WorldContent/TestPlayer" index="2" unique_id=1653809102]
 remote_path = NodePath("../../MainCamera")
 
-[node name="MainCamera" type="Camera2D" parent="." unique_id=1774033888]
+[node name="MainCamera" type="Camera2D" parent="WorldContent" unique_id=1774033888]
 unique_name_in_owner = true
 position = Vector2(350, 143)
 scale = Vector2(2, 2)
@@ -34,13 +38,16 @@ limit_top = 0
 limit_right = 2560
 limit_bottom = 720
 
-[editable path="TestPlayer"]
-[editable path="TestPlayer/FlipTarget/TestGun"]
-[editable path="TestPlayer/ActorStateMachine"]
-[editable path="TestPlayer/ActorStateMachine/States/Idle"]
-[editable path="TestPlayer/ActorStateMachine/States/Run"]
-[editable path="TestPlayer/ActorStateMachine/States/Fall"]
-[editable path="TestPlayer/ActorStateMachine/States/InitJump"]
-[editable path="TestPlayer/ActorStateMachine/States/Jump"]
-[editable path="TestPlayer/ActorStateMachine/States/IdleShoot"]
-[editable path="TestPlayer/ActorStateMachine/States/IdleShoot/Transitions/ToIdle/ConditionConditionalTimer"]
+[editable path="WorldContent/TestPlayer"]
+[editable path="WorldContent/TestPlayer/FlipTarget/TestGun"]
+[editable path="WorldContent/TestPlayer/ActorStateMachine"]
+[editable path="WorldContent/TestPlayer/ActorStateMachine/States/Idle"]
+[editable path="WorldContent/TestPlayer/ActorStateMachine/States/Run"]
+[editable path="WorldContent/TestPlayer/ActorStateMachine/States/Fall"]
+[editable path="WorldContent/TestPlayer/ActorStateMachine/States/InitJump"]
+[editable path="WorldContent/TestPlayer/ActorStateMachine/States/Jump"]
+[editable path="WorldContent/TestPlayer/ActorStateMachine/States/IdleShoot"]
+[editable path="WorldContent/TestPlayer/ActorStateMachine/States/RunShoot"]
+[editable path="WorldContent/TestPlayer/ActorStateMachine/States/AirShoot"]
+[editable path="WorldContent/TestPlayer/ActorStateMachine/States/Swim"]
+[editable path="WorldContent/TestPlayer/Data/ExternalConditions/ConditionShootTimer"]

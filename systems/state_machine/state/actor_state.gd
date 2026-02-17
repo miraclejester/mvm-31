@@ -36,7 +36,7 @@ func get_actor_behaviour(target_parent: Node) -> ActorBehaviour:
 
 func run_behaviour(behaviour: ActorBehaviour, delta: float) -> void:
 	if behaviour != null:
-		behaviour.run(delta)
+		behaviour.try_run(delta)
 
 func run_on_enter(delta: float) -> void:
 	for transition in transitions:

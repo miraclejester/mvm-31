@@ -9,9 +9,9 @@ func _ready() -> void:
 
 func run(delta: float) -> void:
 	for behaviour in behaviours:
-		behaviour.run(delta)
+		behaviour.try_run(delta)
 
 
 func run_physics(delta: float) -> void:
 	for behaviour in behaviours:
-		behaviour.run(delta)
+		behaviour.try_run_physics(delta)

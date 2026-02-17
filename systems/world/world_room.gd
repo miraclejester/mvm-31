@@ -7,12 +7,19 @@ signal doorway_triggered(data: DoorwayData)
 @onready var background_parent: Node2D = %Background
 @onready var doorway_parent: Node2D = %Doorways
 @onready var projectile_parent: Node2D = %Projectiles
+@onready var foreground_parent: Node2D = %Foreground
+@onready var world_content_parent: Node2D = %WorldContent
 
 var current_context: WorldContext
 var level_layer: TileMapLayer
+var near_foreground_layer: TileMapLayer
 var room_bounds: Rect2i
 var current_map: Node2D
 var spawn_points: Dictionary[String, Vector2] = {}
+
+func first_load(context: WorldContext) -> void:
+	current_context = context
+	Utils.switch_child(current_context.world_content, world_content_parent)
 
 
 func initialize(data: WorldRoomData, context: WorldContext) -> void:
@@ -22,14 +29,14 @@ func initialize(data: WorldRoomData, context: WorldContext) -> void:
 	process_spawn_points(current_map.get_node("spawn_points"))
 	process_doorways()
 	clear_objects()
-	context.player.global_position = spawn_points.get(context.spawn)
+	
+	var spawn: Vector2 = spawn_points.get(context.spawn, spawn_points.values()[0])
+	context.player.global_position = spawn
 
 
 func load_room(data: WorldRoomData) -> void:
-	if map_parent.get_child_count() >= 1:
-		var old_room: Node2D = map_parent.get_child(0)
-		old_room.queue_free()
-		map_parent.remove_child(old_room)
+	delete_map_layer(map_parent)
+	delete_map_layer(foreground_parent)
 	var map_node: Node2D = data.room_scene.instantiate() as Node2D
 	level_layer = map_node.get_node("level") as TileMapLayer
 	calculate_room_bounds()
@@ -40,7 +47,22 @@ func load_room(data: WorldRoomData) -> void:
 	current_context.camera.limit_right = room_bounds.position.x + room_bounds.size.x
 	current_context.camera.limit_top = room_bounds.position.y
 	current_context.camera.limit_bottom = room_bounds.position.y + room_bounds.size.y
+	
+	var layers_to_move: Array[TileMapLayer] = []
+	for child in map_node.get_children():
+		if child is TileMapLayer and current_context.world_data.foreground_layer_names.has(child.name):
+			layers_to_move.append(child)
+			if child.name == "near_foreground":
+				near_foreground_layer = child
+	
+	for layer in layers_to_move:
+		Utils.switch_child(layer, foreground_parent)
 
+
+func delete_map_layer(layer: Node2D) -> void:
+	for child in layer.get_children():
+		child.queue_free()
+		layer.call_deferred("remove_child", child)
 
 func calculate_room_bounds() -> void:
 	var used_rect: Rect2i = level_layer.get_used_rect()

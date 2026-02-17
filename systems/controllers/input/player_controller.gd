@@ -4,6 +4,8 @@ class_name PlayerController
 func get_movement_input() -> void:
 	left_strength = Input.get_action_strength("left")
 	right_strength = Input.get_action_strength("right")
+	up_strength = Input.get_action_strength("up")
+	down_strength = Input.get_action_strength("down")
 
 func get_action_data(key: String) -> void:
 	var data: InputActionData = action_dict.get(key)
