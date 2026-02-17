@@ -14,6 +14,12 @@ func run(_delta: float) -> void:
 func run_physics(_delta: float) -> void:
 	pass
 
+func on_enable() -> void:
+	pass
+
+func on_disable() -> void:
+	pass
+
 
 func try_run(delta: float) -> void:
 	if not enabled:
@@ -29,3 +35,7 @@ func try_run_physics(delta: float) -> void:
 
 func set_enabled(e: bool) -> void:
 	enabled = e
+	if enabled:
+		on_enable()
+	else:
+		on_disable()

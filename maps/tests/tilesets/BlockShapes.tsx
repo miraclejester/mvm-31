@@ -48,6 +48,11 @@
    </object>
   </objectgroup>
  </tile>
+ <tile id="7">
+  <properties>
+   <property name="is_water" type="bool" value="true"/>
+  </properties>
+ </tile>
  <tile id="8">
   <objectgroup draworder="index" id="2">
    <object id="1" x="-0.272727" y="-0.0909091">

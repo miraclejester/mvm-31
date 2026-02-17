@@ -5,4 +5,4 @@ class_name ActorEnableBehaviour
 @export var enable: bool = true
 
 func run(_delta: float) -> void:
-	behaviour.set_enabled(enabled)
+	behaviour.set_enabled(enable)

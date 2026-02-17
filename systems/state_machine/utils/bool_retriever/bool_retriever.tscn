@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cggmfx1p3qyay"]
+
+[ext_resource type="Script" uid="uid://5lquycbb35hg" path="res://systems/state_machine/utils/bool_retriever/bool_retriever.gd" id="1_tgue8"]
+
+[node name="BoolRetriever" type="Node" unique_id=590184828]
+script = ExtResource("1_tgue8")

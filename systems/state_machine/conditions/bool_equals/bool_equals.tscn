@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dm65o3s1q1y0l"]
+
+[ext_resource type="Script" uid="uid://dik4fc5g33ke" path="res://systems/state_machine/conditions/bool_equals/bool_equals.gd" id="1_prwnv"]
+
+[node name="BoolEquals" type="Node" unique_id=1373412581]
+script = ExtResource("1_prwnv")

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dcjwut7tpbc4b"]
+
+[ext_resource type="PackedScene" uid="uid://cggmfx1p3qyay" path="res://systems/state_machine/utils/bool_retriever/bool_retriever.tscn" id="1_baufo"]
+[ext_resource type="Script" uid="uid://cc0u2855a4uw" path="res://systems/state_machine/utils/bool_retriever/actor_tile_bool/actor_tile_bool_retriever.gd" id="2_ks1hm"]
+
+[node name="ActorTileBoolRetriever" unique_id=590184828 instance=ExtResource("1_baufo")]
+script = ExtResource("2_ks1hm")
