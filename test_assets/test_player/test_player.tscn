@@ -371,8 +371,8 @@ shape = SubResource("RectangleShape2D_rgfib")
 [node name="Animations" type="AnimatedSprite2D" parent="FlipTarget" unique_id=1447982666]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_t6pgc")
-animation = &"swim"
-frame_progress = 0.26285234
+animation = &"idle"
+autoplay = "idle"
 script = ExtResource("3_fsgr1")
 
 [node name="TestGun" parent="FlipTarget" unique_id=836465356 instance=ExtResource("4_ssrwr")]

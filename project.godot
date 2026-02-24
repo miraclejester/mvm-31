@@ -25,6 +25,7 @@ FmodManager="*uid://cds10pm7hwn3p"
 EventBroadcaster="*uid://bop3x6g66wjvr"
 Utils="*uid://djm4o8wyidg5d"
 GameManager="*uid://up5qsfygvuc6"
+Strings="*uid://cbl5eeu0884x7"
 
 [display]
 

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bf71hd2o2l5vc"]
+
+[ext_resource type="Script" uid="uid://c0f203fwkxguj" path="res://systems/world/bounds_rect.gd" id="1_gjb4t"]
+
+[node name="BoundsRect" type="Marker2D" unique_id=1922318848]
+script = ExtResource("1_gjb4t")
+debug_color = Color(1, 0, 0, 0.11372549)
+
+[node name="BottomRightCorner" type="Marker2D" parent="." unique_id=775257854]
+unique_name_in_owner = true
+position = Vector2(64, 64)
