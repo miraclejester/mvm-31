@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="GameWorldRoomData" format=3 uid="uid://dhi5ke5wkid20"]
+
+[ext_resource type="Script" uid="uid://w6xaqda0lpl" path="res://systems/world/map/game_world_room_data.gd" id="1_hf3bl"]
+[ext_resource type="PackedScene" uid="uid://ohtaa5143tm8" path="res://maps/tests/test_room_001/test_room_001.tscn" id="1_i61xl"]
+
+[resource]
+script = ExtResource("1_hf3bl")
+room_name = "TestRoom001"
+room_scene = ExtResource("1_i61xl")
+metadata/_custom_type_script = "uid://w6xaqda0lpl"

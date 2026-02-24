@@ -1,14 +1,15 @@
 [gd_scene format=3 uid="uid://b36m53l2v4cpo"]
 
 [ext_resource type="Script" uid="uid://bckn0pt6gpe5h" path="res://game_world.gd" id="1_bvgre"]
+[ext_resource type="Resource" uid="uid://bmlepoxa7f8fj" path="res://maps/world_data.tres" id="2_ea1x0"]
 [ext_resource type="PackedScene" uid="uid://k0gilutiyigl" path="res://test_assets/test_player/test_player.tscn" id="3_e3xe6"]
-[ext_resource type="PackedScene" uid="uid://c4uo8ofncg175" path="res://systems/world/game_world_room.tscn" id="3_e08lw"]
 
 [node name="GameWorld" type="Node2D" unique_id=895151578 node_paths=PackedStringArray("player")]
 script = ExtResource("1_bvgre")
 player = NodePath("TestPlayer")
+world_data = ExtResource("2_ea1x0")
 
-[node name="GameWorldRoom" parent="." unique_id=399359172 instance=ExtResource("3_e08lw")]
+[node name="CurrentRoomParent" type="Node2D" parent="." unique_id=1829280072]
 unique_name_in_owner = true
 
 [node name="TestPlayer" parent="." unique_id=1042347891 instance=ExtResource("3_e3xe6")]

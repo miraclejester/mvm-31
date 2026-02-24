@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="GameWorldData" format=3 uid="uid://bmlepoxa7f8fj"]
+
+[ext_resource type="Script" uid="uid://w6xaqda0lpl" path="res://systems/world/map/game_world_room_data.gd" id="1_cilu7"]
+[ext_resource type="Resource" uid="uid://b1dru0dntqdrp" path="res://maps/tests/test_room_002/test_room_002.tres" id="1_ogtx6"]
+[ext_resource type="Resource" uid="uid://dhi5ke5wkid20" path="res://maps/tests/test_room_001/test_room_001.tres" id="1_r6ju2"]
+[ext_resource type="Script" uid="uid://dft4vx8l4govg" path="res://systems/world/map/game_world_data.gd" id="2_r6ju2"]
+[ext_resource type="Script" uid="uid://4ep8qexpg43j" path="res://systems/world/map/game_world_transition_data.gd" id="3_ogtx6"]
+
+[sub_resource type="Resource" id="Resource_ogtx6"]
+script = ExtResource("3_ogtx6")
+room1 = ExtResource("1_r6ju2")
+key1 = "right_entrance"
+room2 = ExtResource("1_ogtx6")
+key2 = "left_entrance"
+metadata/_custom_type_script = "uid://4ep8qexpg43j"
+
+[resource]
+script = ExtResource("2_r6ju2")
+rooms = Array[ExtResource("1_cilu7")]([ExtResource("1_r6ju2"), ExtResource("1_ogtx6")])
+transitions = Array[ExtResource("3_ogtx6")]([SubResource("Resource_ogtx6")])
+default_room = ExtResource("1_r6ju2")
+metadata/_custom_type_script = "uid://dft4vx8l4govg"
