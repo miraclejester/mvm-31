@@ -400,6 +400,7 @@ water_detector = NodePath("../../Data/IsInWaterRetriever")
 water_friction_factor = 0.1
 water_jump_force = -200.0
 jump_force = -500.0
+cut_jump_force = -220.0
 
 [node name="Node2dFlipOnInput" parent="Behaviours" unique_id=734874977 node_paths=PackedStringArray("flip_target", "controller") instance=ExtResource("5_o2riq")]
 flip_target = NodePath("../../FlipTarget")
