@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dwkgm3mgjypmy"]
+
+[ext_resource type="Script" uid="uid://drvuku4cq6key" path="res://systems/state_machine/conditions/animated_sprite_animation_finished/condition_animated_sprite_animation_finished.gd" id="1_fmeka"]
+
+[node name="ConditionAnimatedSpriteAnimationFinished" type="Node" unique_id=2100299511]
+script = ExtResource("1_fmeka")

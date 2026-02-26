@@ -12,10 +12,10 @@ enum EMovementMode {
 
 @export_group("Ground Movement")
 @export var acceleration: float = 20
+@export var decceleration: float = 40
 @export var max_speed: float = 280
 @export var gravity: Vector2 = Vector2(0, 1500)
 @export var floor_snap_length: float = 5
-@export var friction_factor: float = 0.8
 
 @export_group("Water Movement")
 @export var water_detector: BoolRetriever
@@ -39,11 +39,11 @@ var move_mode_dict: Dictionary[EMovementMode, ActorMovementProfile] = {
 		"move_method": ground_movement,
 		"initialize_method": ground_initialize_movement,
 	}),
-	EMovementMode.WATER : ActorMovementProfile.from_data({
-		"move_method": water_movement,
-		"initialize_method": func(): jump_enabled = false,
-		"post_move_method": water_post_movement
-	})
+	#EMovementMode.WATER : ActorMovementProfile.from_data({
+	#	"move_method": water_movement,
+	#	"initialize_method": func(): jump_enabled = false,
+	#	"post_move_method": water_post_movement
+	#})
 }
 
 func _ready() -> void:
@@ -74,10 +74,7 @@ func move(delta: float) -> void:
 
 
 func get_move_profile() -> ActorMovementProfile:
-	if water_detector.retrieve_bool():
-		return move_mode_dict[EMovementMode.WATER]
-	else:
-		return move_mode_dict[EMovementMode.GROUND]
+	return move_mode_dict[EMovementMode.GROUND]
 
 func ground_movement(delta: float) -> void:
 	velocity = body.velocity
@@ -86,7 +83,7 @@ func ground_movement(delta: float) -> void:
 	if controller.direction.x != 0:
 		velocity.x = move_toward(velocity.x, controller.direction.x * max_speed, acceleration)
 	elif body.is_on_floor():
-		velocity.x = move_toward(velocity.x, 0, max_speed * friction_factor)
+		velocity.x = move_toward(velocity.x, 0, decceleration)
 	body.velocity = velocity
 
 

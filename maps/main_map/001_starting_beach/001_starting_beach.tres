@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="GameWorldRoomData" format=3 uid="uid://d1wsg1mi0xb1j"]
+
+[ext_resource type="PackedScene" uid="uid://bffxs7w2jnh5d" path="res://maps/main_map/001_starting_beach/001_starting_beach.tscn" id="1_hs2xg"]
+[ext_resource type="Script" uid="uid://w6xaqda0lpl" path="res://systems/world/map/game_world_room_data.gd" id="1_rskr8"]
+
+[resource]
+script = ExtResource("1_rskr8")
+room_name = "Starting Beach"
+room_scene = ExtResource("1_hs2xg")
+metadata/_custom_type_script = "uid://w6xaqda0lpl"
