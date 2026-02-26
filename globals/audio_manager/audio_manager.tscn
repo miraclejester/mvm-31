@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://x6rttrg2o85l"]
+
+[node name="AudioManager" type="Node2D" unique_id=778710505]
+
+[node name="FmodBankLoader" type="FmodBankLoader" parent="." unique_id=170548771]
+bank_paths = ["res://addons/fmod/Banks/Desktop/Master.bank", "res://addons/fmod/Banks/Desktop/Master.strings.bank"]

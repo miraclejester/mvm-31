@@ -22,11 +22,13 @@ remote_path = NodePath("../../MainCamera")
 [node name="MainCamera" type="Camera2D" parent="." unique_id=1774033888]
 unique_name_in_owner = true
 position = Vector2(32, 288)
-scale = Vector2(2, 2)
+scale = Vector2(2.6, 1.65)
 limit_left = 0
 limit_top = 0
 limit_right = 2560
 limit_bottom = 720
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
 
 [editable path="TestPlayer"]
 [editable path="TestPlayer/FlipTarget/TestGun"]

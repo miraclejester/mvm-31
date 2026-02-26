@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d1j52u8we6mo5"]
+
+[ext_resource type="Script" uid="uid://dtot4vve38hil" path="res://systems/behaviours/audio_play_event_one_shot/audio_play_event_one_shot.gd" id="1_tkueg"]
+
+[node name="AudioPlayEventOneShot" type="Node" unique_id=51072555]
+script = ExtResource("1_tkueg")

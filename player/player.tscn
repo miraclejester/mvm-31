@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://cflsrlihm1lsk" path="res://systems/state_machine/conditions/body_is_falling/body_is_falling.tscn" id="17_pd5ni"]
 [ext_resource type="PackedScene" uid="uid://de5ldo8mb0tna" path="res://systems/state_machine/conditions/conditional_timer/condition_conditional_timer.tscn" id="22_dhr4d"]
 [ext_resource type="PackedScene" uid="uid://djmto3b623xio" path="res://systems/state_machine/conditions/external_condition/condition_external.tscn" id="22_lykvf"]
+[ext_resource type="PackedScene" uid="uid://d1j52u8we6mo5" path="res://systems/behaviours/audio_play_event_one_shot/audio_play_event_one_shot.tscn" id="22_r7pn3"]
 [ext_resource type="PackedScene" uid="uid://dkekvatgxcsnt" path="res://systems/behaviours/actor_enable_behaviour/actor_enable_behaviour.tscn" id="24_a6siw"]
 [ext_resource type="PackedScene" uid="uid://dm65o3s1q1y0l" path="res://systems/state_machine/conditions/bool_equals/bool_equals.tscn" id="25_p16wc"]
 [ext_resource type="PackedScene" uid="uid://dcjwut7tpbc4b" path="res://systems/state_machine/utils/bool_retriever/actor_tile_bool/actor_tile_bool_retriever.tscn" id="27_a6siw"]
@@ -380,6 +381,11 @@ script = ExtResource("3_fsgr1")
 [node name="Muzzle" parent="FlipTarget/TestGun" index="0" unique_id=782941251]
 position = Vector2(19.5, 0)
 
+[node name="JumpSFX" type="FmodEventEmitter2D" parent="FlipTarget" unique_id=231178890]
+event_name = "event:/Player/Player Jump"
+event_guid = "{d7dabb45-8b96-484f-9bac-7554b16e3801}"
+allow_fadeout = false
+
 [node name="CameraRemote" type="RemoteTransform2D" parent="." unique_id=1653809102]
 
 [node name="DoorwayDetector" parent="." unique_id=690771773 instance=ExtResource("4_56x04")]
@@ -504,6 +510,9 @@ anim_key = "start_jump"
 
 [node name="ActorJump" parent="ActorStateMachine/States/InitJump/OnEnter/BehaviourSequence" unique_id=1771844202 node_paths=PackedStringArray("movement_behaviour") instance=ExtResource("14_3sb8j")]
 movement_behaviour = NodePath("../../../../../../Behaviours/ActorMovement")
+
+[node name="PlayJumpSfx" parent="ActorStateMachine/States/InitJump/OnEnter/BehaviourSequence" unique_id=51072555 node_paths=PackedStringArray("event_emitter") instance=ExtResource("22_r7pn3")]
+event_emitter = NodePath("../../../../../../FlipTarget/JumpSFX")
 
 [node name="ToJump" parent="ActorStateMachine/States/InitJump/Transitions" parent_id_path=PackedInt32Array(1794256466, 1931116749) index="0" unique_id=407001578 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../../Jump")
