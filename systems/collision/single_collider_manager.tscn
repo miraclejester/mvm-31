@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://8osb3g7545cg"]
+
+[ext_resource type="Script" uid="uid://d2xnkbanyw4u2" path="res://systems/collision/single_collider_manager.gd" id="1_wic2r"]
+
+[node name="SingleColliderManager" type="Node" unique_id=59142183]
+script = ExtResource("1_wic2r")

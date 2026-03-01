@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dkek8dj55suja"]
+
+[ext_resource type="Script" uid="uid://dsabpyme3ni14" path="res://systems/collision/collider_group_manager.gd" id="1_majgy"]
+
+[node name="ColliderGroupManager" type="Node" unique_id=1016132639]
+script = ExtResource("1_majgy")

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ddhhy1t8wka5h"]
+
+[ext_resource type="Script" uid="uid://bpcuyosp2cxgc" path="res://systems/behaviours/animator_set_trigger/animator_set_trigger.gd" id="1_4lk74"]
+
+[node name="AnimatorSetTrigger" type="Node" unique_id=432952538]
+script = ExtResource("1_4lk74")

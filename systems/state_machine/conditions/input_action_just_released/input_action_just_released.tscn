@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bolq25lvsemkc"]
+
+[ext_resource type="Script" uid="uid://cb468kp8o574s" path="res://systems/state_machine/conditions/input_action_just_released/input_action_just_released.gd" id="1_p564y"]
+
+[node name="InputActionJustReleased" type="Node" unique_id=598140058]
+script = ExtResource("1_p564y")

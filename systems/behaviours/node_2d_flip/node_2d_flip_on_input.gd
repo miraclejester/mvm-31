@@ -7,6 +7,3 @@ class_name Node2DFlipOnInput
 func run(_delta: float) -> void:
 	if controller.direction.x != 0:
 		flip_target.scale.x = controller.direction.x
-
-func on_disable() -> void:
-	flip_target.scale.x = 1

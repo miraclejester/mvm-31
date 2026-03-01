@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://deinpt7r6nyx3"]
+
+[ext_resource type="Script" uid="uid://blefxpqfuvrvg" path="res://systems/behaviours/collision_switch_profile/collision_switch_profile.gd" id="1_umxmu"]
+
+[node name="CollisionSwitchProfile" type="Node" unique_id=30520376]
+script = ExtResource("1_umxmu")

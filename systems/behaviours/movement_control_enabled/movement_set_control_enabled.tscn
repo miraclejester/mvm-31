@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://4iuiej4q10ax"]
+
+[ext_resource type="Script" uid="uid://doxskmecw6jvv" path="res://systems/behaviours/movement_control_enabled/movement_set_control_enabled.gd" id="1_ludxr"]
+
+[node name="MovementSetControlEnabled" type="Node" unique_id=1728581116]
+script = ExtResource("1_ludxr")

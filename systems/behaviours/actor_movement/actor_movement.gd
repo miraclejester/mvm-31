@@ -38,6 +38,9 @@ enum EMovementMode {
 var jump_enabled = true
 var on_coyote_time: bool = false
 var was_on_floor: bool = false
+var controller_enabled: bool = true
+var control_direction: Vector2 = Vector2.ZERO
+var control_face_dir: Vector2 = Vector2.ZERO
 
 var velocity: Vector2
 var current_profile: ActorMovementProfile
@@ -81,6 +84,7 @@ func apply_gravity(delta: float) -> void:
 
 
 func move(delta: float) -> void:
+	get_controller_input()
 	var profile: ActorMovementProfile = get_move_profile()
 	if current_profile == null or current_profile != profile:
 		current_profile = profile
@@ -94,13 +98,14 @@ func move(delta: float) -> void:
 func get_move_profile() -> ActorMovementProfile:
 	return move_mode_dict[EMovementMode.GROUND]
 
+
 func ground_movement(delta: float) -> void:
 	velocity = body.velocity
 	if velocity.y < 0 or (not on_coyote_time):
 		apply_gravity(delta)
 	
-	if controller.direction.x != 0:
-		velocity.x = move_toward(velocity.x, controller.direction.x * max_speed, acceleration)
+	if control_direction.x != 0:
+		velocity.x = move_toward(velocity.x, control_direction.x * max_speed, acceleration)
 	elif is_considered_on_floor():
 		velocity.x = move_toward(velocity.x, 0, decceleration)
 	body.velocity = velocity
@@ -118,9 +123,9 @@ func ground_initialize_movement() -> void:
 func water_movement(_delta: float) -> void:
 	velocity = body.velocity
 	
-	body.rotation = controller.face_direction.angle()
-	if controller.direction != Vector2.ZERO:
-		velocity = velocity.move_toward(controller.direction * water_max_speed, water_acceleration)
+	body.rotation = control_face_dir.angle()
+	if control_direction != Vector2.ZERO:
+		velocity = velocity.move_toward(control_direction * water_max_speed, water_acceleration)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, water_max_speed * water_friction_factor)
 	body.velocity = velocity
@@ -145,8 +150,16 @@ func apply_jump_force(jf: float) -> void:
 	body.velocity = velocity
 
 
+func get_controller_input() -> void:
+	if controller_enabled:
+		control_direction = controller.direction
+		control_face_dir = controller.face_direction
+	else:
+		control_direction = Vector2.ZERO
+
+
 func on_controller_just_released(key: String) -> void:
-	if not enabled:
+	if not enabled or not controller_enabled:
 		return
 	if key == jump_action_key and body.velocity.y < jump_threshold:
 		apply_jump_force(cut_jump_force)

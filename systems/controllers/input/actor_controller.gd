@@ -42,6 +42,16 @@ func is_action_just_pressed(action: String) -> bool:
 	return data != null and data.just_pressed
 
 
+func is_action_just_released(action: String) -> bool:
+	var data: InputActionData = action_dict.get(action)
+	return data != null and data.just_released
+
+
+func is_action_pressed(action: String) -> bool:
+	var data: InputActionData = action_dict.get(action)
+	return data != null and data.pressed
+
+
 func action_buffered(action: String, time: float) -> bool:
 	var data: InputActionData = action_dict.get(action)
 	return data != null and data.buffering and data.time_since_last_just_pressed <= time
