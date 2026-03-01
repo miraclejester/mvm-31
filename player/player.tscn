@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://dcjwut7tpbc4b" path="res://systems/state_machine/utils/bool_retriever/actor_tile_bool/actor_tile_bool_retriever.tscn" id="27_a6siw"]
 [ext_resource type="PackedScene" uid="uid://dwkgm3mgjypmy" path="res://systems/state_machine/conditions/animated_sprite_animation_finished/condition_animated_sprite_animation_finished.tscn" id="27_r7pn3"]
 [ext_resource type="PackedScene" uid="uid://b00tf8thm1346" path="res://systems/state_machine/conditions/body_is_in_coyote_time/body_is_in_coyote_time.tscn" id="28_b8hi5"]
+[ext_resource type="PackedScene" uid="uid://ctmx5mrxbb0kc" path="res://systems/state_machine/conditions/input_action_buffered/input_action_buffered.tscn" id="29_2uvqg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgfib"]
 size = Vector2(10, 29)
@@ -447,8 +448,8 @@ movement = NodePath("../../../../../../../Behaviours/ActorMovement")
 [node name="ToInitJump" parent="ActorStateMachine/States/Idle/Transitions" parent_id_path=PackedInt32Array(89059854, 1931116749) index="2" unique_id=1702225407 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../../InitJump")
 
-[node name="JumpJustPressed" parent="ActorStateMachine/States/Idle/Transitions/ToInitJump" unique_id=1586438110 node_paths=PackedStringArray("condition") instance=ExtResource("22_lykvf")]
-condition = NodePath("../../../../../../Data/ExternalConditions/JumpJustPressed")
+[node name="JumpBuffered" parent="ActorStateMachine/States/Idle/Transitions/ToInitJump" unique_id=2049590081 node_paths=PackedStringArray("condition") instance=ExtResource("22_lykvf")]
+condition = NodePath("../../../../../../Data/ExternalConditions/JumpInputBuffered")
 
 [node name="Run" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="1" unique_id=1562434832 instance=ExtResource("4_oycdn")]
 
@@ -473,9 +474,8 @@ condition = NodePath("../../../../../../Data/ExternalConditions/ConditionIsNotMo
 [node name="ToInitJump" parent="ActorStateMachine/States/Run/Transitions" parent_id_path=PackedInt32Array(1562434832, 1931116749) index="2" unique_id=509310922 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../../InitJump")
 
-[node name="InputActionJustPressed" parent="ActorStateMachine/States/Run/Transitions/ToInitJump" unique_id=708573237 node_paths=PackedStringArray("controller") instance=ExtResource("14_pd5ni")]
-controller = NodePath("../../../../../../PlayerController")
-key = "jump"
+[node name="JumpBuffered" parent="ActorStateMachine/States/Run/Transitions/ToInitJump" unique_id=353168540 node_paths=PackedStringArray("condition") instance=ExtResource("22_lykvf")]
+condition = NodePath("../../../../../../Data/ExternalConditions/JumpInputBuffered")
 
 [node name="Fall" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="2" unique_id=2036586534 instance=ExtResource("4_oycdn")]
 
@@ -564,8 +564,8 @@ condition = NodePath("../../../../../../Data/ExternalConditions/ConditionShootTi
 [node name="ToInitJump" parent="ActorStateMachine/States/IdleShoot/Transitions" parent_id_path=PackedInt32Array(774027170, 1931116749) index="2" unique_id=1608129105 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../../InitJump")
 
-[node name="JumpJustPressed" parent="ActorStateMachine/States/IdleShoot/Transitions/ToInitJump" unique_id=1241145638 node_paths=PackedStringArray("condition") instance=ExtResource("22_lykvf")]
-condition = NodePath("../../../../../../Data/ExternalConditions/JumpJustPressed")
+[node name="JumpBuffered" parent="ActorStateMachine/States/IdleShoot/Transitions/ToInitJump" unique_id=72761672 node_paths=PackedStringArray("condition") instance=ExtResource("22_lykvf")]
+condition = NodePath("../../../../../../Data/ExternalConditions/JumpInputBuffered")
 
 [node name="ToRunShoot" parent="ActorStateMachine/States/IdleShoot/Transitions" parent_id_path=PackedInt32Array(774027170, 1931116749) index="3" unique_id=1139926524 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../../RunShoot")
@@ -595,8 +595,8 @@ condition = NodePath("../../../../../../Data/ExternalConditions/ConditionShootTi
 [node name="ToInitJump" parent="ActorStateMachine/States/RunShoot/Transitions" parent_id_path=PackedInt32Array(1275365783, 1931116749) index="2" unique_id=27556957 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../../InitJump")
 
-[node name="JumpJustPressed" parent="ActorStateMachine/States/RunShoot/Transitions/ToInitJump" unique_id=1381013025 node_paths=PackedStringArray("condition") instance=ExtResource("22_lykvf")]
-condition = NodePath("../../../../../../Data/ExternalConditions/JumpJustPressed")
+[node name="JumpBuffered" parent="ActorStateMachine/States/RunShoot/Transitions/ToInitJump" unique_id=534295521 node_paths=PackedStringArray("condition") instance=ExtResource("22_lykvf")]
+condition = NodePath("../../../../../../Data/ExternalConditions/JumpInputBuffered")
 
 [node name="ToIdleShoot" parent="ActorStateMachine/States/RunShoot/Transitions" parent_id_path=PackedInt32Array(1275365783, 1931116749) index="3" unique_id=926778866 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../../IdleShoot")
@@ -677,6 +677,11 @@ compared_value = true
 
 [node name="BodyIsInCoyoteTime" parent="Data/ExternalConditions" unique_id=1513931 node_paths=PackedStringArray("body") instance=ExtResource("28_b8hi5")]
 body = NodePath("../../..")
+
+[node name="JumpInputBuffered" parent="Data/ExternalConditions" unique_id=521880295 node_paths=PackedStringArray("controller") instance=ExtResource("29_2uvqg")]
+controller = NodePath("../../../PlayerController")
+action = "jump"
+buffer_time = 0.1
 
 [node name="LastAnimationRetriever" parent="Data" unique_id=1733489810 node_paths=PackedStringArray("animation_controller") instance=ExtResource("17_ixgpl")]
 animation_controller = NodePath("../../FlipTarget/Animations")

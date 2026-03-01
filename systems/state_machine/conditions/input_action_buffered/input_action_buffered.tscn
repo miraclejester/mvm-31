@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ctmx5mrxbb0kc"]
+
+[ext_resource type="Script" uid="uid://hr8c4co2rniu" path="res://systems/state_machine/conditions/input_action_buffered/input_action_buffered.gd" id="1_ekyea"]
+
+[node name="InputActionBuffered" type="Node" unique_id=521880295]
+script = ExtResource("1_ekyea")
