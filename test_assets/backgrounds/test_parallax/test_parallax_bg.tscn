@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://bxxaqj4j4ruuu"]
+
+[ext_resource type="Texture2D" uid="uid://dcy2k1ysx7rnd" path="res://test_assets/backgrounds/test_parallax/sky.png" id="1_0ti6r"]
+[ext_resource type="Texture2D" uid="uid://dh0crxph8ey8r" path="res://test_assets/backgrounds/test_parallax/trees.png" id="2_1e0aj"]
+[ext_resource type="Texture2D" uid="uid://ciols552bhv4p" path="res://test_assets/backgrounds/test_parallax/wall.png" id="3_t0r31"]
+[ext_resource type="Texture2D" uid="uid://dqykgoq5vuy2d" path="res://test_assets/backgrounds/test_parallax/ground.png" id="4_lbjp2"]
+
+[node name="TestParallaxBg" type="Node2D" unique_id=1629707704]
+
+[node name="SkyLayer" type="Parallax2D" parent="." unique_id=1179466292]
+scroll_scale = Vector2(0.2, 0.2)
+repeat_size = Vector2(768, 0)
+
+[node name="TextureRect" type="TextureRect" parent="SkyLayer" unique_id=1393166226]
+offset_right = 768.0
+offset_bottom = 224.0
+texture = ExtResource("1_0ti6r")
+stretch_mode = 1
+
+[node name="TreeLayer" type="Parallax2D" parent="." unique_id=511924682]
+scroll_scale = Vector2(0.4, 0.4)
+scroll_offset = Vector2(0, 136)
+repeat_size = Vector2(672, 0)
+
+[node name="TextureRect" type="TextureRect" parent="TreeLayer" unique_id=733987835]
+offset_right = 672.0
+offset_bottom = 192.0
+texture = ExtResource("2_1e0aj")
+stretch_mode = 1
+
+[node name="WallLayer" type="Parallax2D" parent="." unique_id=2055420257]
+scroll_scale = Vector2(0.6, 0.6)
+scroll_offset = Vector2(0, 200)
+repeat_size = Vector2(640, 0)
+
+[node name="Wall" type="TextureRect" parent="WallLayer" unique_id=2053023033]
+offset_right = 640.0
+offset_bottom = 96.0
+texture = ExtResource("3_t0r31")
+stretch_mode = 1
+
+[node name="GroundLayer" type="Parallax2D" parent="." unique_id=560810301]
+scroll_scale = Vector2(0.8, 0.8)
+scroll_offset = Vector2(0, 296)
+repeat_size = Vector2(640, 0)
+
+[node name="TextureRect" type="TextureRect" parent="GroundLayer" unique_id=941932537]
+offset_right = 640.0
+offset_bottom = 64.0
+texture = ExtResource("4_lbjp2")
+stretch_mode = 1

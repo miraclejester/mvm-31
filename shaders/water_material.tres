@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://clcncxwjg65sp"]
+
+[ext_resource type="Shader" uid="uid://dpua40kwgocjo" path="res://shaders/water.gdshader" id="1_jqt2h"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4fglm"]
+frequency = 0.001
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hipue"]
+noise = SubResource("FastNoiseLite_4fglm")
+seamless = true
+seamless_blend_skirt = 1.0
+
+[resource]
+shader = ExtResource("1_jqt2h")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_hipue")
+shader_parameter/distortion = 0.002
+shader_parameter/speed = Vector2(0.5, 0.2)
+shader_parameter/wave_strength = 0.05

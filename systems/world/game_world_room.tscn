@@ -3,9 +3,13 @@
 [ext_resource type="TileSet" uid="uid://d1elsqtrg3brw" path="res://maps/tilesets/cave_tileset.tres" id="1_4m5io"]
 [ext_resource type="Script" uid="uid://cw6tdul7vs5tu" path="res://systems/world/game_world_room.gd" id="1_8jd48"]
 [ext_resource type="PackedScene" uid="uid://bf71hd2o2l5vc" path="res://systems/world/bounds_rect.tscn" id="3_8exy1"]
+[ext_resource type="Material" uid="uid://clcncxwjg65sp" path="res://shaders/water_material.tres" id="4_4fglm"]
+[ext_resource type="TileSet" uid="uid://dldkia42uas4j" path="res://maps/tilesets/water_tiles/water_tileset.tres" id="5_4fglm"]
 
 [node name="GameWorldRoom" type="Node2D" unique_id=399359172]
 script = ExtResource("1_8jd48")
+
+[node name="ParallaxBackground" type="Node2D" parent="." unique_id=181560860]
 
 [node name="CameraBounds" parent="." unique_id=1922318848 instance=ExtResource("3_8exy1")]
 unique_name_in_owner = true
@@ -25,8 +29,9 @@ tile_set = ExtResource("1_4m5io")
 
 [node name="NearForegroundLayer" type="TileMapLayer" parent="MapLayers" unique_id=561237308]
 z_index = 1
+material = ExtResource("4_4fglm")
 tile_map_data = PackedByteArray("AAAMAAcAAgAAAAEAAAALAAcAAgAAAAEAAAALAAYAAgAAAAEAAAAMAAYAAgAAAAEAAAANAAYAAgAAAAEAAAANAAcAAgAAAAEAAAAKAAcAAgAAAAEAAAAKAAYAAgAAAAEAAAAKAAUAAgAAAAEAAAALAAUAAgAAAAEAAAAMAAUAAgAAAAEAAAANAAUAAgAAAAEAAAAOAAUAAgAAAAEAAAAOAAYAAgAAAAEAAAAOAAcAAgAAAAEAAAA=")
-tile_set = ExtResource("1_4m5io")
+tile_set = ExtResource("5_4fglm")
 
 [node name="ProjectilesParent" type="Node2D" parent="." unique_id=976289283]
 unique_name_in_owner = true
