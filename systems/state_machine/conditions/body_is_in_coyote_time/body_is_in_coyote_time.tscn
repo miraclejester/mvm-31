@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b00tf8thm1346"]
+
+[ext_resource type="Script" uid="uid://r0whayv4no6k" path="res://systems/state_machine/conditions/body_is_in_coyote_time/body_is_in_coyote_time.gd" id="1_u4a58"]
+
+[node name="BodyIsInCoyoteTime" type="Node" unique_id=1513931]
+script = ExtResource("1_u4a58")
+
+[node name="CoyoteTimer" type="Timer" parent="." unique_id=1716977398]
+unique_name_in_owner = true
+one_shot = true

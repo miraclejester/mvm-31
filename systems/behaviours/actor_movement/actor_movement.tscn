@@ -4,3 +4,7 @@
 
 [node name="ActorMovement" type="Node" unique_id=655420935]
 script = ExtResource("1_dt1pn")
+
+[node name="CoyoteTimer" type="Timer" parent="." unique_id=713641762]
+unique_name_in_owner = true
+one_shot = true

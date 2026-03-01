@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://dm65o3s1q1y0l" path="res://systems/state_machine/conditions/bool_equals/bool_equals.tscn" id="25_p16wc"]
 [ext_resource type="PackedScene" uid="uid://dcjwut7tpbc4b" path="res://systems/state_machine/utils/bool_retriever/actor_tile_bool/actor_tile_bool_retriever.tscn" id="27_a6siw"]
 [ext_resource type="PackedScene" uid="uid://dwkgm3mgjypmy" path="res://systems/state_machine/conditions/animated_sprite_animation_finished/condition_animated_sprite_animation_finished.tscn" id="27_r7pn3"]
+[ext_resource type="PackedScene" uid="uid://b00tf8thm1346" path="res://systems/state_machine/conditions/body_is_in_coyote_time/body_is_in_coyote_time.tscn" id="28_b8hi5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgfib"]
 size = Vector2(10, 29)
@@ -402,6 +403,8 @@ controller = NodePath("../../PlayerController")
 acceleration = 70.0
 decceleration = 80.0
 max_speed = 230.0
+coyote_time = 0.08
+coyote_time_enabled = true
 water_detector = NodePath("../../Data/IsInWaterRetriever")
 water_friction_factor = 0.1
 water_jump_force = -200.0
@@ -436,10 +439,10 @@ condition = NodePath("../../../../../../Data/ExternalConditions/ConditionInputIs
 [node name="ToFall" parent="ActorStateMachine/States/Idle/Transitions" parent_id_path=PackedInt32Array(89059854, 1931116749) index="1" unique_id=869809304 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../../Fall")
 
-[node name="ConditionNegate" parent="ActorStateMachine/States/Idle/Transitions/ToFall" unique_id=2124520631 instance=ExtResource("7_wcyp4")]
+[node name="NotOnFloor" parent="ActorStateMachine/States/Idle/Transitions/ToFall" unique_id=2124520631 instance=ExtResource("7_wcyp4")]
 
-[node name="ConditionBodyIsOnFloor" parent="ActorStateMachine/States/Idle/Transitions/ToFall/ConditionNegate" unique_id=234422326 node_paths=PackedStringArray("body") instance=ExtResource("8_w5goq")]
-body = NodePath("../../../../../../..")
+[node name="ConditionBodyIsOnFloor" parent="ActorStateMachine/States/Idle/Transitions/ToFall/NotOnFloor" unique_id=234422326 node_paths=PackedStringArray("movement") instance=ExtResource("8_w5goq")]
+movement = NodePath("../../../../../../../Behaviours/ActorMovement")
 
 [node name="ToInitJump" parent="ActorStateMachine/States/Idle/Transitions" parent_id_path=PackedInt32Array(89059854, 1931116749) index="2" unique_id=1702225407 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../../InitJump")
@@ -458,8 +461,8 @@ target_state = NodePath("../../../Fall")
 
 [node name="ConditionNegate" parent="ActorStateMachine/States/Run/Transitions/ToFall" unique_id=1335498023 instance=ExtResource("7_wcyp4")]
 
-[node name="ConditionBodyIsOnFloor" parent="ActorStateMachine/States/Run/Transitions/ToFall/ConditionNegate" unique_id=1523527932 node_paths=PackedStringArray("body") instance=ExtResource("8_w5goq")]
-body = NodePath("../../../../../../..")
+[node name="ConditionBodyIsOnFloor" parent="ActorStateMachine/States/Run/Transitions/ToFall/ConditionNegate" unique_id=1523527932 node_paths=PackedStringArray("movement") instance=ExtResource("8_w5goq")]
+movement = NodePath("../../../../../../../Behaviours/ActorMovement")
 
 [node name="ToIdle" parent="ActorStateMachine/States/Run/Transitions" parent_id_path=PackedInt32Array(1562434832, 1931116749) index="1" unique_id=1570151577 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../../Idle")
@@ -483,8 +486,8 @@ anim_key = "fall"
 [node name="ToIdle" parent="ActorStateMachine/States/Fall/Transitions" parent_id_path=PackedInt32Array(2036586534, 1931116749) index="0" unique_id=1377074211 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../../Idle")
 
-[node name="ConditionBodyIsOnFloor" parent="ActorStateMachine/States/Fall/Transitions/ToIdle" unique_id=2067622077 node_paths=PackedStringArray("body") instance=ExtResource("8_w5goq")]
-body = NodePath("../../../../../..")
+[node name="ConditionBodyIsOnFloor" parent="ActorStateMachine/States/Fall/Transitions/ToIdle" unique_id=2067622077 node_paths=PackedStringArray("movement") instance=ExtResource("8_w5goq")]
+movement = NodePath("../../../../../../Behaviours/ActorMovement")
 
 [node name="ConditionNegate" parent="ActorStateMachine/States/Fall/Transitions/ToIdle" unique_id=1292555298 instance=ExtResource("7_wcyp4")]
 
@@ -494,8 +497,8 @@ controller = NodePath("../../../../../../../PlayerController")
 [node name="ToRun" parent="ActorStateMachine/States/Fall/Transitions" parent_id_path=PackedInt32Array(2036586534, 1931116749) index="1" unique_id=860086746 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../../Run")
 
-[node name="ConditionBodyIsOnFloor" parent="ActorStateMachine/States/Fall/Transitions/ToRun" unique_id=1090202383 node_paths=PackedStringArray("body") instance=ExtResource("8_w5goq")]
-body = NodePath("../../../../../..")
+[node name="ConditionBodyIsOnFloor" parent="ActorStateMachine/States/Fall/Transitions/ToRun" unique_id=1090202383 node_paths=PackedStringArray("movement") instance=ExtResource("8_w5goq")]
+movement = NodePath("../../../../../../Behaviours/ActorMovement")
 
 [node name="ConditionInputIsMoving" parent="ActorStateMachine/States/Fall/Transitions/ToRun" unique_id=523807191 node_paths=PackedStringArray("controller") instance=ExtResource("10_wvr7c")]
 controller = NodePath("../../../../../../PlayerController")
@@ -536,8 +539,8 @@ body = NodePath("../../../../../..")
 [node name="ToIdle" parent="ActorStateMachine/States/Jump/Transitions" parent_id_path=PackedInt32Array(511277125, 1931116749) index="1" unique_id=888541959 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../../Idle")
 
-[node name="ConditionBodyIsOnFloor" parent="ActorStateMachine/States/Jump/Transitions/ToIdle" unique_id=1554627409 node_paths=PackedStringArray("body") instance=ExtResource("8_w5goq")]
-body = NodePath("../../../../../..")
+[node name="ConditionBodyIsOnFloor" parent="ActorStateMachine/States/Jump/Transitions/ToIdle" unique_id=1554627409 node_paths=PackedStringArray("movement") instance=ExtResource("8_w5goq")]
+movement = NodePath("../../../../../../Behaviours/ActorMovement")
 
 [node name="IdleShoot" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="5" unique_id=774027170 instance=ExtResource("4_oycdn")]
 
@@ -550,8 +553,7 @@ target_state = NodePath("../../../AirShoot")
 
 [node name="ConditionNegate" parent="ActorStateMachine/States/IdleShoot/Transitions/ToAirShoot" unique_id=566211503 instance=ExtResource("7_wcyp4")]
 
-[node name="ConditionBodyIsOnFloor" parent="ActorStateMachine/States/IdleShoot/Transitions/ToAirShoot/ConditionNegate" unique_id=345130844 node_paths=PackedStringArray("body") instance=ExtResource("8_w5goq")]
-body = NodePath("../../../../../../..")
+[node name="ConditionBodyIsOnFloor" parent="ActorStateMachine/States/IdleShoot/Transitions/ToAirShoot/ConditionNegate" unique_id=345130844 instance=ExtResource("8_w5goq")]
 
 [node name="ToIdle" parent="ActorStateMachine/States/IdleShoot/Transitions" parent_id_path=PackedInt32Array(774027170, 1931116749) index="1" unique_id=1084076594 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../../Idle")
@@ -582,8 +584,7 @@ target_state = NodePath("../../../AirShoot")
 
 [node name="ConditionNegate" parent="ActorStateMachine/States/RunShoot/Transitions/ToAirShoot" unique_id=2068086929 instance=ExtResource("7_wcyp4")]
 
-[node name="ConditionBodyIsOnFloor" parent="ActorStateMachine/States/RunShoot/Transitions/ToAirShoot/ConditionNegate" unique_id=924427811 node_paths=PackedStringArray("body") instance=ExtResource("8_w5goq")]
-body = NodePath("../../../../../../..")
+[node name="ConditionBodyIsOnFloor" parent="ActorStateMachine/States/RunShoot/Transitions/ToAirShoot/ConditionNegate" unique_id=924427811 instance=ExtResource("8_w5goq")]
 
 [node name="ToRun" parent="ActorStateMachine/States/RunShoot/Transitions" parent_id_path=PackedInt32Array(1275365783, 1931116749) index="1" unique_id=2113870534 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../../Run")
@@ -612,8 +613,7 @@ anim_key = "shoot_run"
 [node name="ToIdleShoot" parent="ActorStateMachine/States/AirShoot/Transitions" parent_id_path=PackedInt32Array(483378483, 1931116749) index="0" unique_id=804696360 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../../IdleShoot")
 
-[node name="ConditionBodyIsOnFloor" parent="ActorStateMachine/States/AirShoot/Transitions/ToIdleShoot" unique_id=1919997080 node_paths=PackedStringArray("body") instance=ExtResource("8_w5goq")]
-body = NodePath("../../../../../..")
+[node name="ConditionBodyIsOnFloor" parent="ActorStateMachine/States/AirShoot/Transitions/ToIdleShoot" unique_id=1919997080 instance=ExtResource("8_w5goq")]
 
 [node name="ToFall" parent="ActorStateMachine/States/AirShoot/Transitions" parent_id_path=PackedInt32Array(483378483, 1931116749) index="1" unique_id=150802836 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../../Fall")
@@ -674,6 +674,9 @@ controller = NodePath("../../../../PlayerController")
 [node name="IsInWater" parent="Data/ExternalConditions" unique_id=1373412581 node_paths=PackedStringArray("bool_retriever") instance=ExtResource("25_p16wc")]
 bool_retriever = NodePath("../../IsInWaterRetriever")
 compared_value = true
+
+[node name="BodyIsInCoyoteTime" parent="Data/ExternalConditions" unique_id=1513931 node_paths=PackedStringArray("body") instance=ExtResource("28_b8hi5")]
+body = NodePath("../../..")
 
 [node name="LastAnimationRetriever" parent="Data" unique_id=1733489810 node_paths=PackedStringArray("animation_controller") instance=ExtResource("17_ixgpl")]
 animation_controller = NodePath("../../FlipTarget/Animations")

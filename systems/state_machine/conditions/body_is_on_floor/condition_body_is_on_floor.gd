@@ -1,7 +1,7 @@
 extends StateMachineCondition
 class_name ConditionBodyIsOnFloor
 
-@export var body: CharacterBody2D
+@export var movement: ActorMovement
 
 func evaluate() -> bool:
-	return body.is_on_floor()
+	return movement.is_considered_on_floor()
