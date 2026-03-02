@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d0tog31ax2il5"]
+
+[ext_resource type="Script" uid="uid://diqfgc8prg6eu" path="res://systems/audio/local_sfx_manager.gd" id="1_ss810"]
+
+[node name="LocalSFXManager" type="Node2D" unique_id=1512446885]
+script = ExtResource("1_ss810")

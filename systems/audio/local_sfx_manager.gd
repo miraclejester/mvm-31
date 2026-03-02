@@ -11,3 +11,7 @@ func _ready() -> void:
 
 func play_sfx(key: String) -> void:
 	emitters[key].play_one_shot()
+
+
+func play_quick_sfx(key) -> void:
+	emitters[key].play()

@@ -1,6 +1,15 @@
 [gd_scene format=3 uid="uid://x6rttrg2o85l"]
 
+[ext_resource type="Script" uid="uid://dr13wfi2r6i54" path="res://globals/audio_manager/audio_manager.gd" id="1_gqfen"]
+
 [node name="AudioManager" type="Node2D" unique_id=778710505]
+script = ExtResource("1_gqfen")
 
 [node name="FmodBankLoader" type="FmodBankLoader" parent="." unique_id=170548771]
 bank_paths = ["res://addons/fmod/Banks/Desktop/Master.bank", "res://addons/fmod/Banks/Desktop/Master.strings.bank"]
+
+[node name="BGMPlayer" type="FmodEventEmitter2D" parent="." unique_id=1535297171]
+event_name = "event:/Player/Magic Chime"
+event_guid = "{a921e08e-c3f9-42d3-b08d-c103566b41f9}"
+volume = 0.6
+unique_name_in_owner = true

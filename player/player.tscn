@@ -5,13 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://bjoawgso0vy1g" path="res://systems/state_machine/actor_state_machine.tscn" id="3_8pyyg"]
 [ext_resource type="PackedScene" uid="uid://b60yvaarvf2iu" path="res://systems/controllers/input/player_controller.tscn" id="3_rcghi"]
 [ext_resource type="PackedScene" uid="uid://byhh2fowtieuu" path="res://systems/interactables/doorways/doorway_detector.tscn" id="4_56x04"]
-[ext_resource type="Script" uid="uid://diqfgc8prg6eu" path="res://systems/audio/local_sfx_manager.gd" id="4_ge24q"]
 [ext_resource type="PackedScene" uid="uid://dtq4wlupjnawu" path="res://systems/behaviours/actor_movement/actor_movement.tscn" id="4_o2riq"]
 [ext_resource type="PackedScene" uid="uid://0sdn13hb32u4" path="res://systems/state_machine/state/actor_state.tscn" id="4_oycdn"]
+[ext_resource type="PackedScene" uid="uid://d0tog31ax2il5" path="res://systems/audio/local_sfx_manager.tscn" id="4_pnw6m"]
 [ext_resource type="PackedScene" uid="uid://wqvwwvwj828h" path="res://test_assets/projectile_emiters/test_gun.tscn" id="4_ssrwr"]
+[ext_resource type="PackedScene" uid="uid://h6ww2xh1eft0" path="res://systems/audio/footsteps_player.tscn" id="5_1so5t"]
 [ext_resource type="Script" uid="uid://cxc0inepqmmgr" path="res://systems/animation/actor_animation_controller.gd" id="5_b8hi5"]
 [ext_resource type="PackedScene" uid="uid://d3thoe536xwf4" path="res://systems/behaviours/node_2d_flip/node_2d_flip_on_input.tscn" id="5_o2riq"]
-[ext_resource type="Script" uid="uid://dhok1matw03a5" path="res://systems/world/ground_tile_detector.gd" id="5_pnw6m"]
 [ext_resource type="PackedScene" uid="uid://b4esk6pcjmjsv" path="res://systems/state_machine/transitions/actor_state_transition.tscn" id="6_rcghi"]
 [ext_resource type="PackedScene" uid="uid://dkek8dj55suja" path="res://systems/collision/collider_group_manager.tscn" id="7_2uvqg"]
 [ext_resource type="PackedScene" uid="uid://m6msobg5ayht" path="res://systems/state_machine/conditions/negate/condition_negate.tscn" id="7_wcyp4"]
@@ -218,6 +218,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [6, 7, 8, 9, 10, 11]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FlipTarget/FootstepsPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_footstep_sound"
+}, {
+"args": [],
+"method": &"play_footstep_sound"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_1so5t"]
@@ -483,7 +500,7 @@ states/shoot/position = Vector2(181, 357)
 states/start_shoot/node = SubResource("AnimationNodeAnimation_1so5t")
 states/start_shoot/position = Vector2(181, 218)
 transitions = ["Start", "Grounded", SubResource("AnimationNodeStateMachineTransition_5ejfk"), "Grounded", "jump", SubResource("AnimationNodeStateMachineTransition_b8hi5"), "jump", "Airborne", SubResource("AnimationNodeStateMachineTransition_q28gw"), "Airborne", "Grounded", SubResource("AnimationNodeStateMachineTransition_ge24q"), "Grounded", "Airborne", SubResource("AnimationNodeStateMachineTransition_pnw6m"), "Grounded", "crouch", SubResource("AnimationNodeStateMachineTransition_1so5t"), "crouch", "Grounded", SubResource("AnimationNodeStateMachineTransition_55jnj"), "crouch", "Airborne", SubResource("AnimationNodeStateMachineTransition_dx5ib"), "Grounded", "attack", SubResource("AnimationNodeStateMachineTransition_art4l"), "attack", "Grounded", SubResource("AnimationNodeStateMachineTransition_jd2rm"), "Airborne", "air_attack", SubResource("AnimationNodeStateMachineTransition_a2xo5"), "air_attack", "Airborne", SubResource("AnimationNodeStateMachineTransition_gswnw"), "air_attack", "Grounded", SubResource("AnimationNodeStateMachineTransition_xcnuv"), "jump", "air_attack", SubResource("AnimationNodeStateMachineTransition_fjxoa"), "Grounded", "start_shoot", SubResource("AnimationNodeStateMachineTransition_j55il"), "Airborne", "start_shoot", SubResource("AnimationNodeStateMachineTransition_hjies"), "start_shoot", "shoot", SubResource("AnimationNodeStateMachineTransition_mmwog"), "shoot", "Grounded", SubResource("AnimationNodeStateMachineTransition_8pxes"), "jump", "start_shoot", SubResource("AnimationNodeStateMachineTransition_fmu53")]
-graph_offset = Vector2(49, 54)
+graph_offset = Vector2(-33, -56)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jd2rm"]
 size = Vector2(10, 45)
@@ -522,27 +539,34 @@ vframes = 9
 [node name="Muzzle" parent="FlipTarget/TestGun" index="0" unique_id=782941251]
 position = Vector2(34, -31)
 
-[node name="SFX" type="Node2D" parent="FlipTarget" unique_id=1523074050]
-script = ExtResource("4_ge24q")
+[node name="SFX" parent="FlipTarget" unique_id=1512446885 instance=ExtResource("4_pnw6m")]
 
-[node name="jump" type="FmodEventEmitter2D" parent="FlipTarget/SFX" unique_id=231178890]
+[node name="jump" type="FmodEventEmitter2D" parent="FlipTarget/SFX" unique_id=1640731737]
 event_name = "event:/Player/Player Jump"
 event_guid = "{d7dabb45-8b96-484f-9bac-7554b16e3801}"
-allow_fadeout = false
+volume = 0.8
 
-[node name="melee" type="FmodEventEmitter2D" parent="FlipTarget/SFX" unique_id=1823243193]
+[node name="melee" type="FmodEventEmitter2D" parent="FlipTarget/SFX" unique_id=1325436008]
 event_name = "event:/Player/Player Melee Swipe"
 event_guid = "{23f46a14-1ff5-4316-98fd-b5ad509d68f6}"
 volume = 0.6
 
-[node name="spell" type="FmodEventEmitter2D" parent="FlipTarget/SFX" unique_id=768501618]
+[node name="spell" type="FmodEventEmitter2D" parent="FlipTarget/SFX" unique_id=457826235]
 event_name = "event:/Player/Player Melee Spell"
 event_guid = "{82ee20ce-be92-4d71-b266-2932ab63fac7}"
 volume = 0.6
 
-[node name="GroundTileDetector" type="Node2D" parent="FlipTarget" unique_id=136406024]
+[node name="FootstepsPlayer" parent="FlipTarget" unique_id=946456107 instance=ExtResource("5_1so5t")]
 position = Vector2(0, 4)
-script = ExtResource("5_pnw6m")
+
+[node name="sand" type="FmodEventEmitter2D" parent="FlipTarget/FootstepsPlayer/LocalSFXManager" parent_id_path=PackedInt32Array(946456107, 36647118) index="0" unique_id=1833674200]
+event_name = "event:/Player/Player FS Sand"
+event_guid = "{fd7c8726-73c0-4be4-9e6c-c479b5c04eb7}"
+volume = 0.4
+
+[node name="grass" type="FmodEventEmitter2D" parent="FlipTarget/FootstepsPlayer/LocalSFXManager" parent_id_path=PackedInt32Array(946456107, 36647118) index="1" unique_id=132615355]
+event_name = "event:/Player/Player FS Grass"
+event_guid = "{d3f41a99-9998-401a-9ab6-270da90d10bf}"
 
 [node name="TerrainCollider" type="CollisionShape2D" parent="." unique_id=1087129646]
 position = Vector2(0, -22.5)
@@ -871,6 +895,7 @@ actor = NodePath("../..")
 key = "is_water"
 
 [editable path="FlipTarget/TestGun"]
+[editable path="FlipTarget/FootstepsPlayer"]
 [editable path="ActorStateMachine"]
 [editable path="ActorStateMachine/States/Grounded"]
 [editable path="ActorStateMachine/States/InitJump"]
