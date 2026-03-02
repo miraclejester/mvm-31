@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://wqvwwvwj828h" path="res://test_assets/projectile_emiters/test_gun.tscn" id="4_ssrwr"]
 [ext_resource type="Script" uid="uid://cxc0inepqmmgr" path="res://systems/animation/actor_animation_controller.gd" id="5_b8hi5"]
 [ext_resource type="PackedScene" uid="uid://d3thoe536xwf4" path="res://systems/behaviours/node_2d_flip/node_2d_flip_on_input.tscn" id="5_o2riq"]
+[ext_resource type="Script" uid="uid://dhok1matw03a5" path="res://systems/world/ground_tile_detector.gd" id="5_pnw6m"]
 [ext_resource type="PackedScene" uid="uid://b4esk6pcjmjsv" path="res://systems/state_machine/transitions/actor_state_transition.tscn" id="6_rcghi"]
 [ext_resource type="PackedScene" uid="uid://dkek8dj55suja" path="res://systems/collision/collider_group_manager.tscn" id="7_2uvqg"]
 [ext_resource type="PackedScene" uid="uid://m6msobg5ayht" path="res://systems/state_machine/conditions/negate/condition_negate.tscn" id="7_wcyp4"]
@@ -538,6 +539,10 @@ volume = 0.6
 event_name = "event:/Player/Player Melee Spell"
 event_guid = "{82ee20ce-be92-4d71-b266-2932ab63fac7}"
 volume = 0.6
+
+[node name="GroundTileDetector" type="Node2D" parent="FlipTarget" unique_id=136406024]
+position = Vector2(0, 4)
+script = ExtResource("5_pnw6m")
 
 [node name="TerrainCollider" type="CollisionShape2D" parent="." unique_id=1087129646]
 position = Vector2(0, -22.5)
