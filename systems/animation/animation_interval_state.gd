@@ -2,8 +2,8 @@ extends RefCounted
 class_name AnimationIntervalState
 
 var pending_reset: bool
-var action: String
+var data: AnimationIntervalData
 
-func _init(a: String) -> void:
+func _init(d: AnimationIntervalData) -> void:
 	pending_reset = false
-	action = a
+	data = d
