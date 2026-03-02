@@ -5,6 +5,7 @@ static var MAX_BUFFER_TIME: float = 1
 
 signal action_just_released(action: String)
 signal action_just_pressed(action: String)
+signal direct_action(action: String)
 
 @export var available_actions: Array[String]
 
@@ -63,6 +64,10 @@ func send_action_just_released(action: String) -> void:
 
 func send_action_just_pressed(action: String) -> void:
 	action_just_pressed.emit(action)
+
+
+func call_direct_action(action: String) -> void:
+	direct_action.emit(action)
 
 
 func get_movement_input() -> void:

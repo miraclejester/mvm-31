@@ -6,10 +6,10 @@ class_name ProjectileControllerEmitterBehaviour
 @export var shoot_action: String
 
 func _ready() -> void:
-	controller.action_just_pressed.connect(on_controller_just_pressed)
+	controller.direct_action.connect(on_controller_direct_action)
 
 
-func on_controller_just_pressed(key: String) -> void:
+func on_controller_direct_action(key: String) -> void:
 	if not enabled:
 		return
 	if key == shoot_action:

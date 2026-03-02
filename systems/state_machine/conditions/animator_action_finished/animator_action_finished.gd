@@ -26,5 +26,5 @@ func evaluate() -> bool:
 
 
 func on_action_finished(action_key: String) -> void:
-	if action_key == action:
+	if checking and action_key == action:
 		finished = true 
