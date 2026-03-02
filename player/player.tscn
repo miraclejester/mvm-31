@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bjoawgso0vy1g" path="res://systems/state_machine/actor_state_machine.tscn" id="3_8pyyg"]
 [ext_resource type="PackedScene" uid="uid://b60yvaarvf2iu" path="res://systems/controllers/input/player_controller.tscn" id="3_rcghi"]
 [ext_resource type="PackedScene" uid="uid://byhh2fowtieuu" path="res://systems/interactables/doorways/doorway_detector.tscn" id="4_56x04"]
+[ext_resource type="Script" uid="uid://diqfgc8prg6eu" path="res://systems/audio/local_sfx_manager.gd" id="4_ge24q"]
 [ext_resource type="PackedScene" uid="uid://dtq4wlupjnawu" path="res://systems/behaviours/actor_movement/actor_movement.tscn" id="4_o2riq"]
 [ext_resource type="PackedScene" uid="uid://0sdn13hb32u4" path="res://systems/state_machine/state/actor_state.tscn" id="4_oycdn"]
 [ext_resource type="PackedScene" uid="uid://wqvwwvwj828h" path="res://test_assets/projectile_emiters/test_gun.tscn" id="4_ssrwr"]
@@ -82,6 +83,20 @@ tracks/1/keys = {
 "values": [{
 "args": ["attack"],
 "method": &"send_action_finished_event"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FlipTarget/SFX")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["melee"],
+"method": &"play_sfx"
 }]
 }
 
@@ -250,6 +265,20 @@ tracks/2/keys = {
 "values": [{
 "args": ["shoot"],
 "method": &"call_direct_action"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FlipTarget/SFX")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["spell"],
+"method": &"play_sfx"
 }]
 }
 
@@ -492,10 +521,23 @@ vframes = 9
 [node name="Muzzle" parent="FlipTarget/TestGun" index="0" unique_id=782941251]
 position = Vector2(34, -31)
 
-[node name="JumpSFX" type="FmodEventEmitter2D" parent="FlipTarget" unique_id=231178890]
+[node name="SFX" type="Node2D" parent="FlipTarget" unique_id=1523074050]
+script = ExtResource("4_ge24q")
+
+[node name="jump" type="FmodEventEmitter2D" parent="FlipTarget/SFX" unique_id=231178890]
 event_name = "event:/Player/Player Jump"
 event_guid = "{d7dabb45-8b96-484f-9bac-7554b16e3801}"
 allow_fadeout = false
+
+[node name="melee" type="FmodEventEmitter2D" parent="FlipTarget/SFX" unique_id=1823243193]
+event_name = "event:/Player/Player Melee Swipe"
+event_guid = "{23f46a14-1ff5-4316-98fd-b5ad509d68f6}"
+volume = 0.6
+
+[node name="spell" type="FmodEventEmitter2D" parent="FlipTarget/SFX" unique_id=768501618]
+event_name = "event:/Player/Player Melee Spell"
+event_guid = "{82ee20ce-be92-4d71-b266-2932ab63fac7}"
+volume = 0.6
 
 [node name="TerrainCollider" type="CollisionShape2D" parent="." unique_id=1087129646]
 position = Vector2(0, -22.5)
@@ -619,7 +661,7 @@ trigger_key = "jump_started"
 movement_behaviour = NodePath("../../../../../../Behaviours/ActorMovement")
 
 [node name="PlayJumpSfx" parent="ActorStateMachine/States/InitJump/OnEnter/BehaviourSequence" unique_id=51072555 node_paths=PackedStringArray("event_emitter") instance=ExtResource("22_r7pn3")]
-event_emitter = NodePath("../../../../../../FlipTarget/JumpSFX")
+event_emitter = NodePath("../../../../../../FlipTarget/SFX/jump")
 
 [node name="ToAirborne" parent="ActorStateMachine/States/InitJump/Transitions" parent_id_path=PackedInt32Array(1794256466, 1931116749) index="0" unique_id=407001578 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../../Airborne")
