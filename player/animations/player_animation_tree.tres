@@ -1,0 +1,25 @@
+[gd_resource type="AnimationNodeStateMachine" format=3 uid="uid://q4tixcwktkjb"]
+
+[ext_resource type="AnimationNodeStateMachine" uid="uid://bu5nckae43cl7" path="res://player/animations/outside_water_state_machine.tres" id="1_me207"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2hw45"]
+animation = &"surface_swim"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dx5ib"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yc777"]
+advance_mode = 2
+advance_condition = &"swim_started"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bybc6"]
+advance_mode = 2
+advance_condition = &"jump_started"
+
+[resource]
+states/OutsideWater/node = ExtResource("1_me207")
+states/OutsideWater/position = Vector2(419, 100)
+states/Start/position = Vector2(101, 100)
+states/surface_swim/node = SubResource("AnimationNodeAnimation_2hw45")
+states/surface_swim/position = Vector2(680, 100)
+transitions = ["Start", "OutsideWater", SubResource("AnimationNodeStateMachineTransition_dx5ib"), "OutsideWater", "surface_swim", SubResource("AnimationNodeStateMachineTransition_yc777"), "surface_swim", "OutsideWater", SubResource("AnimationNodeStateMachineTransition_bybc6")]

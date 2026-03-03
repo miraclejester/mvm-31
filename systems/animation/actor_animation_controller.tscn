@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://nhdidou2ssqp"]
+
+[ext_resource type="Script" uid="uid://cxc0inepqmmgr" path="res://systems/animation/actor_animation_controller.gd" id="2_x4sit"]
+
+[node name="AnimationTree" type="AnimationTree" unique_id=704880076]
+active = false
+script = ExtResource("2_x4sit")
+
+[node name="ProcessParameters" type="Node" parent="." unique_id=1452081964]
+unique_name_in_owner = true
+
+[node name="IntervalParameters" type="Node" parent="." unique_id=1455507333]
+unique_name_in_owner = true
+
+[node name="TriggerParameters" type="Node" parent="." unique_id=1517241733]
+unique_name_in_owner = true

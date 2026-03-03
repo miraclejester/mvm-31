@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bcykxdmbk4vai"]
+
+[ext_resource type="PackedScene" uid="uid://bsjr1j5fxwvx6" path="res://systems/animation/parameter_setters/actor_animator_parameter_setter.tscn" id="1_hvua6"]
+[ext_resource type="Script" uid="uid://df6qkne3r8dp2" path="res://systems/animation/parameter_setters/body_velocity_parameter_setter/body_velocity_parameter_setter.gd" id="2_fk46w"]
+
+[node name="BodyVelocityParameterSetter" unique_id=1270825895 instance=ExtResource("1_hvua6")]
+script = ExtResource("2_fk46w")
+axis = 0
+operation = 0

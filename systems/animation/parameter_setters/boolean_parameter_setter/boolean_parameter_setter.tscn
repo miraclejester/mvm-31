@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cv0lwcb2ky6vl"]
+
+[ext_resource type="PackedScene" uid="uid://bsjr1j5fxwvx6" path="res://systems/animation/parameter_setters/actor_animator_parameter_setter.tscn" id="1_u8yos"]
+[ext_resource type="Script" uid="uid://d3veax815bbyi" path="res://systems/animation/parameter_setters/boolean_parameter_setter/boolean_parameter_setter.gd" id="2_cmr7e"]
+
+[node name="BooleanParameterSetter" unique_id=1270825895 instance=ExtResource("1_u8yos")]
+script = ExtResource("2_cmr7e")
+negative_path = ""

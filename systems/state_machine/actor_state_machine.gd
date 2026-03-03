@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 	current_state.run_on_process(delta)
 	
 	for transition in any_transitions:
-		if transition.evaluate():
+		if transition.target_state != current_state and transition.evaluate():
 			enter_state(transition.target_state)
 			return
 	
@@ -41,4 +41,5 @@ func enter_state(state: ActorState) -> void:
 	if (current_state != null):
 		current_state.run_on_exit(0)
 	current_state = state
+	print("Entered state %s" % state.name)
 	current_state.run_on_enter(0)

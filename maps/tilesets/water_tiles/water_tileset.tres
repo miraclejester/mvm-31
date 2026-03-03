@@ -7,13 +7,17 @@
 texture = ExtResource("1_r8ttu")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
+0:0/0/custom_data_0 = true
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_42nv0"]
 texture = ExtResource("2_qarm2")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
+0:0/0/custom_data_0 = true
 
 [resource]
 tile_size = Vector2i(32, 32)
+custom_data_layer_0/name = "is_water"
+custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_qarm2")
 sources/1 = SubResource("TileSetAtlasSource_42nv0")

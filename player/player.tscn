@@ -10,17 +10,23 @@
 [ext_resource type="PackedScene" uid="uid://d0tog31ax2il5" path="res://systems/audio/local_sfx_manager.tscn" id="4_pnw6m"]
 [ext_resource type="PackedScene" uid="uid://wqvwwvwj828h" path="res://test_assets/projectile_emiters/test_gun.tscn" id="4_ssrwr"]
 [ext_resource type="PackedScene" uid="uid://h6ww2xh1eft0" path="res://systems/audio/footsteps_player.tscn" id="5_1so5t"]
-[ext_resource type="Script" uid="uid://cxc0inepqmmgr" path="res://systems/animation/actor_animation_controller.gd" id="5_b8hi5"]
 [ext_resource type="PackedScene" uid="uid://d3thoe536xwf4" path="res://systems/behaviours/node_2d_flip/node_2d_flip_on_input.tscn" id="5_o2riq"]
 [ext_resource type="PackedScene" uid="uid://b4esk6pcjmjsv" path="res://systems/state_machine/transitions/actor_state_transition.tscn" id="6_rcghi"]
 [ext_resource type="PackedScene" uid="uid://dkek8dj55suja" path="res://systems/collision/collider_group_manager.tscn" id="7_2uvqg"]
+[ext_resource type="PackedScene" uid="uid://nhdidou2ssqp" path="res://systems/animation/actor_animation_controller.tscn" id="7_55jnj"]
 [ext_resource type="PackedScene" uid="uid://m6msobg5ayht" path="res://systems/state_machine/conditions/negate/condition_negate.tscn" id="7_wcyp4"]
 [ext_resource type="PackedScene" uid="uid://8osb3g7545cg" path="res://systems/collision/single_collider_manager.tscn" id="8_1s1yo"]
 [ext_resource type="Script" uid="uid://bdd038wsyq51v" path="res://systems/animation/animation_interval_data.gd" id="8_1so5t"]
+[ext_resource type="PackedScene" uid="uid://bcykxdmbk4vai" path="res://systems/animation/parameter_setters/body_velocity_parameter_setter/body_velocity_parameter_setter.tscn" id="8_dx5ib"]
 [ext_resource type="PackedScene" uid="uid://be345138hbvre" path="res://systems/state_machine/conditions/body_is_on_floor/condition_body_is_on_floor.tscn" id="8_w5goq"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://q4tixcwktkjb" path="res://player/animations/player_animation_tree.tres" id="8_xcnuv"]
 [ext_resource type="Script" uid="uid://bsxdp451nivth" path="res://systems/collision/collider_spec.gd" id="9_5ejfk"]
+[ext_resource type="PackedScene" uid="uid://bfao0rp0fau05" path="res://systems/animation/parameter_setters/boolean_parameter_setter/actor_movement_parameter_setter/actor_movement_parameter_setter.tscn" id="9_dx5ib"]
+[ext_resource type="PackedScene" uid="uid://dm67ok4oau36j" path="res://systems/animation/parameter_setters/boolean_parameter_setter/controller_parameter_setter/controller_parameter_setter.tscn" id="10_a2xo5"]
 [ext_resource type="PackedScene" uid="uid://cqjba3ufwm12m" path="res://systems/state_machine/conditions/input_is_moving/condition_input_is_moving.tscn" id="10_wvr7c"]
+[ext_resource type="PackedScene" uid="uid://ccdmlb2o47ant" path="res://systems/animation/parameter_setters/boolean_parameter_setter/animator_interval_parameter_settter/animator_interval_parameter_setter.tscn" id="11_art4l"]
 [ext_resource type="PackedScene" uid="uid://b3cpmwgk577cm" path="res://systems/behaviours/projectile_emitter_controller/projectile_emitter_controller_behaviour.tscn" id="12_ge24q"]
+[ext_resource type="PackedScene" uid="uid://bsjr1j5fxwvx6" path="res://systems/animation/parameter_setters/actor_animator_parameter_setter.tscn" id="13_gswnw"]
 [ext_resource type="PackedScene" uid="uid://drlk8sb1yh6hn" path="res://systems/behaviours/actor_jump/actor_jump.tscn" id="14_3sb8j"]
 [ext_resource type="PackedScene" uid="uid://b5ka04bu3afdb" path="res://systems/state_machine/conditions/input_action_just_pressed/input_action_just_pressed.tscn" id="14_pd5ni"]
 [ext_resource type="PackedScene" uid="uid://caqfq51gueoim" path="res://systems/behaviours/sequence/behaviour_sequence.tscn" id="14_vrg71"]
@@ -38,9 +44,11 @@
 [ext_resource type="PackedScene" uid="uid://dcjwut7tpbc4b" path="res://systems/state_machine/utils/bool_retriever/actor_tile_bool/actor_tile_bool_retriever.tscn" id="27_a6siw"]
 [ext_resource type="PackedScene" uid="uid://b00tf8thm1346" path="res://systems/state_machine/conditions/body_is_in_coyote_time/body_is_in_coyote_time.tscn" id="28_b8hi5"]
 [ext_resource type="PackedScene" uid="uid://ctmx5mrxbb0kc" path="res://systems/state_machine/conditions/input_action_buffered/input_action_buffered.tscn" id="29_2uvqg"]
+[ext_resource type="PackedScene" uid="uid://deinpt7r6nyx3" path="res://systems/behaviours/collision_switch_profile/collision_switch_profile.tscn" id="31_dx5ib"]
+[ext_resource type="PackedScene" uid="uid://dxiwnhdey0obs" path="res://systems/state_machine/conditions/actor_is_on_water_surface/actor_is_on_water_surface.tscn" id="39_j55il"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgfib"]
-size = Vector2(10, 45)
+size = Vector2(12, 45)
 
 [sub_resource type="Animation" id="Animation_b8hi5"]
 length = 0.001
@@ -202,6 +210,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [14]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationTree")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["jump"],
+"method": &"send_action_finished_event"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_r7pn3"]
 resource_name = "run"
@@ -262,14 +284,11 @@ tracks/1/path = NodePath("AnimationTree")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "values": [{
 "args": ["shoot"],
-"method": &"start_action_reset_interval"
-}, {
-"args": ["shoot"],
-"method": &"resolve_interval"
+"method": &"call_direct_action"
 }]
 }
 tracks/2/type = "method"
@@ -279,11 +298,14 @@ tracks/2/path = NodePath("AnimationTree")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": ["shoot"],
-"method": &"call_direct_action"
+"method": &"start_action_reset_interval"
+}, {
+"args": ["shoot"],
+"method": &"resolve_interval"
 }]
 }
 tracks/3/type = "method"
@@ -324,11 +346,11 @@ tracks/1/path = NodePath("AnimationTree")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.05),
+"times": PackedFloat32Array(0.15),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": ["shoot"],
-"method": &"start_action_reset_interval"
+"args": ["start_shoot"],
+"method": &"send_action_finished_event"
 }]
 }
 tracks/2/type = "method"
@@ -338,12 +360,30 @@ tracks/2/path = NodePath("AnimationTree")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.15),
+"times": PackedFloat32Array(0.05),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": ["start_shoot"],
-"method": &"send_action_finished_event"
+"args": ["shoot"],
+"method": &"start_action_reset_interval"
 }]
+}
+
+[sub_resource type="Animation" id="Animation_55jnj"]
+resource_name = "surface_swim"
+length = 1.0000167
+loop_mode = 1
+step = 0.16666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipTarget/LandSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.5, 0.6666667, 0.8333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [36, 37, 38, 39, 40, 41]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1s1yo"]
@@ -357,165 +397,19 @@ _data = {
 &"rise": SubResource("Animation_jd2rm"),
 &"run": SubResource("Animation_r7pn3"),
 &"shoot": SubResource("Animation_1so5t"),
-&"start_shoot": SubResource("Animation_pnw6m")
+&"start_shoot": SubResource("Animation_pnw6m"),
+&"surface_swim": SubResource("Animation_55jnj")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1s1yo"]
-animation = &"rise"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5ejfk"]
-animation = &"fall"
-
-[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_jd2rm"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_1s1yo")
-blend_point_0/pos = -1.0
-blend_point_1/node = SubResource("AnimationNodeAnimation_5ejfk")
-blend_point_1/pos = 0.0
-value_label = "air_speed"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b8hi5"]
-animation = &"idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2uvqg"]
-animation = &"run"
-
-[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_1s1yo"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_b8hi5")
-blend_point_0/pos = 0.0
-blend_point_1/node = SubResource("AnimationNodeAnimation_2uvqg")
-blend_point_1/pos = 1.0
-min_space = 0.0
-value_label = "speed"
-blend_mode = 1
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ge24q"]
-animation = &"attack"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_q28gw"]
-animation = &"attack"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jd2rm"]
-animation = &"crouch"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r7pn3"]
-animation = &"jump"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pnw6m"]
-animation = &"shoot"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1so5t"]
-animation = &"start_shoot"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5ejfk"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b8hi5"]
-advance_mode = 2
-advance_condition = &"jump_started"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q28gw"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ge24q"]
-advance_mode = 2
-advance_condition = &"grounded"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pnw6m"]
-advance_mode = 2
-advance_condition = &"airborne"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1so5t"]
-advance_mode = 2
-advance_condition = &"crouching"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_55jnj"]
-advance_mode = 2
-advance_condition = &"standing"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dx5ib"]
-advance_mode = 2
-advance_condition = &"airborne"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_art4l"]
-advance_mode = 2
-advance_condition = &"attack_started"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jd2rm"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a2xo5"]
-advance_mode = 2
-advance_condition = &"attack_started"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gswnw"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xcnuv"]
-advance_mode = 2
-advance_condition = &"grounded"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fjxoa"]
-advance_mode = 2
-advance_condition = &"attack_started"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j55il"]
-advance_mode = 2
-advance_condition = &"shoot_started"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hjies"]
-advance_mode = 2
-advance_condition = &"shoot_started"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mmwog"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8pxes"]
-advance_mode = 2
-advance_condition = &"gun_idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fmu53"]
-advance_mode = 2
-advance_condition = &"shoot_started"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w7j2h"]
-advance_mode = 2
-advance_condition = &"jump_started"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_jd2rm"]
-states/Airborne/node = SubResource("AnimationNodeBlendSpace1D_jd2rm")
-states/Airborne/position = Vector2(685, 200)
-states/End/position = Vector2(1054, 90)
-states/Grounded/node = SubResource("AnimationNodeBlendSpace1D_1s1yo")
-states/Grounded/position = Vector2(332, 90)
-states/Start/position = Vector2(32, 100)
-states/air_attack/node = SubResource("AnimationNodeAnimation_ge24q")
-states/air_attack/position = Vector2(679, 337)
-states/attack/node = SubResource("AnimationNodeAnimation_q28gw")
-states/attack/position = Vector2(332, -17)
-states/crouch/node = SubResource("AnimationNodeAnimation_jd2rm")
-states/crouch/position = Vector2(717, 100)
-states/jump/node = SubResource("AnimationNodeAnimation_r7pn3")
-states/jump/position = Vector2(322, 329)
-states/shoot/node = SubResource("AnimationNodeAnimation_pnw6m")
-states/shoot/position = Vector2(115, 370)
-states/start_shoot/node = SubResource("AnimationNodeAnimation_1so5t")
-states/start_shoot/position = Vector2(122, 217)
-transitions = ["Start", "Grounded", SubResource("AnimationNodeStateMachineTransition_5ejfk"), "Grounded", "jump", SubResource("AnimationNodeStateMachineTransition_b8hi5"), "jump", "Airborne", SubResource("AnimationNodeStateMachineTransition_q28gw"), "Airborne", "Grounded", SubResource("AnimationNodeStateMachineTransition_ge24q"), "Grounded", "Airborne", SubResource("AnimationNodeStateMachineTransition_pnw6m"), "Grounded", "crouch", SubResource("AnimationNodeStateMachineTransition_1so5t"), "crouch", "Grounded", SubResource("AnimationNodeStateMachineTransition_55jnj"), "crouch", "Airborne", SubResource("AnimationNodeStateMachineTransition_dx5ib"), "Grounded", "attack", SubResource("AnimationNodeStateMachineTransition_art4l"), "attack", "Grounded", SubResource("AnimationNodeStateMachineTransition_jd2rm"), "Airborne", "air_attack", SubResource("AnimationNodeStateMachineTransition_a2xo5"), "air_attack", "Airborne", SubResource("AnimationNodeStateMachineTransition_gswnw"), "air_attack", "Grounded", SubResource("AnimationNodeStateMachineTransition_xcnuv"), "jump", "air_attack", SubResource("AnimationNodeStateMachineTransition_fjxoa"), "Grounded", "start_shoot", SubResource("AnimationNodeStateMachineTransition_j55il"), "Airborne", "start_shoot", SubResource("AnimationNodeStateMachineTransition_hjies"), "start_shoot", "shoot", SubResource("AnimationNodeStateMachineTransition_mmwog"), "shoot", "Grounded", SubResource("AnimationNodeStateMachineTransition_8pxes"), "jump", "start_shoot", SubResource("AnimationNodeStateMachineTransition_fmu53"), "shoot", "jump", SubResource("AnimationNodeStateMachineTransition_w7j2h")]
-graph_offset = Vector2(-26, -35)
-
-[sub_resource type="Resource" id="Resource_55jnj"]
+[sub_resource type="Resource" id="Resource_fjxoa"]
 script = ExtResource("8_1so5t")
 interval_key = "shoot"
 control_key = "shoot"
-triggerInterrupts = Array[String](["jump_started"])
+triggerInterrupts = Array[String](["OutsideWater/conditions/jump_started"])
 metadata/_custom_type_script = "uid://bdd038wsyq51v"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jd2rm"]
-size = Vector2(10, 45)
+size = Vector2(12, 45)
 
 [sub_resource type="Resource" id="Resource_q28gw"]
 script = ExtResource("9_5ejfk")
@@ -525,7 +419,7 @@ position = Vector2(0, -22.5)
 metadata/_custom_type_script = "uid://bsxdp451nivth"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2uvqg"]
-size = Vector2(10, 28)
+size = Vector2(12, 28)
 
 [sub_resource type="Resource" id="Resource_1s1yo"]
 script = ExtResource("9_5ejfk")
@@ -580,6 +474,12 @@ volume = 0.4
 event_name = "event:/Player/Player FS Grass"
 event_guid = "{d3f41a99-9998-401a-9ab6-270da90d10bf}"
 
+[node name="WaterLimit" type="Marker2D" parent="FlipTarget" unique_id=226604563]
+position = Vector2(0, -35)
+
+[node name="UnderwaterLimit" type="Marker2D" parent="FlipTarget" unique_id=334110961]
+position = Vector2(0, -10)
+
 [node name="TerrainCollider" type="CollisionShape2D" parent="." unique_id=1087129646]
 position = Vector2(0, -22.5)
 shape = SubResource("RectangleShape2D_rgfib")
@@ -593,26 +493,85 @@ position = Vector2(0, -23)
 libraries/ = SubResource("AnimationLibrary_1s1yo")
 autoplay = &"idle"
 
-[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1409416179 node_paths=PackedStringArray("body", "movement", "controller")]
-active = false
-tree_root = SubResource("AnimationNodeStateMachine_jd2rm")
+[node name="AnimationTree" parent="." unique_id=704880076 node_paths=PackedStringArray("controller") instance=ExtResource("7_55jnj")]
+active = true
+tree_root = ExtResource("8_xcnuv")
 anim_player = NodePath("../AnimationPlayer")
-parameters/conditions/airborne = false
-parameters/conditions/attack_started = false
-parameters/conditions/crouching = false
-parameters/conditions/grounded = false
-parameters/conditions/gun_idle = false
 parameters/conditions/jump_started = false
-parameters/conditions/shoot_started = false
-parameters/conditions/standing = false
-parameters/Airborne/blend_position = -1.0
-parameters/Grounded/blend_position = 0.0
-script = ExtResource("5_b8hi5")
-body = NodePath("..")
-movement = NodePath("../Behaviours/ActorMovement")
+parameters/conditions/swim_started = false
+parameters/OutsideWater/conditions/airborne = false
+parameters/OutsideWater/conditions/attack_started = false
+parameters/OutsideWater/conditions/crouching = false
+parameters/OutsideWater/conditions/grounded = false
+parameters/OutsideWater/conditions/gun_idle = false
+parameters/OutsideWater/conditions/jump_started = false
+parameters/OutsideWater/conditions/shoot_started = false
+parameters/OutsideWater/conditions/standing = false
+parameters/OutsideWater/conditions/swim_started = false
+parameters/OutsideWater/Airborne/blend_position = 0.0
+parameters/OutsideWater/Grounded/blend_position = 0.0
 controller = NodePath("../PlayerController")
-crouch_action = "down"
-interval_data = Array[ExtResource("8_1so5t")]([SubResource("Resource_55jnj")])
+interval_data = Array[ExtResource("8_1so5t")]([SubResource("Resource_fjxoa")])
+
+[node name="GroundedBlendPos" parent="AnimationTree/ProcessParameters" parent_id_path=PackedInt32Array(704880076, 1452081964) index="0" unique_id=1270825895 node_paths=PackedStringArray("body") instance=ExtResource("8_dx5ib")]
+body = NodePath("../../..")
+operation = 1
+parameter_path = "OutsideWater/Grounded/blend_position"
+setter_key = "ourside_water_grounded"
+
+[node name="AirborneBlendPos" parent="AnimationTree/ProcessParameters" parent_id_path=PackedInt32Array(704880076, 1452081964) index="1" unique_id=1446482700 node_paths=PackedStringArray("body") instance=ExtResource("8_dx5ib")]
+body = NodePath("../../..")
+axis = 1
+operation = 2
+parameter_path = "OutsideWater/Airborne/blend_position"
+setter_key = "outside_water_airborne"
+
+[node name="OutsideWaterGroundedAirborne" parent="AnimationTree/ProcessParameters" parent_id_path=PackedInt32Array(704880076, 1452081964) index="2" unique_id=1257442804 node_paths=PackedStringArray("movement") instance=ExtResource("9_dx5ib")]
+movement = NodePath("../../../Behaviours/ActorMovement")
+negative_path = "OutsideWater/conditions/airborne"
+send_negative = true
+send_positive = true
+parameter_path = "OutsideWater/conditions/grounded"
+setter_key = "outside_water_grounded_airborne"
+
+[node name="OutsideWaterCrouchingStanding" parent="AnimationTree/ProcessParameters" parent_id_path=PackedInt32Array(704880076, 1452081964) index="3" unique_id=687607519 node_paths=PackedStringArray("controller") instance=ExtResource("10_a2xo5")]
+controller = NodePath("../../../PlayerController")
+action = "down"
+negative_path = "OutsideWater/conditions/standing"
+send_positive = true
+parameter_path = "OutsideWater/conditions/crouching"
+setter_key = "outside_water_crouching_standing"
+
+[node name="OutsideWaterGunIdle" parent="AnimationTree/IntervalParameters" parent_id_path=PackedInt32Array(704880076, 1455507333) index="0" unique_id=381462708 instance=ExtResource("11_art4l")]
+interval_key = "shoot"
+negative_path = "OutsideWater/conditions/gun_idle"
+send_positive = false
+setter_key = "outside_water_gun_idle"
+
+[node name="JumpStarted" parent="AnimationTree/TriggerParameters" parent_id_path=PackedInt32Array(704880076, 1517241733) index="0" unique_id=1097550186 instance=ExtResource("13_gswnw")]
+parameter_path = "OutsideWater/conditions/jump_started"
+is_trigger = true
+setter_key = "jump_started"
+
+[node name="AttackStarted" parent="AnimationTree/TriggerParameters" parent_id_path=PackedInt32Array(704880076, 1517241733) index="1" unique_id=1454793339 instance=ExtResource("13_gswnw")]
+parameter_path = "OutsideWater/conditions/attack_started"
+is_trigger = true
+setter_key = "attack_started"
+
+[node name="ShootStarted" parent="AnimationTree/TriggerParameters" parent_id_path=PackedInt32Array(704880076, 1517241733) index="2" unique_id=787303547 instance=ExtResource("13_gswnw")]
+parameter_path = "OutsideWater/conditions/shoot_started"
+is_trigger = true
+setter_key = "shoot_started"
+
+[node name="SwimStarted" parent="AnimationTree/TriggerParameters" parent_id_path=PackedInt32Array(704880076, 1517241733) index="3" unique_id=662729878 instance=ExtResource("13_gswnw")]
+parameter_path = "conditions/swim_started"
+is_trigger = true
+setter_key = "swim_started"
+
+[node name="JumpFromWaterStarted" parent="AnimationTree/TriggerParameters" parent_id_path=PackedInt32Array(704880076, 1517241733) index="4" unique_id=327177721 instance=ExtResource("13_gswnw")]
+parameter_path = "conditions/jump_started"
+is_trigger = true
+setter_key = "water_jump_started"
 
 [node name="PlayerController" parent="." unique_id=1995312103 instance=ExtResource("3_rcghi")]
 available_actions = Array[String](["jump", "attack", "down", "shoot"])
@@ -626,7 +585,7 @@ specs = Array[ExtResource("9_5ejfk")]([SubResource("Resource_q28gw"), SubResourc
 [node name="Behaviours" type="Node" parent="." unique_id=112046428]
 unique_name_in_owner = true
 
-[node name="ActorMovement" parent="Behaviours" unique_id=655420935 node_paths=PackedStringArray("body", "controller", "water_detector") instance=ExtResource("4_o2riq")]
+[node name="ActorMovement" parent="Behaviours" unique_id=655420935 node_paths=PackedStringArray("body", "controller", "water_detector", "water_marker", "underwater_marker") instance=ExtResource("4_o2riq")]
 body = NodePath("../..")
 controller = NodePath("../../PlayerController")
 acceleration = 70.0
@@ -637,6 +596,10 @@ coyote_time_enabled = true
 water_detector = NodePath("../../Data/IsInWaterRetriever")
 water_friction_factor = 0.1
 water_jump_force = -200.0
+water_marker = NodePath("../../FlipTarget/WaterLimit")
+underwater_marker = NodePath("../../FlipTarget/UnderwaterLimit")
+surfacing_speed = 100.0
+surface_move_speed = 180.0
 jump_force = -500.0
 cut_jump_force = -220.0
 
@@ -695,7 +658,11 @@ key = "shoot"
 
 [node name="BehaviourSequence" parent="ActorStateMachine/States/InitJump/OnEnter" parent_id_path=PackedInt32Array(1794256466, 667290384) index="0" unique_id=1550808993 instance=ExtResource("14_vrg71")]
 
-[node name="TriggerJumpAnim" parent="ActorStateMachine/States/InitJump/OnEnter/BehaviourSequence" unique_id=432952538 node_paths=PackedStringArray("animation_controller") instance=ExtResource("17_b8hi5")]
+[node name="TriggerJumpFromWater" parent="ActorStateMachine/States/InitJump/OnEnter/BehaviourSequence" unique_id=432952538 node_paths=PackedStringArray("animation_controller") instance=ExtResource("17_b8hi5")]
+animation_controller = NodePath("../../../../../../AnimationTree")
+trigger_key = "water_jump_started"
+
+[node name="TriggerJumpAnim" parent="ActorStateMachine/States/InitJump/OnEnter/BehaviourSequence" unique_id=1787995950 node_paths=PackedStringArray("animation_controller") instance=ExtResource("17_b8hi5")]
 animation_controller = NodePath("../../../../../../AnimationTree")
 trigger_key = "jump_started"
 
@@ -750,12 +717,24 @@ key = "shoot"
 
 [node name="Crouch" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="3" unique_id=397219139 instance=ExtResource("4_oycdn")]
 
-[node name="DisableMovementControl" parent="ActorStateMachine/States/Crouch/OnEnter" parent_id_path=PackedInt32Array(397219139, 667290384) index="0" unique_id=1728581116 node_paths=PackedStringArray("movement") instance=ExtResource("22_1s1yo")]
-movement = NodePath("../../../../../Behaviours/ActorMovement")
+[node name="BehaviourSequence" parent="ActorStateMachine/States/Crouch/OnEnter" parent_id_path=PackedInt32Array(397219139, 667290384) index="0" unique_id=64282278 instance=ExtResource("14_vrg71")]
 
-[node name="EnableMovementControl" parent="ActorStateMachine/States/Crouch/OnExit" parent_id_path=PackedInt32Array(397219139, 1496048418) index="0" unique_id=1227295390 node_paths=PackedStringArray("movement") instance=ExtResource("22_1s1yo")]
-movement = NodePath("../../../../../Behaviours/ActorMovement")
+[node name="DisableMovementControl" parent="ActorStateMachine/States/Crouch/OnEnter/BehaviourSequence" unique_id=1728581116 node_paths=PackedStringArray("movement") instance=ExtResource("22_1s1yo")]
+movement = NodePath("../../../../../../Behaviours/ActorMovement")
+
+[node name="CollisionSwitchProfile" parent="ActorStateMachine/States/Crouch/OnEnter/BehaviourSequence" unique_id=30520376 node_paths=PackedStringArray("manager") instance=ExtResource("31_dx5ib")]
+manager = NodePath("../../../../../../ColliderGroupManager")
+profile_key = "crouch"
+
+[node name="BehaviourSequence" parent="ActorStateMachine/States/Crouch/OnExit" parent_id_path=PackedInt32Array(397219139, 1496048418) index="0" unique_id=2063922373 instance=ExtResource("14_vrg71")]
+
+[node name="EnableMovementControl" parent="ActorStateMachine/States/Crouch/OnExit/BehaviourSequence" unique_id=1227295390 node_paths=PackedStringArray("movement") instance=ExtResource("22_1s1yo")]
+movement = NodePath("../../../../../../Behaviours/ActorMovement")
 control_enabled = true
+
+[node name="CollisionSwitchProfile" parent="ActorStateMachine/States/Crouch/OnExit/BehaviourSequence" unique_id=1254111024 node_paths=PackedStringArray("manager") instance=ExtResource("31_dx5ib")]
+manager = NodePath("../../../../../../ColliderGroupManager")
+profile_key = "stand"
 
 [node name="ToGrounded" parent="ActorStateMachine/States/Crouch/Transitions" parent_id_path=PackedInt32Array(397219139, 1931116749) index="0" unique_id=74687544 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../../Grounded")
@@ -908,8 +887,25 @@ action = "shoot"
 
 [node name="Swim" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="10" unique_id=798264796 instance=ExtResource("4_oycdn")]
 
-[node name="ToInitJump" parent="ActorStateMachine/States/Swim/Transitions" parent_id_path=PackedInt32Array(798264796, 1931116749) index="0" unique_id=1808208984 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+[node name="AnimatorSetTrigger" parent="ActorStateMachine/States/Swim/OnEnter" parent_id_path=PackedInt32Array(798264796, 667290384) index="0" unique_id=1936274439 node_paths=PackedStringArray("animation_controller") instance=ExtResource("17_b8hi5")]
+animation_controller = NodePath("../../../../../AnimationTree")
+trigger_key = "swim_started"
+
+[node name="ToInitJump" parent="ActorStateMachine/States/Swim/Transitions" parent_id_path=PackedInt32Array(798264796, 1931116749) index="0" unique_id=1574746690 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../../InitJump")
+
+[node name="JumpJustPressed" parent="ActorStateMachine/States/Swim/Transitions/ToInitJump" unique_id=1699305092 node_paths=PackedStringArray("controller") instance=ExtResource("18_jd2rm")]
+controller = NodePath("../../../../../../PlayerController")
+key = "jump"
+
+[node name="ActorIsOnWaterSurface" parent="ActorStateMachine/States/Swim/Transitions/ToInitJump" unique_id=1415875844 node_paths=PackedStringArray("movement") instance=ExtResource("39_j55il")]
+movement = NodePath("../../../../../../Behaviours/ActorMovement")
+
+[node name="ToSwim" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="0" unique_id=1979086372 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+target_state = NodePath("../../States/Swim")
+
+[node name="IsInWater" parent="ActorStateMachine/AnyStateTransitions/ToSwim" unique_id=149233817 node_paths=PackedStringArray("condition") instance=ExtResource("22_lykvf")]
+condition = NodePath("../../../../Data/ExternalConditions/IsInWater")
 
 [node name="Data" type="Node" parent="." unique_id=257589254]
 
@@ -952,12 +948,12 @@ buffer_time = 0.1
 
 [node name="LastAnimationRetriever" parent="Data" unique_id=1733489810 instance=ExtResource("17_ixgpl")]
 
-[node name="IsInWaterRetriever" parent="Data" unique_id=590184828 node_paths=PackedStringArray("actor") instance=ExtResource("27_a6siw")]
-actor = NodePath("../..")
-key = "is_water"
+[node name="IsInWaterRetriever" parent="Data" unique_id=590184828 node_paths=PackedStringArray("movement") instance=ExtResource("27_a6siw")]
+movement = NodePath("../../Behaviours/ActorMovement")
 
 [editable path="FlipTarget/TestGun"]
 [editable path="FlipTarget/FootstepsPlayer"]
+[editable path="AnimationTree"]
 [editable path="ActorStateMachine"]
 [editable path="ActorStateMachine/States/Grounded"]
 [editable path="ActorStateMachine/States/InitJump"]

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dxiwnhdey0obs"]
+
+[ext_resource type="Script" uid="uid://bmv86dvjr72wj" path="res://systems/state_machine/conditions/actor_is_on_water_surface/actor_is_on_water_surface.gd" id="1_b7ib0"]
+
+[node name="ActorIsOnWaterSurface" type="Node" unique_id=1415875844]
+script = ExtResource("1_b7ib0")

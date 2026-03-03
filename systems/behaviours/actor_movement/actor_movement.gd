@@ -3,7 +3,8 @@ class_name ActorMovement
 
 enum EMovementMode {
 	GROUND,
-	WATER
+	WATER,
+	SURFACE_WATER
 }
 
 @export_group("References")
@@ -27,6 +28,12 @@ enum EMovementMode {
 @export var water_speed_jump_out_threshold: float = 200
 @export var water_jump_force: float = -400
 
+@export_group("Surface Water Movement")
+@export var water_marker: Node2D
+@export var underwater_marker: Node2D
+@export var surfacing_speed: float = 300
+@export var surface_move_speed: float = 280
+
 @export_group("Jump")
 @export var jump_action_key: String = "jump"
 @export var jump_force: float = -700
@@ -41,14 +48,21 @@ var was_on_floor: bool = false
 var controller_enabled: bool = true
 var control_direction: Vector2 = Vector2.ZERO
 var control_face_dir: Vector2 = Vector2.ZERO
+var jumping = false
 
 var velocity: Vector2
 var current_profile: ActorMovementProfile
+var profile_key: EMovementMode = EMovementMode.GROUND
 var move_mode_dict: Dictionary[EMovementMode, ActorMovementProfile] = {
 	EMovementMode.GROUND : ActorMovementProfile.from_data({
 		"move_method": ground_movement,
 		"initialize_method": ground_initialize_movement,
+		"profile_name": "Ground"
 	}),
+	EMovementMode.SURFACE_WATER: ActorMovementProfile.from_data({
+		"move_method": surface_water_movement,
+		"profile_name": "WaterSurface"
+	})
 	#EMovementMode.WATER : ActorMovementProfile.from_data({
 	#	"move_method": water_movement,
 	#	"initialize_method": func(): jump_enabled = false,
@@ -76,6 +90,8 @@ func run(_delta: float) -> void:
 
 func run_physics(delta: float) -> void:
 	move(delta)
+	if body.velocity.y >= 0:
+		jumping = false
 
 
 func apply_gravity(delta: float) -> void:
@@ -85,9 +101,12 @@ func apply_gravity(delta: float) -> void:
 
 func move(delta: float) -> void:
 	get_controller_input()
-	var profile: ActorMovementProfile = get_move_profile()
+	var key: EMovementMode = get_move_profile_key()
+	var profile: ActorMovementProfile = move_mode_dict[key]
 	if current_profile == null or current_profile != profile:
 		current_profile = profile
+		profile_key = key
+		#print("Profile %s chosen" % profile.profile_name)
 		profile.enter_method.call()
 	profile.initialize_method.call()
 	profile.move_method.call(delta)
@@ -95,8 +114,19 @@ func move(delta: float) -> void:
 	profile.post_move_method.call()
 
 
-func get_move_profile() -> ActorMovementProfile:
-	return move_mode_dict[EMovementMode.GROUND]
+func get_move_profile_key() -> EMovementMode:
+	match profile_key:
+		EMovementMode.GROUND:
+			if water_marker_in_water():
+				return EMovementMode.SURFACE_WATER
+			else:
+				return EMovementMode.GROUND
+		EMovementMode.SURFACE_WATER:
+			if not underwater_marker_in_water():
+				return EMovementMode.GROUND
+			else:
+				return EMovementMode.SURFACE_WATER
+	return EMovementMode.GROUND
 
 
 func ground_movement(delta: float) -> void:
@@ -113,6 +143,16 @@ func ground_movement(delta: float) -> void:
 
 func is_considered_on_floor():
 	return body.is_on_floor() or on_coyote_time
+
+
+func water_marker_in_water() -> bool:
+	var tile: TileData = Utils.get_tile_at(Strings.ROOM_LAYER_NEAR_FOREGROUND, water_marker.global_position)
+	return tile != null and tile.get_custom_data("is_water")
+
+
+func underwater_marker_in_water() -> bool:
+	var tile: TileData = Utils.get_tile_at(Strings.ROOM_LAYER_NEAR_FOREGROUND, underwater_marker.global_position)
+	return tile != null and tile.get_custom_data("is_water")
 
 
 func ground_initialize_movement() -> void:
@@ -138,6 +178,19 @@ func water_post_movement() -> void:
 		apply_jump_force(water_jump_force)
 
 
+func surface_water_movement(_delta: float) -> void:
+	if water_marker_in_water() and underwater_marker_in_water():
+		velocity.y = -surfacing_speed
+	elif not jumping:
+		velocity.y = 0
+	
+	if control_direction.x != 0:
+		velocity.x = move_toward(velocity.x, control_direction.x * surface_move_speed, acceleration)
+	else:
+		velocity.x = move_toward(velocity.x, 0, decceleration)
+	body.velocity = velocity
+
+
 func start_jump(_delta: float) -> void:
 	apply_jump_force(jump_force)
 
@@ -145,6 +198,7 @@ func start_jump(_delta: float) -> void:
 func apply_jump_force(jf: float) -> void:
 	if not jump_enabled:
 		return
+	jumping = true
 	velocity = body.velocity
 	velocity.y = jf
 	body.velocity = velocity

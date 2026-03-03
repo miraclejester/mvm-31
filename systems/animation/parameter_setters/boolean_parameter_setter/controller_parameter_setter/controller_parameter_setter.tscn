@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dm67ok4oau36j"]
+
+[ext_resource type="PackedScene" uid="uid://cv0lwcb2ky6vl" path="res://systems/animation/parameter_setters/boolean_parameter_setter/boolean_parameter_setter.tscn" id="1_jryfd"]
+[ext_resource type="Script" uid="uid://d33xgyt1lswgj" path="res://systems/animation/parameter_setters/boolean_parameter_setter/controller_parameter_setter/controller_parameter_setter.gd" id="2_rcw76"]
+
+[node name="ControllerParameterSetter" unique_id=1270825895 instance=ExtResource("1_jryfd")]
+script = ExtResource("2_rcw76")
+action_modifier = 0
+action = ""
+send_negative = true

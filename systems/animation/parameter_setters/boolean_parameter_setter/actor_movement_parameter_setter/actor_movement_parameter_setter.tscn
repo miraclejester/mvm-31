@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bfao0rp0fau05"]
+
+[ext_resource type="PackedScene" uid="uid://bsjr1j5fxwvx6" path="res://systems/animation/parameter_setters/actor_animator_parameter_setter.tscn" id="1_57qec"]
+[ext_resource type="Script" uid="uid://dbvqygmdti6f2" path="res://systems/animation/parameter_setters/boolean_parameter_setter/actor_movement_parameter_setter/actor_movement_parameter_setter.gd" id="2_veujj"]
+
+[node name="ActorMovementParameterSetter" unique_id=1270825895 instance=ExtResource("1_57qec")]
+script = ExtResource("2_veujj")
+movement_parameter = 0
+negate = false

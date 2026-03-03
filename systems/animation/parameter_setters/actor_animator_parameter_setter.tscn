@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bsjr1j5fxwvx6"]
+
+[ext_resource type="Script" uid="uid://cbcbjj5q8awnc" path="res://systems/animation/parameter_setters/actor_animator_parameter_setter.gd" id="1_eigst"]
+
+[node name="ActorAnimatorParameterSetter" type="Node" unique_id=1270825895]
+script = ExtResource("1_eigst")
