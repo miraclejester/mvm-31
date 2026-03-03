@@ -39,6 +39,8 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 position = Vector2(40, 264)
 
+[node name="Pickups" type="Node2D" parent="." unique_id=1193866743]
+
 [node name="Transitions" type="Node2D" parent="." unique_id=1723779582]
 unique_name_in_owner = true
 

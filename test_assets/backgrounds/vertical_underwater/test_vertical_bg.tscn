@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://by5y1634a7814"]
+
+[ext_resource type="Texture2D" uid="uid://bte711yudd0go" path="res://test_assets/backgrounds/vertical_underwater/background.png" id="1_62pgm"]
+[ext_resource type="Texture2D" uid="uid://d1j6rkwt7270e" path="res://test_assets/backgrounds/vertical_underwater/midground.png" id="2_7thps"]
+
+[node name="TestVerticalBg" type="Node2D" unique_id=405482237]
+
+[node name="BG" type="Parallax2D" parent="." unique_id=1965331622]
+scroll_scale = Vector2(0.4, 0.4)
+repeat_size = Vector2(864, 512)
+
+[node name="TextureRect" type="TextureRect" parent="BG" unique_id=1150171057]
+offset_right = 864.0
+offset_bottom = 512.0
+texture = ExtResource("1_62pgm")
+stretch_mode = 1
+
+[node name="Mid" type="Parallax2D" parent="." unique_id=1308170211]
+scroll_scale = Vector2(0.8, 0.8)
+repeat_size = Vector2(960, 512)
+
+[node name="TextureRect" type="TextureRect" parent="Mid" unique_id=1075086245]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_7thps")
+stretch_mode = 1

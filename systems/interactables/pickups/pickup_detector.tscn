@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://trwo62w6obod"]
+
+[ext_resource type="Script" uid="uid://buoahvll2p72g" path="res://systems/interactables/pickups/pickup_detector.gd" id="1_8eiio"]
+
+[node name="PickupDetector" type="Area2D" unique_id=2127628464]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+script = ExtResource("1_8eiio")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1741257539]

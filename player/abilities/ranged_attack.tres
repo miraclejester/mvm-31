@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3 uid="uid://c3ra0kc8itl6v"]
+
+[ext_resource type="Script" uid="uid://tgtio2puq0ht" path="res://player/abilities/AbilityData.gd" id="1_uparh"]
+
+[resource]
+script = ExtResource("1_uparh")
+ability_key = 1
+ability_name = "Ranged Attack"
+metadata/_custom_type_script = "uid://tgtio2puq0ht"

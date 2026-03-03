@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://ca41udnppg3bd"]
+
+[ext_resource type="PackedScene" uid="uid://u66m7wsa6t3r" path="res://systems/interactables/pickups/game_pickup.tscn" id="1_e0mpn"]
+[ext_resource type="PackedScene" uid="uid://bc0o8awii1imp" path="res://systems/behaviours/game_unlock_ability/game_unlock_ability.tscn" id="2_1l8yc"]
+[ext_resource type="Resource" uid="uid://b00n5n0jremam" path="res://player/abilities/melee_attack.tres" id="3_mt1gy"]
+
+[node name="MeleeAbilityPickup" unique_id=1496596766 instance=ExtResource("1_e0mpn")]
+
+[node name="UnlockMelee" parent="PickupBehaviour" parent_id_path=PackedInt32Array(1438285594) index="0" unique_id=1343139861 instance=ExtResource("2_1l8yc")]
+ability = ExtResource("3_mt1gy")

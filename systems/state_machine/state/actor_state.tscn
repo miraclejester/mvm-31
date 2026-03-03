@@ -19,3 +19,6 @@ unique_name_in_owner = true
 
 [node name="Transitions" type="Node" parent="." unique_id=1931116749]
 unique_name_in_owner = true
+
+[node name="EntryConditions" type="Node" parent="." unique_id=537054144]
+unique_name_in_owner = true

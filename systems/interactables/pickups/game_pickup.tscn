@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://u66m7wsa6t3r"]
+
+[ext_resource type="Script" uid="uid://diesydoybfbkt" path="res://systems/interactables/pickups/game_pickup.gd" id="1_ebtn8"]
+[ext_resource type="Texture2D" uid="uid://chk2mkbp88xrv" path="res://test_assets/pickups/sword_pickup.png" id="1_xe7q5"]
+[ext_resource type="Texture2D" uid="uid://cyiphevpoguit" path="res://test_assets/pickups/tiny_star.png" id="2_ebtn8"]
+
+[sub_resource type="Curve" id="Curve_xe7q5"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(1, 1), 2.8, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_ebtn8"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_xe7q5"]
+offsets = PackedFloat32Array(0.3219697, 1)
+colors = PackedColorArray(0.6898556, 0.11337756, 0.57855654, 1, 0.64705884, 1, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xe7q5"]
+size = Vector2(24, 24)
+
+[node name="GamePickup" type="Area2D" unique_id=1496596766]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_ebtn8")
+
+[node name="Visuals" type="Node2D" parent="." unique_id=2039960070]
+unique_name_in_owner = true
+
+[node name="Sprite" type="Sprite2D" parent="Visuals" unique_id=2080173746]
+unique_name_in_owner = true
+texture = ExtResource("1_xe7q5")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Visuals" unique_id=13087681]
+amount = 6
+texture = ExtResource("2_ebtn8")
+lifetime = 0.4
+randomness = 0.57
+lifetime_randomness = 0.2
+emission_shape = 3
+emission_rect_extents = Vector2(16, 16)
+direction = Vector2(0, 1)
+spread = 68.45
+gravity = Vector2(0, -80)
+initial_velocity_min = 10.56
+initial_velocity_max = 29.7
+linear_accel_min = -4.5
+linear_accel_max = 12.48
+angle_min = -90.0
+angle_max = 90.0
+angle_curve = SubResource("Curve_xe7q5")
+scale_amount_max = 1.1
+scale_amount_curve = SubResource("Curve_ebtn8")
+color_ramp = SubResource("Gradient_xe7q5")
+hue_variation_min = -0.56
+hue_variation_max = 0.56
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=718029099]
+shape = SubResource("RectangleShape2D_xe7q5")
+
+[node name="PickupBehaviour" type="Node" parent="." unique_id=1438285594]
+unique_name_in_owner = true

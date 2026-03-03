@@ -54,5 +54,5 @@ metadata/_custom_type_script = "uid://4ep8qexpg43j"
 script = ExtResource("4_0v0hj")
 rooms = Array[ExtResource("2_etdg4")]([ExtResource("3_2j7pp"), ExtResource("1_f8wy1")])
 transitions = Array[ExtResource("5_5gm3r")]([SubResource("Resource_f8wy1"), SubResource("Resource_2j7pp"), SubResource("Resource_0v0hj"), SubResource("Resource_5gm3r"), SubResource("Resource_ik0ij")])
-default_room = ExtResource("3_2j7pp")
+default_room = ExtResource("8_0v0hj")
 metadata/_custom_type_script = "uid://dft4vx8l4govg"

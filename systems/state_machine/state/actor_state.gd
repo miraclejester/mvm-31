@@ -6,12 +6,14 @@ class_name ActorState
 @onready var on_process_parent: Node = %OnProcess
 @onready var on_physics_process_parent: Node = %OnPhysicsProcess
 @onready var transitions_parent: Node = %Transitions
+@onready var entry_parent: Node = %EntryConditions
 
 var on_enter: ActorBehaviour
 var on_exit: ActorBehaviour
 var on_process: ActorBehaviour
 var on_physics_process: ActorBehaviour
 var transitions: Array[ActorStateTransition] = []
+var entry_conditions: Array[StateMachineCondition] = []
 
 func _ready() -> void:
 	on_enter = get_actor_behaviour(on_enter_parent)
@@ -19,6 +21,7 @@ func _ready() -> void:
 	on_process = get_actor_behaviour(on_process_parent)
 	on_physics_process = get_actor_behaviour(on_physics_process_parent)
 	transitions.assign(transitions_parent.get_children())
+	entry_conditions.assign(entry_parent.get_children())
 
 
 func process_transitions() -> ActorState:
@@ -26,6 +29,13 @@ func process_transitions() -> ActorState:
 		if transition.evaluate():
 			return transition.target_state
 	return null
+
+
+func can_enter_state() -> bool:
+	for condition in entry_conditions:
+		if not condition.evaluate():
+			return false
+	return true
 
 
 func get_actor_behaviour(target_parent: Node) -> ActorBehaviour:

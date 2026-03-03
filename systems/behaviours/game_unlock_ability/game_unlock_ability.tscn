@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bc0o8awii1imp"]
+
+[ext_resource type="Script" uid="uid://bhrx5hdh3lg83" path="res://systems/behaviours/game_unlock_ability/game_unlock_ability.gd" id="1_54io4"]
+
+[node name="GameUnlockAbility" type="Node" unique_id=1343139861]
+script = ExtResource("1_54io4")

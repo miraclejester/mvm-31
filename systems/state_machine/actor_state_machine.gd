@@ -38,6 +38,8 @@ func _physics_process(delta: float) -> void:
 
 
 func enter_state(state: ActorState) -> void:
+	if not state.can_enter_state():
+		return
 	if (current_state != null):
 		current_state.run_on_exit(0)
 	current_state = state

@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://b4esk6pcjmjsv" path="res://systems/state_machine/transitions/actor_state_transition.tscn" id="6_rcghi"]
 [ext_resource type="PackedScene" uid="uid://dkek8dj55suja" path="res://systems/collision/collider_group_manager.tscn" id="7_2uvqg"]
 [ext_resource type="PackedScene" uid="uid://nhdidou2ssqp" path="res://systems/animation/actor_animation_controller.tscn" id="7_55jnj"]
+[ext_resource type="PackedScene" uid="uid://trwo62w6obod" path="res://systems/interactables/pickups/pickup_detector.tscn" id="7_mmwog"]
 [ext_resource type="PackedScene" uid="uid://m6msobg5ayht" path="res://systems/state_machine/conditions/negate/condition_negate.tscn" id="7_wcyp4"]
 [ext_resource type="PackedScene" uid="uid://8osb3g7545cg" path="res://systems/collision/single_collider_manager.tscn" id="8_1s1yo"]
 [ext_resource type="Script" uid="uid://bdd038wsyq51v" path="res://systems/animation/animation_interval_data.gd" id="8_1so5t"]
@@ -45,10 +46,14 @@
 [ext_resource type="PackedScene" uid="uid://b00tf8thm1346" path="res://systems/state_machine/conditions/body_is_in_coyote_time/body_is_in_coyote_time.tscn" id="28_b8hi5"]
 [ext_resource type="PackedScene" uid="uid://ctmx5mrxbb0kc" path="res://systems/state_machine/conditions/input_action_buffered/input_action_buffered.tscn" id="29_2uvqg"]
 [ext_resource type="PackedScene" uid="uid://deinpt7r6nyx3" path="res://systems/behaviours/collision_switch_profile/collision_switch_profile.tscn" id="31_dx5ib"]
+[ext_resource type="PackedScene" uid="uid://bfpyr06ovhqg3" path="res://systems/state_machine/conditions/game_ability_unlocked/game_ability_unlocked.tscn" id="39_hjies"]
 [ext_resource type="PackedScene" uid="uid://dxiwnhdey0obs" path="res://systems/state_machine/conditions/actor_is_on_water_surface/actor_is_on_water_surface.tscn" id="39_j55il"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgfib"]
 size = Vector2(12, 45)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8pxes"]
+size = Vector2(20, 45)
 
 [sub_resource type="Animation" id="Animation_b8hi5"]
 length = 0.001
@@ -489,6 +494,13 @@ shape = SubResource("RectangleShape2D_rgfib")
 [node name="DoorwayDetector" parent="." unique_id=690771773 instance=ExtResource("4_56x04")]
 position = Vector2(0, -23)
 
+[node name="PickupDetector" parent="." unique_id=2127628464 instance=ExtResource("7_mmwog")]
+
+[node name="CollisionShape2D" parent="PickupDetector" index="0" unique_id=1741257539]
+position = Vector2(0, -22.5)
+shape = SubResource("RectangleShape2D_8pxes")
+debug_color = Color(0.63529414, 0.5254902, 0.15686275, 0.12156863)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1192519116]
 libraries/ = SubResource("AnimationLibrary_1s1yo")
 autoplay = &"idle"
@@ -782,6 +794,8 @@ target_state = NodePath("../../../Grounded")
 animation_controller = NodePath("../../../../../../AnimationTree")
 action = "attack"
 
+[node name="AttackAbilityUnlocked" parent="ActorStateMachine/States/Attack/EntryConditions" parent_id_path=PackedInt32Array(279396632, 537054144) index="0" unique_id=1488628682 instance=ExtResource("39_hjies")]
+
 [node name="AirAttack" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="5" unique_id=1141462487 instance=ExtResource("4_oycdn")]
 
 [node name="BehaviourSequence" parent="ActorStateMachine/States/AirAttack/OnEnter" parent_id_path=PackedInt32Array(1141462487, 667290384) index="0" unique_id=805988651 instance=ExtResource("14_vrg71")]
@@ -812,6 +826,8 @@ target_state = NodePath("../../../Airborne")
 animation_controller = NodePath("../../../../../../AnimationTree")
 action = "attack"
 
+[node name="AttackAbilityUnlocked" parent="ActorStateMachine/States/AirAttack/EntryConditions" parent_id_path=PackedInt32Array(1141462487, 537054144) index="0" unique_id=2043772134 instance=ExtResource("39_hjies")]
+
 [node name="StartShoot" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="6" unique_id=1353357530 instance=ExtResource("4_oycdn")]
 
 [node name="BehaviourSequence" parent="ActorStateMachine/States/StartShoot/OnEnter" parent_id_path=PackedInt32Array(1353357530, 667290384) index="0" unique_id=1056280105 instance=ExtResource("14_vrg71")]
@@ -833,6 +849,9 @@ target_state = NodePath("../../../Shoot")
 [node name="AnimatorActionFinished" parent="ActorStateMachine/States/StartShoot/Transitions/ToShoot" unique_id=1357971945 node_paths=PackedStringArray("animation_controller") instance=ExtResource("25_q28gw")]
 animation_controller = NodePath("../../../../../../AnimationTree")
 action = "start_shoot"
+
+[node name="ShootAbilityUnlocked" parent="ActorStateMachine/States/StartShoot/EntryConditions" parent_id_path=PackedInt32Array(1353357530, 537054144) index="0" unique_id=352789067 instance=ExtResource("39_hjies")]
+ability = 1
 
 [node name="Shoot" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="7" unique_id=405997985 instance=ExtResource("4_oycdn")]
 
@@ -869,6 +888,9 @@ target_state = NodePath("../../../AirShoot")
 [node name="AnimatorActionFinished" parent="ActorStateMachine/States/AirStartShoot/Transitions/ToAirShoot" unique_id=1430096141 node_paths=PackedStringArray("animation_controller") instance=ExtResource("25_q28gw")]
 animation_controller = NodePath("../../../../../../AnimationTree")
 action = "start_shoot"
+
+[node name="ShootUnlocked" parent="ActorStateMachine/States/AirStartShoot/EntryConditions" parent_id_path=PackedInt32Array(1056821060, 537054144) index="0" unique_id=139541493 instance=ExtResource("39_hjies")]
+ability = 1
 
 [node name="AirShoot" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="9" unique_id=638155807 instance=ExtResource("4_oycdn")]
 
@@ -953,6 +975,7 @@ movement = NodePath("../../Behaviours/ActorMovement")
 
 [editable path="FlipTarget/TestGun"]
 [editable path="FlipTarget/FootstepsPlayer"]
+[editable path="PickupDetector"]
 [editable path="AnimationTree"]
 [editable path="ActorStateMachine"]
 [editable path="ActorStateMachine/States/Grounded"]

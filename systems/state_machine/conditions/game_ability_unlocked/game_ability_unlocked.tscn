@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bfpyr06ovhqg3"]
+
+[ext_resource type="Script" uid="uid://bxrv6j0i2afr8" path="res://systems/state_machine/conditions/game_ability_unlocked/game_ability_unlocked.gd" id="1_6fbvp"]
+
+[node name="GameAbilityUnlocked" type="Node" unique_id=1488628682]
+script = ExtResource("1_6fbvp")
