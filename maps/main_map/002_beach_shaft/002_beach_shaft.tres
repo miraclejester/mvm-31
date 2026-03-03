@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="GameWorldRoomData" format=3 uid="uid://dtw4nrkeo4v3h"]
+
+[ext_resource type="PackedScene" uid="uid://mxsi01kcuelv" path="res://maps/main_map/002_beach_shaft/002_beach_shaft.tscn" id="1_cgknb"]
+[ext_resource type="Script" uid="uid://w6xaqda0lpl" path="res://systems/world/map/game_world_room_data.gd" id="1_m7me5"]
+
+[resource]
+script = ExtResource("1_m7me5")
+room_name = "Beach Shaft"
+room_scene = ExtResource("1_cgknb")
+bgm_guid = "{9bf42cb4-6c55-48fe-acb1-e42a3ed6bc77}"
+metadata/_custom_type_script = "uid://w6xaqda0lpl"

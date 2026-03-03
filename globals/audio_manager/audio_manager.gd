@@ -4,4 +4,4 @@ extends Node2D
 
 func play_bgm(key: String) -> void:
 	bgm_player.event_guid = key
-	bgm_player.play()
+	bgm_player.play(false)

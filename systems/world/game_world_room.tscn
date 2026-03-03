@@ -30,7 +30,6 @@ tile_set = ExtResource("1_4m5io")
 [node name="NearForegroundLayer" type="TileMapLayer" parent="MapLayers" unique_id=561237308]
 z_index = 1
 material = ExtResource("4_4fglm")
-tile_map_data = PackedByteArray("AAAMAAcAAgAAAAEAAAALAAcAAgAAAAEAAAALAAYAAgAAAAEAAAAMAAYAAgAAAAEAAAANAAYAAgAAAAEAAAANAAcAAgAAAAEAAAAKAAcAAgAAAAEAAAAKAAYAAgAAAAEAAAAKAAUAAgAAAAEAAAALAAUAAgAAAAEAAAAMAAUAAgAAAAEAAAANAAUAAgAAAAEAAAAOAAUAAgAAAAEAAAAOAAYAAgAAAAEAAAAOAAcAAgAAAAEAAAA=")
 tile_set = ExtResource("5_4fglm")
 
 [node name="ProjectilesParent" type="Node2D" parent="." unique_id=976289283]

@@ -339,5 +339,7 @@ terrain_set_0/terrain_1/name = "diagonals"
 terrain_set_0/terrain_1/color = Color(0.7083496, 0.06214194, 0.72964615, 1)
 custom_data_layer_0/name = "is_water"
 custom_data_layer_0/type = 1
+custom_data_layer_1/name = "step_sound"
+custom_data_layer_1/type = 4
 sources/0 = SubResource("TileSetAtlasSource_8jd48")
 sources/2 = SubResource("TileSetAtlasSource_kdg0o")

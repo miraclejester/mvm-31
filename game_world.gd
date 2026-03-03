@@ -35,6 +35,8 @@ func load_room(data: GameWorldRoomData, entrance_key: String = "") -> void:
 		player.global_position = room.get_default_player_position()
 	else:
 		player.global_position = room.get_room_transition(entrance_key).get_entrance_point()
+	camera.global_position = player.global_position
+	camera.reset_smoothing()
 	current_room = room
 	AudioManager.play_bgm(room.room_data.bgm_guid)
 

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="GameWorldRoomData" format=3 uid="uid://c5sh3b87v2euf"]
+
+[ext_resource type="Script" uid="uid://w6xaqda0lpl" path="res://systems/world/map/game_world_room_data.gd" id="1_7o260"]
+[ext_resource type="PackedScene" uid="uid://lyphbpg7ekqe" path="res://maps/main_map/006_first_cove_save_room/006_first_cove_save_room.tscn" id="1_p741v"]
+
+[resource]
+script = ExtResource("1_7o260")
+room_name = "First Cove Save Room"
+room_scene = ExtResource("1_p741v")
+bgm_guid = "{9bf42cb4-6c55-48fe-acb1-e42a3ed6bc77}"
+metadata/_custom_type_script = "uid://w6xaqda0lpl"
