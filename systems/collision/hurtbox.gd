@@ -9,7 +9,7 @@ var overlapping_boxes: Array[Hitbox]
 func hit(hitbox: Hitbox) -> void:
 	if not invincible:
 		life.deal_damage(hitbox.data.damage)
-		overlapping_boxes.append(hitbox)
+	overlapping_boxes.append(hitbox)
 
 
 func left_area(hitbox: Hitbox) -> void:
