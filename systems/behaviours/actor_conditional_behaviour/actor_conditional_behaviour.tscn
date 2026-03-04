@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://2yo1sera82mt"]
+
+[ext_resource type="Script" uid="uid://bb5yoodo8dhup" path="res://systems/behaviours/actor_conditional_behaviour/actor_conditional_behaviour.gd" id="1_ga76e"]
+
+[node name="ActorConditionalBehaviour" type="Node" unique_id=743546512]
+script = ExtResource("1_ga76e")
+
+[node name="Condition" type="Node" parent="." unique_id=1206924850]
+unique_name_in_owner = true
+
+[node name="Behaviour" type="Node" parent="." unique_id=1805669259]
+unique_name_in_owner = true

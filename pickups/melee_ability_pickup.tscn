@@ -2,9 +2,18 @@
 
 [ext_resource type="PackedScene" uid="uid://u66m7wsa6t3r" path="res://systems/interactables/pickups/game_pickup.tscn" id="1_e0mpn"]
 [ext_resource type="PackedScene" uid="uid://bc0o8awii1imp" path="res://systems/behaviours/game_unlock_ability/game_unlock_ability.tscn" id="2_1l8yc"]
+[ext_resource type="Script" uid="uid://bxds426srt4lw" path="res://systems/behaviours/sequence/behaviour_sequence.gd" id="2_jujf0"]
 [ext_resource type="Resource" uid="uid://b00n5n0jremam" path="res://player/abilities/melee_attack.tres" id="3_mt1gy"]
+[ext_resource type="PackedScene" uid="uid://dee7yhnj1hr50" path="res://systems/behaviours/game_set_switch/game_set_switch.tscn" id="5_sqdnr"]
 
 [node name="MeleeAbilityPickup" unique_id=1496596766 instance=ExtResource("1_e0mpn")]
 
-[node name="UnlockMelee" parent="PickupBehaviour" parent_id_path=PackedInt32Array(1438285594) index="0" unique_id=1343139861 instance=ExtResource("2_1l8yc")]
+[node name="BehaviourSequence" type="Node" parent="PickupBehaviour" parent_id_path=PackedInt32Array(1438285594) index="0" unique_id=1952831489]
+script = ExtResource("2_jujf0")
+metadata/_custom_type_script = "uid://bxds426srt4lw"
+
+[node name="UnlockMelee" parent="PickupBehaviour/BehaviourSequence" index="0" unique_id=1343139861 instance=ExtResource("2_1l8yc")]
 ability = ExtResource("3_mt1gy")
+
+[node name="GameSetSwitch" parent="PickupBehaviour/BehaviourSequence" index="1" unique_id=30775204 instance=ExtResource("5_sqdnr")]
+switch_name = "melee_upgrade_obtained"

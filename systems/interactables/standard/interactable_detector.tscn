@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bt53x3ndaey0n"]
+
+[ext_resource type="Script" uid="uid://bdsl4gtnk5r4s" path="res://systems/interactables/standard/interactable_detector.gd" id="1_2tqlm"]
+
+[node name="InteractableDetector" type="Area2D" unique_id=1003259783]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource("1_2tqlm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1243302592]

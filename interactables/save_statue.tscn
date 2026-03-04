@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://cxi10i50ypars"]
+
+[ext_resource type="PackedScene" uid="uid://dto1etc05oivl" path="res://systems/interactables/standard/standard_interactable.tscn" id="1_kbl7b"]
+[ext_resource type="Texture2D" uid="uid://4nyn7vcjn7bt" path="res://pixel_assets/props/wipProps1.png" id="2_241m3"]
+[ext_resource type="PackedScene" uid="uid://iye8lf2mceuq" path="res://systems/behaviours/game_save_game/game_save_game.tscn" id="3_1mdj6"]
+[ext_resource type="PackedScene" uid="uid://7wqfyffrk3j7" path="res://systems/behaviours/ui_fade_visual/ui_fade_visual.tscn" id="3_kiqb3"]
+[ext_resource type="PackedScene" uid="uid://caqfq51gueoim" path="res://systems/behaviours/sequence/behaviour_sequence.tscn" id="5_3b8xr"]
+[ext_resource type="PackedScene" uid="uid://d1p4dw08vn6mn" path="res://systems/behaviours/actor_hook_to_game_manager_signal/actor_hook_to_game_manager_signal.tscn" id="5_vas7y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kiqb3"]
+size = Vector2(72, 80)
+
+[node name="SaveStatue" unique_id=337649948 instance=ExtResource("1_kbl7b")]
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals" parent_id_path=PackedInt32Array(588994056) index="0" unique_id=1396800261]
+position = Vector2(0, -48)
+texture = ExtResource("2_241m3")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 96)
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=393311028]
+position = Vector2(4, -40)
+shape = SubResource("RectangleShape2D_kiqb3")
+
+[node name="GameSaveGame" parent="InteractBehaviour" parent_id_path=PackedInt32Array(224959421) index="0" unique_id=352030842 instance=ExtResource("3_1mdj6")]
+
+[node name="FadeInInstructions" parent="EnterBehaviour" parent_id_path=PackedInt32Array(1717418744) index="0" unique_id=1021497290 node_paths=PackedStringArray("item") instance=ExtResource("3_kiqb3")]
+item = NodePath("../../ToolTips/Instructions")
+time_to_fade = 0.5
+
+[node name="BehaviourSequence" parent="ExitBehaviour" parent_id_path=PackedInt32Array(850974734) index="0" unique_id=1550808993 instance=ExtResource("5_3b8xr")]
+
+[node name="FadeOutInstructions" parent="ExitBehaviour/BehaviourSequence" index="0" unique_id=2025783969 node_paths=PackedStringArray("item") instance=ExtResource("3_kiqb3")]
+item = NodePath("../../../ToolTips/Instructions")
+fade_option = 1
+time_to_fade = 0.5
+
+[node name="FadeOutGameSave" parent="ExitBehaviour/BehaviourSequence" index="1" unique_id=2036549777 node_paths=PackedStringArray("item") instance=ExtResource("3_kiqb3")]
+item = NodePath("../../../ToolTips/GameSaveNotification")
+fade_option = 1
+time_to_fade = 0.5
+
+[node name="ToolTips" type="Control" parent="." index="5" unique_id=2104671528]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -40.0
+offset_top = -112.0
+offset_bottom = -72.0
+
+[node name="Instructions" type="Label" parent="ToolTips" index="0" unique_id=1333700317]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -16.0
+offset_right = 99.0
+offset_bottom = 23.0
+text = "Press E to Save"
+
+[node name="GameSaveNotification" type="Label" parent="ToolTips" index="1" unique_id=479464314]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -8.0
+offset_top = -24.0
+offset_right = 107.0
+offset_bottom = -1.0
+text = "Game Saved!"
+
+[node name="HookToSavedGame" parent="SetupBehaviour" parent_id_path=PackedInt32Array(222444026) index="0" unique_id=1280618467 instance=ExtResource("5_vas7y")]
+
+[node name="FadeInGameSave" parent="SetupBehaviour/HookToSavedGame" index="0" unique_id=1807204266 node_paths=PackedStringArray("item") instance=ExtResource("3_kiqb3")]
+item = NodePath("../../../ToolTips/GameSaveNotification")
+time_to_fade = 0.1

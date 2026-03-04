@@ -1,6 +1,9 @@
 extends Node2D
 class_name GameWorld
 
+signal room_load_started(next_room: GameWorldRoomData)
+signal current_room_set(room: GameWorldRoomData)
+
 @export var player: Player
 @export var world_data: GameWorldData
 
@@ -17,8 +20,8 @@ func _ready() -> void:
 	})
 	
 	EventBroadcaster.projectile_shot.connect(on_projectile_shot)
-	GameManager.current_world = self
-	load_room(world_data.default_room)
+	GameManager.set_world(self)
+	load_room(GameManager.get_current_saved_room())
 
 
 func load_room(data: GameWorldRoomData, entrance_key: String = "") -> void:
@@ -26,6 +29,7 @@ func load_room(data: GameWorldRoomData, entrance_key: String = "") -> void:
 		current_room.queue_free()
 		current_room_parent.remove_child(current_room)
 	
+	room_load_started.emit(data)
 	var room: GameWorldRoom = data.room_scene.instantiate() as GameWorldRoom
 	current_room_parent.add_child(room)
 	room.room_data = data
@@ -38,6 +42,7 @@ func load_room(data: GameWorldRoomData, entrance_key: String = "") -> void:
 	camera.global_position = player.global_position
 	camera.reset_smoothing()
 	current_room = room
+	current_room_set.emit(data)
 	AudioManager.play_bgm(room.room_data.bgm_guid)
 
 

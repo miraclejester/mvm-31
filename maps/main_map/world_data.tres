@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="GameWorldData" format=3 uid="uid://kk0npsje8um6"]
 
-[ext_resource type="Resource" uid="uid://dtw4nrkeo4v3h" path="res://maps/main_map/002_beach_shaft/002_beach_shaft.tres" id="1_f8wy1"]
+[ext_resource type="Resource" uid="uid://dtw4nrkeo4v3h" path="res://maps/main_map/data/002_beach_shaft.tres" id="1_f8wy1"]
 [ext_resource type="Script" uid="uid://w6xaqda0lpl" path="res://systems/world/map/game_world_room_data.gd" id="2_etdg4"]
-[ext_resource type="Resource" uid="uid://d1wsg1mi0xb1j" path="res://maps/main_map/001_starting_beach/001_starting_beach.tres" id="3_2j7pp"]
+[ext_resource type="Resource" uid="uid://d1wsg1mi0xb1j" path="res://maps/main_map/data/001_starting_beach.tres" id="3_2j7pp"]
 [ext_resource type="Script" uid="uid://dft4vx8l4govg" path="res://systems/world/map/game_world_data.gd" id="4_0v0hj"]
 [ext_resource type="Script" uid="uid://4ep8qexpg43j" path="res://systems/world/map/game_world_transition_data.gd" id="5_5gm3r"]
-[ext_resource type="Resource" uid="uid://sto1onudmbhk" path="res://maps/main_map/003_first_cove_entrance/003_first_cove_entrance.tres" id="6_etdg4"]
-[ext_resource type="Resource" uid="uid://c00vpqi1ouf0g" path="res://maps/main_map/004_first_cove_long_fall/004_first_cove_long_fall.tres" id="7_2j7pp"]
-[ext_resource type="Resource" uid="uid://dvoafhlvsrrvc" path="res://maps/main_map/005_melee_upgrade_room/005_melee_upgrade_room.tres" id="8_0v0hj"]
-[ext_resource type="Resource" uid="uid://c5sh3b87v2euf" path="res://maps/main_map/006_first_cove_save_room/006_first_cove_save_room.tres" id="9_5gm3r"]
+[ext_resource type="Resource" uid="uid://sto1onudmbhk" path="res://maps/main_map/data/003_first_cove_entrance.tres" id="6_etdg4"]
+[ext_resource type="Resource" uid="uid://c00vpqi1ouf0g" path="res://maps/main_map/data/004_first_cove_long_fall.tres" id="7_2j7pp"]
+[ext_resource type="Resource" uid="uid://dvoafhlvsrrvc" path="res://maps/main_map/data/005_melee_upgrade_room.tres" id="8_0v0hj"]
+[ext_resource type="Resource" uid="uid://c5sh3b87v2euf" path="res://maps/main_map/data/006_first_cove_save_room.tres" id="9_5gm3r"]
 
 [sub_resource type="Resource" id="Resource_f8wy1"]
 script = ExtResource("5_5gm3r")

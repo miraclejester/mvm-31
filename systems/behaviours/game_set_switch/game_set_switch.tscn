@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dee7yhnj1hr50"]
+
+[ext_resource type="Script" uid="uid://c8wx0e2uw1034" path="res://systems/behaviours/game_set_switch/game_set_switch.gd" id="1_55wow"]
+
+[node name="GameSetSwitch" type="Node" unique_id=30775204]
+script = ExtResource("1_55wow")

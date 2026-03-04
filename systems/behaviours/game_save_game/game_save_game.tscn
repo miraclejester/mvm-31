@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://iye8lf2mceuq"]
+
+[ext_resource type="Script" uid="uid://dnyskgifpmdpa" path="res://systems/behaviours/game_save_game/game_save_game.gd" id="1_w8v12"]
+
+[node name="GameSaveGame" type="Node" unique_id=352030842]
+script = ExtResource("1_w8v12")

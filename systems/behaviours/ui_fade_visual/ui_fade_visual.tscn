@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://7wqfyffrk3j7"]
+
+[ext_resource type="Script" uid="uid://bme6x8df816b1" path="res://systems/behaviours/ui_fade_visual/ui_fade_visual.gd" id="1_h3cc8"]
+
+[node name="UiFadeVisual" type="Node" unique_id=1021497290]
+script = ExtResource("1_h3cc8")

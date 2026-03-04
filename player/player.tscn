@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://m6msobg5ayht" path="res://systems/state_machine/conditions/negate/condition_negate.tscn" id="7_wcyp4"]
 [ext_resource type="PackedScene" uid="uid://8osb3g7545cg" path="res://systems/collision/single_collider_manager.tscn" id="8_1s1yo"]
 [ext_resource type="Script" uid="uid://bdd038wsyq51v" path="res://systems/animation/animation_interval_data.gd" id="8_1so5t"]
+[ext_resource type="PackedScene" uid="uid://bt53x3ndaey0n" path="res://systems/interactables/standard/interactable_detector.tscn" id="8_8pxes"]
 [ext_resource type="PackedScene" uid="uid://bcykxdmbk4vai" path="res://systems/animation/parameter_setters/body_velocity_parameter_setter/body_velocity_parameter_setter.tscn" id="8_dx5ib"]
 [ext_resource type="PackedScene" uid="uid://be345138hbvre" path="res://systems/state_machine/conditions/body_is_on_floor/condition_body_is_on_floor.tscn" id="8_w5goq"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://q4tixcwktkjb" path="res://player/animations/player_animation_tree.tres" id="8_xcnuv"]
@@ -53,6 +54,9 @@
 size = Vector2(12, 45)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8pxes"]
+size = Vector2(20, 45)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fmu53"]
 size = Vector2(20, 45)
 
 [sub_resource type="Animation" id="Animation_b8hi5"]
@@ -501,6 +505,14 @@ position = Vector2(0, -22.5)
 shape = SubResource("RectangleShape2D_8pxes")
 debug_color = Color(0.63529414, 0.5254902, 0.15686275, 0.12156863)
 
+[node name="InteractableDetector" parent="." unique_id=1003259783 node_paths=PackedStringArray("controller") instance=ExtResource("8_8pxes")]
+controller = NodePath("../PlayerController")
+
+[node name="CollisionShape2D" parent="InteractableDetector" index="0" unique_id=1243302592]
+position = Vector2(0, -22.5)
+shape = SubResource("RectangleShape2D_fmu53")
+debug_color = Color(0, 0.6317335, 0.4624179, 0.41960785)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1192519116]
 libraries/ = SubResource("AnimationLibrary_1s1yo")
 autoplay = &"idle"
@@ -586,7 +598,7 @@ is_trigger = true
 setter_key = "water_jump_started"
 
 [node name="PlayerController" parent="." unique_id=1995312103 instance=ExtResource("3_rcghi")]
-available_actions = Array[String](["jump", "attack", "down", "shoot"])
+available_actions = Array[String](["jump", "attack", "down", "shoot", "interact"])
 
 [node name="ColliderGroupManager" parent="." unique_id=1016132639 instance=ExtResource("7_2uvqg")]
 
@@ -976,6 +988,7 @@ movement = NodePath("../../Behaviours/ActorMovement")
 [editable path="FlipTarget/TestGun"]
 [editable path="FlipTarget/FootstepsPlayer"]
 [editable path="PickupDetector"]
+[editable path="InteractableDetector"]
 [editable path="AnimationTree"]
 [editable path="ActorStateMachine"]
 [editable path="ActorStateMachine/States/Grounded"]

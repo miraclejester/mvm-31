@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dto1etc05oivl"]
+
+[ext_resource type="Script" uid="uid://qpfcx8vn0que" path="res://systems/interactables/standard/standard_interactable.gd" id="1_5rybw"]
+
+[node name="StandardInteractable" type="Area2D" unique_id=337649948]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_5rybw")
+valid_actions = Array[String](["interact"])
+
+[node name="Visuals" type="Node2D" parent="." unique_id=588994056]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=393311028]
+
+[node name="InteractBehaviour" type="Node" parent="." unique_id=224959421]
+unique_name_in_owner = true
+
+[node name="EnterBehaviour" type="Node" parent="." unique_id=1717418744]
+unique_name_in_owner = true
+
+[node name="ExitBehaviour" type="Node" parent="." unique_id=850974734]
+unique_name_in_owner = true
+
+[node name="SetupBehaviour" type="Node" parent="." unique_id=222444026]
+unique_name_in_owner = true

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d1p4dw08vn6mn"]
+
+[ext_resource type="Script" uid="uid://fcgj0w6gn57q" path="res://systems/behaviours/actor_hook_to_game_manager_signal/actor_hook_to_game_manager_signal.gd" id="1_try6l"]
+
+[node name="ActorHookToGameManagerSignal" type="Node" unique_id=1280618467]
+script = ExtResource("1_try6l")

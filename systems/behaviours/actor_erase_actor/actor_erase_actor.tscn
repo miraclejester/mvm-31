@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bwfojncre050s"]
+
+[ext_resource type="Script" uid="uid://b0523yxrgndsc" path="res://systems/behaviours/actor_erase_actor/actor_erase_actor.gd" id="1_7e70m"]
+
+[node name="ActorEraseActor" type="Node" unique_id=521280831]
+script = ExtResource("1_7e70m")

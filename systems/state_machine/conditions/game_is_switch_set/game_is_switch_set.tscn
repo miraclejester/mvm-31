@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dixcymjc3r412"]
+
+[ext_resource type="Script" uid="uid://0idr6mwbpsai" path="res://systems/state_machine/conditions/game_is_switch_set/game_is_switch_set.gd" id="1_o4uww"]
+
+[node name="GameIsSwitchSet" type="Node" unique_id=1837927436]
+script = ExtResource("1_o4uww")

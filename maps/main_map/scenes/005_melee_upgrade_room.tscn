@@ -1,0 +1,85 @@
+[gd_scene format=4 uid="uid://b4vkj6i0sppr8"]
+
+[ext_resource type="PackedScene" uid="uid://c4uo8ofncg175" path="res://systems/world/game_world_room.tscn" id="1_d2i3l"]
+[ext_resource type="PackedScene" uid="uid://bxxaqj4j4ruuu" path="res://test_assets/backgrounds/test_parallax/test_parallax_bg.tscn" id="2_4bkuy"]
+[ext_resource type="PackedScene" uid="uid://dlcssb4x7r0fi" path="res://systems/world/rooms/room_transition.tscn" id="2_qnfdf"]
+[ext_resource type="PackedScene" uid="uid://ca41udnppg3bd" path="res://pickups/melee_ability_pickup.tscn" id="3_4bkuy"]
+[ext_resource type="PackedScene" uid="uid://dto1etc05oivl" path="res://systems/interactables/standard/standard_interactable.tscn" id="4_opakh"]
+[ext_resource type="PackedScene" uid="uid://2yo1sera82mt" path="res://systems/behaviours/actor_conditional_behaviour/actor_conditional_behaviour.tscn" id="5_qum1k"]
+[ext_resource type="PackedScene" uid="uid://dixcymjc3r412" path="res://systems/state_machine/conditions/game_is_switch_set/game_is_switch_set.tscn" id="6_ityar"]
+[ext_resource type="PackedScene" uid="uid://bwfojncre050s" path="res://systems/behaviours/actor_erase_actor/actor_erase_actor.tscn" id="7_qum1k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4bkuy"]
+size = Vector2(152, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d2i3l"]
+size = Vector2(20, 98)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qnfdf"]
+size = Vector2(20, 98)
+
+[node name="005_MeleeUpgradeRoom" unique_id=399359172 instance=ExtResource("1_d2i3l")]
+
+[node name="TestParallaxBg" parent="ParallaxBackground" parent_id_path=PackedInt32Array(181560860) index="0" unique_id=1629707704 instance=ExtResource("2_4bkuy")]
+
+[node name="BottomRightCorner" parent="CameraBounds" parent_id_path=PackedInt32Array(1922318848) index="0" unique_id=775257854]
+position = Vector2(640, 360)
+
+[node name="TerrainLayer" parent="MapLayers" parent_id_path=PackedInt32Array(76465743) index="1" unique_id=1942143527]
+tile_map_data = PackedByteArray("AAAAAAoAAAAJAAIAAAABAAoAAAAJAAIAAAACAAoAAAABAAAAAAADAAoAAAABAAAAAAAEAAoAAAAJAAIAAAAFAAoAAAAJAAIAAAAGAAoAAAAJAAIAAAAHAAoAAAAJAAIAAAAIAAoAAAAKAAIAAAAJAAoAAAABAAEAAAAKAAoAAAABAAEAAAALAAoAAAABAAEAAAAMAAoAAAABAAEAAAANAAoAAAAIAAIAAAAOAAoAAAABAAAAAAAPAAoAAAABAAAAAAAQAAoAAAAJAAIAAAARAAoAAAABAAAAAAASAAoAAAABAAAAAAATAAoAAAAJAAIAAAAAAAsAAAABAAEAAAABAAsAAAABAAEAAAACAAsAAAABAAEAAAADAAsAAAABAAEAAAAEAAsAAAABAAEAAAAFAAsAAAABAAEAAAAGAAsAAAABAAEAAAAHAAsAAAABAAEAAAAIAAsAAAABAAEAAAAJAAsAAAABAAEAAAAKAAsAAAABAAEAAAALAAsAAAABAAEAAAAMAAsAAAABAAEAAAANAAsAAAABAAEAAAAOAAsAAAABAAEAAAAPAAsAAAABAAEAAAAQAAsAAAABAAEAAAARAAsAAAABAAEAAAASAAsAAAABAAEAAAATAAsAAAABAAEAAAAUAAsAAAABAAEAAAAVAAsAAAAIAAEAAAAUAAoAAAAJAAIAAAAVAAoAAAACAAAAAAAUAAcAAAAJAAAAAAAUAAYAAAABAAEAAAAVAAYAAAAIAAEAAAAVAAcAAAACAAIAAAAMAAkAAAAIAAIAAAAMAAgAAAAIAAEAAAANAAkAAAACAAAAAAALAAkAAAABAAEAAAAKAAkAAAABAAEAAAAMAAwAAAAJAAAAAAANAAwAAAABAAIAAAAOAAwAAAAJAAAAAAAPAAwAAAABAAIAAAAQAAwAAAABAAIAAAARAAwAAAAJAAAAAAASAAwAAAABAAIAAAATAAwAAAAJAAAAAAALAAwAAAAJAAAAAAAKAAwAAAAJAAAAAAAJAAwAAAAJAAAAAAAIAAwAAAAJAAAAAAAHAAwAAAAJAAAAAAAGAAwAAAABAAIAAAAFAAwAAAABAAIAAAAEAAwAAAABAAIAAAADAAwAAAAJAAAAAAACAAwAAAABAAIAAAABAAwAAAABAAIAAAAAAAwAAAABAAIAAAADAAAAAAAKAAEAAAAEAAAAAAABAAEAAAAFAAAAAAABAAEAAAAGAAAAAAABAAEAAAAHAAAAAAABAAEAAAAIAAAAAAABAAEAAAAJAAAAAAABAAEAAAAKAAAAAAABAAEAAAALAAAAAAABAAEAAAAMAAAAAAABAAEAAAANAAAAAAABAAEAAAAOAAAAAAABAAEAAAAPAAAAAAABAAEAAAAQAAAAAAABAAEAAAARAAAAAAABAAEAAAASAAAAAAABAAEAAAATAAAAAAABAAEAAAATAAcAAAAAAAIAAAATAAYAAAAAAAEAAAATAAUAAAAAAAEAAAATAAQAAAAAAAEAAAATAAMAAAAKAAEAAAATAAIAAAAAAAEAAAATAAEAAAAKAAAAAAAUAAAAAAABAAEAAAAUAAEAAAABAAEAAAAUAAIAAAABAAEAAAAUAAMAAAABAAEAAAAUAAQAAAABAAEAAAAUAAUAAAABAAEAAAAUAAwAAAAJAAAAAAASAAEAAAABAAIAAAARAAEAAAAJAAAAAAAQAAEAAAAJAAAAAAAPAAEAAAABAAIAAAAOAAEAAAABAAIAAAANAAEAAAAJAAAAAAAMAAEAAAABAAIAAAALAAEAAAAJAAAAAAAKAAEAAAAJAAAAAAAJAAEAAAAJAAAAAAAIAAEAAAAJAAAAAAAHAAEAAAABAAIAAAAGAAEAAAABAAIAAAAFAAEAAAABAAIAAAAEAAEAAAAJAAAAAAADAAEAAAAAAAIAAAD//wAAAAABAAEAAAD//wEAAAABAAEAAAD//wIAAAABAAEAAAD//wMAAAABAAEAAAD//wQAAAABAAEAAAD//wUAAAABAAEAAAD//wYAAAABAAEAAAD//wcAAAABAAIAAAD//woAAAABAAAAAAD//wwAAAAJAAAAAAAAAAAAAAAIAAEAAAAAAAEAAAACAAEAAAAAAAIAAAACAAEAAAAAAAMAAAACAAEAAAAAAAQAAAAIAAEAAAAAAAUAAAACAAEAAAAAAAYAAAAIAAEAAAAAAAcAAAACAAIAAAD//wsAAAABAAEAAAD+/woAAAAAAAAAAAD+/wsAAAAAAAEAAAD+/wwAAAAAAAIAAAD+/wcAAAAAAAIAAAD+/wYAAAAKAAEAAAD+/wUAAAAKAAEAAAD+/wQAAAAAAAEAAAD+/wMAAAAKAAEAAAD+/wIAAAAAAAEAAAD+/wEAAAAAAAEAAAD+/wAAAAAKAAEAAAAVAAwAAAACAAIAAAAVAAUAAAACAAEAAAAVAAQAAAAIAAEAAAAVAAMAAAACAAEAAAAVAAIAAAACAAEAAAAVAAEAAAACAAEAAAAVAAAAAAAIAAEAAAAVAP//AAACAAAAAAAUAP//AAAJAAIAAAATAP//AAABAAAAAAASAP//AAAJAAIAAAARAP//AAAJAAIAAAAQAP//AAABAAAAAAAPAP//AAAJAAIAAAAOAP//AAABAAAAAAANAP//AAABAAAAAAAMAP//AAAJAAIAAAALAP//AAAJAAIAAAAKAP//AAAJAAIAAAAJAP//AAABAAAAAAAIAP//AAAJAAIAAAAHAP//AAAJAAIAAAAGAP//AAAJAAIAAAAFAP//AAAJAAIAAAAEAP//AAABAAAAAAADAP//AAAAAAAAAAAAAP//AAACAAAAAAD/////AAABAAAAAAD+////AAAAAAAAAAALAAgAAAABAAEAAAALAAcAAAAIAAIAAAAKAAgAAAABAAEAAAAKAAcAAAAKAAIAAAAJAAgAAAAKAAEAAAAJAAkAAAAKAAIAAAAIAAkAAAAAAAAAAAALAAYAAAACAAEAAAAKAAYAAAAKAAEAAAALAAUAAAACAAAAAAAKAAUAAAAAAAAAAAAJAAcAAAAAAAAAAAAMAAcAAAACAAAAAAA=")
+
+[node name="PlayerSpawn" parent="." index="4" unique_id=548575327]
+position = Vector2(96, 320)
+
+[node name="MeleeAbilityPickup" parent="Pickups" parent_id_path=PackedInt32Array(1193866743) index="0" unique_id=1496596766 instance=ExtResource("3_4bkuy")]
+position = Vector2(352, 136)
+
+[node name="StandardInteractable" parent="Interactables" parent_id_path=PackedInt32Array(817726722) index="0" unique_id=337649948 instance=ExtResource("4_opakh")]
+
+[node name="RemoveMeleeIfObtained" parent="Interactables/StandardInteractable/SetupBehaviour" parent_id_path=PackedInt32Array(337649948, 222444026) index="0" unique_id=743546512 instance=ExtResource("5_qum1k")]
+
+[node name="GameIsSwitchSet" parent="Interactables/StandardInteractable/SetupBehaviour/RemoveMeleeIfObtained/Condition" parent_id_path=PackedInt32Array(743546512, 1206924850) index="0" unique_id=1837927436 instance=ExtResource("6_ityar")]
+switch_name = "melee_upgrade_obtained"
+
+[node name="ActorEraseActor" parent="Interactables/StandardInteractable/SetupBehaviour/RemoveMeleeIfObtained/Behaviour" parent_id_path=PackedInt32Array(743546512, 1805669259) index="0" unique_id=521280831 node_paths=PackedStringArray("target") instance=ExtResource("7_qum1k")]
+target = NodePath("../../../../../../Pickups/MeleeAbilityPickup")
+
+[node name="UpEntrance" parent="Transitions" parent_id_path=PackedInt32Array(1723779582) index="0" unique_id=487296057 instance=ExtResource("2_qnfdf")]
+position = Vector2(64, -56)
+key = "up_entrance"
+
+[node name="Entrance" parent="Transitions/UpEntrance" index="0" unique_id=796242982]
+position = Vector2(0, 88)
+
+[node name="CollisionShape2D" parent="Transitions/UpEntrance" index="1" unique_id=550180330]
+position = Vector2(4, -5)
+shape = SubResource("RectangleShape2D_4bkuy")
+
+[node name="LeftEntrance" parent="Transitions" parent_id_path=PackedInt32Array(1723779582) index="1" unique_id=1779497791 instance=ExtResource("2_qnfdf")]
+position = Vector2(-40, 320)
+key = "left_entrance"
+
+[node name="Entrance" parent="Transitions/LeftEntrance" index="0" unique_id=796242982]
+position = Vector2(40, 0)
+
+[node name="CollisionShape2D" parent="Transitions/LeftEntrance" index="1" unique_id=550180330]
+position = Vector2(0, -39)
+shape = SubResource("RectangleShape2D_d2i3l")
+
+[node name="RightEntrance" parent="Transitions" parent_id_path=PackedInt32Array(1723779582) index="2" unique_id=375319793 instance=ExtResource("2_qnfdf")]
+position = Vector2(680, 320)
+key = "right_entrance"
+
+[node name="Entrance" parent="Transitions/RightEntrance" index="0" unique_id=796242982]
+position = Vector2(-40, 0)
+
+[node name="CollisionShape2D" parent="Transitions/RightEntrance" index="1" unique_id=550180330]
+position = Vector2(0, -39)
+shape = SubResource("RectangleShape2D_qnfdf")
+
+[editable path="CameraBounds"]
+[editable path="Interactables/StandardInteractable"]
+[editable path="Interactables/StandardInteractable/SetupBehaviour/RemoveMeleeIfObtained"]
+[editable path="Transitions/UpEntrance"]
+[editable path="Transitions/LeftEntrance"]
+[editable path="Transitions/RightEntrance"]
