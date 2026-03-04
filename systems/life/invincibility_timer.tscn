@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b4ulewswb6ooe"]
+
+[ext_resource type="Script" uid="uid://cvns50kjigiia" path="res://systems/life/invincibility_timer.gd" id="1_ltkkb"]
+
+[node name="InvincibilityTimer" type="Node" unique_id=1945452152]
+script = ExtResource("1_ltkkb")
+
+[node name="Timer" type="Timer" parent="." unique_id=2146689437]
+unique_name_in_owner = true
+one_shot = true

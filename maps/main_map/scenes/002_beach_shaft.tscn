@@ -4,6 +4,7 @@
 [ext_resource type="TileSet" uid="uid://bo41c76hqrjot" path="res://maps/tilesets/beach_tileset.tres" id="2_7fqgq"]
 [ext_resource type="PackedScene" uid="uid://by5y1634a7814" path="res://test_assets/backgrounds/vertical_underwater/test_vertical_bg.tscn" id="2_ylpi7"]
 [ext_resource type="PackedScene" uid="uid://dlcssb4x7r0fi" path="res://systems/world/rooms/room_transition.tscn" id="3_w2p8b"]
+[ext_resource type="PackedScene" uid="uid://c6bapa1itjpfh" path="res://characters/enemies/crab/crab.tscn" id="5_g4usg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ylpi7"]
 size = Vector2(20, 272)
@@ -60,6 +61,9 @@ position = Vector2(-48, 0)
 [node name="CollisionShape2D" parent="Transitions/CoveEntrance" index="1" unique_id=550180330]
 position = Vector2(0, -55)
 shape = SubResource("RectangleShape2D_djgcq")
+
+[node name="Crab" parent="Enemies" parent_id_path=PackedInt32Array(1450376257) index="0" unique_id=1487671488 instance=ExtResource("5_g4usg")]
+position = Vector2(368, 160)
 
 [editable path="CameraBounds"]
 [editable path="Transitions/LeftEntrance"]

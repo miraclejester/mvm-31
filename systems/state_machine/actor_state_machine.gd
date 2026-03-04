@@ -43,5 +43,5 @@ func enter_state(state: ActorState) -> void:
 	if (current_state != null):
 		current_state.run_on_exit(0)
 	current_state = state
-	print("Entered state %s" % state.name)
+	#print("Entered state %s" % state.name)
 	current_state.run_on_enter(0)

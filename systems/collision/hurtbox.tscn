@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cf2nwnpit6vtj"]
+
+[ext_resource type="Script" uid="uid://c02do38exp5qy" path="res://systems/collision/hurtbox.gd" id="1_2og2t"]
+
+[node name="Hurtbox" type="Area2D" unique_id=573111498]
+monitoring = false
+script = ExtResource("1_2og2t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1674096468]

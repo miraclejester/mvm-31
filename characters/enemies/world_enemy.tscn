@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d1ao8x1632aoe" path="res://systems/controllers/input/actor_controller.tscn" id="3_e2633"]
 [ext_resource type="PackedScene" uid="uid://d3thoe536xwf4" path="res://systems/behaviours/node_2d_flip/node_2d_flip_on_input.tscn" id="3_tge8d"]
 [ext_resource type="PackedScene" uid="uid://dtq4wlupjnawu" path="res://systems/behaviours/actor_movement/actor_movement.tscn" id="5_lgkyx"]
+[ext_resource type="PackedScene" uid="uid://cr2ssks6txaq4" path="res://systems/life/character_life.tscn" id="5_v3144"]
 
 [node name="WorldEnemy" type="CharacterBody2D" unique_id=1487671488]
 collision_layer = 0
@@ -28,6 +29,8 @@ unique_name_in_owner = true
 
 [node name="ActorController" parent="." unique_id=1814408435 instance=ExtResource("3_e2633")]
 external_input = false
+
+[node name="CharacterLife" parent="." unique_id=771178152 instance=ExtResource("5_v3144")]
 
 [node name="Behaviours" type="Node" parent="." unique_id=1762055959]
 unique_name_in_owner = true
