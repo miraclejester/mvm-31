@@ -106,7 +106,6 @@ func move(delta: float) -> void:
 	if current_profile == null or current_profile != profile:
 		current_profile = profile
 		profile_key = key
-		#print("Profile %s chosen" % profile.profile_name)
 		profile.enter_method.call()
 	profile.initialize_method.call()
 	profile.move_method.call(delta)
@@ -146,11 +145,15 @@ func is_considered_on_floor():
 
 
 func water_marker_in_water() -> bool:
+	if water_marker == null:
+		return false
 	var tile: TileData = Utils.get_tile_at(Strings.ROOM_LAYER_NEAR_FOREGROUND, water_marker.global_position)
 	return tile != null and tile.get_custom_data("is_water")
 
 
 func underwater_marker_in_water() -> bool:
+	if underwater_marker != null:
+		return false
 	var tile: TileData = Utils.get_tile_at(Strings.ROOM_LAYER_NEAR_FOREGROUND, underwater_marker.global_position)
 	return tile != null and tile.get_custom_data("is_water")
 

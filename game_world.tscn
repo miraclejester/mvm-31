@@ -2,21 +2,21 @@
 
 [ext_resource type="Script" uid="uid://bckn0pt6gpe5h" path="res://game_world.gd" id="1_bvgre"]
 [ext_resource type="Resource" uid="uid://kk0npsje8um6" path="res://maps/main_map/world_data.tres" id="2_ea1x0"]
-[ext_resource type="PackedScene" uid="uid://k0gilutiyigl" path="res://player/player.tscn" id="3_e3xe6"]
+[ext_resource type="PackedScene" uid="uid://k0gilutiyigl" path="res://characters/player/player.tscn" id="3_e3xe6"]
 
 [node name="GameWorld" type="Node2D" unique_id=895151578 node_paths=PackedStringArray("player")]
 script = ExtResource("1_bvgre")
-player = NodePath("TestPlayer")
+player = NodePath("Player")
 world_data = ExtResource("2_ea1x0")
 
 [node name="CurrentRoomParent" type="Node2D" parent="." unique_id=1829280072]
 unique_name_in_owner = true
 
-[node name="TestPlayer" parent="." unique_id=1042347891 instance=ExtResource("3_e3xe6")]
+[node name="Player" parent="." unique_id=1042347891 instance=ExtResource("3_e3xe6")]
 position = Vector2(32, 288)
 metadata/_edit_group_ = true
 
-[node name="CameraRemote" parent="TestPlayer" index="2" unique_id=1653809102]
+[node name="CameraRemote" parent="Player" index="2" unique_id=1653809102]
 remote_path = NodePath("../../MainCamera")
 
 [node name="MainCamera" type="Camera2D" parent="." unique_id=1774033888]
@@ -29,22 +29,22 @@ limit_bottom = 720
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 
-[editable path="TestPlayer"]
-[editable path="TestPlayer/FlipTarget/TestGun"]
-[editable path="TestPlayer/FlipTarget/FootstepsPlayer"]
-[editable path="TestPlayer/PickupDetector"]
-[editable path="TestPlayer/InteractableDetector"]
-[editable path="TestPlayer/AnimationTree"]
-[editable path="TestPlayer/ActorStateMachine"]
-[editable path="TestPlayer/ActorStateMachine/States/Grounded"]
-[editable path="TestPlayer/ActorStateMachine/States/InitJump"]
-[editable path="TestPlayer/ActorStateMachine/States/Airborne"]
-[editable path="TestPlayer/ActorStateMachine/States/Crouch"]
-[editable path="TestPlayer/ActorStateMachine/States/Attack"]
-[editable path="TestPlayer/ActorStateMachine/States/AirAttack"]
-[editable path="TestPlayer/ActorStateMachine/States/StartShoot"]
-[editable path="TestPlayer/ActorStateMachine/States/Shoot"]
-[editable path="TestPlayer/ActorStateMachine/States/AirStartShoot"]
-[editable path="TestPlayer/ActorStateMachine/States/AirShoot"]
-[editable path="TestPlayer/ActorStateMachine/States/Swim"]
-[editable path="TestPlayer/Data/ExternalConditions/ConditionShootTimer"]
+[editable path="Player"]
+[editable path="Player/FlipTarget/TestGun"]
+[editable path="Player/FlipTarget/FootstepsPlayer"]
+[editable path="Player/PickupDetector"]
+[editable path="Player/InteractableDetector"]
+[editable path="Player/AnimationTree"]
+[editable path="Player/ActorStateMachine"]
+[editable path="Player/ActorStateMachine/States/Grounded"]
+[editable path="Player/ActorStateMachine/States/InitJump"]
+[editable path="Player/ActorStateMachine/States/Airborne"]
+[editable path="Player/ActorStateMachine/States/Crouch"]
+[editable path="Player/ActorStateMachine/States/Attack"]
+[editable path="Player/ActorStateMachine/States/AirAttack"]
+[editable path="Player/ActorStateMachine/States/StartShoot"]
+[editable path="Player/ActorStateMachine/States/Shoot"]
+[editable path="Player/ActorStateMachine/States/AirStartShoot"]
+[editable path="Player/ActorStateMachine/States/AirShoot"]
+[editable path="Player/ActorStateMachine/States/Swim"]
+[editable path="Player/Data/ExternalConditions/ConditionShootTimer"]

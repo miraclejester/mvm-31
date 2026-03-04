@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://hjh1okejbpsr"]
+
+[ext_resource type="Script" uid="uid://rt3kt7slfyvo" path="res://systems/behaviours/controller_set_movement_input/controller_set_movement_input.gd" id="1_voghg"]
+
+[node name="ControllerSetMovementInput" type="Node" unique_id=758941129]
+script = ExtResource("1_voghg")

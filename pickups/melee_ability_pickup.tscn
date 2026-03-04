@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://u66m7wsa6t3r" path="res://systems/interactables/pickups/game_pickup.tscn" id="1_e0mpn"]
 [ext_resource type="PackedScene" uid="uid://bc0o8awii1imp" path="res://systems/behaviours/game_unlock_ability/game_unlock_ability.tscn" id="2_1l8yc"]
 [ext_resource type="Script" uid="uid://bxds426srt4lw" path="res://systems/behaviours/sequence/behaviour_sequence.gd" id="2_jujf0"]
-[ext_resource type="Resource" uid="uid://b00n5n0jremam" path="res://player/abilities/melee_attack.tres" id="3_mt1gy"]
+[ext_resource type="Resource" uid="uid://b00n5n0jremam" path="res://characters/player/abilities/melee_attack.tres" id="3_mt1gy"]
 [ext_resource type="PackedScene" uid="uid://dee7yhnj1hr50" path="res://systems/behaviours/game_set_switch/game_set_switch.tscn" id="5_sqdnr"]
 
 [node name="MeleeAbilityPickup" unique_id=1496596766 instance=ExtResource("1_e0mpn")]

@@ -2,7 +2,7 @@ extends RefCounted
 class_name WorldContext
 
 var camera: Camera2D
-var player: Player
+var player: WorldCharacter
 
 static func from_data(data: Dictionary) -> WorldContext:
 	var res = WorldContext.new()

@@ -46,4 +46,6 @@ position = Vector2(40, 264)
 [node name="Transitions" type="Node2D" parent="." unique_id=1723779582]
 unique_name_in_owner = true
 
+[node name="Enemies" type="Node2D" parent="." unique_id=1450376257]
+
 [editable path="CameraBounds"]

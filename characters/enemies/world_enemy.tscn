@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://ewmtqexggdi8"]
+
+[ext_resource type="Script" uid="uid://cs8bhqaypv0lu" path="res://characters/world_character.gd" id="1_7artk"]
+[ext_resource type="PackedScene" uid="uid://nhdidou2ssqp" path="res://systems/animation/actor_animation_controller.tscn" id="2_m05bq"]
+[ext_resource type="PackedScene" uid="uid://bjoawgso0vy1g" path="res://systems/state_machine/actor_state_machine.tscn" id="2_tge8d"]
+[ext_resource type="PackedScene" uid="uid://d1ao8x1632aoe" path="res://systems/controllers/input/actor_controller.tscn" id="3_e2633"]
+[ext_resource type="PackedScene" uid="uid://d3thoe536xwf4" path="res://systems/behaviours/node_2d_flip/node_2d_flip_on_input.tscn" id="3_tge8d"]
+[ext_resource type="PackedScene" uid="uid://dtq4wlupjnawu" path="res://systems/behaviours/actor_movement/actor_movement.tscn" id="5_lgkyx"]
+
+[node name="WorldEnemy" type="CharacterBody2D" unique_id=1487671488]
+collision_layer = 0
+script = ExtResource("1_7artk")
+
+[node name="FlipVisuals" type="Node2D" parent="." unique_id=783290642]
+
+[node name="StaticVisuals" type="Node2D" parent="." unique_id=613635385]
+
+[node name="WorldCollider" type="CollisionShape2D" parent="." unique_id=978122623]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=849005601]
+
+[node name="AnimationTree" parent="." unique_id=704880076 node_paths=PackedStringArray("controller") instance=ExtResource("2_m05bq")]
+anim_player = NodePath("../AnimationPlayer")
+controller = NodePath("../ActorController")
+
+[node name="ActorStateMachine" parent="." unique_id=1386328368 instance=ExtResource("2_tge8d")]
+unique_name_in_owner = true
+
+[node name="ActorController" parent="." unique_id=1814408435 instance=ExtResource("3_e2633")]
+external_input = false
+
+[node name="Behaviours" type="Node" parent="." unique_id=1762055959]
+unique_name_in_owner = true
+
+[node name="ActorMovement" parent="Behaviours" unique_id=655420935 node_paths=PackedStringArray("body", "controller") instance=ExtResource("5_lgkyx")]
+body = NodePath("../..")
+controller = NodePath("../../ActorController")
+acceleration = 70.0
+decceleration = 80.0
+max_speed = 230.0
+jump_force = -500.0
+cut_jump_force = -220.0
+
+[node name="Node2dFlipOnInput" parent="Behaviours" unique_id=734874977 node_paths=PackedStringArray("flip_target", "controller") instance=ExtResource("3_tge8d")]
+flip_target = NodePath("../../FlipVisuals")
+controller = NodePath("../../ActorController")
+
+[node name="ExternalConditions" type="Node" parent="." unique_id=518635833]

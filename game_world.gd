@@ -4,7 +4,7 @@ class_name GameWorld
 signal room_load_started(next_room: GameWorldRoomData)
 signal current_room_set(room: GameWorldRoomData)
 
-@export var player: Player
+@export var player: WorldCharacter
 @export var world_data: GameWorldData
 
 @onready var camera: Camera2D = %MainCamera

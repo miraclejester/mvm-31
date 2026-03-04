@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name Player
+class_name WorldCharacter
 
 @onready var state_machine: ActorStateMachine = %ActorStateMachine
 @onready var behaviours_parent: Node = %Behaviours

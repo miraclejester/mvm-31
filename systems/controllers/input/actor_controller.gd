@@ -8,6 +8,7 @@ signal action_just_pressed(action: String)
 signal direct_action(action: String)
 
 @export var available_actions: Array[String]
+@export var external_input: bool = true
 
 var direction: Vector2 = Vector2.ZERO
 var face_direction: Vector2 = Vector2.ZERO
@@ -27,7 +28,8 @@ func _process(delta: float) -> void:
 
 
 func update_inputs(delta: float) -> void:
-	get_movement_input()
+	if external_input:
+		set_movement_input(get_movement_input())
 	for action in available_actions:
 		get_action_data(action, delta)
 	if not (right_strength > 0 and left_strength > 0):
@@ -70,8 +72,15 @@ func call_direct_action(action: String) -> void:
 	direct_action.emit(action)
 
 
-func get_movement_input() -> void:
-	pass
+func set_movement_input(input: Vector2) -> void:
+	right_strength = 1 if input.x > 0 else 0
+	left_strength = 1 if input.x < 0 else 0
+	up_strength = 1 if input.y < 0 else 0
+	down_strength = 1 if input.y > 0 else 0
+
+
+func get_movement_input() -> Vector2:
+	return Vector2.ZERO
 
 func get_action_data(_key: String, _delta: float) -> void:
 	pass

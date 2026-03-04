@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b418fycnvlwjw"]
+
+[ext_resource type="Script" uid="uid://ytlxqwg6wfn1" path="res://systems/state_machine/conditions/condition_any/condition_any.gd" id="1_yw8pe"]
+
+[node name="ConditionAny" type="Node" unique_id=1399651393]
+script = ExtResource("1_yw8pe")

@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://c6bapa1itjpfh"]
+
+[ext_resource type="PackedScene" uid="uid://ewmtqexggdi8" path="res://characters/enemies/world_enemy.tscn" id="1_66stj"]
+[ext_resource type="Texture2D" uid="uid://biox5wiuridiq" path="res://test_assets/enemies/e.png" id="2_ggo2l"]
+[ext_resource type="PackedScene" uid="uid://0sdn13hb32u4" path="res://systems/state_machine/state/actor_state.tscn" id="3_p8c51"]
+[ext_resource type="PackedScene" uid="uid://hjh1okejbpsr" path="res://systems/behaviours/controller_set_movement_input/controller_set_movement_input.tscn" id="4_p8c51"]
+[ext_resource type="PackedScene" uid="uid://b4esk6pcjmjsv" path="res://systems/state_machine/transitions/actor_state_transition.tscn" id="5_ptlxy"]
+[ext_resource type="PackedScene" uid="uid://b418fycnvlwjw" path="res://systems/state_machine/conditions/condition_any/condition_any.tscn" id="6_c612j"]
+[ext_resource type="PackedScene" uid="uid://djmto3b623xio" path="res://systems/state_machine/conditions/external_condition/condition_external.tscn" id="6_nvhio"]
+[ext_resource type="PackedScene" uid="uid://dhtoiv2mgpv7u" path="res://systems/state_machine/conditions/marker_is_on_terrain/marker_is_on_terrain.tscn" id="7_nvhio"]
+[ext_resource type="PackedScene" uid="uid://m6msobg5ayht" path="res://systems/state_machine/conditions/negate/condition_negate.tscn" id="8_42hum"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p8c51"]
+size = Vector2(26, 29)
+
+[node name="Crab" unique_id=1487671488 instance=ExtResource("1_66stj")]
+
+[node name="FlipVisuals" parent="." index="0" unique_id=783290642]
+position = Vector2(0, -14)
+
+[node name="Sprite" type="Sprite2D" parent="FlipVisuals" index="0" unique_id=414510599]
+texture = ExtResource("2_ggo2l")
+
+[node name="SideMarker" type="Marker2D" parent="FlipVisuals" index="1" unique_id=547964677]
+position = Vector2(14, 0)
+
+[node name="DiagonalMarker" type="Marker2D" parent="FlipVisuals" index="2" unique_id=340481097]
+position = Vector2(14, 15)
+
+[node name="WorldCollider" parent="." index="2" unique_id=978122623]
+position = Vector2(0, -14.5)
+shape = SubResource("RectangleShape2D_p8c51")
+
+[node name="ActorStateMachine" parent="." index="5" unique_id=1386328368 node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("States/MoveRight")
+
+[node name="MoveRight" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="0" unique_id=89059854 instance=ExtResource("3_p8c51")]
+
+[node name="InputRight" parent="ActorStateMachine/States/MoveRight/OnEnter" parent_id_path=PackedInt32Array(89059854, 667290384) index="0" unique_id=758941129 node_paths=PackedStringArray("controller") instance=ExtResource("4_p8c51")]
+controller = NodePath("../../../../../ActorController")
+input = Vector2(1, 0)
+
+[node name="ClearInput" parent="ActorStateMachine/States/MoveRight/OnExit" parent_id_path=PackedInt32Array(89059854, 1496048418) index="0" unique_id=920707355 node_paths=PackedStringArray("controller") instance=ExtResource("4_p8c51")]
+controller = NodePath("../../../../../ActorController")
+
+[node name="ToMoveLeft" parent="ActorStateMachine/States/MoveRight/Transitions" parent_id_path=PackedInt32Array(89059854, 1931116749) index="0" unique_id=306109941 node_paths=PackedStringArray("target_state") instance=ExtResource("5_ptlxy")]
+target_state = NodePath("../../../MoveLeft")
+
+[node name="ConditionExternal" parent="ActorStateMachine/States/MoveRight/Transitions/ToMoveLeft" index="0" unique_id=2049590081 node_paths=PackedStringArray("condition") instance=ExtResource("6_nvhio")]
+condition = NodePath("../../../../../../ExternalConditions/SideIsTerrainOrDiagIsNotTerrain")
+
+[node name="MoveLeft" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="1" unique_id=1180960142 instance=ExtResource("3_p8c51")]
+
+[node name="InputLeft" parent="ActorStateMachine/States/MoveLeft/OnEnter" parent_id_path=PackedInt32Array(1180960142, 667290384) index="0" unique_id=36709136 node_paths=PackedStringArray("controller") instance=ExtResource("4_p8c51")]
+controller = NodePath("../../../../../ActorController")
+input = Vector2(-1, 0)
+
+[node name="ClearInput" parent="ActorStateMachine/States/MoveLeft/OnExit" parent_id_path=PackedInt32Array(1180960142, 1496048418) index="0" unique_id=510739237 node_paths=PackedStringArray("controller") instance=ExtResource("4_p8c51")]
+controller = NodePath("../../../../../ActorController")
+
+[node name="ToMoveRight" parent="ActorStateMachine/States/MoveLeft/Transitions" parent_id_path=PackedInt32Array(1180960142, 1931116749) index="0" unique_id=471776266 node_paths=PackedStringArray("target_state") instance=ExtResource("5_ptlxy")]
+target_state = NodePath("../../../MoveRight")
+
+[node name="ConditionExternal" parent="ActorStateMachine/States/MoveLeft/Transitions/ToMoveRight" index="0" unique_id=483501810 node_paths=PackedStringArray("condition") instance=ExtResource("6_nvhio")]
+condition = NodePath("../../../../../../ExternalConditions/SideIsTerrainOrDiagIsNotTerrain")
+
+[node name="ActorMovement" parent="Behaviours" parent_id_path=PackedInt32Array(1762055959) index="0" unique_id=655420935]
+max_speed = 180.0
+
+[node name="SideIsTerrainOrDiagIsNotTerrain" parent="ExternalConditions" parent_id_path=PackedInt32Array(518635833) index="0" unique_id=1399651393 instance=ExtResource("6_c612j")]
+
+[node name="SideIsOnTerrain" parent="ExternalConditions/SideIsTerrainOrDiagIsNotTerrain" index="0" unique_id=2124288543 node_paths=PackedStringArray("marker") instance=ExtResource("7_nvhio")]
+marker = NodePath("../../../FlipVisuals/SideMarker")
+
+[node name="ConditionNegate" parent="ExternalConditions/SideIsTerrainOrDiagIsNotTerrain" index="1" unique_id=2124520631 instance=ExtResource("8_42hum")]
+
+[node name="DiagonalIsOnTerrain" parent="ExternalConditions/SideIsTerrainOrDiagIsNotTerrain/ConditionNegate" index="0" unique_id=1265034454 node_paths=PackedStringArray("marker") instance=ExtResource("7_nvhio")]
+marker = NodePath("../../../../FlipVisuals/DiagonalMarker")
+
+[editable path="ActorStateMachine"]
+[editable path="ActorStateMachine/States/MoveRight"]
+[editable path="ActorStateMachine/States/MoveLeft"]

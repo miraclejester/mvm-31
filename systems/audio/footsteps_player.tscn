@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://h6ww2xh1eft0"]
 
-[ext_resource type="Script" uid="uid://dhok1matw03a5" path="res://systems/world/ground_tile_detector.gd" id="1_vpmp0"]
+[ext_resource type="Script" uid="uid://dhok1matw03a5" path="res://systems/world/footsteps_player.gd" id="1_vpmp0"]
 [ext_resource type="Script" uid="uid://diqfgc8prg6eu" path="res://systems/audio/local_sfx_manager.gd" id="2_hnlsg"]
 
 [node name="FootstepsPlayer" type="Node2D" unique_id=946456107]

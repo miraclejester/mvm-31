@@ -1,6 +1,6 @@
 [gd_resource type="AnimationNodeStateMachine" format=3 uid="uid://q4tixcwktkjb"]
 
-[ext_resource type="AnimationNodeStateMachine" uid="uid://bu5nckae43cl7" path="res://player/animations/outside_water_state_machine.tres" id="1_me207"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://bu5nckae43cl7" path="res://characters/player/animations/outside_water_state_machine.tres" id="1_me207"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2hw45"]
 animation = &"surface_swim"

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://k0gilutiyigl"]
 
-[ext_resource type="Script" uid="uid://cs8bhqaypv0lu" path="res://player/player.gd" id="1_unksh"]
+[ext_resource type="Script" uid="uid://cs8bhqaypv0lu" path="res://characters/world_character.gd" id="1_unksh"]
 [ext_resource type="Texture2D" uid="uid://bsso5kbg1xfv6" path="res://pixel_assets/characters/protagonist/magicalGirlLand.png" id="2_r7pn3"]
 [ext_resource type="PackedScene" uid="uid://bjoawgso0vy1g" path="res://systems/state_machine/actor_state_machine.tscn" id="3_8pyyg"]
 [ext_resource type="PackedScene" uid="uid://b60yvaarvf2iu" path="res://systems/controllers/input/player_controller.tscn" id="3_rcghi"]
@@ -21,7 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://bt53x3ndaey0n" path="res://systems/interactables/standard/interactable_detector.tscn" id="8_8pxes"]
 [ext_resource type="PackedScene" uid="uid://bcykxdmbk4vai" path="res://systems/animation/parameter_setters/body_velocity_parameter_setter/body_velocity_parameter_setter.tscn" id="8_dx5ib"]
 [ext_resource type="PackedScene" uid="uid://be345138hbvre" path="res://systems/state_machine/conditions/body_is_on_floor/condition_body_is_on_floor.tscn" id="8_w5goq"]
-[ext_resource type="AnimationNodeStateMachine" uid="uid://q4tixcwktkjb" path="res://player/animations/player_animation_tree.tres" id="8_xcnuv"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://q4tixcwktkjb" path="res://characters/player/animations/player_animation_tree.tres" id="8_xcnuv"]
 [ext_resource type="Script" uid="uid://bsxdp451nivth" path="res://systems/collision/collider_spec.gd" id="9_5ejfk"]
 [ext_resource type="PackedScene" uid="uid://bfao0rp0fau05" path="res://systems/animation/parameter_setters/boolean_parameter_setter/actor_movement_parameter_setter/actor_movement_parameter_setter.tscn" id="9_dx5ib"]
 [ext_resource type="PackedScene" uid="uid://dm67ok4oau36j" path="res://systems/animation/parameter_setters/boolean_parameter_setter/controller_parameter_setter/controller_parameter_setter.tscn" id="10_a2xo5"]
@@ -438,6 +438,7 @@ position = Vector2(0, -14)
 metadata/_custom_type_script = "uid://bsxdp451nivth"
 
 [node name="Player" type="CharacterBody2D" unique_id=1042347891]
+collision_layer = 0
 script = ExtResource("1_unksh")
 
 [node name="FlipTarget" type="Node2D" parent="." unique_id=1381709409]

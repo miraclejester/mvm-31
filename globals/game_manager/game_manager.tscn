@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://up5qsfygvuc6"]
 
 [ext_resource type="Script" uid="uid://bbriiha0sjn3r" path="res://globals/game_manager/game_manager.gd" id="1_dmcod"]
-[ext_resource type="Script" uid="uid://tgtio2puq0ht" path="res://player/abilities/AbilityData.gd" id="2_q5eha"]
-[ext_resource type="Resource" uid="uid://b00n5n0jremam" path="res://player/abilities/melee_attack.tres" id="3_qfmkk"]
-[ext_resource type="Resource" uid="uid://c3ra0kc8itl6v" path="res://player/abilities/ranged_attack.tres" id="4_qfmkk"]
-[ext_resource type="Resource" uid="uid://d1wsg1mi0xb1j" path="res://maps/main_map/data/001_starting_beach.tres" id="5_0bnvm"]
+[ext_resource type="Script" uid="uid://tgtio2puq0ht" path="res://characters/player/abilities/AbilityData.gd" id="2_q5eha"]
+[ext_resource type="Resource" uid="uid://b00n5n0jremam" path="res://characters/player/abilities/melee_attack.tres" id="3_qfmkk"]
+[ext_resource type="Resource" uid="uid://c3ra0kc8itl6v" path="res://characters/player/abilities/ranged_attack.tres" id="4_qfmkk"]
+[ext_resource type="Resource" uid="uid://dtw4nrkeo4v3h" path="res://maps/main_map/data/002_beach_shaft.tres" id="5_0bnvm"]
 
 [node name="GameManager" type="Node" unique_id=1195116369]
 script = ExtResource("1_dmcod")
