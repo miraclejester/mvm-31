@@ -107,6 +107,7 @@ func move(delta: float) -> void:
 		current_profile = profile
 		profile_key = key
 		profile.enter_method.call()
+		print("Changed profile")
 	profile.initialize_method.call()
 	profile.move_method.call(delta)
 	body.move_and_slide()
@@ -152,7 +153,7 @@ func water_marker_in_water() -> bool:
 
 
 func underwater_marker_in_water() -> bool:
-	if underwater_marker != null:
+	if underwater_marker == null:
 		return false
 	var tile: TileData = Utils.get_tile_at(Strings.ROOM_LAYER_NEAR_FOREGROUND, underwater_marker.global_position)
 	return tile != null and tile.get_custom_data("is_water")

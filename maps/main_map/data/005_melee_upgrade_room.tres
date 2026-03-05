@@ -8,5 +8,5 @@ script = ExtResource("1_d02vc")
 room_key = "005_melee_upgrade_room"
 room_name = "MeleeUpgradeRoom"
 room_scene = ExtResource("1_b8kse")
-bgm_guid = "{9bf42cb4-6c55-48fe-acb1-e42a3ed6bc77}"
+bgm_key = "Cove"
 metadata/_custom_type_script = "uid://w6xaqda0lpl"

@@ -43,7 +43,7 @@ func load_room(data: GameWorldRoomData, entrance_key: String = "") -> void:
 	camera.reset_smoothing()
 	current_room = room
 	current_room_set.emit(data)
-	AudioManager.play_bgm(room.room_data.bgm_guid)
+	AudioManager.play_bgm(room.room_data.bgm_key)
 
 
 func execute_transition(key: String) -> void:

@@ -9,7 +9,11 @@ script = ExtResource("1_gqfen")
 bank_paths = ["res://addons/fmod/Banks/Desktop/Master.bank", "res://addons/fmod/Banks/Desktop/Master.strings.bank"]
 
 [node name="BGMPlayer" type="FmodEventEmitter2D" parent="." unique_id=1535297171]
-event_name = "event:/Player/Magic Chime"
-event_guid = "{a921e08e-c3f9-42d3-b08d-c103566b41f9}"
+event_name = "event:/Music/Level Music"
+event_guid = "{e0437226-a106-4243-8627-e28bd15fbb1a}"
 volume = 0.6
+"fmod_parameters/Music Switch/id" = 4800832153492976375
+"fmod_parameters/Music Switch" = "Beach"
+"fmod_parameters/Music Switch/labels" = PackedStringArray("Beach", "Cove")
+"fmod_parameters/Music Switch/variant_type" = 4
 unique_name_in_owner = true
