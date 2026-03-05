@@ -36,6 +36,7 @@
 [ext_resource type="PackedScene" uid="uid://ddhhy1t8wka5h" path="res://systems/behaviours/animator_set_trigger/animator_set_trigger.tscn" id="17_b8hi5"]
 [ext_resource type="PackedScene" uid="uid://csme4n5aj5nu3" path="res://systems/state_machine/utils/string_retriever/last_animation_retriever/last_animation_retriever.tscn" id="17_ixgpl"]
 [ext_resource type="PackedScene" uid="uid://dd2d4exvkiiy6" path="res://systems/state_machine/conditions/input_action_pressed/input_action_pressed.tscn" id="18_jd2rm"]
+[ext_resource type="PackedScene" uid="uid://bnqa0toqfjr0m" path="res://systems/animation/parameter_setters/boolean_parameter_setter/hurtbox_parameter_setter/hurtbox_parameter_setter.tscn" id="18_kr20l"]
 [ext_resource type="PackedScene" uid="uid://cr2ssks6txaq4" path="res://systems/life/character_life.tscn" id="19_xvmlt"]
 [ext_resource type="PackedScene" uid="uid://4iuiej4q10ax" path="res://systems/behaviours/movement_control_enabled/movement_set_control_enabled.tscn" id="22_1s1yo"]
 [ext_resource type="PackedScene" uid="uid://de5ldo8mb0tna" path="res://systems/state_machine/conditions/conditional_timer/condition_conditional_timer.tscn" id="22_dhr4d"]
@@ -64,6 +65,49 @@ size = Vector2(20, 45)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xvmlt"]
 size = Vector2(13, 36)
+
+[sub_resource type="Animation" id="Animation_6d2wq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bdpt7"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_kr20l"]
+resource_name = "invincible"
+length = 0.20000668
+loop_mode = 1
+step = 0.06666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.11764706), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bdpt7"]
+_data = {
+&"RESET": SubResource("Animation_6d2wq"),
+&"idle": SubResource("Animation_bdpt7"),
+&"invincible": SubResource("Animation_kr20l")
+}
 
 [sub_resource type="Animation" id="Animation_b8hi5"]
 length = 0.001
@@ -99,7 +143,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimationTree")
+tracks/1/path = NodePath("Animations/AnimationTree")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -142,6 +186,23 @@ tracks/0/keys = {
 "values": [18, 19, 20]
 }
 
+[sub_resource type="Animation" id="Animation_apqh1"]
+resource_name = "death"
+length = 1.00001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipTarget/LandSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+}
+
 [sub_resource type="Animation" id="Animation_5ejfk"]
 resource_name = "fall"
 length = 0.20001
@@ -158,6 +219,37 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [15, 16]
+}
+
+[sub_resource type="Animation" id="Animation_di0ei"]
+resource_name = "hurt"
+length = 0.10001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipTarget/LandSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [42]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/AnimationTree")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["hurt"],
+"method": &"send_action_finished_event"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_2uvqg"]
@@ -197,7 +289,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimationTree")
+tracks/1/path = NodePath("Animations/AnimationTree")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -228,7 +320,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimationTree")
+tracks/1/path = NodePath("Animations/AnimationTree")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -295,7 +387,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimationTree")
+tracks/1/path = NodePath("Animations/AnimationTree")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -309,7 +401,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AnimationTree")
+tracks/2/path = NodePath("Animations/AnimationTree")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -357,7 +449,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimationTree")
+tracks/1/path = NodePath("Animations/AnimationTree")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -371,7 +463,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AnimationTree")
+tracks/2/path = NodePath("Animations/AnimationTree")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -406,7 +498,9 @@ _data = {
 &"RESET": SubResource("Animation_b8hi5"),
 &"attack": SubResource("Animation_ge24q"),
 &"crouch": SubResource("Animation_q28gw"),
+&"death": SubResource("Animation_apqh1"),
 &"fall": SubResource("Animation_5ejfk"),
+&"hurt": SubResource("Animation_di0ei"),
 &"idle": SubResource("Animation_2uvqg"),
 &"jump": SubResource("Animation_1s1yo"),
 &"rise": SubResource("Animation_jd2rm"),
@@ -420,8 +514,32 @@ _data = {
 script = ExtResource("8_1so5t")
 interval_key = "shoot"
 control_key = "shoot"
-triggerInterrupts = Array[String](["OutsideWater/conditions/jump_started"])
+triggerInterrupts = Array[String](["OutsideWater/conditions/jump_started", "conditions/hurt_started"])
 metadata/_custom_type_script = "uid://bdd038wsyq51v"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6d2wq"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kr20l"]
+animation = &"invincible"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bdpt7"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_di0ei"]
+advance_mode = 2
+advance_condition = &"is_invincible"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_apqh1"]
+advance_mode = 2
+advance_condition = &"is_vulnerable"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_f0ap2"]
+states/idle/node = SubResource("AnimationNodeAnimation_6d2wq")
+states/idle/position = Vector2(374, 100)
+states/invincible/node = SubResource("AnimationNodeAnimation_kr20l")
+states/invincible/position = Vector2(580, 100)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_bdpt7"), "idle", "invincible", SubResource("AnimationNodeStateMachineTransition_di0ei"), "invincible", "idle", SubResource("AnimationNodeStateMachineTransition_apqh1")]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jd2rm"]
 size = Vector2(12, 45)
@@ -532,12 +650,18 @@ position = Vector2(0.5, -22)
 shape = SubResource("RectangleShape2D_xvmlt")
 debug_color = Color(0.96595424, 0.9928238, 1, 0.41960785)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1192519116]
+[node name="Animations" type="Node2D" parent="." unique_id=120887897]
+
+[node name="EffectsPlayer" type="AnimationPlayer" parent="Animations" unique_id=1343266353]
+libraries/ = SubResource("AnimationLibrary_bdpt7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Animations" unique_id=1192519116]
+root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_1s1yo")
 autoplay = &"idle"
 
-[node name="AnimationTree" parent="." unique_id=704880076 node_paths=PackedStringArray("controller") instance=ExtResource("7_55jnj")]
-active = true
+[node name="AnimationTree" parent="Animations" unique_id=704880076 node_paths=PackedStringArray("controller") instance=ExtResource("7_55jnj")]
+root_node = NodePath("../..")
 tree_root = ExtResource("8_xcnuv")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/jump_started = false
@@ -553,68 +677,81 @@ parameters/OutsideWater/conditions/standing = false
 parameters/OutsideWater/conditions/swim_started = false
 parameters/OutsideWater/Airborne/blend_position = 0.0
 parameters/OutsideWater/Grounded/blend_position = 0.0
-controller = NodePath("../StaticBehaviours/PlayerController")
+controller = NodePath("../../StaticBehaviours/PlayerController")
 interval_data = Array[ExtResource("8_1so5t")]([SubResource("Resource_fjxoa")])
 
-[node name="GroundedBlendPos" parent="AnimationTree/ProcessParameters" parent_id_path=PackedInt32Array(704880076, 1452081964) index="0" unique_id=1270825895 node_paths=PackedStringArray("body") instance=ExtResource("8_dx5ib")]
-body = NodePath("../../..")
+[node name="GroundedBlendPos" parent="Animations/AnimationTree/ProcessParameters" parent_id_path=PackedInt32Array(704880076, 1452081964) index="0" unique_id=1270825895 node_paths=PackedStringArray("body") instance=ExtResource("8_dx5ib")]
+body = NodePath("../../../..")
 operation = 1
 parameter_path = "OutsideWater/Grounded/blend_position"
 setter_key = "ourside_water_grounded"
 
-[node name="AirborneBlendPos" parent="AnimationTree/ProcessParameters" parent_id_path=PackedInt32Array(704880076, 1452081964) index="1" unique_id=1446482700 node_paths=PackedStringArray("body") instance=ExtResource("8_dx5ib")]
-body = NodePath("../../..")
+[node name="AirborneBlendPos" parent="Animations/AnimationTree/ProcessParameters" parent_id_path=PackedInt32Array(704880076, 1452081964) index="1" unique_id=1446482700 node_paths=PackedStringArray("body") instance=ExtResource("8_dx5ib")]
+body = NodePath("../../../..")
 axis = 1
 operation = 2
 parameter_path = "OutsideWater/Airborne/blend_position"
 setter_key = "outside_water_airborne"
 
-[node name="OutsideWaterGroundedAirborne" parent="AnimationTree/ProcessParameters" parent_id_path=PackedInt32Array(704880076, 1452081964) index="2" unique_id=1257442804 node_paths=PackedStringArray("movement") instance=ExtResource("9_dx5ib")]
-movement = NodePath("../../../Behaviours/ActorMovement")
+[node name="OutsideWaterGroundedAirborne" parent="Animations/AnimationTree/ProcessParameters" parent_id_path=PackedInt32Array(704880076, 1452081964) index="2" unique_id=1257442804 node_paths=PackedStringArray("movement") instance=ExtResource("9_dx5ib")]
+movement = NodePath("../../../../Behaviours/ActorMovement")
 negative_path = "OutsideWater/conditions/airborne"
 send_negative = true
 send_positive = true
 parameter_path = "OutsideWater/conditions/grounded"
 setter_key = "outside_water_grounded_airborne"
 
-[node name="OutsideWaterCrouchingStanding" parent="AnimationTree/ProcessParameters" parent_id_path=PackedInt32Array(704880076, 1452081964) index="3" unique_id=687607519 node_paths=PackedStringArray("controller") instance=ExtResource("10_a2xo5")]
-controller = NodePath("../../../StaticBehaviours/PlayerController")
+[node name="OutsideWaterCrouchingStanding" parent="Animations/AnimationTree/ProcessParameters" parent_id_path=PackedInt32Array(704880076, 1452081964) index="3" unique_id=687607519 node_paths=PackedStringArray("controller") instance=ExtResource("10_a2xo5")]
+controller = NodePath("../../../../StaticBehaviours/PlayerController")
 action = "down"
 negative_path = "OutsideWater/conditions/standing"
 send_positive = true
 parameter_path = "OutsideWater/conditions/crouching"
 setter_key = "outside_water_crouching_standing"
 
-[node name="OutsideWaterGunIdle" parent="AnimationTree/IntervalParameters" parent_id_path=PackedInt32Array(704880076, 1455507333) index="0" unique_id=381462708 instance=ExtResource("11_art4l")]
+[node name="OutsideWaterGunIdle" parent="Animations/AnimationTree/IntervalParameters" parent_id_path=PackedInt32Array(704880076, 1455507333) index="0" unique_id=381462708 instance=ExtResource("11_art4l")]
 interval_key = "shoot"
 negative_path = "OutsideWater/conditions/gun_idle"
 send_positive = false
 setter_key = "outside_water_gun_idle"
 
-[node name="JumpStarted" parent="AnimationTree/TriggerParameters" parent_id_path=PackedInt32Array(704880076, 1517241733) index="0" unique_id=1097550186 instance=ExtResource("13_gswnw")]
+[node name="JumpStarted" parent="Animations/AnimationTree/TriggerParameters" parent_id_path=PackedInt32Array(704880076, 1517241733) index="0" unique_id=1097550186 instance=ExtResource("13_gswnw")]
 parameter_path = "OutsideWater/conditions/jump_started"
 is_trigger = true
 setter_key = "jump_started"
 
-[node name="AttackStarted" parent="AnimationTree/TriggerParameters" parent_id_path=PackedInt32Array(704880076, 1517241733) index="1" unique_id=1454793339 instance=ExtResource("13_gswnw")]
+[node name="AttackStarted" parent="Animations/AnimationTree/TriggerParameters" parent_id_path=PackedInt32Array(704880076, 1517241733) index="1" unique_id=1454793339 instance=ExtResource("13_gswnw")]
 parameter_path = "OutsideWater/conditions/attack_started"
 is_trigger = true
 setter_key = "attack_started"
 
-[node name="ShootStarted" parent="AnimationTree/TriggerParameters" parent_id_path=PackedInt32Array(704880076, 1517241733) index="2" unique_id=787303547 instance=ExtResource("13_gswnw")]
+[node name="ShootStarted" parent="Animations/AnimationTree/TriggerParameters" parent_id_path=PackedInt32Array(704880076, 1517241733) index="2" unique_id=787303547 instance=ExtResource("13_gswnw")]
 parameter_path = "OutsideWater/conditions/shoot_started"
 is_trigger = true
 setter_key = "shoot_started"
 
-[node name="SwimStarted" parent="AnimationTree/TriggerParameters" parent_id_path=PackedInt32Array(704880076, 1517241733) index="3" unique_id=662729878 instance=ExtResource("13_gswnw")]
+[node name="SwimStarted" parent="Animations/AnimationTree/TriggerParameters" parent_id_path=PackedInt32Array(704880076, 1517241733) index="3" unique_id=662729878 instance=ExtResource("13_gswnw")]
 parameter_path = "conditions/swim_started"
 is_trigger = true
 setter_key = "swim_started"
 
-[node name="JumpFromWaterStarted" parent="AnimationTree/TriggerParameters" parent_id_path=PackedInt32Array(704880076, 1517241733) index="4" unique_id=327177721 instance=ExtResource("13_gswnw")]
+[node name="JumpFromWaterStarted" parent="Animations/AnimationTree/TriggerParameters" parent_id_path=PackedInt32Array(704880076, 1517241733) index="4" unique_id=327177721 instance=ExtResource("13_gswnw")]
 parameter_path = "conditions/jump_started"
 is_trigger = true
 setter_key = "water_jump_started"
+
+[node name="EffectsController" parent="Animations" unique_id=806509296 node_paths=PackedStringArray("controller") instance=ExtResource("7_55jnj")]
+tree_root = SubResource("AnimationNodeStateMachine_f0ap2")
+anim_player = NodePath("../EffectsPlayer")
+parameters/conditions/is_invincible = false
+parameters/conditions/is_vulnerable = false
+controller = NodePath("../../StaticBehaviours/PlayerController")
+
+[node name="HurtboxParameterSetter" parent="Animations/EffectsController/ProcessParameters" parent_id_path=PackedInt32Array(806509296, 1452081964) index="0" unique_id=693028164 node_paths=PackedStringArray("hurtbox") instance=ExtResource("18_kr20l")]
+hurtbox = NodePath("../../../../Hurtbox")
+negative_path = "conditions/is_vulnerable"
+parameter_path = "conditions/is_invincible"
+setter_key = "condition_is_vulnerable_invincible"
 
 [node name="StaticBehaviours" type="Node" parent="." unique_id=86199777]
 
@@ -711,11 +848,11 @@ key = "shoot"
 [node name="BehaviourSequence" parent="ActorStateMachine/States/InitJump/OnEnter" parent_id_path=PackedInt32Array(1794256466, 667290384) index="0" unique_id=1550808993 instance=ExtResource("14_vrg71")]
 
 [node name="TriggerJumpFromWater" parent="ActorStateMachine/States/InitJump/OnEnter/BehaviourSequence" unique_id=432952538 node_paths=PackedStringArray("animation_controller") instance=ExtResource("17_b8hi5")]
-animation_controller = NodePath("../../../../../../AnimationTree")
+animation_controller = NodePath("../../../../../../Animations/AnimationTree")
 trigger_key = "water_jump_started"
 
 [node name="TriggerJumpAnim" parent="ActorStateMachine/States/InitJump/OnEnter/BehaviourSequence" unique_id=1787995950 node_paths=PackedStringArray("animation_controller") instance=ExtResource("17_b8hi5")]
-animation_controller = NodePath("../../../../../../AnimationTree")
+animation_controller = NodePath("../../../../../../Animations/AnimationTree")
 trigger_key = "jump_started"
 
 [node name="ActorJump" parent="ActorStateMachine/States/InitJump/OnEnter/BehaviourSequence" unique_id=1771844202 node_paths=PackedStringArray("movement_behaviour") instance=ExtResource("14_3sb8j")]
@@ -742,7 +879,7 @@ key = "attack"
 target_state = NodePath("../../../Airborne")
 
 [node name="AnimatorActionFinished" parent="ActorStateMachine/States/InitJump/Transitions/ToAirborne" unique_id=696539967 node_paths=PackedStringArray("animation_controller") instance=ExtResource("25_q28gw")]
-animation_controller = NodePath("../../../../../../AnimationTree")
+animation_controller = NodePath("../../../../../../Animations/AnimationTree")
 action = "jump"
 
 [node name="Airborne" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="2" unique_id=2036586534 instance=ExtResource("4_oycdn")]
@@ -808,7 +945,7 @@ movement = NodePath("../../../../../../../Behaviours/ActorMovement")
 [node name="BehaviourSequence" parent="ActorStateMachine/States/Attack/OnEnter" parent_id_path=PackedInt32Array(279396632, 667290384) index="0" unique_id=1359831084 instance=ExtResource("14_vrg71")]
 
 [node name="AnimTrigger" parent="ActorStateMachine/States/Attack/OnEnter/BehaviourSequence" unique_id=1980403752 node_paths=PackedStringArray("animation_controller") instance=ExtResource("17_b8hi5")]
-animation_controller = NodePath("../../../../../../AnimationTree")
+animation_controller = NodePath("../../../../../../Animations/AnimationTree")
 trigger_key = "attack_started"
 
 [node name="DisableMovement" parent="ActorStateMachine/States/Attack/OnEnter/BehaviourSequence" unique_id=1133959547 node_paths=PackedStringArray("movement") instance=ExtResource("22_1s1yo")]
@@ -831,7 +968,7 @@ behaviour = NodePath("../../../../../../Behaviours/Node2dFlipOnInput")
 target_state = NodePath("../../../Grounded")
 
 [node name="AnimatorActionFinished" parent="ActorStateMachine/States/Attack/Transitions/Grounded" unique_id=1108655814 node_paths=PackedStringArray("animation_controller") instance=ExtResource("25_q28gw")]
-animation_controller = NodePath("../../../../../../AnimationTree")
+animation_controller = NodePath("../../../../../../Animations/AnimationTree")
 action = "attack"
 
 [node name="AttackAbilityUnlocked" parent="ActorStateMachine/States/Attack/EntryConditions" parent_id_path=PackedInt32Array(279396632, 537054144) index="0" unique_id=1488628682 instance=ExtResource("39_hjies")]
@@ -841,7 +978,7 @@ action = "attack"
 [node name="BehaviourSequence" parent="ActorStateMachine/States/AirAttack/OnEnter" parent_id_path=PackedInt32Array(1141462487, 667290384) index="0" unique_id=805988651 instance=ExtResource("14_vrg71")]
 
 [node name="AnimTrigger" parent="ActorStateMachine/States/AirAttack/OnEnter/BehaviourSequence" unique_id=438890339 node_paths=PackedStringArray("animation_controller") instance=ExtResource("17_b8hi5")]
-animation_controller = NodePath("../../../../../../AnimationTree")
+animation_controller = NodePath("../../../../../../Animations/AnimationTree")
 trigger_key = "attack_started"
 
 [node name="DisableFlipping" parent="ActorStateMachine/States/AirAttack/OnEnter/BehaviourSequence" unique_id=543890139 node_paths=PackedStringArray("behaviour") instance=ExtResource("24_a6siw")]
@@ -863,7 +1000,7 @@ movement = NodePath("../../../../../../Behaviours/ActorMovement")
 target_state = NodePath("../../../Airborne")
 
 [node name="AnimatorActionFinished" parent="ActorStateMachine/States/AirAttack/Transitions/ToAirborne" unique_id=2012825335 node_paths=PackedStringArray("animation_controller") instance=ExtResource("25_q28gw")]
-animation_controller = NodePath("../../../../../../AnimationTree")
+animation_controller = NodePath("../../../../../../Animations/AnimationTree")
 action = "attack"
 
 [node name="AttackAbilityUnlocked" parent="ActorStateMachine/States/AirAttack/EntryConditions" parent_id_path=PackedInt32Array(1141462487, 537054144) index="0" unique_id=2043772134 instance=ExtResource("39_hjies")]
@@ -873,7 +1010,7 @@ action = "attack"
 [node name="BehaviourSequence" parent="ActorStateMachine/States/StartShoot/OnEnter" parent_id_path=PackedInt32Array(1353357530, 667290384) index="0" unique_id=1056280105 instance=ExtResource("14_vrg71")]
 
 [node name="AnimatorSetTrigger" parent="ActorStateMachine/States/StartShoot/OnEnter/BehaviourSequence" unique_id=1668618398 node_paths=PackedStringArray("animation_controller") instance=ExtResource("17_b8hi5")]
-animation_controller = NodePath("../../../../../../AnimationTree")
+animation_controller = NodePath("../../../../../../Animations/AnimationTree")
 trigger_key = "shoot_started"
 
 [node name="DisableMovementControl" parent="ActorStateMachine/States/StartShoot/OnEnter/BehaviourSequence" unique_id=135809542 node_paths=PackedStringArray("movement") instance=ExtResource("22_1s1yo")]
@@ -887,7 +1024,7 @@ control_enabled = true
 target_state = NodePath("../../../Shoot")
 
 [node name="AnimatorActionFinished" parent="ActorStateMachine/States/StartShoot/Transitions/ToShoot" unique_id=1357971945 node_paths=PackedStringArray("animation_controller") instance=ExtResource("25_q28gw")]
-animation_controller = NodePath("../../../../../../AnimationTree")
+animation_controller = NodePath("../../../../../../Animations/AnimationTree")
 action = "start_shoot"
 
 [node name="ShootAbilityUnlocked" parent="ActorStateMachine/States/StartShoot/EntryConditions" parent_id_path=PackedInt32Array(1353357530, 537054144) index="0" unique_id=352789067 instance=ExtResource("39_hjies")]
@@ -906,7 +1043,7 @@ control_enabled = true
 target_state = NodePath("../../../Grounded")
 
 [node name="AnimatorActionFinished" parent="ActorStateMachine/States/Shoot/Transitions/ToGrounded" unique_id=2009916994 node_paths=PackedStringArray("animation_controller") instance=ExtResource("25_q28gw")]
-animation_controller = NodePath("../../../../../../AnimationTree")
+animation_controller = NodePath("../../../../../../Animations/AnimationTree")
 action = "shoot"
 
 [node name="ToInitJump" parent="ActorStateMachine/States/Shoot/Transitions" parent_id_path=PackedInt32Array(405997985, 1931116749) index="1" unique_id=1670844424 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
@@ -919,14 +1056,14 @@ key = "jump"
 [node name="AirStartShoot" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="8" unique_id=1056821060 instance=ExtResource("4_oycdn")]
 
 [node name="AnimatorSetTrigger" parent="ActorStateMachine/States/AirStartShoot/OnEnter" parent_id_path=PackedInt32Array(1056821060, 667290384) index="0" unique_id=1100719889 node_paths=PackedStringArray("animation_controller") instance=ExtResource("17_b8hi5")]
-animation_controller = NodePath("../../../../../AnimationTree")
+animation_controller = NodePath("../../../../../Animations/AnimationTree")
 trigger_key = "shoot_started"
 
 [node name="ToAirShoot" parent="ActorStateMachine/States/AirStartShoot/Transitions" parent_id_path=PackedInt32Array(1056821060, 1931116749) index="0" unique_id=30271002 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../../AirShoot")
 
 [node name="AnimatorActionFinished" parent="ActorStateMachine/States/AirStartShoot/Transitions/ToAirShoot" unique_id=1430096141 node_paths=PackedStringArray("animation_controller") instance=ExtResource("25_q28gw")]
-animation_controller = NodePath("../../../../../../AnimationTree")
+animation_controller = NodePath("../../../../../../Animations/AnimationTree")
 action = "start_shoot"
 
 [node name="ShootUnlocked" parent="ActorStateMachine/States/AirStartShoot/EntryConditions" parent_id_path=PackedInt32Array(1056821060, 537054144) index="0" unique_id=139541493 instance=ExtResource("39_hjies")]
@@ -944,13 +1081,13 @@ movement = NodePath("../../../../../../Behaviours/ActorMovement")
 target_state = NodePath("../../../Airborne")
 
 [node name="AnimatorActionFinished" parent="ActorStateMachine/States/AirShoot/Transitions/ToAirborne" unique_id=1505875658 node_paths=PackedStringArray("animation_controller") instance=ExtResource("25_q28gw")]
-animation_controller = NodePath("../../../../../../AnimationTree")
+animation_controller = NodePath("../../../../../../Animations/AnimationTree")
 action = "shoot"
 
 [node name="Swim" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="10" unique_id=798264796 instance=ExtResource("4_oycdn")]
 
 [node name="AnimatorSetTrigger" parent="ActorStateMachine/States/Swim/OnEnter" parent_id_path=PackedInt32Array(798264796, 667290384) index="0" unique_id=1936274439 node_paths=PackedStringArray("animation_controller") instance=ExtResource("17_b8hi5")]
-animation_controller = NodePath("../../../../../AnimationTree")
+animation_controller = NodePath("../../../../../Animations/AnimationTree")
 trigger_key = "swim_started"
 
 [node name="ToInitJump" parent="ActorStateMachine/States/Swim/Transitions" parent_id_path=PackedInt32Array(798264796, 1931116749) index="0" unique_id=1574746690 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
@@ -1018,7 +1155,8 @@ movement = NodePath("../../Behaviours/ActorMovement")
 [editable path="Detectors/PickupDetector"]
 [editable path="Detectors/InteractableDetector"]
 [editable path="Hurtbox"]
-[editable path="AnimationTree"]
+[editable path="Animations/AnimationTree"]
+[editable path="Animations/EffectsController"]
 [editable path="ActorStateMachine"]
 [editable path="ActorStateMachine/States/Grounded"]
 [editable path="ActorStateMachine/States/InitJump"]

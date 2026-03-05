@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bnqa0toqfjr0m"]
+
+[ext_resource type="PackedScene" uid="uid://cv0lwcb2ky6vl" path="res://systems/animation/parameter_setters/boolean_parameter_setter/boolean_parameter_setter.tscn" id="1_hwhbc"]
+[ext_resource type="Script" uid="uid://b61u0e8ue238d" path="res://systems/animation/parameter_setters/boolean_parameter_setter/hurtbox_parameter_setter/hurtbox_parameter_setter.gd" id="2_j7it4"]
+
+[node name="HurtboxParameterSetter" unique_id=1270825895 instance=ExtResource("1_hwhbc")]
+script = ExtResource("2_j7it4")
+parameter = 0
+send_negative = true
+send_positive = true

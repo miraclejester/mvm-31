@@ -18,8 +18,8 @@ advance_condition = &"jump_started"
 
 [resource]
 states/OutsideWater/node = ExtResource("1_me207")
-states/OutsideWater/position = Vector2(419, 100)
+states/OutsideWater/position = Vector2(308, 100)
 states/Start/position = Vector2(101, 100)
 states/surface_swim/node = SubResource("AnimationNodeAnimation_2hw45")
-states/surface_swim/position = Vector2(680, 100)
+states/surface_swim/position = Vector2(662, 100)
 transitions = ["Start", "OutsideWater", SubResource("AnimationNodeStateMachineTransition_dx5ib"), "OutsideWater", "surface_swim", SubResource("AnimationNodeStateMachineTransition_yc777"), "surface_swim", "OutsideWater", SubResource("AnimationNodeStateMachineTransition_bybc6")]
