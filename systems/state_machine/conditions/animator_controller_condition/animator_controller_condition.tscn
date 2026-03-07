@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://woclehb2tr1t"]
+
+[ext_resource type="Script" uid="uid://c1vtnye2d2chu" path="res://systems/state_machine/conditions/animator_controller_condition/animator_controller_condition.gd" id="1_06bkb"]
+
+[node name="AnimatorControllerCondition" type="Node" unique_id=907808244]
+script = ExtResource("1_06bkb")

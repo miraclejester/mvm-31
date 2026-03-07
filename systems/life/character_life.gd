@@ -3,6 +3,7 @@ class_name CharacterLife
 
 signal damage_dealt(amount: int)
 signal died()
+signal hurt()
 signal life_changed(current: int)
 
 @export var starting_max_life: int = 3
@@ -22,10 +23,11 @@ func set_life(val: int) -> void:
 func deal_damage(amount: int) -> void:
 	set_life(life - amount)
 	damage_dealt.emit(amount)
-	print("%s received %d damage" % [get_parent().name, amount])
+	#print("%s received %d damage" % [get_parent().name, amount])
 	if life <= 0:
-		print("%s died" % [get_parent().name])
 		died.emit()
+	else:
+		hurt.emit()
 
 
 func heal_damage(amount: int) -> void:

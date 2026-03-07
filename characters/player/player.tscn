@@ -53,6 +53,10 @@
 [ext_resource type="PackedScene" uid="uid://deinpt7r6nyx3" path="res://systems/behaviours/collision_switch_profile/collision_switch_profile.tscn" id="31_dx5ib"]
 [ext_resource type="PackedScene" uid="uid://bfpyr06ovhqg3" path="res://systems/state_machine/conditions/game_ability_unlocked/game_ability_unlocked.tscn" id="39_hjies"]
 [ext_resource type="PackedScene" uid="uid://dxiwnhdey0obs" path="res://systems/state_machine/conditions/actor_is_on_water_surface/actor_is_on_water_surface.tscn" id="39_j55il"]
+[ext_resource type="PackedScene" uid="uid://ckknu5s2iq2tc" path="res://systems/behaviours/animator_behaviour/actor_animator_behaviour.tscn" id="47_bdpt7"]
+[ext_resource type="PackedScene" uid="uid://woclehb2tr1t" path="res://systems/state_machine/conditions/animator_controller_condition/animator_controller_condition.tscn" id="48_di0ei"]
+[ext_resource type="PackedScene" uid="uid://c4b3teprr3iu4" path="res://systems/state_machine/conditions/actor_life_condition/actor_life_condition.tscn" id="49_apqh1"]
+[ext_resource type="PackedScene" uid="uid://bwfojncre050s" path="res://systems/behaviours/actor_erase_actor/actor_erase_actor.tscn" id="49_f0ap2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgfib"]
 size = Vector2(12, 45)
@@ -223,7 +227,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_di0ei"]
 resource_name = "hurt"
-length = 0.10001
+length = 0.40001002
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -244,12 +248,9 @@ tracks/1/path = NodePath("Animations/AnimationTree")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": ["hurt"],
-"method": &"send_action_finished_event"
-}]
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
 }
 
 [sub_resource type="Animation" id="Animation_2uvqg"]
@@ -664,6 +665,8 @@ autoplay = &"idle"
 root_node = NodePath("../..")
 tree_root = ExtResource("8_xcnuv")
 anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/death_started = false
+parameters/conditions/hurt_started = false
 parameters/conditions/jump_started = false
 parameters/conditions/swim_started = false
 parameters/OutsideWater/conditions/airborne = false
@@ -679,6 +682,7 @@ parameters/OutsideWater/Airborne/blend_position = 0.0
 parameters/OutsideWater/Grounded/blend_position = 0.0
 controller = NodePath("../../StaticBehaviours/PlayerController")
 interval_data = Array[ExtResource("8_1so5t")]([SubResource("Resource_fjxoa")])
+debug_is_player = true
 
 [node name="GroundedBlendPos" parent="Animations/AnimationTree/ProcessParameters" parent_id_path=PackedInt32Array(704880076, 1452081964) index="0" unique_id=1270825895 node_paths=PackedStringArray("body") instance=ExtResource("8_dx5ib")]
 body = NodePath("../../../..")
@@ -805,6 +809,7 @@ enable_on_ready = false
 [node name="ActorStateMachine" parent="." unique_id=1386328368 node_paths=PackedStringArray("initial_state") instance=ExtResource("3_8pyyg")]
 unique_name_in_owner = true
 initial_state = NodePath("States/Grounded")
+debug_logs = true
 
 [node name="Grounded" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="0" unique_id=89059854 instance=ExtResource("4_oycdn")]
 
@@ -1100,11 +1105,74 @@ key = "jump"
 [node name="ActorIsOnWaterSurface" parent="ActorStateMachine/States/Swim/Transitions/ToInitJump" unique_id=1415875844 node_paths=PackedStringArray("movement") instance=ExtResource("39_j55il")]
 movement = NodePath("../../../../../../Behaviours/ActorMovement")
 
+[node name="Hurt" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="11" unique_id=743104112 instance=ExtResource("4_oycdn")]
+
+[node name="BehaviourSequence" parent="ActorStateMachine/States/Hurt/OnEnter" parent_id_path=PackedInt32Array(743104112, 667290384) index="0" unique_id=104501501 instance=ExtResource("14_vrg71")]
+
+[node name="TravelDirectlyToHurt" parent="ActorStateMachine/States/Hurt/OnEnter/BehaviourSequence" unique_id=1200312524 node_paths=PackedStringArray("animation_controller") instance=ExtResource("47_bdpt7")]
+animation_controller = NodePath("../../../../../../Animations/AnimationTree")
+target_node = "hurt"
+
+[node name="DisableMovement" parent="ActorStateMachine/States/Hurt/OnEnter/BehaviourSequence" unique_id=225048397 node_paths=PackedStringArray("behaviour") instance=ExtResource("24_a6siw")]
+behaviour = NodePath("../../../../../../Behaviours/ActorMovement")
+enable = false
+
+[node name="EnableMovement" parent="ActorStateMachine/States/Hurt/OnExit" parent_id_path=PackedInt32Array(743104112, 1496048418) index="0" unique_id=844470036 node_paths=PackedStringArray("behaviour") instance=ExtResource("24_a6siw")]
+behaviour = NodePath("../../../../../Behaviours/ActorMovement")
+
+[node name="ToGrounded" parent="ActorStateMachine/States/Hurt/Transitions" parent_id_path=PackedInt32Array(743104112, 1931116749) index="0" unique_id=1649198060 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+target_state = NodePath("../../../Grounded")
+
+[node name="HurtAnimationFinished" parent="ActorStateMachine/States/Hurt/Transitions/ToGrounded" unique_id=907808244 node_paths=PackedStringArray("animator_controller") instance=ExtResource("48_di0ei")]
+animator_controller = NodePath("../../../../../../Animations/AnimationTree")
+target_state = "hurt"
+
+[node name="Dead" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="12" unique_id=135406971 instance=ExtResource("4_oycdn")]
+
+[node name="BehaviourSequence" parent="ActorStateMachine/States/Dead/OnEnter" parent_id_path=PackedInt32Array(135406971, 667290384) index="0" unique_id=994631856 instance=ExtResource("14_vrg71")]
+
+[node name="TravelToDeath" parent="ActorStateMachine/States/Dead/OnEnter/BehaviourSequence" unique_id=963464231 node_paths=PackedStringArray("animation_controller") instance=ExtResource("47_bdpt7")]
+animation_controller = NodePath("../../../../../../Animations/AnimationTree")
+target_node = "death"
+
+[node name="DisableMovement" parent="ActorStateMachine/States/Dead/OnEnter/BehaviourSequence" unique_id=485896248 node_paths=PackedStringArray("behaviour") instance=ExtResource("24_a6siw")]
+behaviour = NodePath("../../../../../../Behaviours/ActorMovement")
+enable = false
+
+[node name="DisableFlipping" parent="ActorStateMachine/States/Dead/OnEnter/BehaviourSequence" unique_id=1393055921 node_paths=PackedStringArray("behaviour") instance=ExtResource("24_a6siw")]
+behaviour = NodePath("../../../../../../Behaviours/Node2dFlipOnInput")
+enable = false
+
+[node name="ToDisappear" parent="ActorStateMachine/States/Dead/Transitions" parent_id_path=PackedInt32Array(135406971, 1931116749) index="0" unique_id=1549022254 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+target_state = NodePath("../../../Disappear")
+
+[node name="DeathAnimationFinished" parent="ActorStateMachine/States/Dead/Transitions/ToDisappear" unique_id=323814671 node_paths=PackedStringArray("animator_controller") instance=ExtResource("48_di0ei")]
+animator_controller = NodePath("../../../../../../Animations/AnimationTree")
+target_state = "death"
+
+[node name="Disappear" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="13" unique_id=387503826 instance=ExtResource("4_oycdn")]
+
+[node name="ActorEraseActor" parent="ActorStateMachine/States/Disappear/OnEnter" parent_id_path=PackedInt32Array(387503826, 667290384) index="0" unique_id=521280831 node_paths=PackedStringArray("target") instance=ExtResource("49_f0ap2")]
+target = NodePath("../../../../..")
+
 [node name="ToSwim" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="0" unique_id=1979086372 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../States/Swim")
 
 [node name="IsInWater" parent="ActorStateMachine/AnyStateTransitions/ToSwim" unique_id=149233817 node_paths=PackedStringArray("condition") instance=ExtResource("22_lykvf")]
 condition = NodePath("../../../../Data/ExternalConditions/IsInWater")
+
+[node name="ToHurt" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="1" unique_id=1919227895 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+target_state = NodePath("../../States/Hurt")
+
+[node name="IsHurt" parent="ActorStateMachine/AnyStateTransitions/ToHurt" unique_id=1634116028 node_paths=PackedStringArray("life") instance=ExtResource("49_apqh1")]
+life = NodePath("../../../../StaticBehaviours/CharacterLife")
+
+[node name="ToDead" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="2" unique_id=220846891 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+target_state = NodePath("../../States/Dead")
+
+[node name="IsDead" parent="ActorStateMachine/AnyStateTransitions/ToDead" unique_id=788520301 node_paths=PackedStringArray("life") instance=ExtResource("49_apqh1")]
+life = NodePath("../../../../StaticBehaviours/CharacterLife")
+operation = 1
 
 [node name="Data" type="Node" parent="." unique_id=257589254]
 
@@ -1169,4 +1237,7 @@ movement = NodePath("../../Behaviours/ActorMovement")
 [editable path="ActorStateMachine/States/AirStartShoot"]
 [editable path="ActorStateMachine/States/AirShoot"]
 [editable path="ActorStateMachine/States/Swim"]
+[editable path="ActorStateMachine/States/Hurt"]
+[editable path="ActorStateMachine/States/Dead"]
+[editable path="ActorStateMachine/States/Disappear"]
 [editable path="Data/ExternalConditions/ConditionShootTimer"]

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c4b3teprr3iu4"]
+
+[ext_resource type="Script" uid="uid://bycwusp680mf7" path="res://systems/state_machine/conditions/actor_life_condition/actor_life_condition.gd" id="1_78v5y"]
+
+[node name="ActorLifeCondition" type="Node" unique_id=1634116028]
+script = ExtResource("1_78v5y")

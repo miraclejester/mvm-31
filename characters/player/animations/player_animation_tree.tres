@@ -2,6 +2,12 @@
 
 [ext_resource type="AnimationNodeStateMachine" uid="uid://bu5nckae43cl7" path="res://characters/player/animations/outside_water_state_machine.tres" id="1_me207"]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_oi7gn"]
+animation = &"death"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wwbo6"]
+animation = &"hurt"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2hw45"]
 animation = &"surface_swim"
 
@@ -16,10 +22,31 @@ advance_condition = &"swim_started"
 advance_mode = 2
 advance_condition = &"jump_started"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oi7gn"]
+advance_mode = 2
+advance_condition = &"hurt_started"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wkbj1"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r5wdn"]
+advance_mode = 2
+advance_condition = &"death_started"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wwbo6"]
+switch_mode = 2
+advance_mode = 2
+
 [resource]
 states/OutsideWater/node = ExtResource("1_me207")
 states/OutsideWater/position = Vector2(308, 100)
 states/Start/position = Vector2(101, 100)
+states/death/node = SubResource("AnimationNodeAnimation_oi7gn")
+states/death/position = Vector2(459, 298)
+states/hurt/node = SubResource("AnimationNodeAnimation_wwbo6")
+states/hurt/position = Vector2(204, 298)
 states/surface_swim/node = SubResource("AnimationNodeAnimation_2hw45")
 states/surface_swim/position = Vector2(662, 100)
-transitions = ["Start", "OutsideWater", SubResource("AnimationNodeStateMachineTransition_dx5ib"), "OutsideWater", "surface_swim", SubResource("AnimationNodeStateMachineTransition_yc777"), "surface_swim", "OutsideWater", SubResource("AnimationNodeStateMachineTransition_bybc6")]
+transitions = ["Start", "OutsideWater", SubResource("AnimationNodeStateMachineTransition_dx5ib"), "OutsideWater", "surface_swim", SubResource("AnimationNodeStateMachineTransition_yc777"), "surface_swim", "OutsideWater", SubResource("AnimationNodeStateMachineTransition_bybc6"), "OutsideWater", "hurt", SubResource("AnimationNodeStateMachineTransition_oi7gn"), "hurt", "OutsideWater", SubResource("AnimationNodeStateMachineTransition_wkbj1"), "OutsideWater", "death", SubResource("AnimationNodeStateMachineTransition_r5wdn"), "death", "End", SubResource("AnimationNodeStateMachineTransition_wwbo6")]
+graph_offset = Vector2(-148, 22)

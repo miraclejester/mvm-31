@@ -9,14 +9,13 @@ class_name InvincibilityTimer
 
 
 func _ready() -> void:
-	life.damage_dealt.connect(on_damage_dealt)
+	life.hurt.connect(on_hurt)
 	timer.timeout.connect(on_timeout)
 
 
-func on_damage_dealt(_amount: int) -> void:
-	if not life.is_dead():
-		hurtbox.make_invincible()
-		timer.start(invincibility_time)
+func on_hurt() -> void:
+	hurtbox.make_invincible()
+	timer.start(invincibility_time)
 
 
 func on_timeout() -> void:

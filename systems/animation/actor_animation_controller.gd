@@ -5,6 +5,7 @@ signal action_finished(key: String)
 
 @export var controller: ActorController
 @export var interval_data: Array[AnimationIntervalData]
+@export var debug_is_player: bool = false
 
 @onready var process_parent: Node = %ProcessParameters
 @onready var interval_parent: Node = %IntervalParameters
@@ -43,6 +44,16 @@ func _process(_delta: float) -> void:
 		var state: AnimationIntervalState = active_intervals.get(key)
 		if (not state.pending_reset) and controller.is_action_just_pressed(state.data.control_key):
 			state.pending_reset = true
+	if Input.is_action_just_pressed("debug_hurt") and debug_is_player:
+		direct_to_state('hurt')
+
+
+func direct_to_state(state_key: String) -> void:
+	get_playback().travel(state_key)
+
+
+func get_playback() -> AnimationNodeStateMachinePlayback:
+	return get('parameters/playback') as AnimationNodeStateMachinePlayback
 
 
 func set_trigger(key: String) -> void:
