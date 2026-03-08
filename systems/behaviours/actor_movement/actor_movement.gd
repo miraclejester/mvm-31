@@ -107,7 +107,7 @@ func move(delta: float) -> void:
 		current_profile = profile
 		profile_key = key
 		profile.enter_method.call()
-		print("Changed profile")
+		#print("Changed profile")
 	profile.initialize_method.call()
 	profile.move_method.call(delta)
 	body.move_and_slide()

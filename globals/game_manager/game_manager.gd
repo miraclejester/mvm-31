@@ -6,6 +6,7 @@ signal game_saved()
 @export var possible_abilities: Array[AbilityData]
 @export var save_path: String = "save_game.save"
 @export var default_room: GameWorldRoomData
+@export var default_abilities: Array[AbilityData.EAbilityKey]
 
 var current_world: GameWorld
 var ability_dict: Dictionary[AbilityData.EAbilityKey, AbilityData] = {}
@@ -13,8 +14,7 @@ var unlocked_abilities: Dictionary[AbilityData.EAbilityKey, AbilityData] = {}
 var save_data: SaveData
 
 func _ready() -> void:
-	save_data = SaveData.new(default_room.room_key)
-	load_from_file()
+	save_data = load_from_file()
 	for ability in possible_abilities:
 		ability_dict[ability.ability_key] = ability
 	for ability_key in save_data.unlocked_abilities:
@@ -76,15 +76,25 @@ func save_to_file() -> void:
 	game_saved.emit()
 
 
-func load_from_file() -> void:
+func load_from_file() -> SaveData:
 	var path: String = get_save_path()
+	var data: SaveData = create_new_save()
 	if not FileAccess.file_exists(path):
-		return SaveData.new(default_room.room_key)
+		return data
 	
 	var file: FileAccess = FileAccess.open(path, FileAccess.READ)
 	if file == null:
-		return SaveData.new(default_room.room_key)
+		return data
 	
 	var res: Dictionary = file.get_var() as Dictionary
 	file.close()
-	save_data.fill_from_data(res)
+	data.fill_from_data(res)
+	return data
+
+
+func create_new_save() -> SaveData:
+	var data: SaveData = SaveData.new(default_room.room_key)
+	data.fill_from_data({
+		Strings.DATA_UNLOCKED_ABILITIES: default_abilities
+	})
+	return data

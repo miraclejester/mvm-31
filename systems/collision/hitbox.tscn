@@ -6,4 +6,6 @@
 monitorable = false
 script = ExtResource("1_ca3yq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1393029115]
+[node name="Collider" type="CollisionShape2D" parent="." unique_id=1393029115]
+unique_name_in_owner = true
+debug_color = Color(0.75725037, 0.12767443, 0.249683, 0.41960785)

@@ -1,27 +1,107 @@
 [gd_scene format=3 uid="uid://ewmtqexggdi8"]
 
 [ext_resource type="Script" uid="uid://cs8bhqaypv0lu" path="res://characters/world_character.gd" id="1_7artk"]
+[ext_resource type="Material" uid="uid://bfcpmjjytnr6i" path="res://shaders/hitflash/hitflash.tres" id="2_404c2"]
 [ext_resource type="PackedScene" uid="uid://nhdidou2ssqp" path="res://systems/animation/actor_animation_controller.tscn" id="2_m05bq"]
+[ext_resource type="PackedScene" uid="uid://cf2nwnpit6vtj" path="res://systems/collision/hurtbox.tscn" id="2_r5p1c"]
 [ext_resource type="PackedScene" uid="uid://bjoawgso0vy1g" path="res://systems/state_machine/actor_state_machine.tscn" id="2_tge8d"]
 [ext_resource type="PackedScene" uid="uid://d1ao8x1632aoe" path="res://systems/controllers/input/actor_controller.tscn" id="3_e2633"]
 [ext_resource type="PackedScene" uid="uid://d3thoe536xwf4" path="res://systems/behaviours/node_2d_flip/node_2d_flip_on_input.tscn" id="3_tge8d"]
 [ext_resource type="PackedScene" uid="uid://dtq4wlupjnawu" path="res://systems/behaviours/actor_movement/actor_movement.tscn" id="5_lgkyx"]
 [ext_resource type="PackedScene" uid="uid://cr2ssks6txaq4" path="res://systems/life/character_life.tscn" id="5_v3144"]
+[ext_resource type="PackedScene" uid="uid://ckknu5s2iq2tc" path="res://systems/behaviours/animator_behaviour/actor_animator_behaviour.tscn" id="8_tartb"]
+
+[sub_resource type="Animation" id="Animation_404c2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipVisuals:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_tartb"]
+resource_name = "hit_flash"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipVisuals:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dob5b"]
+_data = {
+&"RESET": SubResource("Animation_404c2"),
+&"hit_flash": SubResource("Animation_tartb")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_404c2"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tartb"]
+animation = &"hit_flash"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3jqio"]
+advance_condition = &"hitflash_started"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mv3lb"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tartb"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_hk274"]
+states/RESET/node = SubResource("AnimationNodeAnimation_404c2")
+states/RESET/position = Vector2(364, 105)
+states/hitflash/node = SubResource("AnimationNodeAnimation_tartb")
+states/hitflash/position = Vector2(562, 105)
+transitions = ["RESET", "hitflash", SubResource("AnimationNodeStateMachineTransition_3jqio"), "hitflash", "RESET", SubResource("AnimationNodeStateMachineTransition_mv3lb"), "Start", "RESET", SubResource("AnimationNodeStateMachineTransition_tartb")]
+graph_offset = Vector2(-11, 67)
 
 [node name="WorldEnemy" type="CharacterBody2D" unique_id=1487671488]
 collision_layer = 0
 script = ExtResource("1_7artk")
 
 [node name="FlipVisuals" type="Node2D" parent="." unique_id=783290642]
+material = ExtResource("2_404c2")
 
 [node name="StaticVisuals" type="Node2D" parent="." unique_id=613635385]
 
 [node name="WorldCollider" type="CollisionShape2D" parent="." unique_id=978122623]
 
+[node name="Hurtbox" parent="." unique_id=573111498 node_paths=PackedStringArray("life") instance=ExtResource("2_r5p1c")]
+collision_layer = 128
+collision_mask = 0
+life = NodePath("../CharacterLife")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=849005601]
 
 [node name="AnimationTree" parent="." unique_id=704880076 node_paths=PackedStringArray("controller") instance=ExtResource("2_m05bq")]
 anim_player = NodePath("../AnimationPlayer")
+controller = NodePath("../ActorController")
+
+[node name="EffectsPlayer" type="AnimationPlayer" parent="." unique_id=596851950]
+libraries/ = SubResource("AnimationLibrary_dob5b")
+
+[node name="EffectsAnimationController" parent="." unique_id=1158168363 node_paths=PackedStringArray("controller") instance=ExtResource("2_m05bq")]
+tree_root = SubResource("AnimationNodeStateMachine_hk274")
+anim_player = NodePath("../EffectsPlayer")
+parameters/conditions/hitflash_started = false
 controller = NodePath("../ActorController")
 
 [node name="ActorStateMachine" parent="." unique_id=1386328368 instance=ExtResource("2_tge8d")]
@@ -31,6 +111,10 @@ unique_name_in_owner = true
 external_input = false
 
 [node name="CharacterLife" parent="." unique_id=771178152 instance=ExtResource("5_v3144")]
+
+[node name="TravelToHitflash" parent="CharacterLife/OnHurt" parent_id_path=PackedInt32Array(771178152, 1571804799) index="0" unique_id=1200312524 node_paths=PackedStringArray("animation_controller") instance=ExtResource("8_tartb")]
+animation_controller = NodePath("../../../EffectsAnimationController")
+target_node = "hitflash"
 
 [node name="Behaviours" type="Node" parent="." unique_id=1762055959]
 unique_name_in_owner = true
@@ -49,3 +133,6 @@ flip_target = NodePath("../../FlipVisuals")
 controller = NodePath("../../ActorController")
 
 [node name="ExternalConditions" type="Node" parent="." unique_id=518635833]
+
+[editable path="EffectsAnimationController"]
+[editable path="CharacterLife"]

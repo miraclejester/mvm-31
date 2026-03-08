@@ -8,6 +8,10 @@ var enabled: bool = true
 func _ready() -> void:
 	set_enabled(enable_on_ready)
 
+
+func state_entered() -> void:
+	pass
+
 func run(_delta: float) -> void:
 	pass
 

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cxe2ks6yypkgh"]
+
+[ext_resource type="PackedScene" uid="uid://tthpm8c6xsb3" path="res://systems/behaviours/actor_behaviour.tscn" id="1_wjvn2"]
+[ext_resource type="Script" uid="uid://du5t727tyert6" path="res://systems/behaviours/actor_hitbox_behaviour/actor_hitbox_behaviour.gd" id="2_6d65n"]
+
+[node name="ActorHitboxBehaviour" unique_id=1200312524 instance=ExtResource("1_wjvn2")]
+script = ExtResource("2_6d65n")
+operation = 0
+enable = false

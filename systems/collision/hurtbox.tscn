@@ -7,3 +7,4 @@ monitoring = false
 script = ExtResource("1_2og2t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1674096468]
+debug_color = Color(0.82914484, 0.8209733, 0.894987, 0.41960785)

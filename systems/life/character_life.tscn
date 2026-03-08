@@ -4,3 +4,6 @@
 
 [node name="CharacterLife" type="Node" unique_id=771178152]
 script = ExtResource("1_vny5v")
+
+[node name="OnHurt" type="Node" parent="." unique_id=1571804799]
+unique_name_in_owner = true

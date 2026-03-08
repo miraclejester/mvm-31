@@ -5,11 +5,13 @@ signal action_finished(key: String)
 
 @export var controller: ActorController
 @export var interval_data: Array[AnimationIntervalData]
-@export var debug_is_player: bool = false
+@export var tracked_playback_paths: Array[String]
+@export var debug_logs: bool = false
 
 @onready var process_parent: Node = %ProcessParameters
 @onready var interval_parent: Node = %IntervalParameters
 @onready var trigger_parent: Node = %TriggerParameters
+@onready var state_ended_parent: Node = %StateEndedBehaviours
 
 var active_triggers: Array[String] = []
 var active_intervals: Dictionary[String, AnimationIntervalState] = {}
@@ -17,6 +19,7 @@ var interval_specs: Dictionary[String, AnimationIntervalData] = {}
 var process_parameters: Dictionary[String, ActorAnimatorParameterSetter] = {}
 var interval_parameters: Dictionary[String, ActorAnimatorParameterSetter] = {}
 var trigger_parameters: Dictionary[String, ActorAnimatorParameterSetter] = {}
+var state_ended_behaviours: Dictionary[String, ActorBehaviour] = {}
 
 func _ready() -> void:
 	active = true
@@ -34,6 +37,9 @@ func _ready() -> void:
 		var s: ActorAnimatorParameterSetter = child as ActorAnimatorParameterSetter
 		trigger_parameters[s.setter_key] = s
 		s.animation_controller = self
+	for child in state_ended_parent.get_children():
+		state_ended_behaviours[child.name] = child.get_child(0) as ActorBehaviour
+	set_up_playbacks()
 
 func _process(_delta: float) -> void:
 	reset_triggers()
@@ -44,17 +50,22 @@ func _process(_delta: float) -> void:
 		var state: AnimationIntervalState = active_intervals.get(key)
 		if (not state.pending_reset) and controller.is_action_just_pressed(state.data.control_key):
 			state.pending_reset = true
-	if Input.is_action_just_pressed("debug_hurt") and debug_is_player:
-		direct_to_state('hurt')
 
 
 func direct_to_state(state_key: String) -> void:
-	get_playback().travel(state_key)
+	var playback: AnimationNodeStateMachinePlayback = get_playback()
+	playback.travel(state_key)
 
 
 func get_playback() -> AnimationNodeStateMachinePlayback:
 	return get('parameters/playback') as AnimationNodeStateMachinePlayback
 
+
+func set_up_playbacks() -> void:
+	for path in tracked_playback_paths:
+		var playback: AnimationNodeStateMachinePlayback = get('parameters/%s' % path) as AnimationNodeStateMachinePlayback
+		playback.state_finished.connect(state_ended)
+		
 
 func set_trigger(key: String) -> void:
 	trigger_parameters[key].set_trigger()
@@ -108,3 +119,11 @@ func remove_interval(action: String) -> void:
 func refresh_interval_parameters() -> void:
 	for s_key in interval_parameters:
 		interval_parameters[s_key].set_parameter()
+
+
+func state_ended(state: String) -> void:
+	if debug_logs:
+		print("Animator state %s ended" % state)
+	var action: ActorBehaviour = state_ended_behaviours.get(state, null)
+	if action != null:
+		action.run(0)

@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dbqqk4kdx6l0c"]
+
+[ext_resource type="PackedScene" uid="uid://tthpm8c6xsb3" path="res://systems/behaviours/actor_behaviour.tscn" id="1_jglne"]
+[ext_resource type="Script" uid="uid://c7l0knlvamccu" path="res://systems/behaviours/actor_timed_behaviour/actor_timed_behaviour.gd" id="2_cmi8e"]
+
+[node name="ActorTimedBehaviour" unique_id=1200312524 instance=ExtResource("1_jglne")]
+script = ExtResource("2_cmi8e")
+running_rate = 1.0
+
+[node name="Behaviour" type="Node" parent="." index="0" unique_id=2112558235]
+unique_name_in_owner = true
+
+[node name="Timer" type="Timer" parent="." index="1" unique_id=2101038676]
+unique_name_in_owner = true
+one_shot = true

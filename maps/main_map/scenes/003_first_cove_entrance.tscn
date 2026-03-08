@@ -63,6 +63,9 @@ shape = SubResource("RectangleShape2D_woc1h")
 [node name="Crab" parent="Enemies" parent_id_path=PackedInt32Array(1450376257) index="0" unique_id=1487671488 instance=ExtResource("4_n6lci")]
 position = Vector2(304, 320)
 
+[node name="CharacterLife" parent="Enemies/Crab" index="9" unique_id=771178152]
+debug_logs = true
+
 [node name="Crab2" parent="Enemies" parent_id_path=PackedInt32Array(1450376257) index="1" unique_id=398314895 instance=ExtResource("4_n6lci")]
 position = Vector2(592, 320)
 
@@ -76,3 +79,11 @@ position = Vector2(1392, 320)
 [editable path="Transitions/LeftEntrance"]
 [editable path="Transitions/DownEntrance"]
 [editable path="Transitions/RightEntrance"]
+[editable path="Enemies/Crab"]
+[editable path="Enemies/Crab/Hurtbox"]
+[editable path="Enemies/Crab/Hitbox"]
+[editable path="Enemies/Crab/ActorStateMachine"]
+[editable path="Enemies/Crab/ActorStateMachine/States/MoveRight"]
+[editable path="Enemies/Crab/ActorStateMachine/States/MoveLeft"]
+[editable path="Enemies/Crab/ActorStateMachine/States/Hurt"]
+[editable path="Enemies/Crab/ActorStateMachine/States/Dead"]

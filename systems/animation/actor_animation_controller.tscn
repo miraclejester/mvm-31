@@ -14,3 +14,6 @@ unique_name_in_owner = true
 
 [node name="TriggerParameters" type="Node" parent="." unique_id=1517241733]
 unique_name_in_owner = true
+
+[node name="StateEndedBehaviours" type="Node" parent="." unique_id=1299340365]
+unique_name_in_owner = true

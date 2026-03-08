@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c6bapa1itjpfh"]
 
 [ext_resource type="PackedScene" uid="uid://ewmtqexggdi8" path="res://characters/enemies/world_enemy.tscn" id="1_66stj"]
-[ext_resource type="Texture2D" uid="uid://biox5wiuridiq" path="res://test_assets/enemies/e.png" id="2_ggo2l"]
+[ext_resource type="Texture2D" uid="uid://bijs7p8v60e12" path="res://pixel_assets/characters/enemies/crab-Sheet.png" id="2_42hum"]
 [ext_resource type="PackedScene" uid="uid://ent37cfwkxei" path="res://systems/collision/hitbox.tscn" id="3_nvhio"]
 [ext_resource type="PackedScene" uid="uid://0sdn13hb32u4" path="res://systems/state_machine/state/actor_state.tscn" id="3_p8c51"]
 [ext_resource type="Script" uid="uid://bybupba6sp868" path="res://systems/collision/hitbox_data.gd" id="4_42hum"]
@@ -11,9 +11,73 @@
 [ext_resource type="PackedScene" uid="uid://djmto3b623xio" path="res://systems/state_machine/conditions/external_condition/condition_external.tscn" id="6_nvhio"]
 [ext_resource type="PackedScene" uid="uid://dhtoiv2mgpv7u" path="res://systems/state_machine/conditions/marker_is_on_terrain/marker_is_on_terrain.tscn" id="7_nvhio"]
 [ext_resource type="PackedScene" uid="uid://m6msobg5ayht" path="res://systems/state_machine/conditions/negate/condition_negate.tscn" id="8_42hum"]
+[ext_resource type="PackedScene" uid="uid://ckknu5s2iq2tc" path="res://systems/behaviours/animator_behaviour/actor_animator_behaviour.tscn" id="9_6ne20"]
+[ext_resource type="PackedScene" uid="uid://woclehb2tr1t" path="res://systems/state_machine/conditions/animator_controller_condition/animator_controller_condition.tscn" id="10_2utb2"]
+[ext_resource type="PackedScene" uid="uid://c4b3teprr3iu4" path="res://systems/state_machine/conditions/actor_life_condition/actor_life_condition.tscn" id="11_uaed0"]
+[ext_resource type="PackedScene" uid="uid://bwfojncre050s" path="res://systems/behaviours/actor_erase_actor/actor_erase_actor.tscn" id="11_xtawb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8c51"]
-size = Vector2(26, 29)
+size = Vector2(26, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uaed0"]
+size = Vector2(26, 18)
+
+[sub_resource type="Animation" id="Animation_6ne20"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipVisuals/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_42hum"]
+resource_name = "hurt"
+length = 0.40001002
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipVisuals/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [24]
+}
+
+[sub_resource type="Animation" id="Animation_2utb2"]
+resource_name = "walk"
+length = 0.40001002
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipVisuals/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [18, 19, 20, 21]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uaed0"]
+_data = {
+&"RESET": SubResource("Animation_6ne20"),
+&"hurt": SubResource("Animation_42hum"),
+&"walk": SubResource("Animation_2utb2")
+}
 
 [sub_resource type="Resource" id="Resource_6ne20"]
 script = ExtResource("4_42hum")
@@ -21,7 +85,31 @@ damage = 1
 metadata/_custom_type_script = "uid://bybupba6sp868"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nvhio"]
-size = Vector2(21, 28)
+size = Vector2(21, 16)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6ne20"]
+animation = &"hurt"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_42hum"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6ne20"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2utb2"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uaed0"]
+advance_mode = 2
+advance_condition = &"hurt_started"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_2utb2"]
+states/hurt/node = SubResource("AnimationNodeAnimation_6ne20")
+states/hurt/position = Vector2(599, 100)
+states/walk/node = SubResource("AnimationNodeAnimation_42hum")
+states/walk/position = Vector2(402, 100)
+transitions = ["Start", "walk", SubResource("AnimationNodeStateMachineTransition_6ne20"), "hurt", "walk", SubResource("AnimationNodeStateMachineTransition_2utb2"), "walk", "hurt", SubResource("AnimationNodeStateMachineTransition_uaed0")]
 
 [node name="Crab" unique_id=1487671488 instance=ExtResource("1_66stj")]
 
@@ -29,7 +117,12 @@ size = Vector2(21, 28)
 position = Vector2(0, -14)
 
 [node name="Sprite" type="Sprite2D" parent="FlipVisuals" index="0" unique_id=414510599]
-texture = ExtResource("2_ggo2l")
+use_parent_material = true
+position = Vector2(0, -1)
+texture = ExtResource("2_42hum")
+flip_h = true
+hframes = 6
+vframes = 5
 
 [node name="SideMarker" type="Marker2D" parent="FlipVisuals" index="1" unique_id=547964677]
 position = Vector2(14, 0)
@@ -38,20 +131,40 @@ position = Vector2(14, 0)
 position = Vector2(14, 15)
 
 [node name="WorldCollider" parent="." index="2" unique_id=978122623]
-position = Vector2(0, -14.5)
+visible = false
+position = Vector2(0, -9)
 shape = SubResource("RectangleShape2D_p8c51")
 
+[node name="Hurtbox" parent="." index="3" unique_id=573111498]
+visible = false
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0" unique_id=1674096468]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_uaed0")
+
+[node name="AnimationPlayer" parent="." index="4" unique_id=849005601]
+libraries/ = SubResource("AnimationLibrary_uaed0")
+autoplay = &"walk"
+
 [node name="Hitbox" parent="." index="5" unique_id=484190945 instance=ExtResource("3_nvhio")]
+visible = false
 collision_layer = 0
 collision_mask = 32
 data = SubResource("Resource_6ne20")
 
-[node name="CollisionShape2D" parent="Hitbox" index="0" unique_id=1393029115]
-position = Vector2(0.5, -14)
+[node name="Collider" parent="Hitbox" index="0" unique_id=1393029115]
+position = Vector2(0.5, -8)
 shape = SubResource("RectangleShape2D_nvhio")
 debug_color = Color(0.2803205, 0.0041354485, 0.1275267, 0.41960785)
 
-[node name="ActorStateMachine" parent="." index="6" unique_id=1386328368 node_paths=PackedStringArray("initial_state")]
+[node name="AnimationTree" parent="." index="6" unique_id=704880076]
+tree_root = SubResource("AnimationNodeStateMachine_2utb2")
+parameters/conditions/hurt_started = false
+
+[node name="EffectsAnimationController" parent="." index="8" unique_id=1158168363]
+debug_logs = true
+
+[node name="ActorStateMachine" parent="." index="9" unique_id=1386328368 node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("States/MoveRight")
 
 [node name="MoveRight" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="0" unique_id=89059854 instance=ExtResource("3_p8c51")]
@@ -84,11 +197,42 @@ target_state = NodePath("../../../MoveRight")
 [node name="ConditionExternal" parent="ActorStateMachine/States/MoveLeft/Transitions/ToMoveRight" index="0" unique_id=483501810 node_paths=PackedStringArray("condition") instance=ExtResource("6_nvhio")]
 condition = NodePath("../../../../../../ExternalConditions/SideIsTerrainOrDiagIsNotTerrain")
 
-[node name="CharacterLife" parent="." index="8" unique_id=771178152]
+[node name="Hurt" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="2" unique_id=1577882639 instance=ExtResource("3_p8c51")]
+
+[node name="TriggerHurt" parent="ActorStateMachine/States/Hurt/OnEnter" parent_id_path=PackedInt32Array(1577882639, 667290384) index="0" unique_id=1200312524 node_paths=PackedStringArray("animation_controller") instance=ExtResource("9_6ne20")]
+animation_controller = NodePath("../../../../../AnimationTree")
+target_node = "hurt"
+
+[node name="ToMoveRight" parent="ActorStateMachine/States/Hurt/Transitions" parent_id_path=PackedInt32Array(1577882639, 1931116749) index="0" unique_id=1187003789 node_paths=PackedStringArray("target_state") instance=ExtResource("5_ptlxy")]
+target_state = NodePath("../../../MoveRight")
+
+[node name="HurtFinished" parent="ActorStateMachine/States/Hurt/Transitions/ToMoveRight" index="0" unique_id=907808244 node_paths=PackedStringArray("animator_controller") instance=ExtResource("10_2utb2")]
+animator_controller = NodePath("../../../../../../AnimationTree")
+target_state = "hurt"
+
+[node name="Dead" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="3" unique_id=1415114911 instance=ExtResource("3_p8c51")]
+
+[node name="ActorEraseActor" parent="ActorStateMachine/States/Dead/OnEnter" parent_id_path=PackedInt32Array(1415114911, 667290384) index="0" unique_id=521280831 node_paths=PackedStringArray("target") instance=ExtResource("11_xtawb")]
+target = NodePath("../../../../..")
+
+[node name="ToHurt" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="0" unique_id=332837108 node_paths=PackedStringArray("target_state") instance=ExtResource("5_ptlxy")]
+target_state = NodePath("../../States/Hurt")
+
+[node name="WasHurt" parent="ActorStateMachine/AnyStateTransitions/ToHurt" index="0" unique_id=1634116028 node_paths=PackedStringArray("life") instance=ExtResource("11_uaed0")]
+life = NodePath("../../../../CharacterLife")
+
+[node name="ToDead" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="1" unique_id=1066525487 node_paths=PackedStringArray("target_state") instance=ExtResource("5_ptlxy")]
+target_state = NodePath("../../States/Dead")
+
+[node name="IsDead" parent="ActorStateMachine/AnyStateTransitions/ToDead" index="0" unique_id=640617098 node_paths=PackedStringArray("life") instance=ExtResource("11_uaed0")]
+life = NodePath("../../../../CharacterLife")
+operation = 1
+
+[node name="CharacterLife" parent="." index="11" unique_id=771178152]
 starting_max_life = 2
 
 [node name="ActorMovement" parent="Behaviours" parent_id_path=PackedInt32Array(1762055959) index="0" unique_id=655420935]
-max_speed = 180.0
+max_speed = 50.0
 
 [node name="SideIsTerrainOrDiagIsNotTerrain" parent="ExternalConditions" parent_id_path=PackedInt32Array(518635833) index="0" unique_id=1399651393 instance=ExtResource("6_c612j")]
 
@@ -100,7 +244,12 @@ marker = NodePath("../../../FlipVisuals/SideMarker")
 [node name="DiagonalIsOnTerrain" parent="ExternalConditions/SideIsTerrainOrDiagIsNotTerrain/ConditionNegate" index="0" unique_id=1265034454 node_paths=PackedStringArray("marker") instance=ExtResource("7_nvhio")]
 marker = NodePath("../../../../FlipVisuals/DiagonalMarker")
 
+[editable path="Hurtbox"]
 [editable path="Hitbox"]
+[editable path="EffectsAnimationController"]
 [editable path="ActorStateMachine"]
 [editable path="ActorStateMachine/States/MoveRight"]
 [editable path="ActorStateMachine/States/MoveLeft"]
+[editable path="ActorStateMachine/States/Hurt"]
+[editable path="ActorStateMachine/States/Dead"]
+[editable path="CharacterLife"]

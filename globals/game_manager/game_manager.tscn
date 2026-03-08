@@ -4,9 +4,10 @@
 [ext_resource type="Script" uid="uid://tgtio2puq0ht" path="res://characters/player/abilities/AbilityData.gd" id="2_q5eha"]
 [ext_resource type="Resource" uid="uid://b00n5n0jremam" path="res://characters/player/abilities/melee_attack.tres" id="3_qfmkk"]
 [ext_resource type="Resource" uid="uid://c3ra0kc8itl6v" path="res://characters/player/abilities/ranged_attack.tres" id="4_qfmkk"]
-[ext_resource type="Resource" uid="uid://dtw4nrkeo4v3h" path="res://maps/main_map/data/002_beach_shaft.tres" id="5_0bnvm"]
+[ext_resource type="Resource" uid="uid://sto1onudmbhk" path="res://maps/main_map/data/003_first_cove_entrance.tres" id="5_0bnvm"]
 
 [node name="GameManager" type="Node" unique_id=1195116369]
 script = ExtResource("1_dmcod")
 possible_abilities = Array[ExtResource("2_q5eha")]([ExtResource("3_qfmkk"), ExtResource("4_qfmkk")])
 default_room = ExtResource("5_0bnvm")
+default_abilities = Array[int]([0])

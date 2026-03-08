@@ -11,9 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://wqvwwvwj828h" path="res://test_assets/projectile_emiters/test_gun.tscn" id="4_ssrwr"]
 [ext_resource type="PackedScene" uid="uid://h6ww2xh1eft0" path="res://systems/audio/footsteps_player.tscn" id="5_1so5t"]
 [ext_resource type="PackedScene" uid="uid://d3thoe536xwf4" path="res://systems/behaviours/node_2d_flip/node_2d_flip_on_input.tscn" id="5_o2riq"]
+[ext_resource type="PackedScene" uid="uid://ent37cfwkxei" path="res://systems/collision/hitbox.tscn" id="6_hfasb"]
 [ext_resource type="PackedScene" uid="uid://b4esk6pcjmjsv" path="res://systems/state_machine/transitions/actor_state_transition.tscn" id="6_rcghi"]
 [ext_resource type="PackedScene" uid="uid://cf2nwnpit6vtj" path="res://systems/collision/hurtbox.tscn" id="6_xvmlt"]
 [ext_resource type="PackedScene" uid="uid://dkek8dj55suja" path="res://systems/collision/collider_group_manager.tscn" id="7_2uvqg"]
+[ext_resource type="Script" uid="uid://bybupba6sp868" path="res://systems/collision/hitbox_data.gd" id="7_6ew83"]
 [ext_resource type="PackedScene" uid="uid://nhdidou2ssqp" path="res://systems/animation/actor_animation_controller.tscn" id="7_55jnj"]
 [ext_resource type="PackedScene" uid="uid://trwo62w6obod" path="res://systems/interactables/pickups/pickup_detector.tscn" id="7_mmwog"]
 [ext_resource type="PackedScene" uid="uid://m6msobg5ayht" path="res://systems/state_machine/conditions/negate/condition_negate.tscn" id="7_wcyp4"]
@@ -53,10 +55,21 @@
 [ext_resource type="PackedScene" uid="uid://deinpt7r6nyx3" path="res://systems/behaviours/collision_switch_profile/collision_switch_profile.tscn" id="31_dx5ib"]
 [ext_resource type="PackedScene" uid="uid://bfpyr06ovhqg3" path="res://systems/state_machine/conditions/game_ability_unlocked/game_ability_unlocked.tscn" id="39_hjies"]
 [ext_resource type="PackedScene" uid="uid://dxiwnhdey0obs" path="res://systems/state_machine/conditions/actor_is_on_water_surface/actor_is_on_water_surface.tscn" id="39_j55il"]
+[ext_resource type="PackedScene" uid="uid://2yo1sera82mt" path="res://systems/behaviours/actor_conditional_behaviour/actor_conditional_behaviour.tscn" id="46_d7nuc"]
+[ext_resource type="PackedScene" uid="uid://cxe2ks6yypkgh" path="res://systems/behaviours/actor_hitbox_behaviour/actor_hitbox_behaviour.tscn" id="47_6ew83"]
 [ext_resource type="PackedScene" uid="uid://ckknu5s2iq2tc" path="res://systems/behaviours/animator_behaviour/actor_animator_behaviour.tscn" id="47_bdpt7"]
 [ext_resource type="PackedScene" uid="uid://woclehb2tr1t" path="res://systems/state_machine/conditions/animator_controller_condition/animator_controller_condition.tscn" id="48_di0ei"]
+[ext_resource type="PackedScene" uid="uid://dbqqk4kdx6l0c" path="res://systems/behaviours/actor_timed_behaviour/actor_timed_behaviour.tscn" id="48_s04et"]
 [ext_resource type="PackedScene" uid="uid://c4b3teprr3iu4" path="res://systems/state_machine/conditions/actor_life_condition/actor_life_condition.tscn" id="49_apqh1"]
 [ext_resource type="PackedScene" uid="uid://bwfojncre050s" path="res://systems/behaviours/actor_erase_actor/actor_erase_actor.tscn" id="49_f0ap2"]
+
+[sub_resource type="Resource" id="Resource_iy54p"]
+script = ExtResource("7_6ew83")
+damage = 1
+metadata/_custom_type_script = "uid://bybupba6sp868"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ro1nf"]
+size = Vector2(26, 35)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgfib"]
 size = Vector2(12, 45)
@@ -130,8 +143,8 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_ge24q"]
 resource_name = "attack"
-length = 0.40001002
-step = 0.1
+length = 0.28572145
+step = 0.071428575
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -139,7 +152,7 @@ tracks/0/path = NodePath("FlipTarget/LandSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"times": PackedFloat32Array(0, 0.071428575, 0.14285715, 0.21428572),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [24, 25, 26, 27]
@@ -151,7 +164,7 @@ tracks/1/path = NodePath("Animations/AnimationTree")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.4),
+"times": PackedFloat32Array(0.2857143),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": ["attack"],
@@ -165,11 +178,28 @@ tracks/2/path = NodePath("FlipTarget/SFX")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.1),
+"times": PackedFloat32Array(0.071428575),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": ["melee"],
 "method": &"play_sfx"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FlipTarget/MeleeAttackHitbox")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.14285715, 0.21428572),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [true],
+"method": &"set_collider_enabled"
+}, {
+"args": [false],
+"method": &"set_collider_enabled"
 }]
 }
 
@@ -597,6 +627,21 @@ event_name = "event:/Player/Player Melee Spell"
 event_guid = "{82ee20ce-be92-4d71-b266-2932ab63fac7}"
 volume = 0.6
 
+[node name="hit" type="FmodEventEmitter2D" parent="FlipTarget/SFX" unique_id=6825675]
+event_name = "event:/Player/Player_Hit"
+event_guid = "{24693673-1685-4b61-9832-4a737d613192}"
+volume = 0.6
+
+[node name="death" type="FmodEventEmitter2D" parent="FlipTarget/SFX" unique_id=1446608530]
+event_name = "event:/Player/Player Death"
+event_guid = "{7265b98f-67a4-4ab1-a23d-946eddbbb4e0}"
+volume = 0.7
+
+[node name="swim" type="FmodEventEmitter2D" parent="FlipTarget/SFX" unique_id=978925020]
+event_name = "event:/Player/Player Swim"
+event_guid = "{778c261e-956b-4734-bb38-36f674508e85}"
+volume = 0.6
+
 [node name="FootstepsPlayer" parent="FlipTarget" unique_id=946456107 instance=ExtResource("5_1so5t")]
 position = Vector2(0, 4)
 
@@ -614,6 +659,17 @@ position = Vector2(0, -35)
 
 [node name="UnderwaterLimit" type="Marker2D" parent="FlipTarget" unique_id=334110961]
 position = Vector2(0, -10)
+
+[node name="MeleeAttackHitbox" parent="FlipTarget" unique_id=484190945 instance=ExtResource("6_hfasb")]
+position = Vector2(34, -31)
+collision_layer = 0
+collision_mask = 128
+data = SubResource("Resource_iy54p")
+disable_on_ready = true
+
+[node name="Collider" parent="FlipTarget/MeleeAttackHitbox" index="0" unique_id=1393029115]
+position = Vector2(-5, 2.5)
+shape = SubResource("RectangleShape2D_ro1nf")
 
 [node name="TerrainCollider" type="CollisionShape2D" parent="." unique_id=1087129646]
 position = Vector2(0, -22.5)
@@ -682,7 +738,7 @@ parameters/OutsideWater/Airborne/blend_position = 0.0
 parameters/OutsideWater/Grounded/blend_position = 0.0
 controller = NodePath("../../StaticBehaviours/PlayerController")
 interval_data = Array[ExtResource("8_1so5t")]([SubResource("Resource_fjxoa")])
-debug_is_player = true
+tracked_playback_paths = Array[String](["playback", "OutsideWater/playback"])
 
 [node name="GroundedBlendPos" parent="Animations/AnimationTree/ProcessParameters" parent_id_path=PackedInt32Array(704880076, 1452081964) index="0" unique_id=1270825895 node_paths=PackedStringArray("body") instance=ExtResource("8_dx5ib")]
 body = NodePath("../../../..")
@@ -743,6 +799,16 @@ setter_key = "swim_started"
 parameter_path = "conditions/jump_started"
 is_trigger = true
 setter_key = "water_jump_started"
+
+[node name="attack" type="Node" parent="Animations/AnimationTree/StateEndedBehaviours" parent_id_path=PackedInt32Array(704880076, 1299340365) index="0" unique_id=1434247642]
+
+[node name="DisableMeleeHitbox" parent="Animations/AnimationTree/StateEndedBehaviours/attack" unique_id=1200312524 node_paths=PackedStringArray("hitbox") instance=ExtResource("47_6ew83")]
+hitbox = NodePath("../../../../../FlipTarget/MeleeAttackHitbox")
+
+[node name="air_attack" type="Node" parent="Animations/AnimationTree/StateEndedBehaviours" parent_id_path=PackedInt32Array(704880076, 1299340365) index="1" unique_id=1298316934]
+
+[node name="DisableMeleeHitbox" parent="Animations/AnimationTree/StateEndedBehaviours/air_attack" unique_id=2073167947 node_paths=PackedStringArray("hitbox") instance=ExtResource("47_6ew83")]
+hitbox = NodePath("../../../../../FlipTarget/MeleeAttackHitbox")
 
 [node name="EffectsController" parent="Animations" unique_id=806509296 node_paths=PackedStringArray("controller") instance=ExtResource("7_55jnj")]
 tree_root = SubResource("AnimationNodeStateMachine_f0ap2")
@@ -809,7 +875,6 @@ enable_on_ready = false
 [node name="ActorStateMachine" parent="." unique_id=1386328368 node_paths=PackedStringArray("initial_state") instance=ExtResource("3_8pyyg")]
 unique_name_in_owner = true
 initial_state = NodePath("States/Grounded")
-debug_logs = true
 
 [node name="Grounded" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="0" unique_id=89059854 instance=ExtResource("4_oycdn")]
 
@@ -1095,6 +1160,17 @@ action = "shoot"
 animation_controller = NodePath("../../../../../Animations/AnimationTree")
 trigger_key = "swim_started"
 
+[node name="PlaySwimSoundIfMoving" parent="ActorStateMachine/States/Swim/OnProcess" parent_id_path=PackedInt32Array(798264796, 1317741512) index="0" unique_id=743546512 instance=ExtResource("46_d7nuc")]
+
+[node name="ConditionInputIsMoving" parent="ActorStateMachine/States/Swim/OnProcess/PlaySwimSoundIfMoving/Condition" parent_id_path=PackedInt32Array(743546512, 1206924850) index="0" unique_id=872567382 node_paths=PackedStringArray("controller") instance=ExtResource("10_wvr7c")]
+controller = NodePath("../../../../../../../StaticBehaviours/PlayerController")
+
+[node name="TimedSwimSound" parent="ActorStateMachine/States/Swim/OnProcess/PlaySwimSoundIfMoving/Behaviour" parent_id_path=PackedInt32Array(743546512, 1805669259) index="0" unique_id=20770543 instance=ExtResource("48_s04et")]
+running_rate = 0.5
+
+[node name="PlaySwimSound" parent="ActorStateMachine/States/Swim/OnProcess/PlaySwimSoundIfMoving/Behaviour/TimedSwimSound/Behaviour" parent_id_path=PackedInt32Array(20770543, 2112558235) index="0" unique_id=776364304 node_paths=PackedStringArray("event_emitter") instance=ExtResource("22_r7pn3")]
+event_emitter = NodePath("../../../../../../../../../FlipTarget/SFX/swim")
+
 [node name="ToInitJump" parent="ActorStateMachine/States/Swim/Transitions" parent_id_path=PackedInt32Array(798264796, 1931116749) index="0" unique_id=1574746690 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../../InitJump")
 
@@ -1109,7 +1185,10 @@ movement = NodePath("../../../../../../Behaviours/ActorMovement")
 
 [node name="BehaviourSequence" parent="ActorStateMachine/States/Hurt/OnEnter" parent_id_path=PackedInt32Array(743104112, 667290384) index="0" unique_id=104501501 instance=ExtResource("14_vrg71")]
 
-[node name="TravelDirectlyToHurt" parent="ActorStateMachine/States/Hurt/OnEnter/BehaviourSequence" unique_id=1200312524 node_paths=PackedStringArray("animation_controller") instance=ExtResource("47_bdpt7")]
+[node name="PlayHitSound" parent="ActorStateMachine/States/Hurt/OnEnter/BehaviourSequence" unique_id=184741307 node_paths=PackedStringArray("event_emitter") instance=ExtResource("22_r7pn3")]
+event_emitter = NodePath("../../../../../../FlipTarget/SFX/hit")
+
+[node name="TravelDirectlyToHurt" parent="ActorStateMachine/States/Hurt/OnEnter/BehaviourSequence" unique_id=457899317 node_paths=PackedStringArray("animation_controller") instance=ExtResource("47_bdpt7")]
 animation_controller = NodePath("../../../../../../Animations/AnimationTree")
 target_node = "hurt"
 
@@ -1130,6 +1209,9 @@ target_state = "hurt"
 [node name="Dead" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="12" unique_id=135406971 instance=ExtResource("4_oycdn")]
 
 [node name="BehaviourSequence" parent="ActorStateMachine/States/Dead/OnEnter" parent_id_path=PackedInt32Array(135406971, 667290384) index="0" unique_id=994631856 instance=ExtResource("14_vrg71")]
+
+[node name="PlayDeathSound" parent="ActorStateMachine/States/Dead/OnEnter/BehaviourSequence" unique_id=145467634 node_paths=PackedStringArray("event_emitter") instance=ExtResource("22_r7pn3")]
+event_emitter = NodePath("../../../../../../FlipTarget/SFX/death")
 
 [node name="TravelToDeath" parent="ActorStateMachine/States/Dead/OnEnter/BehaviourSequence" unique_id=963464231 node_paths=PackedStringArray("animation_controller") instance=ExtResource("47_bdpt7")]
 animation_controller = NodePath("../../../../../../Animations/AnimationTree")
@@ -1186,7 +1268,7 @@ key = "jump"
 controller = NodePath("../../../StaticBehaviours/PlayerController")
 key = "attack"
 
-[node name="ConditionInputIsMoving" parent="Data/ExternalConditions" unique_id=872567382 node_paths=PackedStringArray("controller") instance=ExtResource("10_wvr7c")]
+[node name="ConditionInputIsMoving" parent="Data/ExternalConditions" unique_id=125287853 node_paths=PackedStringArray("controller") instance=ExtResource("10_wvr7c")]
 controller = NodePath("../../../StaticBehaviours/PlayerController")
 
 [node name="ConditionShootTimer" parent="Data/ExternalConditions" unique_id=2107385734 instance=ExtResource("22_dhr4d")]
@@ -1220,6 +1302,7 @@ movement = NodePath("../../Behaviours/ActorMovement")
 
 [editable path="FlipTarget/TestGun"]
 [editable path="FlipTarget/FootstepsPlayer"]
+[editable path="FlipTarget/MeleeAttackHitbox"]
 [editable path="Detectors/PickupDetector"]
 [editable path="Detectors/InteractableDetector"]
 [editable path="Hurtbox"]
@@ -1237,6 +1320,8 @@ movement = NodePath("../../Behaviours/ActorMovement")
 [editable path="ActorStateMachine/States/AirStartShoot"]
 [editable path="ActorStateMachine/States/AirShoot"]
 [editable path="ActorStateMachine/States/Swim"]
+[editable path="ActorStateMachine/States/Swim/OnProcess/PlaySwimSoundIfMoving"]
+[editable path="ActorStateMachine/States/Swim/OnProcess/PlaySwimSoundIfMoving/Behaviour/TimedSwimSound"]
 [editable path="ActorStateMachine/States/Hurt"]
 [editable path="ActorStateMachine/States/Dead"]
 [editable path="ActorStateMachine/States/Disappear"]

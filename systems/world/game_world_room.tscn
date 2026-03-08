@@ -3,7 +3,7 @@
 [ext_resource type="TileSet" uid="uid://d1elsqtrg3brw" path="res://maps/tilesets/cave_tileset.tres" id="1_4m5io"]
 [ext_resource type="Script" uid="uid://cw6tdul7vs5tu" path="res://systems/world/game_world_room.gd" id="1_8jd48"]
 [ext_resource type="PackedScene" uid="uid://bf71hd2o2l5vc" path="res://systems/world/bounds_rect.tscn" id="3_8exy1"]
-[ext_resource type="Material" uid="uid://clcncxwjg65sp" path="res://shaders/water_material.tres" id="4_4fglm"]
+[ext_resource type="Material" uid="uid://clcncxwjg65sp" path="res://shaders/water/water_material.tres" id="4_4fglm"]
 [ext_resource type="TileSet" uid="uid://dldkia42uas4j" path="res://maps/tilesets/water_tiles/water_tileset.tres" id="5_4fglm"]
 
 [node name="GameWorldRoom" type="Node2D" unique_id=399359172]

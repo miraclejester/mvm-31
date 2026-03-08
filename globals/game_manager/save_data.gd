@@ -20,9 +20,9 @@ func serialize() -> Dictionary:
 
 
 func fill_from_data(data: Dictionary) -> void:
-	current_room = data[Strings.DATA_CURRENT_ROOM]
-	unlocked_abilities = data[Strings.DATA_UNLOCKED_ABILITIES]
-	room_switches = data[Strings.DATA_ROOM_SWITCHES]
+	current_room = data.get(Strings.DATA_CURRENT_ROOM, current_room)
+	unlocked_abilities = data.get(Strings.DATA_UNLOCKED_ABILITIES, unlocked_abilities)
+	room_switches = data.get(Strings.DATA_ROOM_SWITCHES, room_switches)
 
 
 func set_switch(switch_name: String) -> void:
