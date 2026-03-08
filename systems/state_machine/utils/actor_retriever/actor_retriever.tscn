@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dhaucbmituw0b"]
+
+[ext_resource type="Script" uid="uid://c1nvbff4y87vn" path="res://systems/state_machine/utils/actor_retriever/actor_retriever.gd" id="1_h3iee"]
+
+[node name="ActorRetriever" type="Node" unique_id=1557420808]
+script = ExtResource("1_h3iee")

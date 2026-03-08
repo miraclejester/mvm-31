@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bh8e5ywavyeuu"]
+
+[ext_resource type="Script" uid="uid://c2c3n4ugg2vtf" path="res://systems/state_machine/utils/static_position_retriever/static_position_retriever.gd" id="1_knxsu"]
+
+[node name="StaticPositionRetriever" type="Node" unique_id=786237967]
+script = ExtResource("1_knxsu")

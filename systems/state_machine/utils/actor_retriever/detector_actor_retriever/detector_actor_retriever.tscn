@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://d2sfif6tar0wc"]
+
+[ext_resource type="PackedScene" uid="uid://dhaucbmituw0b" path="res://systems/state_machine/utils/actor_retriever/actor_retriever.tscn" id="1_hcjh2"]
+[ext_resource type="Script" uid="uid://crw56xbcwhqul" path="res://systems/state_machine/utils/actor_retriever/detector_actor_retriever/detector_actor_retriever.gd" id="2_8o6u1"]
+
+[node name="DetectorActorRetriever" unique_id=1557420808 instance=ExtResource("1_hcjh2")]
+script = ExtResource("2_8o6u1")

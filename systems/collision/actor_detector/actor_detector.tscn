@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bmv6ojt1frevi"]
+
+[ext_resource type="Script" uid="uid://cvu2gvcwdboia" path="res://systems/collision/actor_detector/actor_detector.gd" id="1_1vg33"]
+
+[node name="ActorDetector" type="Area2D" unique_id=129547805]
+collision_layer = 0
+collision_mask = 33
+monitorable = false
+script = ExtResource("1_1vg33")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1925002931]
+debug_color = Color(0, 0.64489555, 0.27794722, 0.41960785)

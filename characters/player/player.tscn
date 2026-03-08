@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://dm67ok4oau36j" path="res://systems/animation/parameter_setters/boolean_parameter_setter/controller_parameter_setter/controller_parameter_setter.tscn" id="10_a2xo5"]
 [ext_resource type="PackedScene" uid="uid://cqjba3ufwm12m" path="res://systems/state_machine/conditions/input_is_moving/condition_input_is_moving.tscn" id="10_wvr7c"]
 [ext_resource type="PackedScene" uid="uid://ccdmlb2o47ant" path="res://systems/animation/parameter_setters/boolean_parameter_setter/animator_interval_parameter_settter/animator_interval_parameter_setter.tscn" id="11_art4l"]
+[ext_resource type="PackedScene" uid="uid://b0oercanyqxbb" path="res://systems/collision/actor_detectable/actor_detectable.tscn" id="11_iy54p"]
 [ext_resource type="PackedScene" uid="uid://b3cpmwgk577cm" path="res://systems/behaviours/projectile_emitter_controller/projectile_emitter_controller_behaviour.tscn" id="12_ge24q"]
 [ext_resource type="PackedScene" uid="uid://bsjr1j5fxwvx6" path="res://systems/animation/parameter_setters/actor_animator_parameter_setter.tscn" id="13_gswnw"]
 [ext_resource type="PackedScene" uid="uid://drlk8sb1yh6hn" path="res://systems/behaviours/actor_jump/actor_jump.tscn" id="14_3sb8j"]
@@ -79,6 +80,9 @@ size = Vector2(20, 45)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fmu53"]
 size = Vector2(20, 45)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wiq46"]
+size = Vector2(53, 62)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xvmlt"]
 size = Vector2(13, 36)
@@ -680,9 +684,11 @@ shape = SubResource("RectangleShape2D_rgfib")
 [node name="Detectors" type="Node2D" parent="." unique_id=233393153]
 
 [node name="DoorwayDetector" parent="Detectors" unique_id=690771773 instance=ExtResource("4_56x04")]
+visible = false
 position = Vector2(0, -23)
 
 [node name="PickupDetector" parent="Detectors" unique_id=2127628464 instance=ExtResource("7_mmwog")]
+visible = false
 
 [node name="CollisionShape2D" parent="Detectors/PickupDetector" index="0" unique_id=1741257539]
 position = Vector2(0, -22.5)
@@ -690,12 +696,22 @@ shape = SubResource("RectangleShape2D_8pxes")
 debug_color = Color(0.63529414, 0.5254902, 0.15686275, 0.12156863)
 
 [node name="InteractableDetector" parent="Detectors" unique_id=1003259783 node_paths=PackedStringArray("controller") instance=ExtResource("8_8pxes")]
+visible = false
 controller = NodePath("../../StaticBehaviours/PlayerController")
 
 [node name="CollisionShape2D" parent="Detectors/InteractableDetector" index="0" unique_id=1243302592]
 position = Vector2(0, -22.5)
 shape = SubResource("RectangleShape2D_fmu53")
 debug_color = Color(0, 0.6317335, 0.4624179, 0.41960785)
+
+[node name="ActorDetectable" parent="Detectors" unique_id=1567081487 node_paths=PackedStringArray("character") instance=ExtResource("11_iy54p")]
+position = Vector2(0, -34)
+monitoring = false
+character = NodePath("../..")
+
+[node name="CollisionShape2D" parent="Detectors/ActorDetectable" index="0" unique_id=1667334940]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_wiq46")
 
 [node name="Hurtbox" parent="." unique_id=573111498 node_paths=PackedStringArray("life") instance=ExtResource("6_xvmlt")]
 collision_layer = 32
@@ -808,6 +824,21 @@ hitbox = NodePath("../../../../../FlipTarget/MeleeAttackHitbox")
 [node name="air_attack" type="Node" parent="Animations/AnimationTree/StateEndedBehaviours" parent_id_path=PackedInt32Array(704880076, 1299340365) index="1" unique_id=1298316934]
 
 [node name="DisableMeleeHitbox" parent="Animations/AnimationTree/StateEndedBehaviours/air_attack" unique_id=2073167947 node_paths=PackedStringArray("hitbox") instance=ExtResource("47_6ew83")]
+hitbox = NodePath("../../../../../FlipTarget/MeleeAttackHitbox")
+
+[node name="OutsideWater" type="Node" parent="Animations/AnimationTree/StateEndedBehaviours" parent_id_path=PackedInt32Array(704880076, 1299340365) index="2" unique_id=2108464032]
+
+[node name="DisableMeleeHitbox" parent="Animations/AnimationTree/StateEndedBehaviours/OutsideWater" unique_id=200516568 node_paths=PackedStringArray("hitbox") instance=ExtResource("47_6ew83")]
+hitbox = NodePath("../../../../../FlipTarget/MeleeAttackHitbox")
+
+[node name="hurt" type="Node" parent="Animations/AnimationTree/StateStartedBehaviours" parent_id_path=PackedInt32Array(704880076, 1643552415) index="0" unique_id=1307531515]
+
+[node name="DisableMeleeHitbox" parent="Animations/AnimationTree/StateStartedBehaviours/hurt" unique_id=165666688 node_paths=PackedStringArray("hitbox") instance=ExtResource("47_6ew83")]
+hitbox = NodePath("../../../../../FlipTarget/MeleeAttackHitbox")
+
+[node name="death" type="Node" parent="Animations/AnimationTree/StateStartedBehaviours" parent_id_path=PackedInt32Array(704880076, 1643552415) index="1" unique_id=46702362]
+
+[node name="DisableMeleeHitbox" parent="Animations/AnimationTree/StateStartedBehaviours/death" unique_id=770720542 node_paths=PackedStringArray("hitbox") instance=ExtResource("47_6ew83")]
 hitbox = NodePath("../../../../../FlipTarget/MeleeAttackHitbox")
 
 [node name="EffectsController" parent="Animations" unique_id=806509296 node_paths=PackedStringArray("controller") instance=ExtResource("7_55jnj")]
@@ -1305,6 +1336,7 @@ movement = NodePath("../../Behaviours/ActorMovement")
 [editable path="FlipTarget/MeleeAttackHitbox"]
 [editable path="Detectors/PickupDetector"]
 [editable path="Detectors/InteractableDetector"]
+[editable path="Detectors/ActorDetectable"]
 [editable path="Hurtbox"]
 [editable path="Animations/AnimationTree"]
 [editable path="Animations/EffectsController"]

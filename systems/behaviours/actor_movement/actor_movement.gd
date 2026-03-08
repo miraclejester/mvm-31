@@ -4,7 +4,8 @@ class_name ActorMovement
 enum EMovementMode {
 	GROUND,
 	WATER,
-	SURFACE_WATER
+	SURFACE_WATER,
+	AERIAL
 }
 
 @export_group("References")
@@ -19,6 +20,7 @@ enum EMovementMode {
 @export var floor_snap_length: float = 5
 @export var coyote_time: float = 0.5
 @export var coyote_time_enabled: bool = false
+@export var constant_speed: bool = false
 
 @export_group("Water Movement")
 @export var water_detector: BoolRetriever
@@ -39,6 +41,9 @@ enum EMovementMode {
 @export var jump_force: float = -700
 @export var jump_threshold: float = -200
 @export var cut_jump_force: float = -320
+
+@export_group("Aerial")
+@export var aerial_enabled = false
 
 @onready var coyote_timer: Timer = %CoyoteTimer
 
@@ -62,6 +67,10 @@ var move_mode_dict: Dictionary[EMovementMode, ActorMovementProfile] = {
 	EMovementMode.SURFACE_WATER: ActorMovementProfile.from_data({
 		"move_method": surface_water_movement,
 		"profile_name": "WaterSurface"
+	}),
+	EMovementMode.AERIAL: ActorMovementProfile.from_data({
+		"move_method": aerial_movement,
+		"profile_name": "Aerial"
 	})
 	#EMovementMode.WATER : ActorMovementProfile.from_data({
 	#	"move_method": water_movement,
@@ -77,6 +86,7 @@ func _ready() -> void:
 	controller.action_just_released.connect(on_controller_just_released)
 	was_on_floor = false
 	on_coyote_time = false
+	profile_key = EMovementMode.AERIAL if aerial_enabled else EMovementMode.GROUND
 	coyote_timer.timeout.connect(on_coyote_timer_timeout)
 
 
@@ -116,6 +126,8 @@ func move(delta: float) -> void:
 
 func get_move_profile_key() -> EMovementMode:
 	match profile_key:
+		EMovementMode.AERIAL:
+			return EMovementMode.AERIAL
 		EMovementMode.GROUND:
 			if water_marker_in_water():
 				return EMovementMode.SURFACE_WATER
@@ -135,9 +147,15 @@ func ground_movement(delta: float) -> void:
 		apply_gravity(delta)
 	
 	if control_direction.x != 0:
-		velocity.x = move_toward(velocity.x, control_direction.x * max_speed, acceleration)
+		if constant_speed:
+			velocity.x = control_direction.x * max_speed
+		else:
+			velocity.x = move_toward(velocity.x, control_direction.x * max_speed, acceleration)
 	elif is_considered_on_floor():
-		velocity.x = move_toward(velocity.x, 0, decceleration)
+		if constant_speed:
+			velocity.x = 0
+		else:
+			velocity.x = move_toward(velocity.x, 0, decceleration)
 	body.velocity = velocity
 
 
@@ -192,6 +210,19 @@ func surface_water_movement(_delta: float) -> void:
 		velocity.x = move_toward(velocity.x, control_direction.x * surface_move_speed, acceleration)
 	else:
 		velocity.x = move_toward(velocity.x, 0, decceleration)
+	body.velocity = velocity
+
+
+func aerial_movement(_delta: float) -> void:
+	velocity = body.velocity
+	
+	if control_direction != Vector2.ZERO:
+		if constant_speed:
+			velocity = control_direction * max_speed
+		else:
+			velocity = velocity.move_toward(control_direction * max_speed, acceleration)
+	else:
+		velocity = Vector2.ZERO
 	body.velocity = velocity
 
 

@@ -134,5 +134,7 @@ controller = NodePath("../../ActorController")
 
 [node name="ExternalConditions" type="Node" parent="." unique_id=518635833]
 
+[node name="Data" type="Node" parent="." unique_id=1763860896]
+
 [editable path="EffectsAnimationController"]
 [editable path="CharacterLife"]

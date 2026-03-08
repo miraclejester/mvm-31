@@ -3,6 +3,7 @@
 [ext_resource type="Shader" uid="uid://cd1fjlst6www0" path="res://shaders/hitflash/hitflash.gdshader" id="1_1odu3"]
 
 [resource]
+resource_local_to_scene = true
 shader = ExtResource("1_1odu3")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/enabled = false

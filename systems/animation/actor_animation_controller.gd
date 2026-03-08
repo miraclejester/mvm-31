@@ -12,6 +12,7 @@ signal action_finished(key: String)
 @onready var interval_parent: Node = %IntervalParameters
 @onready var trigger_parent: Node = %TriggerParameters
 @onready var state_ended_parent: Node = %StateEndedBehaviours
+@onready var state_started_parent: Node = %StateStartedBehaviours
 
 var active_triggers: Array[String] = []
 var active_intervals: Dictionary[String, AnimationIntervalState] = {}
@@ -20,6 +21,7 @@ var process_parameters: Dictionary[String, ActorAnimatorParameterSetter] = {}
 var interval_parameters: Dictionary[String, ActorAnimatorParameterSetter] = {}
 var trigger_parameters: Dictionary[String, ActorAnimatorParameterSetter] = {}
 var state_ended_behaviours: Dictionary[String, ActorBehaviour] = {}
+var state_started_behaviours: Dictionary[String, ActorBehaviour] = {}
 
 func _ready() -> void:
 	active = true
@@ -39,6 +41,8 @@ func _ready() -> void:
 		s.animation_controller = self
 	for child in state_ended_parent.get_children():
 		state_ended_behaviours[child.name] = child.get_child(0) as ActorBehaviour
+	for child in state_started_parent.get_children():
+		state_started_behaviours[child.name] = child.get_child(0) as ActorBehaviour
 	set_up_playbacks()
 
 func _process(_delta: float) -> void:
@@ -65,6 +69,7 @@ func set_up_playbacks() -> void:
 	for path in tracked_playback_paths:
 		var playback: AnimationNodeStateMachinePlayback = get('parameters/%s' % path) as AnimationNodeStateMachinePlayback
 		playback.state_finished.connect(state_ended)
+		playback.state_started.connect(state_started)
 		
 
 func set_trigger(key: String) -> void:
@@ -125,5 +130,12 @@ func state_ended(state: String) -> void:
 	if debug_logs:
 		print("Animator state %s ended" % state)
 	var action: ActorBehaviour = state_ended_behaviours.get(state, null)
+	if action != null:
+		action.run(0)
+
+func state_started(state: String) -> void:
+	if debug_logs:
+		print("Animator state %s started" % state)
+	var action: ActorBehaviour = state_started_behaviours.get(state, null)
 	if action != null:
 		action.run(0)

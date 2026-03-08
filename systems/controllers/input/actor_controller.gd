@@ -9,6 +9,7 @@ signal direct_action(action: String)
 
 @export var available_actions: Array[String]
 @export var external_input: bool = true
+@export var direction_threshold: float = 0.01
 
 var direction: Vector2 = Vector2.ZERO
 var face_direction: Vector2 = Vector2.ZERO
@@ -73,10 +74,10 @@ func call_direct_action(action: String) -> void:
 
 
 func set_movement_input(input: Vector2) -> void:
-	right_strength = 1 if input.x > 0 else 0
-	left_strength = 1 if input.x < 0 else 0
-	up_strength = 1 if input.y < 0 else 0
-	down_strength = 1 if input.y > 0 else 0
+	right_strength = 1 if input.x > direction_threshold else 0
+	left_strength = 1 if input.x < -direction_threshold else 0
+	up_strength = 1 if input.y < -direction_threshold else 0
+	down_strength = 1 if input.y > direction_threshold else 0
 
 
 func get_movement_input() -> Vector2:

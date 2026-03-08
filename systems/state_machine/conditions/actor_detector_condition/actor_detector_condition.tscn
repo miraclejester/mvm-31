@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://clhhu70j4skoc"]
+
+[ext_resource type="Script" uid="uid://b21lsqovs27xd" path="res://systems/state_machine/conditions/actor_detector_condition/actor_detector_condition.gd" id="1_2e3lp"]
+
+[node name="ActorDetectorCondition" type="Node" unique_id=1756302027]
+script = ExtResource("1_2e3lp")

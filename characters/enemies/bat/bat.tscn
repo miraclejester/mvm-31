@@ -2,6 +2,46 @@
 
 [ext_resource type="PackedScene" uid="uid://ewmtqexggdi8" path="res://characters/enemies/world_enemy.tscn" id="1_0e2no"]
 [ext_resource type="Texture2D" uid="uid://bwlsbxt2hd50r" path="res://pixel_assets/characters/enemies/bat-Sheet.png" id="2_4otv1"]
+[ext_resource type="Shader" uid="uid://cd1fjlst6www0" path="res://shaders/hitflash/hitflash.gdshader" id="2_hetit"]
+[ext_resource type="PackedScene" uid="uid://ent37cfwkxei" path="res://systems/collision/hitbox.tscn" id="4_c0pj8"]
+[ext_resource type="Script" uid="uid://bybupba6sp868" path="res://systems/collision/hitbox_data.gd" id="5_t1qwa"]
+[ext_resource type="PackedScene" uid="uid://bmv6ojt1frevi" path="res://systems/collision/actor_detector/actor_detector.tscn" id="6_6yso2"]
+[ext_resource type="PackedScene" uid="uid://0sdn13hb32u4" path="res://systems/state_machine/state/actor_state.tscn" id="6_qfb6v"]
+[ext_resource type="PackedScene" uid="uid://djxsc3di1em5a" path="res://systems/animation/parameter_setters/boolean_parameter_setter/condition_parameter_setter/condition_parameter_setter.tscn" id="7_sy1lm"]
+[ext_resource type="PackedScene" uid="uid://cqjba3ufwm12m" path="res://systems/state_machine/conditions/input_is_moving/condition_input_is_moving.tscn" id="8_636rh"]
+[ext_resource type="PackedScene" uid="uid://clhhu70j4skoc" path="res://systems/state_machine/conditions/actor_detector_condition/actor_detector_condition.tscn" id="8_pnwd6"]
+[ext_resource type="PackedScene" uid="uid://hjh1okejbpsr" path="res://systems/behaviours/controller_set_movement_input/controller_set_movement_input.tscn" id="10_3d87h"]
+[ext_resource type="PackedScene" uid="uid://b5nt342fhk6g5" path="res://systems/behaviours/actor_set_position/actor_set_position.tscn" id="10_4n8rd"]
+[ext_resource type="PackedScene" uid="uid://b4esk6pcjmjsv" path="res://systems/state_machine/transitions/actor_state_transition.tscn" id="10_r3mna"]
+[ext_resource type="PackedScene" uid="uid://dhaucbmituw0b" path="res://systems/state_machine/utils/actor_retriever/actor_retriever.tscn" id="11_xjfgo"]
+[ext_resource type="PackedScene" uid="uid://m6msobg5ayht" path="res://systems/state_machine/conditions/negate/condition_negate.tscn" id="12_nuok5"]
+[ext_resource type="PackedScene" uid="uid://d2sfif6tar0wc" path="res://systems/state_machine/utils/actor_retriever/detector_actor_retriever/detector_actor_retriever.tscn" id="12_xjfgo"]
+[ext_resource type="PackedScene" uid="uid://bh8e5ywavyeuu" path="res://systems/state_machine/utils/static_position_retriever/static_position_retriever.tscn" id="15_5nwb1"]
+[ext_resource type="PackedScene" uid="uid://dkyxr3h4bcc8y" path="res://systems/state_machine/conditions/actor_is_at_position/actor_is_at_position.tscn" id="15_mtq6h"]
+[ext_resource type="PackedScene" uid="uid://ckknu5s2iq2tc" path="res://systems/behaviours/animator_behaviour/actor_animator_behaviour.tscn" id="16_i7hcl"]
+[ext_resource type="PackedScene" uid="uid://woclehb2tr1t" path="res://systems/state_machine/conditions/animator_controller_condition/animator_controller_condition.tscn" id="17_6ntr6"]
+[ext_resource type="PackedScene" uid="uid://c4b3teprr3iu4" path="res://systems/state_machine/conditions/actor_life_condition/actor_life_condition.tscn" id="18_6ntr6"]
+[ext_resource type="PackedScene" uid="uid://bwfojncre050s" path="res://systems/behaviours/actor_erase_actor/actor_erase_actor.tscn" id="18_71uvp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_71uvp"]
+resource_local_to_scene = true
+shader = ExtResource("2_hetit")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/enabled = false
+
+[sub_resource type="Resource" id="Resource_qfb6v"]
+script = ExtResource("5_t1qwa")
+damage = 1
+metadata/_custom_type_script = "uid://bybupba6sp868"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t1qwa"]
+size = Vector2(12, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6yso2"]
+size = Vector2(399, 235)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hetit"]
+size = Vector2(32, 24)
 
 [sub_resource type="Animation" id="Animation_hetit"]
 length = 0.001
@@ -16,6 +56,24 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_t1qwa"]
+resource_name = "ceiling"
+length = 0.40002
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipVisuals/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
 }
 
 [sub_resource type="Animation" id="Animation_c0pj8"]
@@ -36,23 +94,239 @@ tracks/0/keys = {
 "values": [2, 3, 4, 5, 6, 7]
 }
 
+[sub_resource type="Animation" id="Animation_qfb6v"]
+resource_name = "hurt"
+length = 0.40001002
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipVisuals/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t1qwa"]
 _data = {
 &"RESET": SubResource("Animation_hetit"),
-&"fly": SubResource("Animation_c0pj8")
+&"ceiling": SubResource("Animation_t1qwa"),
+&"fly": SubResource("Animation_c0pj8"),
+&"hurt": SubResource("Animation_qfb6v")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hetit"]
+animation = &"ceiling"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c0pj8"]
+animation = &"fly"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t1qwa"]
+animation = &"hurt"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qfb6v"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6yso2"]
+advance_mode = 2
+advance_condition = &"moving"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sy1lm"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pnwd6"]
+advance_mode = 2
+advance_condition = &"hurt_started"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4hoi3"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3d87h"]
+states/ceiling/node = SubResource("AnimationNodeAnimation_hetit")
+states/ceiling/position = Vector2(357, 100)
+states/fly/node = SubResource("AnimationNodeAnimation_c0pj8")
+states/fly/position = Vector2(510, 100)
+states/hurt/node = SubResource("AnimationNodeAnimation_t1qwa")
+states/hurt/position = Vector2(510, 210)
+transitions = ["Start", "ceiling", SubResource("AnimationNodeStateMachineTransition_qfb6v"), "ceiling", "fly", SubResource("AnimationNodeStateMachineTransition_6yso2"), "fly", "ceiling", SubResource("AnimationNodeStateMachineTransition_sy1lm"), "fly", "hurt", SubResource("AnimationNodeStateMachineTransition_pnwd6"), "hurt", "fly", SubResource("AnimationNodeStateMachineTransition_4hoi3")]
 
 [node name="Bat" unique_id=1487671488 instance=ExtResource("1_0e2no")]
 
-[node name="Sprite" type="Sprite2D" parent="FlipVisuals" parent_id_path=PackedInt32Array(783290642) index="0" unique_id=974622509]
+[node name="FlipVisuals" parent="." index="0" unique_id=783290642]
+material = SubResource("ShaderMaterial_71uvp")
+
+[node name="Sprite" type="Sprite2D" parent="FlipVisuals" index="0" unique_id=974622509]
+use_parent_material = true
 texture = ExtResource("2_4otv1")
 hframes = 9
 frame = 2
 
-[node name="AnimationPlayer" parent="." index="3" unique_id=849005601]
+[node name="BodyHitbox" parent="StaticVisuals" parent_id_path=PackedInt32Array(613635385) index="0" unique_id=484190945 instance=ExtResource("4_c0pj8")]
+collision_layer = 0
+collision_mask = 32
+data = SubResource("Resource_qfb6v")
+
+[node name="Collider" parent="StaticVisuals/BodyHitbox" index="0" unique_id=1393029115]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_t1qwa")
+
+[node name="ActorDetector" parent="StaticVisuals" parent_id_path=PackedInt32Array(613635385) index="1" unique_id=129547805 instance=ExtResource("6_6yso2")]
+collision_mask = 32
+
+[node name="CollisionShape2D" parent="StaticVisuals/ActorDetector" index="0" unique_id=1925002931]
+position = Vector2(-0.5, 98.5)
+shape = SubResource("RectangleShape2D_6yso2")
+
+[node name="CollisionShape2D" parent="Hurtbox" parent_id_path=PackedInt32Array(573111498) index="0" unique_id=1674096468]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_hetit")
+
+[node name="AnimationPlayer" parent="." index="4" unique_id=849005601]
 libraries/ = SubResource("AnimationLibrary_t1qwa")
-autoplay = &"fly"
+autoplay = &"ceiling"
+
+[node name="AnimationTree" parent="." index="5" unique_id=704880076]
+tree_root = SubResource("AnimationNodeStateMachine_3d87h")
+parameters/conditions/hurt_started = false
+parameters/conditions/idle = false
+parameters/conditions/moving = false
+
+[node name="BatMovingParameter" parent="AnimationTree/ProcessParameters" parent_id_path=PackedInt32Array(704880076, 1452081964) index="0" unique_id=1270825895 instance=ExtResource("7_sy1lm")]
+negative_path = "conditions/idle"
+parameter_path = "conditions/moving"
+setter_key = "condition_player_detected"
+
+[node name="ConditionInputIsMoving" parent="AnimationTree/ProcessParameters/BatMovingParameter" index="0" unique_id=872567382 node_paths=PackedStringArray("controller") instance=ExtResource("8_636rh")]
+controller = NodePath("../../../../ActorController")
+check_vertical = true
+
+[node name="ActorStateMachine" parent="." index="8" unique_id=1386328368 node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("States/Ceiling")
+
+[node name="Ceiling" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="0" unique_id=89059854 instance=ExtResource("6_qfb6v")]
+
+[node name="ActorSetPosition" parent="ActorStateMachine/States/Ceiling/OnEnter" parent_id_path=PackedInt32Array(89059854, 667290384) index="0" unique_id=1200312524 node_paths=PackedStringArray("actor", "target") instance=ExtResource("10_4n8rd")]
+actor = NodePath("../../../../..")
+target = NodePath("../../../../../Data/InitialBatPosition")
+
+[node name="ToFollowing" parent="ActorStateMachine/States/Ceiling/Transitions" parent_id_path=PackedInt32Array(89059854, 1931116749) index="0" unique_id=306109941 node_paths=PackedStringArray("target_state") instance=ExtResource("10_r3mna")]
+target_state = NodePath("../../../Following")
+
+[node name="HasDetectedPlayer" parent="ActorStateMachine/States/Ceiling/Transitions/ToFollowing" index="0" unique_id=359346698 node_paths=PackedStringArray("detector") instance=ExtResource("8_pnwd6")]
+detector = NodePath("../../../../../../StaticVisuals/ActorDetector")
+
+[node name="Following" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="1" unique_id=1555364255 instance=ExtResource("6_qfb6v")]
+
+[node name="ControllerSetMovementInput" parent="ActorStateMachine/States/Following/OnExit" parent_id_path=PackedInt32Array(1555364255, 1496048418) index="0" unique_id=758941129 node_paths=PackedStringArray("controller") instance=ExtResource("10_3d87h")]
+controller = NodePath("../../../../../ActorController")
+operation = 2
+
+[node name="ControllerSetMovementInput" parent="ActorStateMachine/States/Following/OnProcess" parent_id_path=PackedInt32Array(1555364255, 1317741512) index="0" unique_id=1613833503 node_paths=PackedStringArray("controller", "source", "target") instance=ExtResource("10_3d87h")]
+controller = NodePath("../../../../../ActorController")
+operation = 1
+source = NodePath("../../../../../Data/BatRetriever")
+target = NodePath("../../../../../Data/DetectorActorRetriever")
+
+[node name="ToBackHome" parent="ActorStateMachine/States/Following/Transitions" parent_id_path=PackedInt32Array(1555364255, 1931116749) index="0" unique_id=1441672015 node_paths=PackedStringArray("target_state") instance=ExtResource("10_r3mna")]
+target_state = NodePath("../../../BackHome")
+
+[node name="ConditionNegate" parent="ActorStateMachine/States/Following/Transitions/ToBackHome" index="0" unique_id=2124520631 instance=ExtResource("12_nuok5")]
+
+[node name="ActorDetectorCondition" parent="ActorStateMachine/States/Following/Transitions/ToBackHome/ConditionNegate" index="0" unique_id=858071719 node_paths=PackedStringArray("detector") instance=ExtResource("8_pnwd6")]
+detector = NodePath("../../../../../../../StaticVisuals/ActorDetector")
+
+[node name="BackHome" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="2" unique_id=135565167 instance=ExtResource("6_qfb6v")]
+
+[node name="ControllerSetMovementInput" parent="ActorStateMachine/States/BackHome/OnExit" parent_id_path=PackedInt32Array(135565167, 1496048418) index="0" unique_id=1908825761 node_paths=PackedStringArray("controller") instance=ExtResource("10_3d87h")]
+controller = NodePath("../../../../../ActorController")
+operation = 2
+
+[node name="ControllerSetMovementInput" parent="ActorStateMachine/States/BackHome/OnProcess" parent_id_path=PackedInt32Array(135565167, 1317741512) index="0" unique_id=1449141507 node_paths=PackedStringArray("controller", "source", "static_target") instance=ExtResource("10_3d87h")]
+controller = NodePath("../../../../../ActorController")
+operation = 3
+source = NodePath("../../../../../Data/BatRetriever")
+static_target = NodePath("../../../../../Data/InitialBatPosition")
+
+[node name="ToFollowing" parent="ActorStateMachine/States/BackHome/Transitions" parent_id_path=PackedInt32Array(135565167, 1931116749) index="0" unique_id=2056612784 node_paths=PackedStringArray("target_state") instance=ExtResource("10_r3mna")]
+target_state = NodePath("../../../Following")
+
+[node name="ActorDetectorCondition" parent="ActorStateMachine/States/BackHome/Transitions/ToFollowing" index="0" unique_id=237880514 node_paths=PackedStringArray("detector") instance=ExtResource("8_pnwd6")]
+detector = NodePath("../../../../../../StaticVisuals/ActorDetector")
+
+[node name="ToCeiling" parent="ActorStateMachine/States/BackHome/Transitions" parent_id_path=PackedInt32Array(135565167, 1931116749) index="1" unique_id=403704044 node_paths=PackedStringArray("target_state") instance=ExtResource("10_r3mna")]
+target_state = NodePath("../../../Ceiling")
+
+[node name="ActorIsAtPosition" parent="ActorStateMachine/States/BackHome/Transitions/ToCeiling" index="0" unique_id=471078805 node_paths=PackedStringArray("actor", "retriever") instance=ExtResource("15_mtq6h")]
+actor = NodePath("../../../../../..")
+retriever = NodePath("../../../../../../Data/InitialBatPosition")
+
+[node name="Hurt" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="3" unique_id=1360493217 instance=ExtResource("6_qfb6v")]
+
+[node name="TravelToHurt" parent="ActorStateMachine/States/Hurt/OnEnter" parent_id_path=PackedInt32Array(1360493217, 667290384) index="0" unique_id=965873490 node_paths=PackedStringArray("animation_controller") instance=ExtResource("16_i7hcl")]
+animation_controller = NodePath("../../../../../AnimationTree")
+target_node = "hurt"
+
+[node name="ToFollowing" parent="ActorStateMachine/States/Hurt/Transitions" parent_id_path=PackedInt32Array(1360493217, 1931116749) index="0" unique_id=400526474 node_paths=PackedStringArray("target_state") instance=ExtResource("10_r3mna")]
+target_state = NodePath("../../../Following")
+
+[node name="HurtFinished" parent="ActorStateMachine/States/Hurt/Transitions/ToFollowing" index="0" unique_id=907808244 node_paths=PackedStringArray("animator_controller") instance=ExtResource("17_6ntr6")]
+animator_controller = NodePath("../../../../../../AnimationTree")
+target_state = "hurt"
+
+[node name="Dead" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="4" unique_id=626765673 instance=ExtResource("6_qfb6v")]
+
+[node name="ActorEraseActor" parent="ActorStateMachine/States/Dead/OnEnter" parent_id_path=PackedInt32Array(626765673, 667290384) index="0" unique_id=521280831 node_paths=PackedStringArray("target") instance=ExtResource("18_71uvp")]
+target = NodePath("../../../../..")
+
+[node name="ToHurt" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="0" unique_id=1906865247 node_paths=PackedStringArray("target_state") instance=ExtResource("10_r3mna")]
+target_state = NodePath("../../States/Hurt")
+
+[node name="IsHurt" parent="ActorStateMachine/AnyStateTransitions/ToHurt" index="0" unique_id=1634116028 node_paths=PackedStringArray("life") instance=ExtResource("18_6ntr6")]
+life = NodePath("../../../../CharacterLife")
+
+[node name="ToDead" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="1" unique_id=2124150657 node_paths=PackedStringArray("target_state") instance=ExtResource("10_r3mna")]
+target_state = NodePath("../../States/Dead")
+
+[node name="IsDead" parent="ActorStateMachine/AnyStateTransitions/ToDead" index="0" unique_id=1929376587 node_paths=PackedStringArray("life") instance=ExtResource("18_6ntr6")]
+life = NodePath("../../../../CharacterLife")
+operation = 1
+
+[node name="CharacterLife" parent="." index="10" unique_id=771178152]
+starting_max_life = 2
 
 [node name="ActorMovement" parent="Behaviours" parent_id_path=PackedInt32Array(1762055959) index="0" unique_id=655420935]
+acceleration = 100.0
+decceleration = 1000.0
+max_speed = 100.0
 gravity = Vector2(0, 0)
+constant_speed = true
+aerial_enabled = true
 enable_on_ready = false
+
+[node name="BatRetriever" parent="Data" parent_id_path=PackedInt32Array(1763860896) index="0" unique_id=1557420808 node_paths=PackedStringArray("actor") instance=ExtResource("11_xjfgo")]
+actor = NodePath("../..")
+
+[node name="DetectorActorRetriever" parent="Data" parent_id_path=PackedInt32Array(1763860896) index="1" unique_id=1264505720 node_paths=PackedStringArray("detector") instance=ExtResource("12_xjfgo")]
+detector = NodePath("../../StaticVisuals/ActorDetector")
+
+[node name="InitialBatPosition" parent="Data" parent_id_path=PackedInt32Array(1763860896) index="2" unique_id=786237967 node_paths=PackedStringArray("target") instance=ExtResource("15_5nwb1")]
+target = NodePath("../..")
+
+[editable path="StaticVisuals/BodyHitbox"]
+[editable path="StaticVisuals/ActorDetector"]
+[editable path="Hurtbox"]
+[editable path="AnimationTree"]
+[editable path="EffectsAnimationController"]
+[editable path="ActorStateMachine"]
+[editable path="ActorStateMachine/States/Ceiling"]
+[editable path="ActorStateMachine/States/Following"]
+[editable path="ActorStateMachine/States/BackHome"]
+[editable path="ActorStateMachine/States/Hurt"]
+[editable path="ActorStateMachine/States/Dead"]
+[editable path="CharacterLife"]

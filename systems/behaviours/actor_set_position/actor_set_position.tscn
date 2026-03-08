@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://b5nt342fhk6g5"]
+
+[ext_resource type="PackedScene" uid="uid://tthpm8c6xsb3" path="res://systems/behaviours/actor_behaviour.tscn" id="1_5cwrf"]
+[ext_resource type="Script" uid="uid://bqc4fuiqycc8y" path="res://systems/behaviours/actor_set_position/actor_set_position.gd" id="2_ox352"]
+
+[node name="ActorSetPosition" unique_id=1200312524 instance=ExtResource("1_5cwrf")]
+script = ExtResource("2_ox352")

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dkyxr3h4bcc8y"]
+
+[ext_resource type="Script" uid="uid://cjaoan8o88n4m" path="res://systems/state_machine/conditions/actor_is_at_position/actor_is_at_position.gd" id="1_qv8tv"]
+
+[node name="ActorIsAtPosition" type="Node" unique_id=471078805]
+script = ExtResource("1_qv8tv")

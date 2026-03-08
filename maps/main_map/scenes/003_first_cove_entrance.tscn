@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bxxaqj4j4ruuu" path="res://test_assets/backgrounds/test_parallax/test_parallax_bg.tscn" id="2_8n5bq"]
 [ext_resource type="PackedScene" uid="uid://dlcssb4x7r0fi" path="res://systems/world/rooms/room_transition.tscn" id="3_88fgb"]
 [ext_resource type="PackedScene" uid="uid://c6bapa1itjpfh" path="res://characters/enemies/crab/crab.tscn" id="4_n6lci"]
+[ext_resource type="PackedScene" uid="uid://bh8v5053mctll" path="res://characters/enemies/bat/bat.tscn" id="5_tdq6o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e68xt"]
 size = Vector2(20, 322)
@@ -60,30 +61,22 @@ position = Vector2(-40, 0)
 position = Vector2(0, -39)
 shape = SubResource("RectangleShape2D_woc1h")
 
-[node name="Crab" parent="Enemies" parent_id_path=PackedInt32Array(1450376257) index="0" unique_id=1487671488 instance=ExtResource("4_n6lci")]
-position = Vector2(304, 320)
-
-[node name="CharacterLife" parent="Enemies/Crab" index="9" unique_id=771178152]
-debug_logs = true
-
-[node name="Crab2" parent="Enemies" parent_id_path=PackedInt32Array(1450376257) index="1" unique_id=398314895 instance=ExtResource("4_n6lci")]
-position = Vector2(592, 320)
-
-[node name="Crab3" parent="Enemies" parent_id_path=PackedInt32Array(1450376257) index="2" unique_id=1538759094 instance=ExtResource("4_n6lci")]
-position = Vector2(928, 320)
-
-[node name="Crab4" parent="Enemies" parent_id_path=PackedInt32Array(1450376257) index="3" unique_id=1230022018 instance=ExtResource("4_n6lci")]
+[node name="Crab4" parent="Enemies" parent_id_path=PackedInt32Array(1450376257) index="0" unique_id=1230022018 instance=ExtResource("4_n6lci")]
 position = Vector2(1392, 320)
+
+[node name="Crab5" parent="Enemies" parent_id_path=PackedInt32Array(1450376257) index="1" unique_id=1487671488 instance=ExtResource("4_n6lci")]
+position = Vector2(952, 320)
+
+[node name="Crab6" parent="Enemies" parent_id_path=PackedInt32Array(1450376257) index="2" unique_id=194066197 instance=ExtResource("4_n6lci")]
+position = Vector2(600, 320)
+
+[node name="Crab7" parent="Enemies" parent_id_path=PackedInt32Array(1450376257) index="3" unique_id=576802976 instance=ExtResource("4_n6lci")]
+position = Vector2(456, 320)
+
+[node name="Bat" parent="Enemies" parent_id_path=PackedInt32Array(1450376257) index="4" unique_id=1771595411 instance=ExtResource("5_tdq6o")]
+position = Vector2(392, 24)
 
 [editable path="CameraBounds"]
 [editable path="Transitions/LeftEntrance"]
 [editable path="Transitions/DownEntrance"]
 [editable path="Transitions/RightEntrance"]
-[editable path="Enemies/Crab"]
-[editable path="Enemies/Crab/Hurtbox"]
-[editable path="Enemies/Crab/Hitbox"]
-[editable path="Enemies/Crab/ActorStateMachine"]
-[editable path="Enemies/Crab/ActorStateMachine/States/MoveRight"]
-[editable path="Enemies/Crab/ActorStateMachine/States/MoveLeft"]
-[editable path="Enemies/Crab/ActorStateMachine/States/Hurt"]
-[editable path="Enemies/Crab/ActorStateMachine/States/Dead"]
