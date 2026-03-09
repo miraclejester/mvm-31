@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://bxxaqj4j4ruuu" path="res://test_assets/backgrounds/test_parallax/test_parallax_bg.tscn" id="2_8n5bq"]
 [ext_resource type="PackedScene" uid="uid://dlcssb4x7r0fi" path="res://systems/world/rooms/room_transition.tscn" id="3_88fgb"]
 [ext_resource type="PackedScene" uid="uid://c6bapa1itjpfh" path="res://characters/enemies/crab/crab.tscn" id="4_n6lci"]
-[ext_resource type="PackedScene" uid="uid://bh8v5053mctll" path="res://characters/enemies/bat/bat.tscn" id="5_tdq6o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e68xt"]
 size = Vector2(20, 322)
@@ -72,9 +71,6 @@ position = Vector2(600, 320)
 
 [node name="Crab7" parent="Enemies" parent_id_path=PackedInt32Array(1450376257) index="3" unique_id=576802976 instance=ExtResource("4_n6lci")]
 position = Vector2(456, 320)
-
-[node name="Bat" parent="Enemies" parent_id_path=PackedInt32Array(1450376257) index="4" unique_id=1771595411 instance=ExtResource("5_tdq6o")]
-position = Vector2(392, 24)
 
 [editable path="CameraBounds"]
 [editable path="Transitions/LeftEntrance"]

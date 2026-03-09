@@ -41,6 +41,14 @@ func is_ability_unlocked(key: AbilityData.EAbilityKey) -> bool:
 	return unlocked_abilities.has(key)
 
 
+func get_num_pearls() -> int:
+	return save_data.pearls
+
+
+func add_pearl() -> void:
+	save_data.add_pearl()
+
+
 func get_current_saved_room() -> GameWorldRoomData:
 	var room_key: String = save_data.current_room
 	return ResourceLoader.load("res://maps/main_map/data/%s.tres" % room_key) as GameWorldRoomData
