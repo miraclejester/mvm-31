@@ -27,6 +27,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	#Random comment
 	if Input.is_action_just_pressed("pause"):
 		if not get_tree().paused:
 			stop_time()

@@ -17,7 +17,7 @@ unique_name_in_owner = true
 position = Vector2(32, 288)
 metadata/_edit_group_ = true
 
-[node name="CameraRemote" parent="Player" index="2" unique_id=1653809102]
+[node name="CameraRemote" parent="Player" index="4" unique_id=1653809102]
 remote_path = NodePath("../../MainCamera")
 
 [node name="MainCamera" type="Camera2D" parent="." unique_id=1774033888]
@@ -57,4 +57,11 @@ position_smoothing_speed = 8.0
 [editable path="Player/ActorStateMachine/States/Hurt"]
 [editable path="Player/ActorStateMachine/States/Dead"]
 [editable path="Player/ActorStateMachine/States/Disappear"]
+[editable path="Player/ActorStateMachine/States/TransformToMermaid"]
+[editable path="Player/ActorStateMachine/States/MermaidIdle"]
+[editable path="Player/ActorStateMachine/States/MermaidMovement"]
+[editable path="Player/ActorStateMachine/States/MermaidMovement/OnProcess/ActorTimedBehaviour"]
+[editable path="Player/ActorStateMachine/States/MermaidMovement/Transitions/ToMermaidAttack"]
+[editable path="Player/ActorStateMachine/States/TransformToHuman"]
+[editable path="Player/ActorStateMachine/States/MermaidAttack"]
 [editable path="Player/Data/ExternalConditions/ConditionShootTimer"]
