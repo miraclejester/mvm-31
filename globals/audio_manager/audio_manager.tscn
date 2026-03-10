@@ -1,10 +1,18 @@
 [gd_scene format=3 uid="uid://x6rttrg2o85l"]
 
 [ext_resource type="Script" uid="uid://dr13wfi2r6i54" path="res://globals/audio_manager/audio_manager.gd" id="1_gqfen"]
+[ext_resource type="Script" uid="uid://denvg0xa4mk4g" path="res://globals/audio_manager/audio_manager_data.gd" id="2_jkr7a"]
+
+[sub_resource type="Resource" id="Resource_ix0j0"]
+script = ExtResource("2_jkr7a")
+bgm_volume = 1.0
+sfx_volume = 1.0
+metadata/_custom_type_script = "uid://denvg0xa4mk4g"
 
 [node name="AudioManager" type="Node2D" unique_id=778710505]
 process_mode = 3
 script = ExtResource("1_gqfen")
+config = SubResource("Resource_ix0j0")
 
 [node name="FmodBankLoader" type="FmodBankLoader" parent="." unique_id=170548771]
 bank_paths = ["res://addons/fmod/Banks/Desktop/Master.bank", "res://addons/fmod/Banks/Desktop/Master.strings.bank"]
@@ -12,7 +20,7 @@ bank_paths = ["res://addons/fmod/Banks/Desktop/Master.bank", "res://addons/fmod/
 [node name="BGMPlayer" type="FmodEventEmitter2D" parent="." unique_id=1535297171]
 event_name = "event:/Music/Level Music"
 event_guid = "{e0437226-a106-4243-8627-e28bd15fbb1a}"
-volume = 0.6
+volume = 0.7
 "fmod_parameters/Music Switch/id" = 4800832153492976375
 "fmod_parameters/Music Switch" = "Beach"
 "fmod_parameters/Music Switch/labels" = PackedStringArray("Beach", "Cove")
