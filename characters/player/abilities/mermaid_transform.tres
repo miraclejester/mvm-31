@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3 uid="uid://xb7exrp5le3x"]
+
+[ext_resource type="Script" uid="uid://tgtio2puq0ht" path="res://characters/player/abilities/AbilityData.gd" id="1_mhp4k"]
+
+[resource]
+script = ExtResource("1_mhp4k")
+ability_key = 2
+ability_name = "Mermaid Transform"
+metadata/_custom_type_script = "uid://tgtio2puq0ht"

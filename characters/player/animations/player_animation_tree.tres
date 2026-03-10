@@ -2,14 +2,89 @@
 
 [ext_resource type="AnimationNodeStateMachine" uid="uid://bu5nckae43cl7" path="res://characters/player/animations/outside_water_state_machine.tres" id="1_me207"]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r5wdn"]
+animation = &"mermaid_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8yeva"]
+animation = &"mermaid_swim"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_trht8"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_r5wdn")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_8yeva")
+blend_point_1/pos = 0.90000004
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_trht8"]
+animation = &"mermaid_attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7p7fk"]
+animation = &"mermaid_shoot"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_02vb6"]
+animation = &"mermaid_start_shoot"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7p7fk"]
+advance_mode = 2
+advance_condition = &"attack_started"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_02vb6"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rc2vm"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_18pob"]
+advance_mode = 2
+advance_condition = &"shoot_started"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lduy1"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ccgec"]
+advance_mode = 2
+advance_condition = &"gun_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uxkse"]
+advance_mode = 2
+advance_condition = &"water_ended"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_wwbo6"]
+states/End/position = Vector2(725, 100)
+states/Movement/node = SubResource("AnimationNodeBlendSpace1D_trht8")
+states/Movement/position = Vector2(463, 100)
+states/mermaid_attack/node = SubResource("AnimationNodeAnimation_trht8")
+states/mermaid_attack/position = Vector2(463, -21)
+states/mermaid_shoot/node = SubResource("AnimationNodeAnimation_7p7fk")
+states/mermaid_shoot/position = Vector2(359, 307)
+states/mermaid_start_shoot/node = SubResource("AnimationNodeAnimation_02vb6")
+states/mermaid_start_shoot/position = Vector2(251, 191)
+transitions = ["Movement", "mermaid_attack", SubResource("AnimationNodeStateMachineTransition_7p7fk"), "mermaid_attack", "Movement", SubResource("AnimationNodeStateMachineTransition_02vb6"), "Start", "Movement", SubResource("AnimationNodeStateMachineTransition_rc2vm"), "Movement", "mermaid_start_shoot", SubResource("AnimationNodeStateMachineTransition_18pob"), "mermaid_start_shoot", "mermaid_shoot", SubResource("AnimationNodeStateMachineTransition_lduy1"), "mermaid_shoot", "Movement", SubResource("AnimationNodeStateMachineTransition_ccgec"), "Movement", "End", SubResource("AnimationNodeStateMachineTransition_uxkse")]
+graph_offset = Vector2(52, -114)
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_oi7gn"]
 animation = &"death"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wwbo6"]
 animation = &"hurt"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uxkse"]
+animation = &"mermaid_death"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_030p4"]
+animation = &"mermaid_hurt"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2hw45"]
 animation = &"surface_swim"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_myouy"]
+animation = &"transform_to_mermaid"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wkbj1"]
+animation = &"transform_to_mermaid"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dx5ib"]
 advance_mode = 2
@@ -38,7 +113,42 @@ advance_condition = &"death_started"
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8yeva"]
+advance_mode = 2
+advance_condition = &"mermaid_swimming"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_trht8"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_myouy"]
+advance_mode = 2
+advance_condition = &"mermaid_hurt_started"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2jslb"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cqyyb"]
+advance_mode = 2
+advance_condition = &"mermaid_death_started"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_517gj"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a5f6u"]
+advance_mode = 2
+advance_condition = &"human_transform_started"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_16ib0"]
+switch_mode = 2
+advance_mode = 2
+
 [resource]
+states/End/position = Vector2(675, 306)
+states/InWater/node = SubResource("AnimationNodeStateMachine_wwbo6")
+states/InWater/position = Vector2(868, 100)
 states/OutsideWater/node = ExtResource("1_me207")
 states/OutsideWater/position = Vector2(308, 100)
 states/Start/position = Vector2(101, 100)
@@ -46,7 +156,15 @@ states/death/node = SubResource("AnimationNodeAnimation_oi7gn")
 states/death/position = Vector2(459, 298)
 states/hurt/node = SubResource("AnimationNodeAnimation_wwbo6")
 states/hurt/position = Vector2(204, 298)
+states/mermaid_death/node = SubResource("AnimationNodeAnimation_uxkse")
+states/mermaid_death/position = Vector2(868, 282)
+states/mermaid_hurt/node = SubResource("AnimationNodeAnimation_030p4")
+states/mermaid_hurt/position = Vector2(1061, 100)
 states/surface_swim/node = SubResource("AnimationNodeAnimation_2hw45")
-states/surface_swim/position = Vector2(662, 100)
-transitions = ["Start", "OutsideWater", SubResource("AnimationNodeStateMachineTransition_dx5ib"), "OutsideWater", "surface_swim", SubResource("AnimationNodeStateMachineTransition_yc777"), "surface_swim", "OutsideWater", SubResource("AnimationNodeStateMachineTransition_bybc6"), "OutsideWater", "hurt", SubResource("AnimationNodeStateMachineTransition_oi7gn"), "hurt", "OutsideWater", SubResource("AnimationNodeStateMachineTransition_wkbj1"), "OutsideWater", "death", SubResource("AnimationNodeStateMachineTransition_r5wdn"), "death", "End", SubResource("AnimationNodeStateMachineTransition_wwbo6")]
-graph_offset = Vector2(-148, 22)
+states/surface_swim/position = Vector2(556, 216)
+states/transform_to_human/node = SubResource("AnimationNodeAnimation_myouy")
+states/transform_to_human/position = Vector2(622, 103)
+states/transform_to_mermaid/node = SubResource("AnimationNodeAnimation_wkbj1")
+states/transform_to_mermaid/position = Vector2(606, -7)
+transitions = ["Start", "OutsideWater", SubResource("AnimationNodeStateMachineTransition_dx5ib"), "OutsideWater", "surface_swim", SubResource("AnimationNodeStateMachineTransition_yc777"), "surface_swim", "OutsideWater", SubResource("AnimationNodeStateMachineTransition_bybc6"), "OutsideWater", "hurt", SubResource("AnimationNodeStateMachineTransition_oi7gn"), "hurt", "OutsideWater", SubResource("AnimationNodeStateMachineTransition_wkbj1"), "OutsideWater", "death", SubResource("AnimationNodeStateMachineTransition_r5wdn"), "death", "End", SubResource("AnimationNodeStateMachineTransition_wwbo6"), "OutsideWater", "transform_to_mermaid", SubResource("AnimationNodeStateMachineTransition_8yeva"), "transform_to_mermaid", "InWater", SubResource("AnimationNodeStateMachineTransition_trht8"), "InWater", "mermaid_hurt", SubResource("AnimationNodeStateMachineTransition_myouy"), "mermaid_hurt", "InWater", SubResource("AnimationNodeStateMachineTransition_2jslb"), "InWater", "mermaid_death", SubResource("AnimationNodeStateMachineTransition_cqyyb"), "mermaid_death", "End", SubResource("AnimationNodeStateMachineTransition_517gj"), "InWater", "transform_to_human", SubResource("AnimationNodeStateMachineTransition_a5f6u"), "transform_to_human", "OutsideWater", SubResource("AnimationNodeStateMachineTransition_16ib0")]
+graph_offset = Vector2(109, -85)

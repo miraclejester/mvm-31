@@ -29,6 +29,9 @@ enum EMovementMode {
 @export var water_acceleration: float = 15
 @export var water_speed_jump_out_threshold: float = 200
 @export var water_jump_force: float = -400
+@export var can_swim_underwater_condition: StateMachineCondition
+@export var full_rotation_targets: Array[Node2D]
+@export var half_rotation_targets: Array[Node2D]
 
 @export_group("Surface Water Movement")
 @export var water_marker: Node2D
@@ -71,12 +74,11 @@ var move_mode_dict: Dictionary[EMovementMode, ActorMovementProfile] = {
 	EMovementMode.AERIAL: ActorMovementProfile.from_data({
 		"move_method": aerial_movement,
 		"profile_name": "Aerial"
+	}),
+	EMovementMode.WATER : ActorMovementProfile.from_data({
+		"move_method": water_movement,
+		"profile_name": "Water"
 	})
-	#EMovementMode.WATER : ActorMovementProfile.from_data({
-	#	"move_method": water_movement,
-	#	"initialize_method": func(): jump_enabled = false,
-	#	"post_move_method": water_post_movement
-	#})
 }
 
 func _ready() -> void:
@@ -129,8 +131,9 @@ func get_move_profile_key() -> EMovementMode:
 		EMovementMode.AERIAL:
 			return EMovementMode.AERIAL
 		EMovementMode.GROUND:
+			var can_swim_underwater: bool = (can_swim_underwater_condition != null) and can_swim_underwater_condition.evaluate()
 			if water_marker_in_water():
-				return EMovementMode.SURFACE_WATER
+				return EMovementMode.WATER if can_swim_underwater else EMovementMode.SURFACE_WATER
 			else:
 				return EMovementMode.GROUND
 		EMovementMode.SURFACE_WATER:
@@ -138,6 +141,11 @@ func get_move_profile_key() -> EMovementMode:
 				return EMovementMode.GROUND
 			else:
 				return EMovementMode.SURFACE_WATER
+		EMovementMode.WATER:
+			if not underwater_marker_in_water():
+				return EMovementMode.GROUND
+			else:
+				return EMovementMode.WATER
 	return EMovementMode.GROUND
 
 
@@ -185,19 +193,37 @@ func ground_initialize_movement() -> void:
 func water_movement(_delta: float) -> void:
 	velocity = body.velocity
 	
-	body.rotation = control_face_dir.angle()
+	if not jumping:
+		if control_direction != Vector2.ZERO:
+			var desired_rot: float = rad_to_deg(control_face_dir.angle())
+			for target in full_rotation_targets:
+				target.rotation_degrees = desired_rot
+			for target in half_rotation_targets:
+				print(desired_rot)
+				target.rotation_degrees = desired_rot
+				if target.rotation_degrees > 91 or target.rotation_degrees < -46:
+					target.scale.y = -1
+				else:
+					target.scale.y = 1
+		else:
+			reset_water_rotations()
 	if control_direction != Vector2.ZERO:
 		velocity = velocity.move_toward(control_direction * water_max_speed, water_acceleration)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, water_max_speed * water_friction_factor)
+	
+	if not water_marker_in_water() and not jumping and control_direction.y <= 0:
+		velocity.y = 0
+	
 	body.velocity = velocity
 
 
-func water_post_movement() -> void:
-	var in_water: bool = water_detector.retrieve_bool()
-	if not in_water and body.velocity.y <= -water_speed_jump_out_threshold:
-		jump_enabled = true
-		apply_jump_force(water_jump_force)
+func reset_water_rotations() -> void:
+	for target in full_rotation_targets:
+		target.rotation_degrees = 0
+	for target in half_rotation_targets:
+		target.rotation_degrees = 0
+		target.scale.y = 1
 
 
 func surface_water_movement(_delta: float) -> void:

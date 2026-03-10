@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cn3ufbk6q5r7u"]
+
+[ext_resource type="PackedScene" uid="uid://tthpm8c6xsb3" path="res://systems/behaviours/actor_behaviour.tscn" id="1_pld8m"]
+[ext_resource type="Script" uid="uid://psgjxtdosgbl" path="res://systems/behaviours/game_toggle_stop_time/game_toggle_stop_time.gd" id="2_4dnii"]
+
+[node name="GameToggleStopTime" unique_id=1200312524 instance=ExtResource("1_pld8m")]
+script = ExtResource("2_4dnii")

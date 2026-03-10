@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://pltowxfvinvw"]
+
+[ext_resource type="PackedScene" uid="uid://tthpm8c6xsb3" path="res://systems/behaviours/actor_behaviour.tscn" id="1_4lw2c"]
+[ext_resource type="Script" uid="uid://cscm6iqukypph" path="res://systems/behaviours/actor_set_rotation/actor_set_rotation.gd" id="2_fthqb"]
+
+[node name="ActorSetRotation" unique_id=1200312524 instance=ExtResource("1_4lw2c")]
+script = ExtResource("2_fthqb")
+rotation_degrees = 0.0

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bjql4d7elqrrc"]
+
+[ext_resource type="PackedScene" uid="uid://bsjr1j5fxwvx6" path="res://systems/animation/parameter_setters/actor_animator_parameter_setter.tscn" id="1_hcii6"]
+[ext_resource type="Script" uid="uid://hufh6oylg5nx" path="res://systems/animation/parameter_setters/controller_float_parameter_setter/controller_float_parameter_setter.gd" id="2_2nfn6"]
+
+[node name="ControllerParameterSetter" unique_id=1270825895 instance=ExtResource("1_hcii6")]
+script = ExtResource("2_2nfn6")
+operation = 0

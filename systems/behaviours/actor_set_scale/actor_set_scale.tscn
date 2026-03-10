@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://5c1e8bm57tj1"]
+
+[ext_resource type="PackedScene" uid="uid://tthpm8c6xsb3" path="res://systems/behaviours/actor_behaviour.tscn" id="1_7viga"]
+[ext_resource type="Script" uid="uid://6b7jtfbx1q4" path="res://systems/behaviours/actor_set_scale/actor_set_scale.gd" id="2_0wm45"]
+
+[node name="ActorSetScale" unique_id=1200312524 instance=ExtResource("1_7viga")]
+script = ExtResource("2_0wm45")
+scale = Vector2(0, 0)

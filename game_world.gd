@@ -24,6 +24,24 @@ func _ready() -> void:
 	load_room(GameManager.get_current_saved_room())
 
 
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("pause"):
+		if not get_tree().paused:
+			stop_time()
+		else:
+			continue_time()
+
+
+func stop_time() -> void:
+	current_room_parent.process_mode = Node.PROCESS_MODE_PAUSABLE
+	get_tree().paused = true
+
+
+func continue_time() -> void:
+	current_room_parent.process_mode = Node.PROCESS_MODE_INHERIT
+	get_tree().paused = false
+
+
 func load_room(data: GameWorldRoomData, entrance_key: String = "") -> void:
 	if current_room != null:
 		current_room.queue_free()

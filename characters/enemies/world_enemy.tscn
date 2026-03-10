@@ -82,6 +82,11 @@ material = ExtResource("2_404c2")
 
 [node name="StaticVisuals" type="Node2D" parent="." unique_id=613635385]
 
+[node name="hit" type="FmodEventEmitter2D" parent="StaticVisuals" unique_id=407918030]
+event_name = "event:/Enemies/Enemy_Hit"
+event_guid = "{a631eb36-41fe-495b-b5b9-47f9ee1a5b2e}"
+volume = 0.6
+
 [node name="WorldCollider" type="CollisionShape2D" parent="." unique_id=978122623]
 
 [node name="Hurtbox" parent="." unique_id=573111498 node_paths=PackedStringArray("life") instance=ExtResource("2_r5p1c")]
@@ -110,7 +115,9 @@ unique_name_in_owner = true
 [node name="ActorController" parent="." unique_id=1814408435 instance=ExtResource("3_e2633")]
 external_input = false
 
-[node name="CharacterLife" parent="." unique_id=771178152 instance=ExtResource("5_v3144")]
+[node name="CharacterLife" parent="." unique_id=771178152 node_paths=PackedStringArray("hurt_sound") instance=ExtResource("5_v3144")]
+hurt_sound = NodePath("../StaticVisuals/hit")
+play_hurt_sound_on_death = true
 
 [node name="TravelToHitflash" parent="CharacterLife/OnHurt" parent_id_path=PackedInt32Array(771178152, 1571804799) index="0" unique_id=1200312524 node_paths=PackedStringArray("animation_controller") instance=ExtResource("8_tartb")]
 animation_controller = NodePath("../../../EffectsAnimationController")

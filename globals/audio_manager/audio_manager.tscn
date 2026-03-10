@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dr13wfi2r6i54" path="res://globals/audio_manager/audio_manager.gd" id="1_gqfen"]
 
 [node name="AudioManager" type="Node2D" unique_id=778710505]
+process_mode = 3
 script = ExtResource("1_gqfen")
 
 [node name="FmodBankLoader" type="FmodBankLoader" parent="." unique_id=170548771]
@@ -16,4 +17,7 @@ volume = 0.6
 "fmod_parameters/Music Switch" = "Beach"
 "fmod_parameters/Music Switch/labels" = PackedStringArray("Beach", "Cove")
 "fmod_parameters/Music Switch/variant_type" = 4
+fmod_parameters/Underwater/id = 8004776284960007233
+fmod_parameters/Underwater = 0.0
+fmod_parameters/Underwater/variant_type = 3
 unique_name_in_owner = true

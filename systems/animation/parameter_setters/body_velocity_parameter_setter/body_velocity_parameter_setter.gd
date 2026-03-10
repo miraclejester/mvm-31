@@ -1,7 +1,7 @@
 extends ActorAnimatorParameterSetter
 class_name BodyVelocityParameterSetter
 
-enum EVelocityAxis { X, Y}
+enum EVelocityAxis { X, Y, Both }
 enum EOperation { None, Abs, Sign }
 
 @export var body: CharacterBody2D
@@ -9,7 +9,14 @@ enum EOperation { None, Abs, Sign }
 @export var operation: EOperation
 
 func get_value() -> Variant:
-	var axis_value: float = body.velocity.x if axis == EVelocityAxis.X else body.velocity.y
+	var axis_value: float = 0
+	match axis:
+		EVelocityAxis.X:
+			axis_value = body.velocity.x
+		EVelocityAxis.Y:
+			axis_value = body.velocity.y
+		EVelocityAxis.Both:
+			axis_value = body.velocity.length()
 	match operation:
 		EOperation.Abs:
 			axis_value = abs(axis_value)

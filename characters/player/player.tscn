@@ -40,6 +40,7 @@
 [ext_resource type="PackedScene" uid="uid://csme4n5aj5nu3" path="res://systems/state_machine/utils/string_retriever/last_animation_retriever/last_animation_retriever.tscn" id="17_ixgpl"]
 [ext_resource type="PackedScene" uid="uid://dd2d4exvkiiy6" path="res://systems/state_machine/conditions/input_action_pressed/input_action_pressed.tscn" id="18_jd2rm"]
 [ext_resource type="PackedScene" uid="uid://bnqa0toqfjr0m" path="res://systems/animation/parameter_setters/boolean_parameter_setter/hurtbox_parameter_setter/hurtbox_parameter_setter.tscn" id="18_kr20l"]
+[ext_resource type="PackedScene" uid="uid://bjql4d7elqrrc" path="res://systems/animation/parameter_setters/controller_float_parameter_setter/controller_float_parameter_setter.tscn" id="19_4pmip"]
 [ext_resource type="PackedScene" uid="uid://cr2ssks6txaq4" path="res://systems/life/character_life.tscn" id="19_xvmlt"]
 [ext_resource type="PackedScene" uid="uid://4iuiej4q10ax" path="res://systems/behaviours/movement_control_enabled/movement_set_control_enabled.tscn" id="22_1s1yo"]
 [ext_resource type="PackedScene" uid="uid://de5ldo8mb0tna" path="res://systems/state_machine/conditions/conditional_timer/condition_conditional_timer.tscn" id="22_dhr4d"]
@@ -63,6 +64,10 @@
 [ext_resource type="PackedScene" uid="uid://dbqqk4kdx6l0c" path="res://systems/behaviours/actor_timed_behaviour/actor_timed_behaviour.tscn" id="48_s04et"]
 [ext_resource type="PackedScene" uid="uid://c4b3teprr3iu4" path="res://systems/state_machine/conditions/actor_life_condition/actor_life_condition.tscn" id="49_apqh1"]
 [ext_resource type="PackedScene" uid="uid://bwfojncre050s" path="res://systems/behaviours/actor_erase_actor/actor_erase_actor.tscn" id="49_f0ap2"]
+[ext_resource type="PackedScene" uid="uid://wf5tetpp11rl" path="res://systems/state_machine/conditions/state_machine_in_state/state_machine_in_state.tscn" id="57_ro1nf"]
+[ext_resource type="PackedScene" uid="uid://cn3ufbk6q5r7u" path="res://systems/behaviours/game_toggle_stop_time/game_toggle_stop_time.tscn" id="57_wiq46"]
+[ext_resource type="PackedScene" uid="uid://5c1e8bm57tj1" path="res://systems/behaviours/actor_set_scale/actor_set_scale.tscn" id="59_lpvo7"]
+[ext_resource type="PackedScene" uid="uid://cgu40a5srfbja" path="res://systems/behaviours/actor_movement_modifier_behaviour/actor_movement_modifier_behaviour.tscn" id="60_14epw"]
 
 [sub_resource type="Resource" id="Resource_iy54p"]
 script = ExtResource("7_6ew83")
@@ -275,17 +280,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [42]
 }
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Animations/AnimationTree")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"values": []
-}
 
 [sub_resource type="Animation" id="Animation_2uvqg"]
 resource_name = "idle"
@@ -334,6 +328,201 @@ tracks/1/keys = {
 "args": ["jump"],
 "method": &"send_action_finished_event"
 }]
+}
+
+[sub_resource type="Animation" id="Animation_wiq46"]
+resource_name = "mermaid_attack"
+length = 0.28572145
+step = 0.071428575
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipTarget/LandSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.071428575, 0.14285715, 0.21428573),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [66, 67, 68, 69]
+}
+
+[sub_resource type="Animation" id="Animation_q3y00"]
+resource_name = "mermaid_death"
+length = 1.00001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipTarget/LandSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [78, 79, 80, 81, 82, 83, 84, 85, 86, 87]
+}
+
+[sub_resource type="Animation" id="Animation_b8hv6"]
+resource_name = "mermaid_hurt"
+length = 0.40001002
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipTarget/LandSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [78]
+}
+
+[sub_resource type="Animation" id="Animation_4pmip"]
+resource_name = "mermaid_idle"
+length = 0.40001002
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipTarget/LandSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [54, 55, 56, 57]
+}
+
+[sub_resource type="Animation" id="Animation_arbsv"]
+resource_name = "mermaid_shoot"
+length = 0.30001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipTarget/LandSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [75, 76, 77]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/AnimationTree")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["shoot"],
+"method": &"call_direct_action"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/AnimationTree")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": ["shoot"],
+"method": &"start_action_reset_interval"
+}, {
+"args": ["shoot"],
+"method": &"resolve_interval"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FlipTarget/SFX")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["spell"],
+"method": &"play_sfx"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_lpvo7"]
+resource_name = "mermaid_start_shoot"
+length = 0.150005
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipTarget/LandSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.099999994),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [72, 73, 74]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/AnimationTree")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["start_shoot"],
+"method": &"send_action_finished_event"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/AnimationTree")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.05),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["shoot"],
+"method": &"start_action_reset_interval"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_14epw"]
+resource_name = "mermaid_swim"
+length = 0.60001004
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipTarget/LandSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [60, 61, 62, 63, 64, 65]
 }
 
 [sub_resource type="Animation" id="Animation_jd2rm"]
@@ -528,6 +717,23 @@ tracks/0/keys = {
 "values": [36, 37, 38, 39, 40, 41]
 }
 
+[sub_resource type="Animation" id="Animation_iy54p"]
+resource_name = "transform_to_mermaid"
+length = 1.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipTarget/LandSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1s1yo"]
 _data = {
 &"RESET": SubResource("Animation_b8hi5"),
@@ -538,11 +744,19 @@ _data = {
 &"hurt": SubResource("Animation_di0ei"),
 &"idle": SubResource("Animation_2uvqg"),
 &"jump": SubResource("Animation_1s1yo"),
+&"mermaid_attack": SubResource("Animation_wiq46"),
+&"mermaid_death": SubResource("Animation_q3y00"),
+&"mermaid_hurt": SubResource("Animation_b8hv6"),
+&"mermaid_idle": SubResource("Animation_4pmip"),
+&"mermaid_shoot": SubResource("Animation_arbsv"),
+&"mermaid_start_shoot": SubResource("Animation_lpvo7"),
+&"mermaid_swim": SubResource("Animation_14epw"),
 &"rise": SubResource("Animation_jd2rm"),
 &"run": SubResource("Animation_r7pn3"),
 &"shoot": SubResource("Animation_1so5t"),
 &"start_shoot": SubResource("Animation_pnw6m"),
-&"surface_swim": SubResource("Animation_55jnj")
+&"surface_swim": SubResource("Animation_55jnj"),
+&"transform_to_mermaid": SubResource("Animation_iy54p")
 }
 
 [sub_resource type="Resource" id="Resource_fjxoa"]
@@ -596,6 +810,16 @@ shape = SubResource("RectangleShape2D_2uvqg")
 position = Vector2(0, -14)
 metadata/_custom_type_script = "uid://bsxdp451nivth"
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4pmip"]
+size = Vector2(41, 12)
+
+[sub_resource type="Resource" id="Resource_wiq46"]
+script = ExtResource("9_5ejfk")
+key = "underwater_swimming"
+shape = SubResource("RectangleShape2D_4pmip")
+position = Vector2(1.5, -6)
+metadata/_custom_type_script = "uid://bsxdp451nivth"
+
 [node name="Player" type="CharacterBody2D" unique_id=1042347891]
 collision_layer = 0
 script = ExtResource("1_unksh")
@@ -607,7 +831,7 @@ position = Vector2(0, -32)
 scale = Vector2(1, 0.99999994)
 texture = ExtResource("2_r7pn3")
 hframes = 6
-vframes = 9
+vframes = 18
 
 [node name="TestGun" parent="FlipTarget" unique_id=836465356 instance=ExtResource("4_ssrwr")]
 
@@ -658,11 +882,10 @@ volume = 0.4
 event_name = "event:/Player/Player FS Grass"
 event_guid = "{d3f41a99-9998-401a-9ab6-270da90d10bf}"
 
-[node name="WaterLimit" type="Marker2D" parent="FlipTarget" unique_id=226604563]
-position = Vector2(0, -35)
-
-[node name="UnderwaterLimit" type="Marker2D" parent="FlipTarget" unique_id=334110961]
-position = Vector2(0, -10)
+[node name="stone" type="FmodEventEmitter2D" parent="FlipTarget/FootstepsPlayer/LocalSFXManager" parent_id_path=PackedInt32Array(946456107, 36647118) index="2" unique_id=1420179868]
+event_name = "event:/Player/Player FS Stone"
+event_guid = "{5b98edf4-1eb2-49fe-b828-df637fa009ce}"
+volume = 0.6
 
 [node name="MeleeAttackHitbox" parent="FlipTarget" unique_id=484190945 instance=ExtResource("6_hfasb")]
 position = Vector2(34, -31)
@@ -678,6 +901,20 @@ shape = SubResource("RectangleShape2D_ro1nf")
 [node name="TerrainCollider" type="CollisionShape2D" parent="." unique_id=1087129646]
 position = Vector2(0, -22.5)
 shape = SubResource("RectangleShape2D_rgfib")
+
+[node name="WaterLimit" type="Marker2D" parent="." unique_id=226604563]
+position = Vector2(0, -35)
+gizmo_extents = 21.7
+
+[node name="ColorRect" type="ColorRect" parent="WaterLimit" unique_id=2058138944]
+offset_left = -6.0
+offset_top = -5.0
+offset_right = 6.0
+offset_bottom = 5.0
+
+[node name="UnderwaterLimit" type="Marker2D" parent="." unique_id=334110961]
+position = Vector2(0, -10)
+gizmo_extents = 27.5
 
 [node name="CameraRemote" type="RemoteTransform2D" parent="." unique_id=1653809102]
 
@@ -705,6 +942,7 @@ shape = SubResource("RectangleShape2D_fmu53")
 debug_color = Color(0, 0.6317335, 0.4624179, 0.41960785)
 
 [node name="ActorDetectable" parent="Detectors" unique_id=1567081487 node_paths=PackedStringArray("character") instance=ExtResource("11_iy54p")]
+visible = false
 position = Vector2(0, -34)
 monitoring = false
 character = NodePath("../..")
@@ -719,6 +957,7 @@ collision_mask = 0
 life = NodePath("../StaticBehaviours/CharacterLife")
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0" unique_id=1674096468]
+visible = false
 position = Vector2(0.5, -22)
 shape = SubResource("RectangleShape2D_xvmlt")
 debug_color = Color(0.96595424, 0.9928238, 1, 0.41960785)
@@ -738,9 +977,18 @@ root_node = NodePath("../..")
 tree_root = ExtResource("8_xcnuv")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/death_started = false
+parameters/conditions/human_transform_started = false
 parameters/conditions/hurt_started = false
 parameters/conditions/jump_started = false
+parameters/conditions/mermaid_death_started = false
+parameters/conditions/mermaid_hurt_started = false
+parameters/conditions/mermaid_swimming = false
 parameters/conditions/swim_started = false
+parameters/InWater/conditions/attack_started = false
+parameters/InWater/conditions/gun_idle = false
+parameters/InWater/conditions/shoot_started = false
+parameters/InWater/conditions/water_ended = false
+parameters/InWater/Movement/blend_position = 0.0
 parameters/OutsideWater/conditions/airborne = false
 parameters/OutsideWater/conditions/attack_started = false
 parameters/OutsideWater/conditions/crouching = false
@@ -784,6 +1032,11 @@ negative_path = "OutsideWater/conditions/standing"
 send_positive = true
 parameter_path = "OutsideWater/conditions/crouching"
 setter_key = "outside_water_crouching_standing"
+
+[node name="MermaidMovementBlendPos" parent="Animations/AnimationTree/ProcessParameters" parent_id_path=PackedInt32Array(704880076, 1452081964) index="4" unique_id=902514915 node_paths=PackedStringArray("controller") instance=ExtResource("19_4pmip")]
+controller = NodePath("../../../../StaticBehaviours/PlayerController")
+parameter_path = "InWater/Movement/blend_position"
+setter_key = "mermaind_movement_blend_pos"
 
 [node name="OutsideWaterGunIdle" parent="Animations/AnimationTree/IntervalParameters" parent_id_path=PackedInt32Array(704880076, 1455507333) index="0" unique_id=381462708 instance=ExtResource("11_art4l")]
 interval_key = "shoot"
@@ -860,9 +1113,10 @@ setter_key = "condition_is_vulnerable_invincible"
 
 [node name="TerrainColliderManager" parent="StaticBehaviours/ColliderGroupManager" unique_id=59142183 node_paths=PackedStringArray("collider") instance=ExtResource("8_1s1yo")]
 collider = NodePath("../../../TerrainCollider")
-specs = Array[ExtResource("9_5ejfk")]([SubResource("Resource_q28gw"), SubResource("Resource_1s1yo")])
+specs = Array[ExtResource("9_5ejfk")]([SubResource("Resource_q28gw"), SubResource("Resource_1s1yo"), SubResource("Resource_wiq46")])
 
-[node name="CharacterLife" parent="StaticBehaviours" unique_id=771178152 instance=ExtResource("19_xvmlt")]
+[node name="CharacterLife" parent="StaticBehaviours" unique_id=771178152 node_paths=PackedStringArray("hurt_sound") instance=ExtResource("19_xvmlt")]
+hurt_sound = NodePath("../../FlipTarget/SFX/hit")
 
 [node name="PlayerController" parent="StaticBehaviours" unique_id=1995312103 instance=ExtResource("3_rcghi")]
 available_actions = Array[String](["jump", "attack", "down", "shoot", "interact"])
@@ -875,7 +1129,7 @@ invincibility_time = 1.5
 [node name="Behaviours" type="Node" parent="." unique_id=112046428]
 unique_name_in_owner = true
 
-[node name="ActorMovement" parent="Behaviours" unique_id=655420935 node_paths=PackedStringArray("body", "controller", "water_detector", "water_marker", "underwater_marker") instance=ExtResource("4_o2riq")]
+[node name="ActorMovement" parent="Behaviours" unique_id=655420935 node_paths=PackedStringArray("body", "controller", "water_detector", "can_swim_underwater_condition", "full_rotation_targets", "half_rotation_targets", "water_marker", "underwater_marker") instance=ExtResource("4_o2riq")]
 body = NodePath("../..")
 controller = NodePath("../../StaticBehaviours/PlayerController")
 acceleration = 70.0
@@ -886,8 +1140,11 @@ coyote_time_enabled = true
 water_detector = NodePath("../../Data/IsInWaterRetriever")
 water_friction_factor = 0.1
 water_jump_force = -200.0
-water_marker = NodePath("../../FlipTarget/WaterLimit")
-underwater_marker = NodePath("../../FlipTarget/UnderwaterLimit")
+can_swim_underwater_condition = NodePath("../../Data/ExternalConditions/CanSwimUnderwater")
+full_rotation_targets = [NodePath("../../TerrainCollider")]
+half_rotation_targets = [NodePath("../../FlipTarget")]
+water_marker = NodePath("../../WaterLimit")
+underwater_marker = NodePath("../../UnderwaterLimit")
 surfacing_speed = 100.0
 surface_move_speed = 180.0
 jump_force = -500.0
@@ -1216,9 +1473,6 @@ movement = NodePath("../../../../../../Behaviours/ActorMovement")
 
 [node name="BehaviourSequence" parent="ActorStateMachine/States/Hurt/OnEnter" parent_id_path=PackedInt32Array(743104112, 667290384) index="0" unique_id=104501501 instance=ExtResource("14_vrg71")]
 
-[node name="PlayHitSound" parent="ActorStateMachine/States/Hurt/OnEnter/BehaviourSequence" unique_id=184741307 node_paths=PackedStringArray("event_emitter") instance=ExtResource("22_r7pn3")]
-event_emitter = NodePath("../../../../../../FlipTarget/SFX/hit")
-
 [node name="TravelDirectlyToHurt" parent="ActorStateMachine/States/Hurt/OnEnter/BehaviourSequence" unique_id=457899317 node_paths=PackedStringArray("animation_controller") instance=ExtResource("47_bdpt7")]
 animation_controller = NodePath("../../../../../../Animations/AnimationTree")
 target_node = "hurt"
@@ -1268,24 +1522,175 @@ target_state = "death"
 [node name="ActorEraseActor" parent="ActorStateMachine/States/Disappear/OnEnter" parent_id_path=PackedInt32Array(387503826, 667290384) index="0" unique_id=521280831 node_paths=PackedStringArray("target") instance=ExtResource("49_f0ap2")]
 target = NodePath("../../../../..")
 
-[node name="ToSwim" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="0" unique_id=1979086372 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+[node name="TransformToMermaid" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="14" unique_id=1809890748 instance=ExtResource("4_oycdn")]
+
+[node name="BehaviourSequence" parent="ActorStateMachine/States/TransformToMermaid/OnEnter" parent_id_path=PackedInt32Array(1809890748, 667290384) index="0" unique_id=1247108082 instance=ExtResource("14_vrg71")]
+
+[node name="TravelToMermaidTransform" parent="ActorStateMachine/States/TransformToMermaid/OnEnter/BehaviourSequence" unique_id=2023888821 node_paths=PackedStringArray("animation_controller") instance=ExtResource("47_bdpt7")]
+animation_controller = NodePath("../../../../../../Animations/AnimationTree")
+target_node = "transform_to_mermaid"
+
+[node name="GameToggleStopTime" parent="ActorStateMachine/States/TransformToMermaid/OnEnter/BehaviourSequence" unique_id=201582525 instance=ExtResource("57_wiq46")]
+
+[node name="DisableMovement" parent="ActorStateMachine/States/TransformToMermaid/OnEnter/BehaviourSequence" unique_id=911608145 node_paths=PackedStringArray("behaviour") instance=ExtResource("24_a6siw")]
+behaviour = NodePath("../../../../../../Behaviours/ActorMovement")
+enable = false
+
+[node name="DisableFlipping" parent="ActorStateMachine/States/TransformToMermaid/OnEnter/BehaviourSequence" unique_id=83011135 node_paths=PackedStringArray("behaviour") instance=ExtResource("24_a6siw")]
+behaviour = NodePath("../../../../../../Behaviours/Node2dFlipOnInput")
+enable = false
+
+[node name="BehaviourSequence" parent="ActorStateMachine/States/TransformToMermaid/OnExit" parent_id_path=PackedInt32Array(1809890748, 1496048418) index="0" unique_id=266623539 instance=ExtResource("14_vrg71")]
+
+[node name="GameToggleStopTime" parent="ActorStateMachine/States/TransformToMermaid/OnExit/BehaviourSequence" unique_id=808922702 instance=ExtResource("57_wiq46")]
+
+[node name="EnableMovement" parent="ActorStateMachine/States/TransformToMermaid/OnExit/BehaviourSequence" unique_id=136052818 node_paths=PackedStringArray("behaviour") instance=ExtResource("24_a6siw")]
+behaviour = NodePath("../../../../../../Behaviours/ActorMovement")
+
+[node name="EnableFlipping" parent="ActorStateMachine/States/TransformToMermaid/OnExit/BehaviourSequence" unique_id=538132701 node_paths=PackedStringArray("behaviour") instance=ExtResource("24_a6siw")]
+behaviour = NodePath("../../../../../../Behaviours/Node2dFlipOnInput")
+
+[node name="ToMermaidIdle" parent="ActorStateMachine/States/TransformToMermaid/Transitions" parent_id_path=PackedInt32Array(1809890748, 1931116749) index="0" unique_id=2036317329 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+target_state = NodePath("../../../MermaidIdle")
+
+[node name="TransformationAnimationFinished" parent="ActorStateMachine/States/TransformToMermaid/Transitions/ToMermaidIdle" unique_id=970714488 node_paths=PackedStringArray("animator_controller") instance=ExtResource("48_di0ei")]
+animator_controller = NodePath("../../../../../../Animations/AnimationTree")
+target_state = "transform_to_mermaid"
+
+[node name="MermaidIdle" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="15" unique_id=1154177940 instance=ExtResource("4_oycdn")]
+
+[node name="ToMermaidMovement" parent="ActorStateMachine/States/MermaidIdle/Transitions" parent_id_path=PackedInt32Array(1154177940, 1931116749) index="0" unique_id=1229587871 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+target_state = NodePath("../../../MermaidMovement")
+
+[node name="ConditionInputIsMoving" parent="ActorStateMachine/States/MermaidIdle/Transitions/ToMermaidMovement" unique_id=400799190 node_paths=PackedStringArray("controller") instance=ExtResource("10_wvr7c")]
+controller = NodePath("../../../../../../StaticBehaviours/PlayerController")
+check_vertical = true
+
+[node name="MermaidMovement" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="16" unique_id=197444061 instance=ExtResource("4_oycdn")]
+
+[node name="BehaviourSequence" parent="ActorStateMachine/States/MermaidMovement/OnEnter" parent_id_path=PackedInt32Array(197444061, 667290384) index="0" unique_id=74979453 instance=ExtResource("14_vrg71")]
+
+[node name="CollisionSwitchProfile" parent="ActorStateMachine/States/MermaidMovement/OnEnter/BehaviourSequence" unique_id=309665714 node_paths=PackedStringArray("manager") instance=ExtResource("31_dx5ib")]
+manager = NodePath("../../../../../../StaticBehaviours/ColliderGroupManager")
+profile_key = "underwater_swimming"
+
+[node name="DisableFlipping" parent="ActorStateMachine/States/MermaidMovement/OnEnter/BehaviourSequence" unique_id=639613034 node_paths=PackedStringArray("behaviour") instance=ExtResource("24_a6siw")]
+behaviour = NodePath("../../../../../../Behaviours/Node2dFlipOnInput")
+enable = false
+
+[node name="ActorSetScale" parent="ActorStateMachine/States/MermaidMovement/OnEnter/BehaviourSequence" unique_id=454419220 node_paths=PackedStringArray("actor") instance=ExtResource("59_lpvo7")]
+actor = NodePath("../../../../../../FlipTarget")
+scale = Vector2(1, 1)
+
+[node name="BehaviourSequence" parent="ActorStateMachine/States/MermaidMovement/OnExit" parent_id_path=PackedInt32Array(197444061, 1496048418) index="0" unique_id=1008552089 instance=ExtResource("14_vrg71")]
+
+[node name="CollisionSwitchProfile" parent="ActorStateMachine/States/MermaidMovement/OnExit/BehaviourSequence" unique_id=269822228 node_paths=PackedStringArray("manager") instance=ExtResource("31_dx5ib")]
+manager = NodePath("../../../../../../StaticBehaviours/ColliderGroupManager")
+profile_key = "stand"
+
+[node name="EnableFlipping" parent="ActorStateMachine/States/MermaidMovement/OnExit/BehaviourSequence" unique_id=719891660 node_paths=PackedStringArray("behaviour") instance=ExtResource("24_a6siw")]
+behaviour = NodePath("../../../../../../Behaviours/Node2dFlipOnInput")
+
+[node name="ResetWaterRots" parent="ActorStateMachine/States/MermaidMovement/OnExit/BehaviourSequence" unique_id=1752233378 node_paths=PackedStringArray("movement") instance=ExtResource("60_14epw")]
+movement = NodePath("../../../../../../Behaviours/ActorMovement")
+
+[node name="ToMermaidIdle" parent="ActorStateMachine/States/MermaidMovement/Transitions" parent_id_path=PackedInt32Array(197444061, 1931116749) index="0" unique_id=1194421584 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+target_state = NodePath("../../../MermaidIdle")
+
+[node name="ConditionNegate" parent="ActorStateMachine/States/MermaidMovement/Transitions/ToMermaidIdle" unique_id=968118873 instance=ExtResource("7_wcyp4")]
+
+[node name="ConditionInputIsMoving" parent="ActorStateMachine/States/MermaidMovement/Transitions/ToMermaidIdle/ConditionNegate" unique_id=347332947 node_paths=PackedStringArray("controller") instance=ExtResource("10_wvr7c")]
+controller = NodePath("../../../../../../../StaticBehaviours/PlayerController")
+check_vertical = true
+
+[node name="TransformToHuman" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="17" unique_id=1312318769 instance=ExtResource("4_oycdn")]
+
+[node name="BehaviourSequence" parent="ActorStateMachine/States/TransformToHuman/OnEnter" parent_id_path=PackedInt32Array(1312318769, 667290384) index="0" unique_id=545745700 instance=ExtResource("14_vrg71")]
+
+[node name="TravelToHumanTransform" parent="ActorStateMachine/States/TransformToHuman/OnEnter/BehaviourSequence" unique_id=307197579 node_paths=PackedStringArray("animation_controller") instance=ExtResource("47_bdpt7")]
+animation_controller = NodePath("../../../../../../Animations/AnimationTree")
+target_node = "transform_to_human"
+
+[node name="GameToggleStopTime" parent="ActorStateMachine/States/TransformToHuman/OnEnter/BehaviourSequence" unique_id=2086621838 instance=ExtResource("57_wiq46")]
+
+[node name="DisableMovement" parent="ActorStateMachine/States/TransformToHuman/OnEnter/BehaviourSequence" unique_id=529339512 node_paths=PackedStringArray("behaviour") instance=ExtResource("24_a6siw")]
+behaviour = NodePath("../../../../../../Behaviours/ActorMovement")
+enable = false
+
+[node name="DisableFlipping" parent="ActorStateMachine/States/TransformToHuman/OnEnter/BehaviourSequence" unique_id=654544080 node_paths=PackedStringArray("behaviour") instance=ExtResource("24_a6siw")]
+behaviour = NodePath("../../../../../../Behaviours/Node2dFlipOnInput")
+enable = false
+
+[node name="BehaviourSequence" parent="ActorStateMachine/States/TransformToHuman/OnExit" parent_id_path=PackedInt32Array(1312318769, 1496048418) index="0" unique_id=1166167773 instance=ExtResource("14_vrg71")]
+
+[node name="GameToggleStopTime" parent="ActorStateMachine/States/TransformToHuman/OnExit/BehaviourSequence" unique_id=1059502876 instance=ExtResource("57_wiq46")]
+
+[node name="EnableMovement" parent="ActorStateMachine/States/TransformToHuman/OnExit/BehaviourSequence" unique_id=847252815 node_paths=PackedStringArray("behaviour") instance=ExtResource("24_a6siw")]
+behaviour = NodePath("../../../../../../Behaviours/ActorMovement")
+
+[node name="EnableFlipping" parent="ActorStateMachine/States/TransformToHuman/OnExit/BehaviourSequence" unique_id=1332945183 node_paths=PackedStringArray("behaviour") instance=ExtResource("24_a6siw")]
+behaviour = NodePath("../../../../../../Behaviours/Node2dFlipOnInput")
+
+[node name="ActorJump" parent="ActorStateMachine/States/TransformToHuman/OnExit/BehaviourSequence" unique_id=765273593 node_paths=PackedStringArray("movement_behaviour") instance=ExtResource("14_3sb8j")]
+movement_behaviour = NodePath("../../../../../../Behaviours/ActorMovement")
+
+[node name="ToGrounded" parent="ActorStateMachine/States/TransformToHuman/Transitions" parent_id_path=PackedInt32Array(1312318769, 1931116749) index="0" unique_id=847208085 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+target_state = NodePath("../../../Grounded")
+
+[node name="AnimatorControllerCondition" parent="ActorStateMachine/States/TransformToHuman/Transitions/ToGrounded" unique_id=1597143869 node_paths=PackedStringArray("animator_controller") instance=ExtResource("48_di0ei")]
+animator_controller = NodePath("../../../../../../Animations/AnimationTree")
+target_state = "transform_to_human"
+
+[node name="ToMermaidTransform" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="0" unique_id=1733759237 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+target_state = NodePath("../../States/TransformToMermaid")
+
+[node name="InNonMermaidStates" parent="ActorStateMachine/AnyStateTransitions/ToMermaidTransform" unique_id=1933951883 node_paths=PackedStringArray("state_machine", "valid_states") instance=ExtResource("57_ro1nf")]
+state_machine = NodePath("../../..")
+valid_states = [NodePath("../../../States/Grounded"), NodePath("../../../States/InitJump"), NodePath("../../../States/Airborne"), NodePath("../../../States/Crouch"), NodePath("../../../States/Attack"), NodePath("../../../States/AirAttack"), NodePath("../../../States/StartShoot"), NodePath("../../../States/Shoot"), NodePath("../../../States/AirStartShoot"), NodePath("../../../States/AirShoot"), NodePath("../../../States/Hurt")]
+
+[node name="GameAbilityUnlocked" parent="ActorStateMachine/AnyStateTransitions/ToMermaidTransform" unique_id=430261806 instance=ExtResource("39_hjies")]
+ability = 2
+
+[node name="InWater" parent="ActorStateMachine/AnyStateTransitions/ToMermaidTransform" unique_id=1167934670 node_paths=PackedStringArray("condition") instance=ExtResource("22_lykvf")]
+condition = NodePath("../../../../Data/ExternalConditions/IsInWater")
+
+[node name="ToSwim" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="1" unique_id=1979086372 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../States/Swim")
+
+[node name="ConditionNegate" parent="ActorStateMachine/AnyStateTransitions/ToSwim" unique_id=516093984 instance=ExtResource("7_wcyp4")]
+
+[node name="GameAbilityUnlocked" parent="ActorStateMachine/AnyStateTransitions/ToSwim/ConditionNegate" unique_id=1766482589 instance=ExtResource("39_hjies")]
+ability = 2
 
 [node name="IsInWater" parent="ActorStateMachine/AnyStateTransitions/ToSwim" unique_id=149233817 node_paths=PackedStringArray("condition") instance=ExtResource("22_lykvf")]
 condition = NodePath("../../../../Data/ExternalConditions/IsInWater")
 
-[node name="ToHurt" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="1" unique_id=1919227895 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+[node name="ToHurt" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="2" unique_id=1919227895 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../States/Hurt")
 
 [node name="IsHurt" parent="ActorStateMachine/AnyStateTransitions/ToHurt" unique_id=1634116028 node_paths=PackedStringArray("life") instance=ExtResource("49_apqh1")]
 life = NodePath("../../../../StaticBehaviours/CharacterLife")
 
-[node name="ToDead" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="2" unique_id=220846891 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+[node name="ToDead" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="3" unique_id=220846891 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../States/Dead")
 
 [node name="IsDead" parent="ActorStateMachine/AnyStateTransitions/ToDead" unique_id=788520301 node_paths=PackedStringArray("life") instance=ExtResource("49_apqh1")]
 life = NodePath("../../../../StaticBehaviours/CharacterLife")
 operation = 1
+
+[node name="ToTransformToHuman" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="4" unique_id=1800534706 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+target_state = NodePath("../../States/TransformToHuman")
+
+[node name="InMermaidStates" parent="ActorStateMachine/AnyStateTransitions/ToTransformToHuman" unique_id=1554182965 node_paths=PackedStringArray("state_machine", "valid_states") instance=ExtResource("57_ro1nf")]
+state_machine = NodePath("../../..")
+valid_states = [NodePath("../../../States/MermaidIdle"), NodePath("../../../States/MermaidMovement")]
+
+[node name="JumpJustPressed" parent="ActorStateMachine/AnyStateTransitions/ToTransformToHuman" unique_id=1218573032 node_paths=PackedStringArray("controller") instance=ExtResource("14_pd5ni")]
+controller = NodePath("../../../../StaticBehaviours/PlayerController")
+key = "jump"
+
+[node name="ActorIsOnWaterSurface" parent="ActorStateMachine/AnyStateTransitions/ToTransformToHuman" unique_id=2092206757 node_paths=PackedStringArray("movement") instance=ExtResource("39_j55il")]
+movement = NodePath("../../../../Behaviours/ActorMovement")
 
 [node name="Data" type="Node" parent="." unique_id=257589254]
 
@@ -1326,6 +1731,9 @@ controller = NodePath("../../../StaticBehaviours/PlayerController")
 action = "jump"
 buffer_time = 0.1
 
+[node name="CanSwimUnderwater" parent="Data/ExternalConditions" unique_id=1696119937 instance=ExtResource("39_hjies")]
+ability = 2
+
 [node name="LastAnimationRetriever" parent="Data" unique_id=1733489810 instance=ExtResource("17_ixgpl")]
 
 [node name="IsInWaterRetriever" parent="Data" unique_id=590184828 node_paths=PackedStringArray("movement") instance=ExtResource("27_a6siw")]
@@ -1357,4 +1765,8 @@ movement = NodePath("../../Behaviours/ActorMovement")
 [editable path="ActorStateMachine/States/Hurt"]
 [editable path="ActorStateMachine/States/Dead"]
 [editable path="ActorStateMachine/States/Disappear"]
+[editable path="ActorStateMachine/States/TransformToMermaid"]
+[editable path="ActorStateMachine/States/MermaidIdle"]
+[editable path="ActorStateMachine/States/MermaidMovement"]
+[editable path="ActorStateMachine/States/TransformToHuman"]
 [editable path="Data/ExternalConditions/ConditionShootTimer"]

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cgu40a5srfbja"]
+
+[ext_resource type="PackedScene" uid="uid://tthpm8c6xsb3" path="res://systems/behaviours/actor_behaviour.tscn" id="1_jp8nd"]
+[ext_resource type="Script" uid="uid://fwgfxusee67n" path="res://systems/behaviours/actor_movement_modifier_behaviour/actor_movement_modifier_behaviour.gd" id="2_r06ko"]
+
+[node name="ActorMovementModifierBehaviour" unique_id=1200312524 instance=ExtResource("1_jp8nd")]
+script = ExtResource("2_r06ko")
+operation = 0

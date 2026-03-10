@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://k0gilutiyigl" path="res://characters/player/player.tscn" id="3_e3xe6"]
 
 [node name="GameWorld" type="Node2D" unique_id=895151578 node_paths=PackedStringArray("player")]
+process_mode = 3
 script = ExtResource("1_bvgre")
 player = NodePath("Player")
 world_data = ExtResource("2_ea1x0")
@@ -32,9 +33,13 @@ position_smoothing_speed = 8.0
 [editable path="Player"]
 [editable path="Player/FlipTarget/TestGun"]
 [editable path="Player/FlipTarget/FootstepsPlayer"]
-[editable path="Player/PickupDetector"]
-[editable path="Player/InteractableDetector"]
-[editable path="Player/AnimationTree"]
+[editable path="Player/FlipTarget/MeleeAttackHitbox"]
+[editable path="Player/Detectors/PickupDetector"]
+[editable path="Player/Detectors/InteractableDetector"]
+[editable path="Player/Detectors/ActorDetectable"]
+[editable path="Player/Hurtbox"]
+[editable path="Player/Animations/AnimationTree"]
+[editable path="Player/Animations/EffectsController"]
 [editable path="Player/ActorStateMachine"]
 [editable path="Player/ActorStateMachine/States/Grounded"]
 [editable path="Player/ActorStateMachine/States/InitJump"]
@@ -47,4 +52,9 @@ position_smoothing_speed = 8.0
 [editable path="Player/ActorStateMachine/States/AirStartShoot"]
 [editable path="Player/ActorStateMachine/States/AirShoot"]
 [editable path="Player/ActorStateMachine/States/Swim"]
+[editable path="Player/ActorStateMachine/States/Swim/OnProcess/PlaySwimSoundIfMoving"]
+[editable path="Player/ActorStateMachine/States/Swim/OnProcess/PlaySwimSoundIfMoving/Behaviour/TimedSwimSound"]
+[editable path="Player/ActorStateMachine/States/Hurt"]
+[editable path="Player/ActorStateMachine/States/Dead"]
+[editable path="Player/ActorStateMachine/States/Disappear"]
 [editable path="Player/Data/ExternalConditions/ConditionShootTimer"]

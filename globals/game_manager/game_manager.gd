@@ -31,6 +31,13 @@ func on_current_room_set(data: GameWorldRoomData) -> void:
 	save_data.current_room = data.room_key
 
 
+func toggle_stop_time() -> void:
+	if get_tree().paused:
+		current_world.continue_time()
+	else:
+		current_world.stop_time()
+
+
 func unlock_ability(data: AbilityData) -> void:
 	unlocked_abilities[data.ability_key] = data
 	if not data.ability_key in save_data.unlocked_abilities:

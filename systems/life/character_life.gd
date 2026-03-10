@@ -9,6 +9,9 @@ signal life_changed(current: int)
 @onready var on_hurt_parent: Node = %OnHurt
 
 @export var starting_max_life: int = 3
+@export var hurt_sound: FmodEventEmitter2D
+@export var play_hurt_sound_on_death: bool = false
+@export var infinite_health: bool = false
 @export var debug_logs: bool = false
 
 var max_life: int
@@ -32,20 +35,29 @@ func set_life(val: int) -> void:
 
 
 func deal_damage(amount: int) -> void:
-	set_life(life - amount)
+	if not infinite_health:
+		set_life(life - amount)
 	damage_dealt.emit(amount)
 	if debug_logs:
 		print("%s received %d damage. Life left: %d" % [get_parent().name, amount, life])
 	if life <= 0:
-		died.emit()
+		on_death()
 	else:
 		on_hurt()
 
 
 func on_hurt() -> void:
+	if hurt_sound != null:
+		hurt_sound.play()
 	hurt.emit()
 	if on_hurt_behaviour != null:
 		on_hurt_behaviour.run(0)
+
+
+func on_death() -> void:
+	if play_hurt_sound_on_death:
+		hurt_sound.play()
+	died.emit()
 
 
 func heal_damage(amount: int) -> void:
