@@ -2,6 +2,8 @@ extends AnimationTree
 class_name ActorAnimationController
 
 signal action_finished(key: String)
+signal state_ended(state: String)
+signal state_started(state: String)
 
 @export var controller: ActorController
 @export var interval_data: Array[AnimationIntervalData]
@@ -61,15 +63,15 @@ func direct_to_state(state_key: String) -> void:
 	playback.travel(state_key)
 
 
-func get_playback() -> AnimationNodeStateMachinePlayback:
-	return get('parameters/playback') as AnimationNodeStateMachinePlayback
+func get_playback(mid_path: String = "") -> AnimationNodeStateMachinePlayback:
+	return get('parameters/%splayback' % mid_path) as AnimationNodeStateMachinePlayback
 
 
 func set_up_playbacks() -> void:
 	for path in tracked_playback_paths:
 		var playback: AnimationNodeStateMachinePlayback = get('parameters/%s' % path) as AnimationNodeStateMachinePlayback
-		playback.state_finished.connect(state_ended)
-		playback.state_started.connect(state_started)
+		playback.state_finished.connect(on_state_ended)
+		playback.state_started.connect(on_state_started)
 		
 
 func set_trigger(key: String) -> void:
@@ -126,16 +128,18 @@ func refresh_interval_parameters() -> void:
 		interval_parameters[s_key].set_parameter()
 
 
-func state_ended(state: String) -> void:
+func on_state_ended(state: String) -> void:
 	if debug_logs:
 		print("Animator state %s ended" % state)
 	var action: ActorBehaviour = state_ended_behaviours.get(state, null)
 	if action != null:
 		action.run(0)
+	state_ended.emit(state)
 
-func state_started(state: String) -> void:
+func on_state_started(state: String) -> void:
 	if debug_logs:
 		print("Animator state %s started" % state)
 	var action: ActorBehaviour = state_started_behaviours.get(state, null)
 	if action != null:
 		action.run(0)
+	state_started.emit(state)

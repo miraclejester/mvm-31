@@ -15,6 +15,9 @@ func state_entered() -> void:
 func run(_delta: float) -> void:
 	pass
 
+func run_disabled(_delta: float) -> void:
+	pass
+
 func run_physics(_delta: float) -> void:
 	pass
 
@@ -27,6 +30,7 @@ func on_disable() -> void:
 
 func try_run(delta: float) -> void:
 	if not enabled:
+		run_disabled(delta)
 		return
 	run(delta)
 

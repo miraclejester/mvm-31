@@ -3,6 +3,8 @@ class_name GameWorld
 
 signal room_load_started(next_room: GameWorldRoomData)
 signal current_room_set(room: GameWorldRoomData)
+signal entered_water()
+signal exited_water()
 
 @export var player: WorldCharacter
 @export var world_data: GameWorldData
@@ -76,3 +78,11 @@ func execute_transition(key: String) -> void:
 
 func on_projectile_shot(data: ProjectileShotData) -> void:
 	current_room.on_projectile_shot(data)
+
+
+func send_entered_water() -> void:
+	entered_water.emit()
+
+
+func send_exited_water() -> void:
+	exited_water.emit()

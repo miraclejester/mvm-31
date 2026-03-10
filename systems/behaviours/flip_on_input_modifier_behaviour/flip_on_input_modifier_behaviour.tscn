@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c1nskh5l4tg1c"]
+
+[ext_resource type="PackedScene" uid="uid://tthpm8c6xsb3" path="res://systems/behaviours/actor_behaviour.tscn" id="1_05b5e"]
+[ext_resource type="Script" uid="uid://d3thkfgku2w3l" path="res://systems/behaviours/flip_on_input_modifier_behaviour/flip_on_input_modifier_behaviour.gd" id="2_3vxu3"]
+
+[node name="FlipOnInputModifierBehaviour" unique_id=1200312524 instance=ExtResource("1_05b5e")]
+script = ExtResource("2_3vxu3")
+operation = 0

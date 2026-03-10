@@ -199,7 +199,6 @@ func water_movement(_delta: float) -> void:
 			for target in full_rotation_targets:
 				target.rotation_degrees = desired_rot
 			for target in half_rotation_targets:
-				print(desired_rot)
 				target.rotation_degrees = desired_rot
 				if target.rotation_degrees > 91 or target.rotation_degrees < -46:
 					target.scale.y = -1
