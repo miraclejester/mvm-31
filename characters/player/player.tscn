@@ -1114,6 +1114,12 @@ negative_path = "OutsideWater/conditions/gun_idle"
 send_positive = false
 setter_key = "outside_water_gun_idle"
 
+[node name="InWaterGunIdle" parent="Animations/AnimationTree/IntervalParameters" parent_id_path=PackedInt32Array(704880076, 1455507333) index="1" unique_id=1638471933 instance=ExtResource("11_art4l")]
+interval_key = "shoot"
+negative_path = "InWater/conditions/gun_idle"
+send_positive = false
+setter_key = "outside_water_gun_idle"
+
 [node name="JumpStarted" parent="Animations/AnimationTree/TriggerParameters" parent_id_path=PackedInt32Array(704880076, 1517241733) index="0" unique_id=1097550186 instance=ExtResource("13_gswnw")]
 parameter_path = "OutsideWater/conditions/jump_started"
 is_trigger = true
@@ -1143,6 +1149,11 @@ setter_key = "water_jump_started"
 parameter_path = "InWater/conditions/attack_started"
 is_trigger = true
 setter_key = "mermaid_attack_started"
+
+[node name="MermaidShootStarted" parent="Animations/AnimationTree/TriggerParameters" parent_id_path=PackedInt32Array(704880076, 1517241733) index="6" unique_id=1932831713 instance=ExtResource("13_gswnw")]
+parameter_path = "InWater/conditions/shoot_started"
+is_trigger = true
+setter_key = "mermaid_shoot_started"
 
 [node name="attack" type="Node" parent="Animations/AnimationTree/StateEndedBehaviours" parent_id_path=PackedInt32Array(704880076, 1299340365) index="0" unique_id=1434247642]
 
@@ -1662,6 +1673,13 @@ target_state = NodePath("../../../MermaidAttack")
 controller = NodePath("../../../../../../StaticBehaviours/PlayerController")
 key = "attack"
 
+[node name="ToMermaidShootStarted" parent="ActorStateMachine/States/MermaidIdle/Transitions" parent_id_path=PackedInt32Array(1154177940, 1931116749) index="2" unique_id=2061633232 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+target_state = NodePath("../../../MermaidStartShoot")
+
+[node name="InputActionJustPressed" parent="ActorStateMachine/States/MermaidIdle/Transitions/ToMermaidShootStarted" unique_id=794871445 node_paths=PackedStringArray("controller") instance=ExtResource("14_pd5ni")]
+controller = NodePath("../../../../../../StaticBehaviours/PlayerController")
+key = "shoot"
+
 [node name="MermaidMovement" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="16" unique_id=197444061 instance=ExtResource("4_oycdn")]
 
 [node name="BehaviourSequence" parent="ActorStateMachine/States/MermaidMovement/OnEnter" parent_id_path=PackedInt32Array(197444061, 667290384) index="0" unique_id=74979453 instance=ExtResource("14_vrg71")]
@@ -1714,6 +1732,13 @@ target_state = NodePath("../../../MermaidAttack")
 [node name="AttackJustPressed" parent="ActorStateMachine/States/MermaidMovement/Transitions/ToMermaidAttack" unique_id=1994136153 node_paths=PackedStringArray("controller") instance=ExtResource("14_pd5ni")]
 controller = NodePath("../../../../../../StaticBehaviours/PlayerController")
 key = "attack"
+
+[node name="ToMermaidShootStarted" parent="ActorStateMachine/States/MermaidMovement/Transitions" parent_id_path=PackedInt32Array(197444061, 1931116749) index="2" unique_id=1505963030 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+target_state = NodePath("../../../MermaidStartShoot")
+
+[node name="InputActionJustPressed" parent="ActorStateMachine/States/MermaidMovement/Transitions/ToMermaidShootStarted" unique_id=88530133 node_paths=PackedStringArray("controller") instance=ExtResource("14_pd5ni")]
+controller = NodePath("../../../../../../StaticBehaviours/PlayerController")
+key = "shoot"
 
 [node name="TransformToHuman" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="17" unique_id=1312318769 instance=ExtResource("4_oycdn")]
 
@@ -1794,6 +1819,47 @@ target_state = NodePath("../../../MermaidIdle")
 animator_controller = NodePath("../../../../../../Animations/AnimationTree")
 target_state = "mermaid_attack"
 playback_mid_path = "InWater/"
+
+[node name="MermaidStartShoot" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="19" unique_id=1552606310 instance=ExtResource("4_oycdn")]
+
+[node name="BehaviourSequence" parent="ActorStateMachine/States/MermaidStartShoot/OnEnter" parent_id_path=PackedInt32Array(1552606310, 667290384) index="0" unique_id=1435700349 instance=ExtResource("14_vrg71")]
+
+[node name="AnimatorSetTrigger" parent="ActorStateMachine/States/MermaidStartShoot/OnEnter/BehaviourSequence" unique_id=1740994648 node_paths=PackedStringArray("animation_controller") instance=ExtResource("17_b8hi5")]
+animation_controller = NodePath("../../../../../../Animations/AnimationTree")
+trigger_key = "mermaid_shoot_started"
+
+[node name="DisableMovement" parent="ActorStateMachine/States/MermaidStartShoot/OnEnter/BehaviourSequence" unique_id=1128042563 node_paths=PackedStringArray("behaviour") instance=ExtResource("24_a6siw")]
+behaviour = NodePath("../../../../../../Behaviours/ActorMovement")
+enable = false
+
+[node name="EnableMovement" parent="ActorStateMachine/States/MermaidStartShoot/OnExit" parent_id_path=PackedInt32Array(1552606310, 1496048418) index="0" unique_id=1562747801 node_paths=PackedStringArray("behaviour") instance=ExtResource("24_a6siw")]
+behaviour = NodePath("../../../../../Behaviours/ActorMovement")
+
+[node name="ToMermaidShoot" parent="ActorStateMachine/States/MermaidStartShoot/Transitions" parent_id_path=PackedInt32Array(1552606310, 1931116749) index="0" unique_id=2034952648 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+target_state = NodePath("../../../MermaidShoot")
+
+[node name="AnimatorControllerCondition" parent="ActorStateMachine/States/MermaidStartShoot/Transitions/ToMermaidShoot" unique_id=1709884201 node_paths=PackedStringArray("animator_controller") instance=ExtResource("48_di0ei")]
+animator_controller = NodePath("../../../../../../Animations/AnimationTree")
+target_state = "mermaid_start_shoot"
+
+[node name="GameAbilityUnlocked" parent="ActorStateMachine/States/MermaidStartShoot/EntryConditions" parent_id_path=PackedInt32Array(1552606310, 537054144) index="0" unique_id=1963090612 instance=ExtResource("39_hjies")]
+ability = 1
+
+[node name="MermaidShoot" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="20" unique_id=1865278771 instance=ExtResource("4_oycdn")]
+
+[node name="DisableMovement" parent="ActorStateMachine/States/MermaidShoot/OnEnter" parent_id_path=PackedInt32Array(1865278771, 667290384) index="0" unique_id=307903333 node_paths=PackedStringArray("behaviour") instance=ExtResource("24_a6siw")]
+behaviour = NodePath("../../../../../Behaviours/ActorMovement")
+enable = false
+
+[node name="EnableMovement" parent="ActorStateMachine/States/MermaidShoot/OnExit" parent_id_path=PackedInt32Array(1865278771, 1496048418) index="0" unique_id=1864293358 node_paths=PackedStringArray("behaviour") instance=ExtResource("24_a6siw")]
+behaviour = NodePath("../../../../../Behaviours/ActorMovement")
+
+[node name="ToMermaidIdle" parent="ActorStateMachine/States/MermaidShoot/Transitions" parent_id_path=PackedInt32Array(1865278771, 1931116749) index="0" unique_id=1137440569 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+target_state = NodePath("../../../MermaidIdle")
+
+[node name="AnimatorActionFinished" parent="ActorStateMachine/States/MermaidShoot/Transitions/ToMermaidIdle" unique_id=381726241 node_paths=PackedStringArray("animation_controller") instance=ExtResource("25_q28gw")]
+animation_controller = NodePath("../../../../../../Animations/AnimationTree")
+action = "shoot"
 
 [node name="ToMermaidTransform" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="0" unique_id=1733759237 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../States/TransformToMermaid")
@@ -1926,4 +1992,6 @@ movement = NodePath("../../Behaviours/ActorMovement")
 [editable path="ActorStateMachine/States/MermaidMovement/Transitions/ToMermaidAttack"]
 [editable path="ActorStateMachine/States/TransformToHuman"]
 [editable path="ActorStateMachine/States/MermaidAttack"]
+[editable path="ActorStateMachine/States/MermaidStartShoot"]
+[editable path="ActorStateMachine/States/MermaidShoot"]
 [editable path="Data/ExternalConditions/ConditionShootTimer"]
