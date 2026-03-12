@@ -72,7 +72,7 @@ func set_up_playbacks() -> void:
 		var playback: AnimationNodeStateMachinePlayback = get('parameters/%s' % path) as AnimationNodeStateMachinePlayback
 		playback.state_finished.connect(on_state_ended)
 		playback.state_started.connect(on_state_started)
-		
+
 
 func set_trigger(key: String) -> void:
 	trigger_parameters[key].set_trigger()

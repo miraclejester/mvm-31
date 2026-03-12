@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="GameWorldRoomData" format=3 uid="uid://bmvgvisp65t60"]
+
+[ext_resource type="Script" uid="uid://w6xaqda0lpl" path="res://systems/world/map/game_world_room_data.gd" id="1_5o3o6"]
+[ext_resource type="PackedScene" uid="uid://bx0i5hkxyydfw" path="res://maps/main_map/scenes/008_underwater_hallway.tscn" id="1_r8osl"]
+
+[resource]
+script = ExtResource("1_5o3o6")
+room_key = "008_underwater_hallway"
+room_name = "Underwater Hallway"
+room_scene = ExtResource("1_r8osl")
+bgm_key = "Cove"
+metadata/_custom_type_script = "uid://w6xaqda0lpl"

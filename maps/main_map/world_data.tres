@@ -10,6 +10,8 @@
 [ext_resource type="Resource" uid="uid://dvoafhlvsrrvc" path="res://maps/main_map/data/005_melee_upgrade_room.tres" id="8_0v0hj"]
 [ext_resource type="Resource" uid="uid://c5sh3b87v2euf" path="res://maps/main_map/data/006_first_cove_save_room.tres" id="9_5gm3r"]
 [ext_resource type="Resource" uid="uid://s5hi1rxnw77j" path="res://maps/main_map/data/007_beach_shaft_below.tres" id="10_ik0ij"]
+[ext_resource type="Resource" uid="uid://bmvgvisp65t60" path="res://maps/main_map/data/008_underwater_hallway.tres" id="11_04p0g"]
+[ext_resource type="Resource" uid="uid://gdv8e30ef1ho" path="res://maps/main_map/data/009_boss_room.tres" id="12_1mix1"]
 
 [sub_resource type="Resource" id="Resource_f8wy1"]
 script = ExtResource("5_5gm3r")
@@ -59,9 +61,25 @@ room2 = ExtResource("10_ik0ij")
 key2 = "up_entrance"
 metadata/_custom_type_script = "uid://4ep8qexpg43j"
 
+[sub_resource type="Resource" id="Resource_1mix1"]
+script = ExtResource("5_5gm3r")
+room1 = ExtResource("8_0v0hj")
+key1 = "right_entrance"
+room2 = ExtResource("11_04p0g")
+key2 = "left_entrance"
+metadata/_custom_type_script = "uid://4ep8qexpg43j"
+
+[sub_resource type="Resource" id="Resource_x110k"]
+script = ExtResource("5_5gm3r")
+room1 = ExtResource("11_04p0g")
+key1 = "right_entrance"
+room2 = ExtResource("12_1mix1")
+key2 = "left_entrance"
+metadata/_custom_type_script = "uid://4ep8qexpg43j"
+
 [resource]
 script = ExtResource("4_0v0hj")
 rooms = Array[ExtResource("2_etdg4")]([ExtResource("3_2j7pp"), ExtResource("1_f8wy1")])
-transitions = Array[ExtResource("5_5gm3r")]([SubResource("Resource_f8wy1"), SubResource("Resource_2j7pp"), SubResource("Resource_0v0hj"), SubResource("Resource_5gm3r"), SubResource("Resource_ik0ij"), SubResource("Resource_04p0g")])
+transitions = Array[ExtResource("5_5gm3r")]([SubResource("Resource_f8wy1"), SubResource("Resource_2j7pp"), SubResource("Resource_0v0hj"), SubResource("Resource_5gm3r"), SubResource("Resource_ik0ij"), SubResource("Resource_04p0g"), SubResource("Resource_1mix1"), SubResource("Resource_x110k")])
 default_room = ExtResource("8_0v0hj")
 metadata/_custom_type_script = "uid://dft4vx8l4govg"

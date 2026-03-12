@@ -208,6 +208,7 @@ check_vertical = true
 
 [node name="ActorStateMachine" parent="." index="8" unique_id=1386328368 node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("States/Ceiling")
+debug_logs = true
 
 [node name="Ceiling" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="0" unique_id=89059854 instance=ExtResource("6_qfb6v")]
 

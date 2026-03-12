@@ -99,6 +99,7 @@ life = NodePath("../CharacterLife")
 [node name="AnimationTree" parent="." unique_id=704880076 node_paths=PackedStringArray("controller") instance=ExtResource("2_m05bq")]
 anim_player = NodePath("../AnimationPlayer")
 controller = NodePath("../ActorController")
+tracked_playback_paths = Array[String](["playback"])
 
 [node name="EffectsPlayer" type="AnimationPlayer" parent="." unique_id=596851950]
 libraries/ = SubResource("AnimationLibrary_dob5b")

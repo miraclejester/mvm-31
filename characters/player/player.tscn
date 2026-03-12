@@ -1086,7 +1086,6 @@ parameters/OutsideWater/Grounded/blend_position = 0.0
 controller = NodePath("../../StaticBehaviours/PlayerController")
 interval_data = Array[ExtResource("8_1so5t")]([SubResource("Resource_fjxoa")])
 tracked_playback_paths = Array[String](["playback", "OutsideWater/playback", "InWater/playback"])
-debug_logs = true
 
 [node name="GroundedBlendPos" parent="Animations/AnimationTree/ProcessParameters" parent_id_path=PackedInt32Array(704880076, 1452081964) index="0" unique_id=1270825895 node_paths=PackedStringArray("body") instance=ExtResource("8_dx5ib")]
 body = NodePath("../../../..")
