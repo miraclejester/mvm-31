@@ -3,10 +3,7 @@ extends Node
 signal world_set()
 signal game_saved()
 
-@export var possible_abilities: Array[AbilityData]
-@export var save_path: String = "save_game.save"
-@export var default_room: GameWorldRoomData
-@export var default_abilities: Array[AbilityData.EAbilityKey]
+@export var config: GameManagerConfig
 
 var current_world: GameWorld
 var ability_dict: Dictionary[AbilityData.EAbilityKey, AbilityData] = {}
@@ -15,7 +12,7 @@ var save_data: SaveData
 
 func _ready() -> void:
 	save_data = load_from_file()
-	for ability in possible_abilities:
+	for ability in config.possible_abilities:
 		ability_dict[ability.ability_key] = ability
 	for ability_key in save_data.unlocked_abilities:
 		unlock_ability(ability_dict[ability_key])
@@ -70,13 +67,13 @@ func get_switch(switch_name: String) -> bool:
 
 
 func get_save_path() -> String:
-	return "user://%s" % save_path
+	return "user://%s" % config.save_path
 
 
 func get_default_data() -> Dictionary:
 	var res: Dictionary = {}
 	res[Strings.DATA_UNLOCKED_ABILITIES] = []
-	res[Strings.DATA_CURRENT_ROOM] = default_room.room_key
+	res[Strings.DATA_CURRENT_ROOM] = config.default_room.room_key
 	res[Strings.DATA_ROOM_SWITCHES] = {}
 	return res
 
@@ -108,8 +105,8 @@ func load_from_file() -> SaveData:
 
 
 func create_new_save() -> SaveData:
-	var data: SaveData = SaveData.new(default_room.room_key)
+	var data: SaveData = SaveData.new(config.default_room.room_key)
 	data.fill_from_data({
-		Strings.DATA_UNLOCKED_ABILITIES: default_abilities
+		Strings.DATA_UNLOCKED_ABILITIES: config.default_abilities
 	})
 	return data

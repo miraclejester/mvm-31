@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://r4hm3khm1k72"]
+
+[ext_resource type="Texture2D" uid="uid://dl017esonha4m" path="res://pixel_assets/backgrounds/backgroundSky.png" id="1_sweqw"]
+[ext_resource type="Texture2D" uid="uid://bdwnr2hpa7noh" path="res://pixel_assets/backgrounds/backgroundSea.png" id="2_6jy42"]
+[ext_resource type="Texture2D" uid="uid://c6h6keec1u552" path="res://pixel_assets/backgrounds/backgroundIslands.png" id="3_5nvm6"]
+
+[node name="HorizontalBeachBackground" type="Node2D" unique_id=1550229274]
+
+[node name="SkyParallax" type="Parallax2D" parent="." unique_id=1232700134]
+scroll_scale = Vector2(0.2, 0.2)
+repeat_size = Vector2(640, 0)
+
+[node name="TextureRect" type="TextureRect" parent="SkyParallax" unique_id=1656284132]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_sweqw")
+stretch_mode = 1
+
+[node name="SeaParallax" type="Parallax2D" parent="." unique_id=440002723]
+scroll_scale = Vector2(0.6, 0.6)
+repeat_size = Vector2(640, 0)
+
+[node name="TextureRect" type="TextureRect" parent="SeaParallax" unique_id=608306595]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_6jy42")
+stretch_mode = 1
+
+[node name="IslandsParallax" type="Parallax2D" parent="." unique_id=1056986840]
+scroll_scale = Vector2(0.6, 0.6)
+repeat_size = Vector2(640, 0)
+
+[node name="TextureRect" type="TextureRect" parent="IslandsParallax" unique_id=1565360428]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_5nvm6")
+stretch_mode = 1

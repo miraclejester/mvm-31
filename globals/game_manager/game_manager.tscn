@@ -1,15 +1,9 @@
 [gd_scene format=3 uid="uid://up5qsfygvuc6"]
 
 [ext_resource type="Script" uid="uid://bbriiha0sjn3r" path="res://globals/game_manager/game_manager.gd" id="1_dmcod"]
-[ext_resource type="Script" uid="uid://tgtio2puq0ht" path="res://characters/player/abilities/AbilityData.gd" id="2_q5eha"]
-[ext_resource type="Resource" uid="uid://b00n5n0jremam" path="res://characters/player/abilities/melee_attack.tres" id="3_qfmkk"]
-[ext_resource type="Resource" uid="uid://c3ra0kc8itl6v" path="res://characters/player/abilities/ranged_attack.tres" id="4_qfmkk"]
-[ext_resource type="Resource" uid="uid://xb7exrp5le3x" path="res://characters/player/abilities/mermaid_transform.tres" id="5_mcos4"]
-[ext_resource type="Resource" uid="uid://c00vpqi1ouf0g" path="res://maps/main_map/data/004_first_cove_long_fall.tres" id="6_mcos4"]
+[ext_resource type="Resource" uid="uid://y5hfyntixuct" path="res://globals/game_manager/game_manager_config.tres" id="2_ctu20"]
 
 [node name="GameManager" type="Node" unique_id=1195116369]
 process_mode = 3
 script = ExtResource("1_dmcod")
-possible_abilities = Array[ExtResource("2_q5eha")]([ExtResource("3_qfmkk"), ExtResource("4_qfmkk"), ExtResource("5_mcos4")])
-default_room = ExtResource("6_mcos4")
-default_abilities = Array[int]([0, 2, 1])
+config = ExtResource("2_ctu20")

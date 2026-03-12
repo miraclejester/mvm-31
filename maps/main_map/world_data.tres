@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://c00vpqi1ouf0g" path="res://maps/main_map/data/004_first_cove_long_fall.tres" id="7_2j7pp"]
 [ext_resource type="Resource" uid="uid://dvoafhlvsrrvc" path="res://maps/main_map/data/005_melee_upgrade_room.tres" id="8_0v0hj"]
 [ext_resource type="Resource" uid="uid://c5sh3b87v2euf" path="res://maps/main_map/data/006_first_cove_save_room.tres" id="9_5gm3r"]
+[ext_resource type="Resource" uid="uid://s5hi1rxnw77j" path="res://maps/main_map/data/007_beach_shaft_below.tres" id="10_ik0ij"]
 
 [sub_resource type="Resource" id="Resource_f8wy1"]
 script = ExtResource("5_5gm3r")
@@ -20,8 +21,8 @@ metadata/_custom_type_script = "uid://4ep8qexpg43j"
 
 [sub_resource type="Resource" id="Resource_2j7pp"]
 script = ExtResource("5_5gm3r")
-room1 = ExtResource("1_f8wy1")
-key1 = "cove_entrance"
+room1 = ExtResource("10_ik0ij")
+key1 = "right_entrance"
 room2 = ExtResource("6_etdg4")
 key2 = "left_entrance"
 metadata/_custom_type_script = "uid://4ep8qexpg43j"
@@ -50,9 +51,17 @@ room2 = ExtResource("9_5gm3r")
 key2 = "right_entrance"
 metadata/_custom_type_script = "uid://4ep8qexpg43j"
 
+[sub_resource type="Resource" id="Resource_04p0g"]
+script = ExtResource("5_5gm3r")
+room1 = ExtResource("1_f8wy1")
+key1 = "down_entrance"
+room2 = ExtResource("10_ik0ij")
+key2 = "up_entrance"
+metadata/_custom_type_script = "uid://4ep8qexpg43j"
+
 [resource]
 script = ExtResource("4_0v0hj")
 rooms = Array[ExtResource("2_etdg4")]([ExtResource("3_2j7pp"), ExtResource("1_f8wy1")])
-transitions = Array[ExtResource("5_5gm3r")]([SubResource("Resource_f8wy1"), SubResource("Resource_2j7pp"), SubResource("Resource_0v0hj"), SubResource("Resource_5gm3r"), SubResource("Resource_ik0ij")])
+transitions = Array[ExtResource("5_5gm3r")]([SubResource("Resource_f8wy1"), SubResource("Resource_2j7pp"), SubResource("Resource_0v0hj"), SubResource("Resource_5gm3r"), SubResource("Resource_ik0ij"), SubResource("Resource_04p0g")])
 default_room = ExtResource("8_0v0hj")
 metadata/_custom_type_script = "uid://dft4vx8l4govg"
