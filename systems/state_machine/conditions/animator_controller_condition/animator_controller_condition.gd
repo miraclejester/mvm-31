@@ -8,7 +8,6 @@ enum EAnimatorControllerConditionOperation {
 @export var animator_controller: ActorAnimationController
 @export var operation: EAnimatorControllerConditionOperation
 @export var target_state: String
-@export var playback_mid_path: String = ""
 
 var condition_fulfilled: bool = false
 

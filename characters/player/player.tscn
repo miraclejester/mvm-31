@@ -396,6 +396,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [78, 79, 80, 81, 82, 83, 84, 85, 86, 87]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_b8hv6"]
 resource_name = "mermaid_hurt"
@@ -1818,7 +1832,6 @@ target_state = NodePath("../../../MermaidIdle")
 [node name="AttackStateFinished" parent="ActorStateMachine/States/MermaidAttack/Transitions/ToMermaidIdle" unique_id=113114299 node_paths=PackedStringArray("animator_controller") instance=ExtResource("48_di0ei")]
 animator_controller = NodePath("../../../../../../Animations/AnimationTree")
 target_state = "mermaid_attack"
-playback_mid_path = "InWater/"
 
 [node name="MermaidStartShoot" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="19" unique_id=1552606310 instance=ExtResource("4_oycdn")]
 
@@ -1861,6 +1874,54 @@ target_state = NodePath("../../../MermaidIdle")
 animation_controller = NodePath("../../../../../../Animations/AnimationTree")
 action = "shoot"
 
+[node name="MermaidHurt" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="21" unique_id=1957754588 instance=ExtResource("4_oycdn")]
+
+[node name="BehaviourSequence" parent="ActorStateMachine/States/MermaidHurt/OnEnter" parent_id_path=PackedInt32Array(1957754588, 667290384) index="0" unique_id=978852543 instance=ExtResource("14_vrg71")]
+
+[node name="TravelToMermaidHurt" parent="ActorStateMachine/States/MermaidHurt/OnEnter/BehaviourSequence" unique_id=1408605890 node_paths=PackedStringArray("animation_controller") instance=ExtResource("47_bdpt7")]
+animation_controller = NodePath("../../../../../../Animations/AnimationTree")
+target_node = "mermaid_hurt"
+
+[node name="DisableMovement" parent="ActorStateMachine/States/MermaidHurt/OnEnter/BehaviourSequence" unique_id=629036920 node_paths=PackedStringArray("behaviour") instance=ExtResource("24_a6siw")]
+behaviour = NodePath("../../../../../../Behaviours/ActorMovement")
+enable = false
+
+[node name="DisableMovement" parent="ActorStateMachine/States/MermaidHurt/OnExit" parent_id_path=PackedInt32Array(1957754588, 1496048418) index="0" unique_id=503432079 node_paths=PackedStringArray("behaviour") instance=ExtResource("24_a6siw")]
+behaviour = NodePath("../../../../../Behaviours/ActorMovement")
+
+[node name="ToMermaidIdle" parent="ActorStateMachine/States/MermaidHurt/Transitions" parent_id_path=PackedInt32Array(1957754588, 1931116749) index="0" unique_id=1478667 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+target_state = NodePath("../../../MermaidIdle")
+
+[node name="HurtFinished" parent="ActorStateMachine/States/MermaidHurt/Transitions/ToMermaidIdle" unique_id=1550991595 node_paths=PackedStringArray("animator_controller") instance=ExtResource("48_di0ei")]
+animator_controller = NodePath("../../../../../../Animations/AnimationTree")
+target_state = "mermaid_hurt"
+
+[node name="MermaidDead" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="22" unique_id=1457782784 instance=ExtResource("4_oycdn")]
+
+[node name="BehaviourSequence" parent="ActorStateMachine/States/MermaidDead/OnEnter" parent_id_path=PackedInt32Array(1457782784, 667290384) index="0" unique_id=1372869001 instance=ExtResource("14_vrg71")]
+
+[node name="PlayDeathSound" parent="ActorStateMachine/States/MermaidDead/OnEnter/BehaviourSequence" unique_id=2078257352 node_paths=PackedStringArray("event_emitter") instance=ExtResource("22_r7pn3")]
+event_emitter = NodePath("../../../../../../FlipTarget/SFX/death")
+
+[node name="TravelToDeath" parent="ActorStateMachine/States/MermaidDead/OnEnter/BehaviourSequence" unique_id=1721014115 node_paths=PackedStringArray("animation_controller") instance=ExtResource("47_bdpt7")]
+animation_controller = NodePath("../../../../../../Animations/AnimationTree")
+target_node = "mermaid_death"
+
+[node name="DisableMovement" parent="ActorStateMachine/States/MermaidDead/OnEnter/BehaviourSequence" unique_id=139252257 node_paths=PackedStringArray("behaviour") instance=ExtResource("24_a6siw")]
+behaviour = NodePath("../../../../../../Behaviours/ActorMovement")
+enable = false
+
+[node name="DisableFlipping" parent="ActorStateMachine/States/MermaidDead/OnEnter/BehaviourSequence" unique_id=1507856200 node_paths=PackedStringArray("behaviour") instance=ExtResource("24_a6siw")]
+behaviour = NodePath("../../../../../../Behaviours/Node2dFlipOnInput")
+enable = false
+
+[node name="ToDisappear" parent="ActorStateMachine/States/MermaidDead" unique_id=48145458 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+target_state = NodePath("../../Disappear")
+
+[node name="DeathAnimationFinished" parent="ActorStateMachine/States/MermaidDead/ToDisappear" unique_id=1051571631 node_paths=PackedStringArray("animator_controller") instance=ExtResource("48_di0ei")]
+animator_controller = NodePath("../../../../../Animations/AnimationTree")
+target_state = "mermaid_death"
+
 [node name="ToMermaidTransform" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="0" unique_id=1733759237 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../States/TransformToMermaid")
 
@@ -1871,7 +1932,7 @@ valid_states = [NodePath("../../../States/Grounded"), NodePath("../../../States/
 [node name="GameAbilityUnlocked" parent="ActorStateMachine/AnyStateTransitions/ToMermaidTransform" unique_id=430261806 instance=ExtResource("39_hjies")]
 ability = 2
 
-[node name="InWater" parent="ActorStateMachine/AnyStateTransitions/ToMermaidTransform" unique_id=1167934670 node_paths=PackedStringArray("condition") instance=ExtResource("22_lykvf")]
+[node name="IsInWater" parent="ActorStateMachine/AnyStateTransitions/ToMermaidTransform" unique_id=1817103166 node_paths=PackedStringArray("condition") instance=ExtResource("22_lykvf")]
 condition = NodePath("../../../../Data/ExternalConditions/IsInWater")
 
 [node name="ToSwim" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="1" unique_id=1979086372 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
@@ -1885,25 +1946,47 @@ ability = 2
 [node name="IsInWater" parent="ActorStateMachine/AnyStateTransitions/ToSwim" unique_id=149233817 node_paths=PackedStringArray("condition") instance=ExtResource("22_lykvf")]
 condition = NodePath("../../../../Data/ExternalConditions/IsInWater")
 
-[node name="ToHurt" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="2" unique_id=1919227895 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
-target_state = NodePath("../../States/Hurt")
+[node name="ToMermaidHurt" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="2" unique_id=265770194 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+target_state = NodePath("../../States/MermaidHurt")
 
-[node name="IsHurt" parent="ActorStateMachine/AnyStateTransitions/ToHurt" unique_id=1634116028 node_paths=PackedStringArray("life") instance=ExtResource("49_apqh1")]
+[node name="IsHurt" parent="ActorStateMachine/AnyStateTransitions/ToMermaidHurt" unique_id=1634116028 node_paths=PackedStringArray("life") instance=ExtResource("49_apqh1")]
 life = NodePath("../../../../StaticBehaviours/CharacterLife")
 
-[node name="ToDead" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="3" unique_id=220846891 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+[node name="InMermaidStatesExt" parent="ActorStateMachine/AnyStateTransitions/ToMermaidHurt" unique_id=1307214390 node_paths=PackedStringArray("condition") instance=ExtResource("22_lykvf")]
+condition = NodePath("../../../../Data/ExternalConditions/InMermaidStates")
+
+[node name="ToHurt" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="3" unique_id=1919227895 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+target_state = NodePath("../../States/Hurt")
+
+[node name="IsHurt" parent="ActorStateMachine/AnyStateTransitions/ToHurt" unique_id=671139255 node_paths=PackedStringArray("life") instance=ExtResource("49_apqh1")]
+life = NodePath("../../../../StaticBehaviours/CharacterLife")
+
+[node name="ToMermaidDead" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="4" unique_id=335092645 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+target_state = NodePath("../../States/MermaidDead")
+
+[node name="IsDead" parent="ActorStateMachine/AnyStateTransitions/ToMermaidDead" unique_id=510846477 node_paths=PackedStringArray("life") instance=ExtResource("49_apqh1")]
+life = NodePath("../../../../StaticBehaviours/CharacterLife")
+operation = 1
+
+[node name="InMermaidStatesExt" parent="ActorStateMachine/AnyStateTransitions/ToMermaidDead" unique_id=142430572 node_paths=PackedStringArray("condition") instance=ExtResource("22_lykvf")]
+condition = NodePath("../../../../Data/ExternalConditions/InMermaidStates")
+
+[node name="ToDead" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="5" unique_id=220846891 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../States/Dead")
 
 [node name="IsDead" parent="ActorStateMachine/AnyStateTransitions/ToDead" unique_id=788520301 node_paths=PackedStringArray("life") instance=ExtResource("49_apqh1")]
 life = NodePath("../../../../StaticBehaviours/CharacterLife")
 operation = 1
 
-[node name="ToTransformToHuman" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="4" unique_id=1800534706 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+[node name="InNonMermaidStates" parent="ActorStateMachine/AnyStateTransitions/ToDead" unique_id=453078158 node_paths=PackedStringArray("state_machine", "valid_states") instance=ExtResource("57_ro1nf")]
+state_machine = NodePath("../../..")
+valid_states = [NodePath("../../../States/Grounded"), NodePath("../../../States/InitJump"), NodePath("../../../States/Airborne"), NodePath("../../../States/Crouch"), NodePath("../../../States/Attack"), NodePath("../../../States/AirAttack"), NodePath("../../../States/StartShoot"), NodePath("../../../States/Shoot"), NodePath("../../../States/AirStartShoot"), NodePath("../../../States/AirShoot"), NodePath("../../../States/Hurt")]
+
+[node name="ToTransformToHuman" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="6" unique_id=1800534706 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
 target_state = NodePath("../../States/TransformToHuman")
 
-[node name="InMermaidStates" parent="ActorStateMachine/AnyStateTransitions/ToTransformToHuman" unique_id=1554182965 node_paths=PackedStringArray("state_machine", "valid_states") instance=ExtResource("57_ro1nf")]
-state_machine = NodePath("../../..")
-valid_states = [NodePath("../../../States/MermaidIdle"), NodePath("../../../States/MermaidMovement"), NodePath("../../../States/MermaidAttack")]
+[node name="InMermaidStatesExt" parent="ActorStateMachine/AnyStateTransitions/ToTransformToHuman" unique_id=1807010474 node_paths=PackedStringArray("condition") instance=ExtResource("22_lykvf")]
+condition = NodePath("../../../../Data/ExternalConditions/InMermaidStates")
 
 [node name="JumpJustPressed" parent="ActorStateMachine/AnyStateTransitions/ToTransformToHuman" unique_id=1218573032 node_paths=PackedStringArray("controller") instance=ExtResource("14_pd5ni")]
 controller = NodePath("../../../../StaticBehaviours/PlayerController")
@@ -1915,6 +1998,10 @@ movement = NodePath("../../../../Behaviours/ActorMovement")
 [node name="Data" type="Node" parent="." unique_id=257589254]
 
 [node name="ExternalConditions" type="Node" parent="Data" unique_id=1230396717]
+
+[node name="InMermaidStates" parent="Data/ExternalConditions" unique_id=823093094 node_paths=PackedStringArray("state_machine", "valid_states") instance=ExtResource("57_ro1nf")]
+state_machine = NodePath("../../../ActorStateMachine")
+valid_states = [NodePath("../../../ActorStateMachine/States/MermaidIdle"), NodePath("../../../ActorStateMachine/States/MermaidMovement"), NodePath("../../../ActorStateMachine/States/MermaidAttack"), NodePath("../../../ActorStateMachine/States/MermaidStartShoot"), NodePath("../../../ActorStateMachine/States/MermaidShoot"), NodePath("../../../ActorStateMachine/States/MermaidDead")]
 
 [node name="JumpJustPressed" parent="Data/ExternalConditions" unique_id=1557642026 node_paths=PackedStringArray("controller") instance=ExtResource("14_pd5ni")]
 controller = NodePath("../../../StaticBehaviours/PlayerController")
@@ -1994,4 +2081,6 @@ movement = NodePath("../../Behaviours/ActorMovement")
 [editable path="ActorStateMachine/States/MermaidAttack"]
 [editable path="ActorStateMachine/States/MermaidStartShoot"]
 [editable path="ActorStateMachine/States/MermaidShoot"]
+[editable path="ActorStateMachine/States/MermaidHurt"]
+[editable path="ActorStateMachine/States/MermaidDead"]
 [editable path="Data/ExternalConditions/ConditionShootTimer"]
