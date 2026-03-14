@@ -17,7 +17,7 @@ unique_name_in_owner = true
 position = Vector2(32, 288)
 metadata/_edit_group_ = true
 
-[node name="CameraRemote" parent="Player" index="4" unique_id=1653809102]
+[node name="CameraRemote" parent="Player" index="5" unique_id=1653809102]
 remote_path = NodePath("../../MainCamera")
 
 [node name="MainCamera" type="Camera2D" parent="." unique_id=1774033888]

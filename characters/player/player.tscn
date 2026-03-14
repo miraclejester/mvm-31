@@ -1000,6 +1000,8 @@ offset_bottom = 5.0
 position = Vector2(0, -10)
 gizmo_extents = 27.5
 
+[node name="PositionalListener" type="FmodListener2D" parent="." unique_id=443365391]
+
 [node name="CameraRemote" type="RemoteTransform2D" parent="." unique_id=1653809102]
 
 [node name="Detectors" type="Node2D" parent="." unique_id=233393153]

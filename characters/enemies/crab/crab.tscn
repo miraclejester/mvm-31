@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ewmtqexggdi8" path="res://characters/enemies/world_enemy.tscn" id="1_66stj"]
 [ext_resource type="Texture2D" uid="uid://bijs7p8v60e12" path="res://pixel_assets/characters/enemies/crab-Sheet.png" id="2_42hum"]
+[ext_resource type="Shader" uid="uid://cd1fjlst6www0" path="res://shaders/hitflash/hitflash.gdshader" id="2_p6tur"]
 [ext_resource type="PackedScene" uid="uid://ent37cfwkxei" path="res://systems/collision/hitbox.tscn" id="3_nvhio"]
 [ext_resource type="PackedScene" uid="uid://0sdn13hb32u4" path="res://systems/state_machine/state/actor_state.tscn" id="3_p8c51"]
 [ext_resource type="Script" uid="uid://bybupba6sp868" path="res://systems/collision/hitbox_data.gd" id="4_42hum"]
@@ -15,6 +16,12 @@
 [ext_resource type="PackedScene" uid="uid://woclehb2tr1t" path="res://systems/state_machine/conditions/animator_controller_condition/animator_controller_condition.tscn" id="10_2utb2"]
 [ext_resource type="PackedScene" uid="uid://c4b3teprr3iu4" path="res://systems/state_machine/conditions/actor_life_condition/actor_life_condition.tscn" id="11_uaed0"]
 [ext_resource type="PackedScene" uid="uid://bwfojncre050s" path="res://systems/behaviours/actor_erase_actor/actor_erase_actor.tscn" id="11_xtawb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f64eg"]
+resource_local_to_scene = true
+shader = ExtResource("2_p6tur")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/enabled = false
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8c51"]
 size = Vector2(26, 18)
@@ -114,6 +121,7 @@ transitions = ["Start", "walk", SubResource("AnimationNodeStateMachineTransition
 [node name="Crab" unique_id=1487671488 instance=ExtResource("1_66stj")]
 
 [node name="FlipVisuals" parent="." index="0" unique_id=783290642]
+material = SubResource("ShaderMaterial_f64eg")
 position = Vector2(0, -14)
 
 [node name="Sprite" type="Sprite2D" parent="FlipVisuals" index="0" unique_id=414510599]
@@ -129,6 +137,12 @@ position = Vector2(14, 0)
 
 [node name="DiagonalMarker" type="Marker2D" parent="FlipVisuals" index="2" unique_id=340481097]
 position = Vector2(14, 15)
+
+[node name="crabWalk" type="FmodEventEmitter2D" parent="StaticVisuals" parent_id_path=PackedInt32Array(613635385) index="1" unique_id=1798121390]
+event_name = "event:/Enemies/Crab_Loop"
+event_guid = "{3b6a43a6-14c3-4a5b-89c9-d73601de3b4f}"
+autoplay = true
+volume = 0.7
 
 [node name="WorldCollider" parent="." index="2" unique_id=978122623]
 visible = false

@@ -16,8 +16,10 @@
 [ext_resource type="PackedScene" uid="uid://dhaucbmituw0b" path="res://systems/state_machine/utils/actor_retriever/actor_retriever.tscn" id="11_xjfgo"]
 [ext_resource type="PackedScene" uid="uid://m6msobg5ayht" path="res://systems/state_machine/conditions/negate/condition_negate.tscn" id="12_nuok5"]
 [ext_resource type="PackedScene" uid="uid://d2sfif6tar0wc" path="res://systems/state_machine/utils/actor_retriever/detector_actor_retriever/detector_actor_retriever.tscn" id="12_xjfgo"]
+[ext_resource type="PackedScene" uid="uid://d1j52u8we6mo5" path="res://systems/behaviours/audio_play_event_one_shot/audio_play_event_one_shot.tscn" id="13_vooy1"]
 [ext_resource type="PackedScene" uid="uid://bh8e5ywavyeuu" path="res://systems/state_machine/utils/static_position_retriever/static_position_retriever.tscn" id="15_5nwb1"]
 [ext_resource type="PackedScene" uid="uid://dkyxr3h4bcc8y" path="res://systems/state_machine/conditions/actor_is_at_position/actor_is_at_position.tscn" id="15_mtq6h"]
+[ext_resource type="PackedScene" uid="uid://caqfq51gueoim" path="res://systems/behaviours/sequence/behaviour_sequence.tscn" id="15_yuo7p"]
 [ext_resource type="PackedScene" uid="uid://ckknu5s2iq2tc" path="res://systems/behaviours/animator_behaviour/actor_animator_behaviour.tscn" id="16_i7hcl"]
 [ext_resource type="PackedScene" uid="uid://woclehb2tr1t" path="res://systems/state_machine/conditions/animator_controller_condition/animator_controller_condition.tscn" id="17_6ntr6"]
 [ext_resource type="PackedScene" uid="uid://c4b3teprr3iu4" path="res://systems/state_machine/conditions/actor_life_condition/actor_life_condition.tscn" id="18_6ntr6"]
@@ -183,6 +185,10 @@ collision_mask = 32
 position = Vector2(-0.5, 98.5)
 shape = SubResource("RectangleShape2D_6yso2")
 
+[node name="bat_fly" type="FmodEventEmitter2D" parent="StaticVisuals" parent_id_path=PackedInt32Array(613635385) index="3" unique_id=1686944072]
+event_name = "event:/Enemies/Bat_Loop"
+event_guid = "{5666c04d-34ba-4d69-9375-8cc4a7233411}"
+
 [node name="CollisionShape2D" parent="Hurtbox" parent_id_path=PackedInt32Array(573111498) index="0" unique_id=1674096468]
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_hetit")
@@ -224,8 +230,18 @@ detector = NodePath("../../../../../../StaticVisuals/ActorDetector")
 
 [node name="Following" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="1" unique_id=1555364255 instance=ExtResource("6_qfb6v")]
 
-[node name="ControllerSetMovementInput" parent="ActorStateMachine/States/Following/OnExit" parent_id_path=PackedInt32Array(1555364255, 1496048418) index="0" unique_id=758941129 node_paths=PackedStringArray("controller") instance=ExtResource("10_3d87h")]
-controller = NodePath("../../../../../ActorController")
+[node name="PlayBatSound" parent="ActorStateMachine/States/Following/OnEnter" parent_id_path=PackedInt32Array(1555364255, 667290384) index="0" unique_id=51072555 node_paths=PackedStringArray("event_emitter") instance=ExtResource("13_vooy1")]
+event_emitter = NodePath("../../../../../StaticVisuals/bat_fly")
+play_regular = true
+
+[node name="BehaviourSequence" parent="ActorStateMachine/States/Following/OnExit" parent_id_path=PackedInt32Array(1555364255, 1496048418) index="0" unique_id=1550808993 instance=ExtResource("15_yuo7p")]
+
+[node name="StopBatSound" parent="ActorStateMachine/States/Following/OnExit/BehaviourSequence" index="0" unique_id=1556472785 node_paths=PackedStringArray("event_emitter") instance=ExtResource("13_vooy1")]
+event_emitter = NodePath("../../../../../../StaticVisuals/bat_fly")
+stop = true
+
+[node name="ControllerSetMovementInput" parent="ActorStateMachine/States/Following/OnExit/BehaviourSequence" index="1" unique_id=758941129 node_paths=PackedStringArray("controller") instance=ExtResource("10_3d87h")]
+controller = NodePath("../../../../../../ActorController")
 operation = 2
 
 [node name="ControllerSetMovementInput" parent="ActorStateMachine/States/Following/OnProcess" parent_id_path=PackedInt32Array(1555364255, 1317741512) index="0" unique_id=1613833503 node_paths=PackedStringArray("controller", "source", "target") instance=ExtResource("10_3d87h")]
@@ -244,8 +260,18 @@ detector = NodePath("../../../../../../../StaticVisuals/ActorDetector")
 
 [node name="BackHome" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="2" unique_id=135565167 instance=ExtResource("6_qfb6v")]
 
-[node name="ControllerSetMovementInput" parent="ActorStateMachine/States/BackHome/OnExit" parent_id_path=PackedInt32Array(135565167, 1496048418) index="0" unique_id=1908825761 node_paths=PackedStringArray("controller") instance=ExtResource("10_3d87h")]
-controller = NodePath("../../../../../ActorController")
+[node name="PlayBatSound" parent="ActorStateMachine/States/BackHome/OnEnter" parent_id_path=PackedInt32Array(135565167, 667290384) index="0" unique_id=297340931 node_paths=PackedStringArray("event_emitter") instance=ExtResource("13_vooy1")]
+event_emitter = NodePath("../../../../../StaticVisuals/bat_fly")
+play_regular = true
+
+[node name="BehaviourSequence" parent="ActorStateMachine/States/BackHome/OnExit" parent_id_path=PackedInt32Array(135565167, 1496048418) index="0" unique_id=627662498 instance=ExtResource("15_yuo7p")]
+
+[node name="StopBatSound" parent="ActorStateMachine/States/BackHome/OnExit/BehaviourSequence" index="0" unique_id=1024143911 node_paths=PackedStringArray("event_emitter") instance=ExtResource("13_vooy1")]
+event_emitter = NodePath("../../../../../../StaticVisuals/bat_fly")
+stop = true
+
+[node name="ControllerSetMovementInput" parent="ActorStateMachine/States/BackHome/OnExit/BehaviourSequence" index="1" unique_id=1908825761 node_paths=PackedStringArray("controller") instance=ExtResource("10_3d87h")]
+controller = NodePath("../../../../../../ActorController")
 operation = 2
 
 [node name="ControllerSetMovementInput" parent="ActorStateMachine/States/BackHome/OnProcess" parent_id_path=PackedInt32Array(135565167, 1317741512) index="0" unique_id=1449141507 node_paths=PackedStringArray("controller", "source", "static_target") instance=ExtResource("10_3d87h")]
