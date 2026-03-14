@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c1h52flsaty6g" path="res://interactables/wall.tscn" id="3_xn5am"]
 [ext_resource type="PackedScene" uid="uid://caqfq51gueoim" path="res://systems/behaviours/sequence/behaviour_sequence.tscn" id="4_c06nw"]
 [ext_resource type="PackedScene" uid="uid://dguk1l368orko" path="res://systems/behaviours/spawn_actor_behaviour/spawn_actor_behaviour.tscn" id="5_it02w"]
+[ext_resource type="PackedScene" uid="uid://bqg5pep6gnwgo" path="res://systems/behaviours/audio_play_bgm/audio_play_bgm.tscn" id="5_pgpcv"]
 [ext_resource type="PackedScene" uid="uid://bwfojncre050s" path="res://systems/behaviours/actor_erase_actor/actor_erase_actor.tscn" id="7_c06nw"]
 [ext_resource type="PackedScene" uid="uid://deh3jqi5rkep7" path="res://systems/behaviours/state_machine_enter_state/state_machine_enter_state.tscn" id="8_gw8os"]
 [ext_resource type="PackedScene" uid="uid://b5kdxqxe2iwvk" path="res://characters/enemies/boss/boss.tscn" id="9_it02w"]
@@ -48,14 +49,17 @@ shape = SubResource("RectangleShape2D_k05pv")
 
 [node name="BehaviourSequence" parent="Interactables/BossStartInteractable/EnterBehaviour" parent_id_path=PackedInt32Array(337649948, 1717418744) index="0" unique_id=1550808993 instance=ExtResource("4_c06nw")]
 
-[node name="SpawnActorBehaviour" parent="Interactables/BossStartInteractable/EnterBehaviour/BehaviourSequence" index="0" unique_id=1200312524 node_paths=PackedStringArray("parent") instance=ExtResource("5_it02w")]
+[node name="AudioPlayBGM" parent="Interactables/BossStartInteractable/EnterBehaviour/BehaviourSequence" index="0" unique_id=1200312524 instance=ExtResource("5_pgpcv")]
+bgm_key = "Boss"
+
+[node name="SpawnActorBehaviour" parent="Interactables/BossStartInteractable/EnterBehaviour/BehaviourSequence" index="1" unique_id=163151838 node_paths=PackedStringArray("parent") instance=ExtResource("5_it02w")]
 actor_scene = ExtResource("3_xn5am")
 parent = NodePath("../../../../WallSpawnParent")
 
-[node name="ActorEraseActor" parent="Interactables/BossStartInteractable/EnterBehaviour/BehaviourSequence" index="1" unique_id=521280831 node_paths=PackedStringArray("target") instance=ExtResource("7_c06nw")]
+[node name="ActorEraseActor" parent="Interactables/BossStartInteractable/EnterBehaviour/BehaviourSequence" index="2" unique_id=521280831 node_paths=PackedStringArray("target") instance=ExtResource("7_c06nw")]
 target = NodePath("../../..")
 
-[node name="StateMachineEnterState" parent="Interactables/BossStartInteractable/EnterBehaviour/BehaviourSequence" index="2" unique_id=331187233 node_paths=PackedStringArray("state_machine") instance=ExtResource("8_gw8os")]
+[node name="StateMachineEnterState" parent="Interactables/BossStartInteractable/EnterBehaviour/BehaviourSequence" index="3" unique_id=331187233 node_paths=PackedStringArray("state_machine") instance=ExtResource("8_gw8os")]
 state_machine = NodePath("../../../../../Enemies/Boss/ActorStateMachine")
 state_name = "MoveToRandomSpot"
 

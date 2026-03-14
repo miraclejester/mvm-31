@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bqg5pep6gnwgo"]
+
+[ext_resource type="PackedScene" uid="uid://tthpm8c6xsb3" path="res://systems/behaviours/actor_behaviour.tscn" id="1_nqjix"]
+[ext_resource type="Script" uid="uid://bekv2doucd5ec" path="res://systems/behaviours/audio_play_bgm/audio_play_bgm.gd" id="2_bmh8p"]
+
+[node name="AudioPlayBGM" unique_id=1200312524 instance=ExtResource("1_nqjix")]
+script = ExtResource("2_bmh8p")
+bgm_key = ""

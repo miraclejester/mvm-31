@@ -23,6 +23,8 @@
 [ext_resource type="Script" uid="uid://bybupba6sp868" path="res://systems/collision/hitbox_data.gd" id="16_b04o6"]
 [ext_resource type="PackedScene" uid="uid://b3cpmwgk577cm" path="res://systems/behaviours/projectile_emitter_controller/projectile_emitter_controller_behaviour.tscn" id="17_d3hq7"]
 [ext_resource type="PackedScene" uid="uid://bwfojncre050s" path="res://systems/behaviours/actor_erase_actor/actor_erase_actor.tscn" id="17_qhixi"]
+[ext_resource type="PackedScene" uid="uid://d1j52u8we6mo5" path="res://systems/behaviours/audio_play_event_one_shot/audio_play_event_one_shot.tscn" id="17_tuiod"]
+[ext_resource type="PackedScene" uid="uid://dkekvatgxcsnt" path="res://systems/behaviours/actor_enable_behaviour/actor_enable_behaviour.tscn" id="18_6vcan"]
 [ext_resource type="PackedScene" uid="uid://c4b3teprr3iu4" path="res://systems/state_machine/conditions/actor_life_condition/actor_life_condition.tscn" id="18_64gbr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b04o6"]
@@ -39,7 +41,7 @@ projectile_speed = 400.0
 metadata/_custom_type_script = "uid://itll3wx11inm"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_64gbr"]
-size = Vector2(40, 32)
+size = Vector2(40, 40)
 
 [sub_resource type="Animation" id="Animation_opu11"]
 length = 0.001
@@ -227,8 +229,13 @@ emitter_data = SubResource("Resource_1obtl")
 [node name="Muzzle" parent="FlipVisuals/BulletEmitter" index="0" unique_id=782941251]
 position = Vector2(40, 0)
 
+[node name="death" type="FmodEventEmitter2D" parent="StaticVisuals" parent_id_path=PackedInt32Array(613635385) index="1" unique_id=199333634]
+event_name = "event:/Player/Player Death"
+event_guid = "{7265b98f-67a4-4ab1-a23d-946eddbbb4e0}"
+volume = 0.8
+
 [node name="CollisionShape2D" parent="Hurtbox" parent_id_path=PackedInt32Array(573111498) index="0" unique_id=1674096468]
-position = Vector2(4, -16)
+position = Vector2(4, -20)
 shape = SubResource("RectangleShape2D_64gbr")
 
 [node name="AnimationPlayer" parent="." index="4" unique_id=849005601]
@@ -349,8 +356,17 @@ retriever = NodePath("../../../../../../../../Data/BottomLeftRetriever")
 
 [node name="Dead" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="3" unique_id=1546061152 instance=ExtResource("4_uhwqo")]
 
-[node name="ActorAnimatorBehaviour" parent="ActorStateMachine/States/Dead/OnEnter" parent_id_path=PackedInt32Array(1546061152, 667290384) index="0" unique_id=175684040 node_paths=PackedStringArray("animation_controller") instance=ExtResource("7_duhj2")]
-animation_controller = NodePath("../../../../../AnimationTree")
+[node name="BehaviourSequence" parent="ActorStateMachine/States/Dead/OnEnter" parent_id_path=PackedInt32Array(1546061152, 667290384) index="0" unique_id=561976442 instance=ExtResource("5_reedr")]
+
+[node name="ActorEnableBehaviour" parent="ActorStateMachine/States/Dead/OnEnter/BehaviourSequence" index="0" unique_id=1778294583 node_paths=PackedStringArray("behaviour") instance=ExtResource("18_6vcan")]
+behaviour = NodePath("../../../../../../Behaviours/ActorMovement")
+enable = false
+
+[node name="AudioPlayEventOneShot" parent="ActorStateMachine/States/Dead/OnEnter/BehaviourSequence" index="1" unique_id=51072555 node_paths=PackedStringArray("event_emitter") instance=ExtResource("17_tuiod")]
+event_emitter = NodePath("../../../../../../StaticVisuals/death")
+
+[node name="ActorAnimatorBehaviour" parent="ActorStateMachine/States/Dead/OnEnter/BehaviourSequence" index="2" unique_id=175684040 node_paths=PackedStringArray("animation_controller") instance=ExtResource("7_duhj2")]
+animation_controller = NodePath("../../../../../../AnimationTree")
 target_node = "death"
 
 [node name="ToDisappear" parent="ActorStateMachine/States/Dead/Transitions" parent_id_path=PackedInt32Array(1546061152, 1931116749) index="0" unique_id=271453584 node_paths=PackedStringArray("target_state") instance=ExtResource("8_pmbpn")]
