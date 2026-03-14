@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dguk1l368orko"]
+
+[ext_resource type="PackedScene" uid="uid://tthpm8c6xsb3" path="res://systems/behaviours/actor_behaviour.tscn" id="1_w2kpu"]
+[ext_resource type="Script" uid="uid://dhqnqnw5sndp3" path="res://systems/behaviours/spawn_actor_behaviour/spawn_actor_behaviour.gd" id="2_mew3d"]
+
+[node name="SpawnActorBehaviour" unique_id=1200312524 instance=ExtResource("1_w2kpu")]
+script = ExtResource("2_mew3d")
+actor_scene = null

@@ -6,3 +6,6 @@
 script = ExtResource("1_c7qi2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1093523711]
+
+[node name="VisibilityNotifier" type="VisibleOnScreenNotifier2D" parent="." unique_id=1573622016]
+unique_name_in_owner = true

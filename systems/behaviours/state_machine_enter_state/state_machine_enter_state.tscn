@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://deh3jqi5rkep7"]
+
+[ext_resource type="PackedScene" uid="uid://tthpm8c6xsb3" path="res://systems/behaviours/actor_behaviour.tscn" id="1_0t7cg"]
+[ext_resource type="Script" uid="uid://dddxxl53pjk0p" path="res://systems/behaviours/state_machine_enter_state/state_machine_enter_state.gd" id="2_ehnrr"]
+
+[node name="StateMachineEnterState" unique_id=1200312524 instance=ExtResource("1_0t7cg")]
+script = ExtResource("2_ehnrr")
+state_name = ""

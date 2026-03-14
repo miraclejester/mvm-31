@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cvjfp7joxgfyy"]
+
+[ext_resource type="PackedScene" uid="uid://0sdn13hb32u4" path="res://systems/state_machine/state/actor_state.tscn" id="1_xxfkc"]
+[ext_resource type="Script" uid="uid://6d1oggu8sssh" path="res://systems/state_machine/state/random_state/random_state.gd" id="2_lidc1"]
+
+[node name="RandomState" unique_id=89059854 instance=ExtResource("1_xxfkc")]
+script = ExtResource("2_lidc1")
+
+[node name="States" type="Node" parent="." index="6" unique_id=658117415]
+unique_name_in_owner = true

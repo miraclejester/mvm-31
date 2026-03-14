@@ -6,6 +6,7 @@
 script = ExtResource("1_kt0to")
 
 [node name="States" type="Node" parent="." unique_id=1209583682]
+unique_name_in_owner = true
 
 [node name="AnyStateTransitions" type="Node" parent="." unique_id=1282942135]
 unique_name_in_owner = true

@@ -4,15 +4,21 @@ class_name ActorStateMachine
 @export var initial_state: ActorState
 @export var debug_logs: bool = false
 
+@onready var states_parent: Node = %States
 @onready var any_state_transitions_parent: Node = %AnyStateTransitions
 
 var current_state: ActorState = null
 var any_transitions: Array[ActorStateTransition] = []
+var state_dict: Dictionary[String, ActorState] = {}
 
 func _ready() -> void:
 	set_process(false)
 	set_physics_process(false)
 	any_transitions.assign(any_state_transitions_parent.get_children())
+	for child in states_parent.get_children():
+		var s: ActorState = child as ActorState
+		state_dict.set(s.name, s)
+	
 
 
 func run() -> void:
@@ -57,3 +63,8 @@ func enter_state(state: ActorState) -> void:
 	current_state.run_on_enter(0)
 	for transition in any_transitions:
 		transition.state_entered()
+
+
+func enter_state_by_name(state_name: String) -> void:
+	var state: ActorState = state_dict.get(state_name, null)
+	enter_state(state)

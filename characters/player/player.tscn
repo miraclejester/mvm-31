@@ -1028,7 +1028,6 @@ shape = SubResource("RectangleShape2D_fmu53")
 debug_color = Color(0, 0.6317335, 0.4624179, 0.41960785)
 
 [node name="ActorDetectable" parent="Detectors" unique_id=1567081487 node_paths=PackedStringArray("character") instance=ExtResource("11_iy54p")]
-visible = false
 position = Vector2(0, -34)
 monitoring = false
 character = NodePath("../..")

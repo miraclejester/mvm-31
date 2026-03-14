@@ -33,12 +33,7 @@ func update_inputs(delta: float) -> void:
 		set_movement_input(get_movement_input())
 	for action in available_actions:
 		get_action_data(action, delta)
-	if not (right_strength > 0 and left_strength > 0):
-		direction.x = right_strength - left_strength
-	if not (up_strength > 0 and down_strength > 0):
-		direction.y = down_strength - up_strength
-	if direction.x != 0 or direction.y != 0:
-		face_direction = direction
+	determine_directions()
 
 
 func is_action_just_pressed(action: String) -> bool:
@@ -74,10 +69,20 @@ func call_direct_action(action: String) -> void:
 
 
 func set_movement_input(input: Vector2) -> void:
-	right_strength = 1 if input.x > direction_threshold else 0
-	left_strength = 1 if input.x < -direction_threshold else 0
-	up_strength = 1 if input.y < -direction_threshold else 0
-	down_strength = 1 if input.y > direction_threshold else 0
+	right_strength = input.x if input.x > direction_threshold else 0.0
+	left_strength = -input.x if input.x < -direction_threshold else 0.0
+	up_strength = -input.y if input.y < -direction_threshold else 0.0
+	down_strength = input.y if input.y > direction_threshold else 0.0
+	determine_directions()
+
+
+func determine_directions() -> void:
+	if not (right_strength > 0 and left_strength > 0):
+		direction.x = right_strength - left_strength
+	if not (up_strength > 0 and down_strength > 0):
+		direction.y = down_strength - up_strength
+	if direction.x != 0 or direction.y != 0:
+		face_direction = direction
 
 
 func get_movement_input() -> Vector2:

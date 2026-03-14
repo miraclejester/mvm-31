@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://d3qpa3dc43nl"]
+
+[ext_resource type="PackedScene" uid="uid://dhaucbmituw0b" path="res://systems/state_machine/utils/actor_retriever/actor_retriever.tscn" id="1_bleni"]
+[ext_resource type="Script" uid="uid://bcwjfdtsmul6f" path="res://systems/state_machine/utils/actor_retriever/player_retriever/player_retriever.gd" id="2_fgcos"]
+
+[node name="PlayerRetriever" unique_id=1557420808 instance=ExtResource("1_bleni")]
+script = ExtResource("2_fgcos")

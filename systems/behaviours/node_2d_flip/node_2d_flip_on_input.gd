@@ -8,13 +8,13 @@ var last_scale_x: float
 
 func run(_delta: float) -> void:
 	if controller.direction.x != 0:
-		last_scale_x = controller.direction.x
-		flip_target.scale.x = controller.direction.x
+		last_scale_x = sign(controller.direction.x)
+		flip_target.scale.x = sign(controller.direction.x)
 
 
 func run_disabled(_delta: float) -> void:
 	if controller.direction.x != 0:
-		last_scale_x = controller.direction.x
+		last_scale_x = sign(controller.direction.x)
 
 
 func recover_last_flip() -> void:

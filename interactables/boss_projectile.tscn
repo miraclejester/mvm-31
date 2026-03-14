@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://cih6x2rsaytqf"]
+
+[ext_resource type="PackedScene" uid="uid://cnj582e0jrrhp" path="res://systems/interactables/projectiles/projectile.tscn" id="1_bd7yy"]
+[ext_resource type="Texture2D" uid="uid://10qfxl6ex47n" path="res://pixel_assets/objects/projectileTries.png" id="2_jxl0h"]
+[ext_resource type="PackedScene" uid="uid://ent37cfwkxei" path="res://systems/collision/hitbox.tscn" id="3_l18si"]
+[ext_resource type="Script" uid="uid://bybupba6sp868" path="res://systems/collision/hitbox_data.gd" id="4_tsw5t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uj4wf"]
+atlas = ExtResource("2_jxl0h")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l18si"]
+atlas = ExtResource("2_jxl0h")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tsw5t"]
+atlas = ExtResource("2_jxl0h")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohny2"]
+atlas = ExtResource("2_jxl0h")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x111l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uj4wf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l18si")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tsw5t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ohny2")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="Resource" id="Resource_ohny2"]
+script = ExtResource("4_tsw5t")
+damage = 1
+metadata/_custom_type_script = "uid://bybupba6sp868"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x111l"]
+size = Vector2(8, 8)
+
+[node name="BossProjectile" unique_id=1232689117 instance=ExtResource("1_bd7yy")]
+direction_type = 1
+
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=1093523711]
+sprite_frames = SubResource("SpriteFrames_x111l")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.63501954
+
+[node name="Hitbox" parent="." index="2" unique_id=484190945 instance=ExtResource("3_l18si")]
+collision_layer = 0
+collision_mask = 32
+data = SubResource("Resource_ohny2")
+
+[node name="Collider" parent="Hitbox" index="0" unique_id=1393029115]
+shape = SubResource("RectangleShape2D_x111l")
+
+[connection signal="hitbox_hit" from="Hitbox" to="." method="queue_free"]
+
+[editable path="Hitbox"]

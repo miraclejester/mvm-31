@@ -1,6 +1,8 @@
 extends Area2D
 class_name Hitbox
 
+signal hitbox_hit()
+
 @export var data: HitboxData
 @export var disable_on_ready: bool = false
 
@@ -16,6 +18,7 @@ func _ready() -> void:
 func on_area_entered(other: Area2D) -> void:
 	if other is Hurtbox:
 		other.hit(self)
+		hitbox_hit.emit()
 
 
 func on_area_exited(other: Area2D) -> void:

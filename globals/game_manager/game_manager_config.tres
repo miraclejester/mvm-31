@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="GameManagerConfig" format=3 uid="uid://y5hfyntixuct"]
 
-[ext_resource type="Resource" uid="uid://c5sh3b87v2euf" path="res://maps/main_map/data/006_first_cove_save_room.tres" id="1_phqh6"]
+[ext_resource type="Resource" uid="uid://gdv8e30ef1ho" path="res://maps/main_map/data/009_boss_room.tres" id="1_phqh6"]
 [ext_resource type="Script" uid="uid://tgtio2puq0ht" path="res://characters/player/abilities/AbilityData.gd" id="1_r3p2s"]
 [ext_resource type="Script" uid="uid://dn854gaw61apa" path="res://globals/game_manager/game_manager_config.gd" id="2_5tdys"]
 [ext_resource type="Resource" uid="uid://b00n5n0jremam" path="res://characters/player/abilities/melee_attack.tres" id="3_uc82c"]
@@ -11,5 +11,5 @@
 script = ExtResource("2_5tdys")
 possible_abilities = Array[ExtResource("1_r3p2s")]([ExtResource("3_uc82c"), ExtResource("4_eqq3k"), ExtResource("5_6c4ra")])
 default_room = ExtResource("1_phqh6")
-default_abilities = Array[int]([0, 1])
+default_abilities = Array[int]([0, 1, 2])
 metadata/_custom_type_script = "uid://dn854gaw61apa"

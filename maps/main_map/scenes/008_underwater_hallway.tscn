@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c4uo8ofncg175" path="res://systems/world/game_world_room.tscn" id="1_mhfba"]
 [ext_resource type="TileSet" uid="uid://cvm3j602kmg6e" path="res://maps/tilesets/cove_tileset.tres" id="2_tcnem"]
 [ext_resource type="PackedScene" uid="uid://dlcssb4x7r0fi" path="res://systems/world/rooms/room_transition.tscn" id="3_bk0ai"]
+[ext_resource type="PackedScene" uid="uid://bh8v5053mctll" path="res://characters/enemies/bat/bat.tscn" id="4_5aiv8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5aiv8"]
 size = Vector2(10, 82)
@@ -43,6 +44,18 @@ position = Vector2(48, 0)
 [node name="CollisionShape2D" parent="Transitions/LeftEntrance" index="1" unique_id=550180330]
 position = Vector2(-5, 4)
 shape = SubResource("RectangleShape2D_bk0ai")
+
+[node name="Bat" parent="Enemies" parent_id_path=PackedInt32Array(1450376257) index="0" unique_id=1487671488 instance=ExtResource("4_5aiv8")]
+position = Vector2(288, 16)
+
+[node name="Bat2" parent="Enemies" parent_id_path=PackedInt32Array(1450376257) index="1" unique_id=932864470 instance=ExtResource("4_5aiv8")]
+position = Vector2(792, 176)
+
+[node name="Bat3" parent="Enemies" parent_id_path=PackedInt32Array(1450376257) index="2" unique_id=1935272232 instance=ExtResource("4_5aiv8")]
+position = Vector2(1432, 16)
+
+[node name="Bat4" parent="Enemies" parent_id_path=PackedInt32Array(1450376257) index="3" unique_id=1429203687 instance=ExtResource("4_5aiv8")]
+position = Vector2(1800, 16)
 
 [editable path="CameraBounds"]
 [editable path="Transitions/RightEntrance"]

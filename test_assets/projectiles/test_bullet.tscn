@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://cnj582e0jrrhp" path="res://systems/interactables/projectiles/projectile.tscn" id="1_jxnb1"]
 [ext_resource type="Texture2D" uid="uid://caqajn7pwvq1s" path="res://test_assets/projectiles/fire-sheet.png" id="2_i6rkn"]
+[ext_resource type="PackedScene" uid="uid://ent37cfwkxei" path="res://systems/collision/hitbox.tscn" id="3_t7tmy"]
+[ext_resource type="Script" uid="uid://bybupba6sp868" path="res://systems/collision/hitbox_data.gd" id="4_nb4ls"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i6rkn"]
 atlas = ExtResource("2_i6rkn")
@@ -25,6 +27,14 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="Resource" id="Resource_el7ye"]
+script = ExtResource("4_nb4ls")
+damage = 1
+metadata/_custom_type_script = "uid://bybupba6sp868"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t7tmy"]
+size = Vector2(16, 8)
+
 [node name="TestBullet" unique_id=449955664 instance=ExtResource("1_jxnb1")]
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=1093523711]
@@ -32,3 +42,15 @@ sprite_frames = SubResource("SpriteFrames_nb4ls")
 animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.5077113
+
+[node name="Hitbox" parent="." index="2" unique_id=484190945 instance=ExtResource("3_t7tmy")]
+collision_layer = 0
+collision_mask = 128
+data = SubResource("Resource_el7ye")
+
+[node name="Collider" parent="Hitbox" index="0" unique_id=1393029115]
+shape = SubResource("RectangleShape2D_t7tmy")
+
+[connection signal="hitbox_hit" from="Hitbox" to="." method="queue_free"]
+
+[editable path="Hitbox"]

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c1h52flsaty6g"]
+
+[ext_resource type="TileSet" uid="uid://cvm3j602kmg6e" path="res://maps/tilesets/cove_tileset.tres" id="1_tl3g2"]
+
+[node name="Wall" type="TileMapLayer" unique_id=492181881]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 1, 0, 3, 0, 2, 0, 0, 0, 0, 0, 1, 0, 1, 0, 3, 0, 4, 0, 0, 0)
+tile_set = ExtResource("1_tl3g2")
