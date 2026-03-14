@@ -1131,7 +1131,7 @@ setter_key = "outside_water_gun_idle"
 interval_key = "shoot"
 negative_path = "InWater/conditions/gun_idle"
 send_positive = false
-setter_key = "outside_water_gun_idle"
+setter_key = "in_water_gun_idle"
 
 [node name="JumpStarted" parent="Animations/AnimationTree/TriggerParameters" parent_id_path=PackedInt32Array(704880076, 1517241733) index="0" unique_id=1097550186 instance=ExtResource("13_gswnw")]
 parameter_path = "OutsideWater/conditions/jump_started"

@@ -27,7 +27,7 @@ tile_set = ExtResource("3_u5kuj")
 position = Vector2(384, 320)
 
 [node name="SaveStatue" parent="Interactables" parent_id_path=PackedInt32Array(817726722) index="0" unique_id=337649948 instance=ExtResource("3_5yvea")]
-position = Vector2(160, 232)
+position = Vector2(160, 224)
 
 [node name="RightEntrance" parent="Transitions" parent_id_path=PackedInt32Array(1723779582) index="0" unique_id=487296057 instance=ExtResource("2_deec6")]
 position = Vector2(688, 320)
