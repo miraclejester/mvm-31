@@ -11,5 +11,5 @@
 script = ExtResource("2_5tdys")
 possible_abilities = Array[ExtResource("1_r3p2s")]([ExtResource("3_uc82c"), ExtResource("4_eqq3k"), ExtResource("5_6c4ra")])
 default_room = ExtResource("1_phqh6")
-default_abilities = Array[int]([0, 1, 2])
+default_abilities = Array[int]([0, 1])
 metadata/_custom_type_script = "uid://dn854gaw61apa"

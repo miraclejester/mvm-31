@@ -4,6 +4,7 @@ signal world_set()
 signal game_saved()
 
 @export var config: GameManagerConfig
+@export var start_new: bool = false
 
 var current_world: GameWorld
 var ability_dict: Dictionary[AbilityData.EAbilityKey, AbilityData] = {}
@@ -91,7 +92,7 @@ func save_to_file() -> void:
 func load_from_file() -> SaveData:
 	var path: String = get_save_path()
 	var data: SaveData = create_new_save()
-	if not FileAccess.file_exists(path):
+	if not FileAccess.file_exists(path) or start_new:
 		return data
 	
 	var file: FileAccess = FileAccess.open(path, FileAccess.READ)

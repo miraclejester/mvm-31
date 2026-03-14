@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cbiv4fn5oah07"]
+
+[ext_resource type="PackedScene" uid="uid://u66m7wsa6t3r" path="res://systems/interactables/pickups/game_pickup.tscn" id="1_pracu"]
+[ext_resource type="PackedScene" uid="uid://bc0o8awii1imp" path="res://systems/behaviours/game_unlock_ability/game_unlock_ability.tscn" id="2_2k5en"]
+[ext_resource type="PackedScene" uid="uid://caqfq51gueoim" path="res://systems/behaviours/sequence/behaviour_sequence.tscn" id="2_48l5q"]
+[ext_resource type="Resource" uid="uid://xb7exrp5le3x" path="res://characters/player/abilities/mermaid_transform.tres" id="3_gng4l"]
+[ext_resource type="PackedScene" uid="uid://dee7yhnj1hr50" path="res://systems/behaviours/game_set_switch/game_set_switch.tscn" id="5_71n4g"]
+
+[node name="MermaidAbilityPickup" unique_id=1496596766 instance=ExtResource("1_pracu")]
+
+[node name="BehaviourSequence" parent="PickupBehaviour" parent_id_path=PackedInt32Array(1438285594) index="0" unique_id=1550808993 instance=ExtResource("2_48l5q")]
+
+[node name="GameUnlockAbility" parent="PickupBehaviour/BehaviourSequence" index="0" unique_id=1343139861 instance=ExtResource("2_2k5en")]
+ability = ExtResource("3_gng4l")
+
+[node name="GameSetSwitch" parent="PickupBehaviour/BehaviourSequence" index="1" unique_id=30775204 instance=ExtResource("5_71n4g")]
+switch_name = "mermaid_ability_unlocked"

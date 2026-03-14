@@ -5,6 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://bxxaqj4j4ruuu" path="res://test_assets/backgrounds/test_parallax/test_parallax_bg.tscn" id="2_eok2b"]
 [ext_resource type="PackedScene" uid="uid://cxi10i50ypars" path="res://interactables/save_statue.tscn" id="3_5yvea"]
 [ext_resource type="TileSet" uid="uid://cvm3j602kmg6e" path="res://maps/tilesets/cove_tileset.tres" id="3_u5kuj"]
+[ext_resource type="PackedScene" uid="uid://cbiv4fn5oah07" path="res://pickups/mermaid_ability_pickup.tscn" id="4_ijrpw"]
+[ext_resource type="PackedScene" uid="uid://dto1etc05oivl" path="res://systems/interactables/standard/standard_interactable.tscn" id="6_1tete"]
+[ext_resource type="PackedScene" uid="uid://2yo1sera82mt" path="res://systems/behaviours/actor_conditional_behaviour/actor_conditional_behaviour.tscn" id="7_metgt"]
+[ext_resource type="PackedScene" uid="uid://dixcymjc3r412" path="res://systems/state_machine/conditions/game_is_switch_set/game_is_switch_set.tscn" id="8_bprmn"]
+[ext_resource type="PackedScene" uid="uid://bwfojncre050s" path="res://systems/behaviours/actor_erase_actor/actor_erase_actor.tscn" id="9_05f08"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eok2b"]
 size = Vector2(20, 90)
@@ -26,8 +31,21 @@ tile_set = ExtResource("3_u5kuj")
 [node name="PlayerSpawn" parent="." index="4" unique_id=548575327]
 position = Vector2(384, 320)
 
+[node name="MermaidAbilityPickup" parent="Pickups" parent_id_path=PackedInt32Array(1193866743) index="0" unique_id=1496596766 instance=ExtResource("4_ijrpw")]
+position = Vector2(96, 256)
+
 [node name="SaveStatue" parent="Interactables" parent_id_path=PackedInt32Array(817726722) index="0" unique_id=337649948 instance=ExtResource("3_5yvea")]
 position = Vector2(160, 224)
+
+[node name="RemoveMermaidPickup" parent="Interactables" parent_id_path=PackedInt32Array(817726722) index="1" unique_id=1422962053 instance=ExtResource("6_1tete")]
+
+[node name="RemovePickupIfSwitch" parent="Interactables/RemoveMermaidPickup/SetupBehaviour" parent_id_path=PackedInt32Array(1422962053, 222444026) index="0" unique_id=743546512 instance=ExtResource("7_metgt")]
+
+[node name="GameIsSwitchSet" parent="Interactables/RemoveMermaidPickup/SetupBehaviour/RemovePickupIfSwitch/Condition" parent_id_path=PackedInt32Array(743546512, 1206924850) index="0" unique_id=1837927436 instance=ExtResource("8_bprmn")]
+switch_name = "mermaid_ability_unlocked"
+
+[node name="ActorEraseActor" parent="Interactables/RemoveMermaidPickup/SetupBehaviour/RemovePickupIfSwitch/Behaviour" parent_id_path=PackedInt32Array(743546512, 1805669259) index="0" unique_id=521280831 node_paths=PackedStringArray("target") instance=ExtResource("9_05f08")]
+target = NodePath("../../../../../../Pickups/MermaidAbilityPickup")
 
 [node name="RightEntrance" parent="Transitions" parent_id_path=PackedInt32Array(1723779582) index="0" unique_id=487296057 instance=ExtResource("2_deec6")]
 position = Vector2(688, 320)
@@ -52,5 +70,7 @@ position = Vector2(0, -39)
 shape = SubResource("RectangleShape2D_pbodf")
 
 [editable path="CameraBounds"]
+[editable path="Interactables/RemoveMermaidPickup"]
+[editable path="Interactables/RemoveMermaidPickup/SetupBehaviour/RemovePickupIfSwitch"]
 [editable path="Transitions/RightEntrance"]
 [editable path="Transitions/LeftEntrance"]
