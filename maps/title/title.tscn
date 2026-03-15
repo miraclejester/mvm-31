@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://b5xc5aclhsr8m"]
+
+[ext_resource type="Texture2D" uid="uid://mua4aivq7dx3" path="res://pixel_assets/ui/maybe logo.png" id="1_7kh0r"]
+[ext_resource type="Script" uid="uid://xsqn82mx8jgs" path="res://maps/title/title.gd" id="1_t1y64"]
+
+[node name="Title" type="CanvasLayer" unique_id=308348748]
+script = ExtResource("1_t1y64")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=349932708]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.11006457, 0.19923276, 0.6156863)
+
+[node name="TitleText" type="TextureRect" parent="." unique_id=200775403]
+offset_left = 96.0
+offset_right = 876.0
+offset_bottom = 300.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_7kh0r")
+
+[node name="NewGame" type="Button" parent="." unique_id=493541859]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = 20.0
+offset_right = 45.0
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "New Game"
+
+[node name="Continue" type="Button" parent="." unique_id=1030114986]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = 76.0
+offset_right = 39.0
+offset_bottom = 107.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Continue"
