@@ -1,4 +1,4 @@
-extends Resource
+dextends Resource
 class_name GameWorldData
 
 @export var rooms: Array[GameWorldRoomData]
