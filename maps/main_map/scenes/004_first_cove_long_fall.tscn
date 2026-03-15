@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://bw0l8lw0qq0w0"]
 
 [ext_resource type="PackedScene" uid="uid://c4uo8ofncg175" path="res://systems/world/game_world_room.tscn" id="1_8aa0s"]
-[ext_resource type="PackedScene" uid="uid://by5y1634a7814" path="res://test_assets/backgrounds/vertical_underwater/test_vertical_bg.tscn" id="2_a62kt"]
+[ext_resource type="PackedScene" uid="uid://c8h4kmv4jowbw" path="res://test_assets/backgrounds/cove/cove_background.tscn" id="2_js3d7"]
 [ext_resource type="PackedScene" uid="uid://dlcssb4x7r0fi" path="res://systems/world/rooms/room_transition.tscn" id="2_v6cws"]
 [ext_resource type="TileSet" uid="uid://cvm3j602kmg6e" path="res://maps/tilesets/cove_tileset.tres" id="3_js3d7"]
 [ext_resource type="PackedScene" uid="uid://c6bapa1itjpfh" path="res://characters/enemies/crab/crab.tscn" id="5_js3d7"]
@@ -14,7 +14,7 @@ size = Vector2(136, 20)
 
 [node name="004_FirstCoveLongFall" unique_id=399359172 instance=ExtResource("1_8aa0s")]
 
-[node name="TestVerticalBg" parent="ParallaxBackground" parent_id_path=PackedInt32Array(181560860) index="0" unique_id=405482237 instance=ExtResource("2_a62kt")]
+[node name="CoveBackground" parent="ParallaxBackground" parent_id_path=PackedInt32Array(181560860) index="0" unique_id=388293656 instance=ExtResource("2_js3d7")]
 
 [node name="BottomRightCorner" parent="CameraBounds" parent_id_path=PackedInt32Array(1922318848) index="0" unique_id=775257854]
 position = Vector2(640, 720)

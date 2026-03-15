@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://mua4aivq7dx3"
-path="res://.godot/imported/maybe logo.png-f16d9cccf608df0fbba05ba70a8850c4.ctex"
+path="res://.godot/imported/maybe logo.png-aa4167b2fc3e18fd4e1590858d09cae4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://systems/world/map/maybe logo.png"
-dest_files=["res://.godot/imported/maybe logo.png-f16d9cccf608df0fbba05ba70a8850c4.ctex"]
+source_file="res://pixel_assets/ui/maybe logo.png"
+dest_files=["res://.godot/imported/maybe logo.png-aa4167b2fc3e18fd4e1590858d09cae4.ctex"]
 
 [params]
 

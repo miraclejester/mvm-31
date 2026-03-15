@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://c8h4kmv4jowbw"]
+
+[ext_resource type="Texture2D" uid="uid://jagtl0crcqhf" path="res://pixel_assets/backgrounds/CoveHorizontalBackground.png" id="1_ldya0"]
+
+[node name="CoveBackground" type="Node2D" unique_id=388293656]
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=653038458]
+repeat_size = Vector2(640, 360)
+
+[node name="TextureRect" type="TextureRect" parent="Parallax2D" unique_id=169362866]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_ldya0")

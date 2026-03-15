@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c7oil8ckl06g7"]
+
+[ext_resource type="PackedScene" uid="uid://tthpm8c6xsb3" path="res://systems/behaviours/actor_behaviour.tscn" id="1_n2ef5"]
+[ext_resource type="Script" uid="uid://8idv1vytgc8u" path="res://systems/behaviours/overlay_fadeout/overlay_fade_out.gd" id="2_6f1cp"]
+
+[node name="OverlayFadeOut" unique_id=1200312524 instance=ExtResource("1_n2ef5")]
+script = ExtResource("2_6f1cp")

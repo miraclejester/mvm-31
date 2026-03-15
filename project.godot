@@ -27,6 +27,7 @@ Utils="*uid://djm4o8wyidg5d"
 GameManager="*uid://up5qsfygvuc6"
 Strings="*uid://cbl5eeu0884x7"
 AudioManager="*uid://x6rttrg2o85l"
+OverlayEffects="*uid://u2t0sq7j2q50"
 
 [display]
 

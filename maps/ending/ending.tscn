@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://d4g8nyypd3wx4"]
+
+[ext_resource type="Script" uid="uid://dahrwebxdtvnu" path="res://maps/ending/ending.gd" id="1_usa2e"]
+[ext_resource type="Texture2D" uid="uid://dk8pfxjgirycn" path="res://pixel_assets/props/image.png" id="2_ax6mv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5ewa0"]
+font_size = 42
+
+[node name="Ending" type="Node2D" unique_id=1309634100]
+script = ExtResource("1_usa2e")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1384230649]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.101960786, 0.101960786, 0.2784314, 1)
+
+[node name="Akoya" type="Sprite2D" parent="." unique_id=1639826758]
+unique_name_in_owner = true
+position = Vector2(328, 280)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_ax6mv")
+
+[node name="Label" type="Label" parent="." unique_id=456432607]
+offset_left = 152.0
+offset_top = 24.0
+offset_right = 537.0
+offset_bottom = 82.0
+text = "Thanks for playing!"
+label_settings = SubResource("LabelSettings_5ewa0")

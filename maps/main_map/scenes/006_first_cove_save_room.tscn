@@ -1,8 +1,8 @@
 [gd_scene format=4 uid="uid://lyphbpg7ekqe"]
 
 [ext_resource type="PackedScene" uid="uid://c4uo8ofncg175" path="res://systems/world/game_world_room.tscn" id="1_pbodf"]
+[ext_resource type="PackedScene" uid="uid://c8h4kmv4jowbw" path="res://test_assets/backgrounds/cove/cove_background.tscn" id="2_1tete"]
 [ext_resource type="PackedScene" uid="uid://dlcssb4x7r0fi" path="res://systems/world/rooms/room_transition.tscn" id="2_deec6"]
-[ext_resource type="PackedScene" uid="uid://bxxaqj4j4ruuu" path="res://test_assets/backgrounds/test_parallax/test_parallax_bg.tscn" id="2_eok2b"]
 [ext_resource type="PackedScene" uid="uid://cxi10i50ypars" path="res://interactables/save_statue.tscn" id="3_5yvea"]
 [ext_resource type="TileSet" uid="uid://cvm3j602kmg6e" path="res://maps/tilesets/cove_tileset.tres" id="3_u5kuj"]
 [ext_resource type="PackedScene" uid="uid://cbiv4fn5oah07" path="res://pickups/mermaid_ability_pickup.tscn" id="4_ijrpw"]
@@ -19,7 +19,7 @@ size = Vector2(20, 98)
 
 [node name="006_FirstCoveSaveRoom" unique_id=399359172 instance=ExtResource("1_pbodf")]
 
-[node name="TestParallaxBg" parent="ParallaxBackground" parent_id_path=PackedInt32Array(181560860) index="0" unique_id=1629707704 instance=ExtResource("2_eok2b")]
+[node name="CoveBackground" parent="ParallaxBackground" parent_id_path=PackedInt32Array(181560860) index="0" unique_id=388293656 instance=ExtResource("2_1tete")]
 
 [node name="BottomRightCorner" parent="CameraBounds" parent_id_path=PackedInt32Array(1922318848) index="0" unique_id=775257854]
 position = Vector2(640, 360)

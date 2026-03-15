@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://c6k23nrrqmk18"]
+
+[ext_resource type="PackedScene" uid="uid://u66m7wsa6t3r" path="res://systems/interactables/pickups/game_pickup.tscn" id="1_mm76p"]
+[ext_resource type="Texture2D" uid="uid://d13bb1x6svx4a" path="res://pixel_assets/props/clam_pearls.png" id="2_c1uj0"]
+[ext_resource type="PackedScene" uid="uid://c7oil8ckl06g7" path="res://systems/behaviours/overlay_fadeout/overlay_fade_out.tscn" id="3_7mmia"]
+
+[node name="EndingPearl" unique_id=1496596766 instance=ExtResource("1_mm76p")]
+
+[node name="Sprite" parent="Visuals" parent_id_path=PackedInt32Array(2039960070) index="0" unique_id=2080173746]
+texture = ExtResource("2_c1uj0")
+region_enabled = true
+region_rect = Rect2(94.842705, 0, 50.851433, 48)
+
+[node name="OverlayFadeOut" parent="PickupBehaviour" parent_id_path=PackedInt32Array(1438285594) index="0" unique_id=1200312524 instance=ExtResource("3_7mmia")]

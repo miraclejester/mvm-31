@@ -1,10 +1,14 @@
 [gd_scene format=4 uid="uid://btd5ndu71l3p1"]
 
 [ext_resource type="PackedScene" uid="uid://c4uo8ofncg175" path="res://systems/world/game_world_room.tscn" id="1_e1bdg"]
+[ext_resource type="PackedScene" uid="uid://c8h4kmv4jowbw" path="res://test_assets/backgrounds/cove/cove_background.tscn" id="2_ajv4v"]
+[ext_resource type="Script" uid="uid://dob8ox0wly1jv" path="res://maps/main_map/scenes/009_boss_room.gd" id="2_x118k"]
 [ext_resource type="TileSet" uid="uid://cvm3j602kmg6e" path="res://maps/tilesets/cove_tileset.tres" id="2_xn5am"]
+[ext_resource type="PackedScene" uid="uid://c6k23nrrqmk18" path="res://pickups/ending_pearl.tscn" id="3_0k6jk"]
 [ext_resource type="PackedScene" uid="uid://dto1etc05oivl" path="res://systems/interactables/standard/standard_interactable.tscn" id="3_dts7s"]
 [ext_resource type="PackedScene" uid="uid://dlcssb4x7r0fi" path="res://systems/world/rooms/room_transition.tscn" id="3_ekmnh"]
 [ext_resource type="PackedScene" uid="uid://c1h52flsaty6g" path="res://interactables/wall.tscn" id="3_xn5am"]
+[ext_resource type="PackedScene" uid="uid://d4g8nyypd3wx4" path="res://maps/ending/ending.tscn" id="4_burkc"]
 [ext_resource type="PackedScene" uid="uid://caqfq51gueoim" path="res://systems/behaviours/sequence/behaviour_sequence.tscn" id="4_c06nw"]
 [ext_resource type="PackedScene" uid="uid://dguk1l368orko" path="res://systems/behaviours/spawn_actor_behaviour/spawn_actor_behaviour.tscn" id="5_it02w"]
 [ext_resource type="PackedScene" uid="uid://bqg5pep6gnwgo" path="res://systems/behaviours/audio_play_bgm/audio_play_bgm.tscn" id="5_pgpcv"]
@@ -19,13 +23,18 @@ size = Vector2(10, 344)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82ddp"]
 size = Vector2(10, 82)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gw8os"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ajv4v"]
 resource_local_to_scene = true
 shader = ExtResource("10_k05pv")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/enabled = false
 
 [node name="009_BossRoom" unique_id=399359172 instance=ExtResource("1_e1bdg")]
+script = ExtResource("2_x118k")
+pearl_pickup = ExtResource("3_0k6jk")
+ending_scene = ExtResource("4_burkc")
+
+[node name="CoveBackground" parent="ParallaxBackground" parent_id_path=PackedInt32Array(181560860) index="0" unique_id=388293656 instance=ExtResource("2_ajv4v")]
 
 [node name="BottomRightCorner" parent="CameraBounds" parent_id_path=PackedInt32Array(1922318848) index="0" unique_id=775257854]
 position = Vector2(640, 360)
@@ -78,10 +87,11 @@ position = Vector2(-5, -31)
 shape = SubResource("RectangleShape2D_82ddp")
 
 [node name="Boss" parent="Enemies" parent_id_path=PackedInt32Array(1450376257) index="0" unique_id=1487671488 instance=ExtResource("9_it02w")]
+unique_name_in_owner = true
 position = Vector2(496, 240)
 
 [node name="FlipVisuals" parent="Enemies/Boss" index="0" unique_id=783290642]
-material = SubResource("ShaderMaterial_gw8os")
+material = SubResource("ShaderMaterial_ajv4v")
 
 [node name="TopLeftRetriever" parent="Enemies/Boss/Data" parent_id_path=PackedInt32Array(1487671488, 1763860896) index="0" unique_id=786237967 node_paths=PackedStringArray("target")]
 target = NodePath("../../../../BossPositions/TopLeft")
@@ -108,6 +118,10 @@ position = Vector2(552, 312)
 
 [node name="BottomLeft" type="Marker2D" parent="BossPositions" index="3" unique_id=543255917]
 position = Vector2(80, 312)
+
+[node name="PearlPosition" type="Marker2D" parent="." index="10" unique_id=623448752]
+unique_name_in_owner = true
+position = Vector2(320, 192)
 
 [editable path="CameraBounds"]
 [editable path="Interactables/BossStartInteractable"]
