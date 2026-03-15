@@ -66,6 +66,7 @@
 [ext_resource type="PackedScene" uid="uid://bwfojncre050s" path="res://systems/behaviours/actor_erase_actor/actor_erase_actor.tscn" id="49_f0ap2"]
 [ext_resource type="PackedScene" uid="uid://wf5tetpp11rl" path="res://systems/state_machine/conditions/state_machine_in_state/state_machine_in_state.tscn" id="57_ro1nf"]
 [ext_resource type="PackedScene" uid="uid://cn3ufbk6q5r7u" path="res://systems/behaviours/game_toggle_stop_time/game_toggle_stop_time.tscn" id="57_wiq46"]
+[ext_resource type="PackedScene" uid="uid://dmpj60046my0x" path="res://systems/behaviours/actor_send_death_event/actor_send_death_event.tscn" id="58_b8hv6"]
 [ext_resource type="PackedScene" uid="uid://5c1e8bm57tj1" path="res://systems/behaviours/actor_set_scale/actor_set_scale.tscn" id="59_lpvo7"]
 [ext_resource type="PackedScene" uid="uid://bkr303ag3qnrw" path="res://systems/behaviours/world_modifier_behaviour/world_modifier_behaviour.tscn" id="59_q3y00"]
 [ext_resource type="PackedScene" uid="uid://cgu40a5srfbja" path="res://systems/behaviours/actor_movement_modifier_behaviour/actor_movement_modifier_behaviour.tscn" id="60_14epw"]
@@ -395,20 +396,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [78, 79, 80, 81, 82, 83, 84, 85, 86, 87]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"queue_free"
-}]
 }
 
 [sub_resource type="Animation" id="Animation_b8hv6"]
@@ -897,9 +884,10 @@ shape = SubResource("RectangleShape2D_b8hv6")
 position = Vector2(6.5, -9.5)
 metadata/_custom_type_script = "uid://bsxdp451nivth"
 
-[node name="Player" type="CharacterBody2D" unique_id=1042347891]
+[node name="Player" type="CharacterBody2D" unique_id=1042347891 node_paths=PackedStringArray("life")]
 collision_layer = 0
 script = ExtResource("1_unksh")
+life = NodePath("StaticBehaviours/CharacterLife")
 
 [node name="FlipTarget" type="Node2D" parent="." unique_id=1381709409]
 
@@ -1087,6 +1075,7 @@ parameters/OutsideWater/Grounded/blend_position = 0.0
 controller = NodePath("../../StaticBehaviours/PlayerController")
 interval_data = Array[ExtResource("8_1so5t")]([SubResource("Resource_fjxoa")])
 tracked_playback_paths = Array[String](["playback", "OutsideWater/playback", "InWater/playback"])
+debug_logs = true
 
 [node name="GroundedBlendPos" parent="Animations/AnimationTree/ProcessParameters" parent_id_path=PackedInt32Array(704880076, 1452081964) index="0" unique_id=1270825895 node_paths=PackedStringArray("body") instance=ExtResource("8_dx5ib")]
 body = NodePath("../../../..")
@@ -1225,6 +1214,7 @@ collider = NodePath("../../../Hurtbox/CollisionShape2D")
 specs = Array[ExtResource("9_5ejfk")]([SubResource("Resource_arbsv"), SubResource("Resource_b8hv6"), SubResource("Resource_jw2xc")])
 
 [node name="CharacterLife" parent="StaticBehaviours" unique_id=771178152 node_paths=PackedStringArray("hurt_sound") instance=ExtResource("19_xvmlt")]
+starting_max_life = 4
 hurt_sound = NodePath("../../FlipTarget/SFX/hit")
 
 [node name="PlayerController" parent="StaticBehaviours" unique_id=1995312103 instance=ExtResource("3_rcghi")]
@@ -1628,8 +1618,13 @@ target_state = "death"
 
 [node name="Disappear" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="13" unique_id=387503826 instance=ExtResource("4_oycdn")]
 
-[node name="ActorEraseActor" parent="ActorStateMachine/States/Disappear/OnEnter" parent_id_path=PackedInt32Array(387503826, 667290384) index="0" unique_id=521280831 node_paths=PackedStringArray("target") instance=ExtResource("49_f0ap2")]
-target = NodePath("../../../../..")
+[node name="BehaviourSequence" parent="ActorStateMachine/States/Disappear/OnEnter" parent_id_path=PackedInt32Array(387503826, 667290384) index="0" unique_id=1878058920 instance=ExtResource("14_vrg71")]
+
+[node name="ActorSendDeathEvent" parent="ActorStateMachine/States/Disappear/OnEnter/BehaviourSequence" unique_id=597059329 node_paths=PackedStringArray("actor") instance=ExtResource("58_b8hv6")]
+actor = NodePath("../../../../../..")
+
+[node name="ActorEraseActor" parent="ActorStateMachine/States/Disappear/OnEnter/BehaviourSequence" unique_id=521280831 node_paths=PackedStringArray("target") instance=ExtResource("49_f0ap2")]
+target = NodePath("../../../../../..")
 
 [node name="TransformToMermaid" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="14" unique_id=1809890748 instance=ExtResource("4_oycdn")]
 
@@ -1915,11 +1910,11 @@ enable = false
 behaviour = NodePath("../../../../../../Behaviours/Node2dFlipOnInput")
 enable = false
 
-[node name="ToDisappear" parent="ActorStateMachine/States/MermaidDead" unique_id=48145458 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
-target_state = NodePath("../../Disappear")
+[node name="ToDisappear" parent="ActorStateMachine/States/MermaidDead/Transitions" parent_id_path=PackedInt32Array(1457782784, 1931116749) index="0" unique_id=48145458 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]
+target_state = NodePath("../../../Disappear")
 
-[node name="DeathAnimationFinished" parent="ActorStateMachine/States/MermaidDead/ToDisappear" unique_id=1051571631 node_paths=PackedStringArray("animator_controller") instance=ExtResource("48_di0ei")]
-animator_controller = NodePath("../../../../../Animations/AnimationTree")
+[node name="DeathAnimationFinished" parent="ActorStateMachine/States/MermaidDead/Transitions/ToDisappear" unique_id=1051571631 node_paths=PackedStringArray("animator_controller") instance=ExtResource("48_di0ei")]
+animator_controller = NodePath("../../../../../../Animations/AnimationTree")
 target_state = "mermaid_death"
 
 [node name="ToMermaidTransform" parent="ActorStateMachine/AnyStateTransitions" parent_id_path=PackedInt32Array(1386328368, 1282942135) index="0" unique_id=1733759237 node_paths=PackedStringArray("target_state") instance=ExtResource("6_rcghi")]

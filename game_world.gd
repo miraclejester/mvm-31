@@ -11,6 +11,7 @@ signal exited_water()
 
 @onready var camera: Camera2D = %MainCamera
 @onready var current_room_parent: Node2D = %CurrentRoomParent
+@onready var hud: Hud = %Hud
 
 var current_room: GameWorldRoom
 var context: WorldContext
@@ -23,6 +24,8 @@ func _ready() -> void:
 	
 	EventBroadcaster.projectile_shot.connect(on_projectile_shot)
 	GameManager.set_world(self)
+	hud.set_health(player.life.life)
+	player.life.life_changed.connect(hud.set_health)
 	load_room(GameManager.get_current_saved_room())
 
 

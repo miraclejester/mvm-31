@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dmpj60046my0x"]
+
+[ext_resource type="PackedScene" uid="uid://tthpm8c6xsb3" path="res://systems/behaviours/actor_behaviour.tscn" id="1_76q5w"]
+[ext_resource type="Script" uid="uid://bcy238d1cb2qx" path="res://systems/behaviours/actor_send_death_event/actor_send_death_event.gd" id="2_6po1w"]
+
+[node name="ActorSendDeathEvent" unique_id=1200312524 instance=ExtResource("1_76q5w")]
+script = ExtResource("2_6po1w")

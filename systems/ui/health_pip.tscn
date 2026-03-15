@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://br1rxujw1ul1m"]
+
+[ext_resource type="Texture2D" uid="uid://ci5g1dcc4ka4s" path="res://systems/ui/pip_off_texture.tres" id="1_204li"]
+[ext_resource type="Script" uid="uid://b36l445wkmjy3" path="res://systems/ui/health_pip.gd" id="2_qbnnj"]
+[ext_resource type="Texture2D" uid="uid://dmwd757lqkr2s" path="res://systems/ui/pip_on_texture.tres" id="3_jq4qy"]
+
+[node name="HealthPip" type="TextureRect" unique_id=388010297]
+texture = ExtResource("1_204li")
+stretch_mode = 2
+script = ExtResource("2_qbnnj")
+on_texture = ExtResource("3_jq4qy")
+off_texture = ExtResource("1_204li")

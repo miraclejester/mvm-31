@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://u66m7wsa6t3r" path="res://systems/interactables/pickups/game_pickup.tscn" id="1_mm76p"]
 [ext_resource type="Texture2D" uid="uid://d13bb1x6svx4a" path="res://pixel_assets/props/clam_pearls.png" id="2_c1uj0"]
 [ext_resource type="PackedScene" uid="uid://c7oil8ckl06g7" path="res://systems/behaviours/overlay_fadeout/overlay_fade_out.tscn" id="3_7mmia"]
+[ext_resource type="PackedScene" uid="uid://caqfq51gueoim" path="res://systems/behaviours/sequence/behaviour_sequence.tscn" id="3_vbs6j"]
+[ext_resource type="PackedScene" uid="uid://d1j52u8we6mo5" path="res://systems/behaviours/audio_play_event_one_shot/audio_play_event_one_shot.tscn" id="4_avjjh"]
 
 [node name="EndingPearl" unique_id=1496596766 instance=ExtResource("1_mm76p")]
 
@@ -11,4 +13,14 @@ texture = ExtResource("2_c1uj0")
 region_enabled = true
 region_rect = Rect2(94.842705, 0, 50.851433, 48)
 
-[node name="OverlayFadeOut" parent="PickupBehaviour" parent_id_path=PackedInt32Array(1438285594) index="0" unique_id=1200312524 instance=ExtResource("3_7mmia")]
+[node name="BehaviourSequence" parent="PickupBehaviour" parent_id_path=PackedInt32Array(1438285594) index="0" unique_id=1550808993 instance=ExtResource("3_vbs6j")]
+
+[node name="AudioPlayEventOneShot" parent="PickupBehaviour/BehaviourSequence" index="0" unique_id=51072555 node_paths=PackedStringArray("event_emitter") instance=ExtResource("4_avjjh")]
+event_emitter = NodePath("../../../pearl_pickup")
+
+[node name="OverlayFadeOut" parent="PickupBehaviour/BehaviourSequence" index="1" unique_id=1200312524 instance=ExtResource("3_7mmia")]
+
+[node name="pearl_pickup" type="FmodEventEmitter2D" parent="." index="3" unique_id=876603204]
+event_name = "event:/Environment/Clam Open"
+event_guid = "{ff25eac8-c5ea-434a-8e88-80b7cd740ca9}"
+volume = 0.8

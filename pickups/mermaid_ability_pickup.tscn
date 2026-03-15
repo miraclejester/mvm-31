@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://caqfq51gueoim" path="res://systems/behaviours/sequence/behaviour_sequence.tscn" id="2_48l5q"]
 [ext_resource type="Texture2D" uid="uid://d13bb1x6svx4a" path="res://pixel_assets/props/clam_pearls.png" id="2_71n4g"]
 [ext_resource type="Resource" uid="uid://xb7exrp5le3x" path="res://characters/player/abilities/mermaid_transform.tres" id="3_gng4l"]
+[ext_resource type="PackedScene" uid="uid://d1j52u8we6mo5" path="res://systems/behaviours/audio_play_event_one_shot/audio_play_event_one_shot.tscn" id="4_2p2vk"]
 [ext_resource type="PackedScene" uid="uid://dee7yhnj1hr50" path="res://systems/behaviours/game_set_switch/game_set_switch.tscn" id="5_71n4g"]
 
 [node name="MermaidAbilityPickup" unique_id=1496596766 instance=ExtResource("1_pracu")]
@@ -16,8 +17,16 @@ region_rect = Rect2(50.66076, 0, 42.889313, 42.581253)
 
 [node name="BehaviourSequence" parent="PickupBehaviour" parent_id_path=PackedInt32Array(1438285594) index="0" unique_id=1550808993 instance=ExtResource("2_48l5q")]
 
-[node name="GameUnlockAbility" parent="PickupBehaviour/BehaviourSequence" index="0" unique_id=1343139861 instance=ExtResource("2_2k5en")]
+[node name="AudioPlayEventOneShot" parent="PickupBehaviour/BehaviourSequence" index="0" unique_id=51072555 node_paths=PackedStringArray("event_emitter") instance=ExtResource("4_2p2vk")]
+event_emitter = NodePath("../../../pickup_sound")
+
+[node name="GameUnlockAbility" parent="PickupBehaviour/BehaviourSequence" index="1" unique_id=1343139861 instance=ExtResource("2_2k5en")]
 ability = ExtResource("3_gng4l")
 
-[node name="GameSetSwitch" parent="PickupBehaviour/BehaviourSequence" index="1" unique_id=30775204 instance=ExtResource("5_71n4g")]
+[node name="GameSetSwitch" parent="PickupBehaviour/BehaviourSequence" index="2" unique_id=30775204 instance=ExtResource("5_71n4g")]
 switch_name = "mermaid_ability_unlocked"
+
+[node name="pickup_sound" type="FmodEventEmitter2D" parent="." index="3" unique_id=1868789720]
+event_name = "event:/Environment/Clam Open"
+event_guid = "{ff25eac8-c5ea-434a-8e88-80b7cd740ca9}"
+volume = 0.8

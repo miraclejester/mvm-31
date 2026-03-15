@@ -5,6 +5,7 @@ signal game_saved()
 
 @export var config: GameManagerConfig
 @export var start_new: bool = false
+@export var world_scene: PackedScene
 
 var current_world: GameWorld
 var ability_dict: Dictionary[AbilityData.EAbilityKey, AbilityData] = {}
@@ -23,6 +24,12 @@ func set_world(world: GameWorld) -> void:
 	current_world = world
 	world_set.emit()
 	world.current_room_set.connect(on_current_room_set)
+	world.player.death_finished.connect(on_player_death)
+
+
+func on_player_death() -> void:
+	await get_tree().create_timer(2).timeout
+	get_tree().change_scene_to_packed(world_scene)
 
 
 func on_current_room_set(data: GameWorldRoomData) -> void:

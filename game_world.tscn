@@ -3,12 +3,13 @@
 [ext_resource type="Script" uid="uid://bckn0pt6gpe5h" path="res://game_world.gd" id="1_bvgre"]
 [ext_resource type="Resource" uid="uid://kk0npsje8um6" path="res://maps/main_map/world_data.tres" id="2_ea1x0"]
 [ext_resource type="PackedScene" uid="uid://k0gilutiyigl" path="res://characters/player/player.tscn" id="3_e3xe6"]
+[ext_resource type="PackedScene" uid="uid://dyjluwwvbrl8n" path="res://systems/ui/hud.tscn" id="4_e08lw"]
 
 [node name="GameWorld" type="Node2D" unique_id=895151578 node_paths=PackedStringArray("player")]
 process_mode = 3
 script = ExtResource("1_bvgre")
-player = NodePath("Player")
 world_data = ExtResource("2_ea1x0")
+player = NodePath("Player")
 
 [node name="CurrentRoomParent" type="Node2D" parent="." unique_id=1829280072]
 unique_name_in_owner = true
@@ -29,6 +30,9 @@ limit_right = 2560
 limit_bottom = 720
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
+
+[node name="Hud" parent="." unique_id=1210185769 instance=ExtResource("4_e08lw")]
+unique_name_in_owner = true
 
 [editable path="Player"]
 [editable path="Player/FlipTarget/TestGun"]

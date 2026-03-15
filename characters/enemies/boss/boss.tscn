@@ -122,6 +122,20 @@ tracks/1/keys = {
 "method": &"call_direct_action"
 }]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StaticVisuals/attack")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.33333334),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_one_shot"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_fi2ex"]
 resource_name = "swim"
@@ -234,6 +248,11 @@ event_name = "event:/Player/Player Death"
 event_guid = "{7265b98f-67a4-4ab1-a23d-946eddbbb4e0}"
 volume = 0.8
 
+[node name="attack" type="FmodEventEmitter2D" parent="StaticVisuals" parent_id_path=PackedInt32Array(613635385) index="2" unique_id=1199862070]
+event_name = "event:/Enemies/Boss Attack"
+event_guid = "{15ba32d2-68b1-44c1-8309-ecb09e42fb9e}"
+volume = 0.8
+
 [node name="CollisionShape2D" parent="Hurtbox" parent_id_path=PackedInt32Array(573111498) index="0" unique_id=1674096468]
 position = Vector2(4, -20)
 shape = SubResource("RectangleShape2D_64gbr")
@@ -251,7 +270,6 @@ parameters/conditions/swimming = false
 
 [node name="ActorStateMachine" parent="." index="8" unique_id=1386328368 node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("States/Waiting")
-debug_logs = true
 
 [node name="Waiting" parent="ActorStateMachine/States" parent_id_path=PackedInt32Array(1386328368, 1209583682) index="0" unique_id=89059854 instance=ExtResource("4_uhwqo")]
 
