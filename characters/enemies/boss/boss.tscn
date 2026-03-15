@@ -27,7 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://dkekvatgxcsnt" path="res://systems/behaviours/actor_enable_behaviour/actor_enable_behaviour.tscn" id="18_6vcan"]
 [ext_resource type="PackedScene" uid="uid://c4b3teprr3iu4" path="res://systems/state_machine/conditions/actor_life_condition/actor_life_condition.tscn" id="18_64gbr"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_b04o6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6vcan"]
 resource_local_to_scene = true
 shader = ExtResource("2_opu11")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
@@ -213,7 +213,7 @@ size = Vector2(34, 16)
 [node name="Boss" unique_id=1487671488 instance=ExtResource("1_j7i0v")]
 
 [node name="FlipVisuals" parent="." index="0" unique_id=783290642]
-material = SubResource("ShaderMaterial_b04o6")
+material = SubResource("ShaderMaterial_6vcan")
 
 [node name="Sprite" type="Sprite2D" parent="FlipVisuals" index="0" unique_id=1116536144]
 use_parent_material = true
@@ -389,7 +389,7 @@ life = NodePath("../../../../CharacterLife")
 operation = 1
 
 [node name="CharacterLife" parent="." index="10" unique_id=771178152]
-starting_max_life = 1
+starting_max_life = 10
 
 [node name="ActorMovement" parent="Behaviours" parent_id_path=PackedInt32Array(1762055959) index="0" unique_id=655420935]
 max_speed = 260.0
