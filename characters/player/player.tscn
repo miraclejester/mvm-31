@@ -1245,7 +1245,7 @@ half_rotation_targets = [NodePath("../../FlipTarget")]
 water_marker = NodePath("../../WaterLimit")
 underwater_marker = NodePath("../../UnderwaterLimit")
 surfacing_speed = 100.0
-surface_move_speed = 180.0
+surface_move_speed = 120.0
 jump_force = -500.0
 cut_jump_force = -220.0
 
@@ -1553,7 +1553,7 @@ trigger_key = "swim_started"
 controller = NodePath("../../../../../../../StaticBehaviours/PlayerController")
 
 [node name="TimedSwimSound" parent="ActorStateMachine/States/Swim/OnProcess/PlaySwimSoundIfMoving/Behaviour" parent_id_path=PackedInt32Array(743546512, 1805669259) index="0" unique_id=20770543 instance=ExtResource("48_s04et")]
-running_rate = 0.5
+running_rate = 0.8
 
 [node name="PlaySwimSound" parent="ActorStateMachine/States/Swim/OnProcess/PlaySwimSoundIfMoving/Behaviour/TimedSwimSound/Behaviour" parent_id_path=PackedInt32Array(20770543, 2112558235) index="0" unique_id=776364304 node_paths=PackedStringArray("event_emitter") instance=ExtResource("22_r7pn3")]
 event_emitter = NodePath("../../../../../../../../../FlipTarget/SFX/swim")

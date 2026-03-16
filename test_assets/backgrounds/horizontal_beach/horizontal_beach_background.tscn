@@ -27,7 +27,7 @@ texture = ExtResource("2_6jy42")
 stretch_mode = 1
 
 [node name="IslandsParallax" type="Parallax2D" parent="." unique_id=1056986840]
-scroll_scale = Vector2(0.6, 0.6)
+scroll_scale = Vector2(0.5, 0.5)
 repeat_size = Vector2(640, 0)
 
 [node name="TextureRect" type="TextureRect" parent="IslandsParallax" unique_id=1565360428]

@@ -12,12 +12,33 @@ var ability_dict: Dictionary[AbilityData.EAbilityKey, AbilityData] = {}
 var unlocked_abilities: Dictionary[AbilityData.EAbilityKey, AbilityData] = {}
 var save_data: SaveData
 
-func _ready() -> void:
-	save_data = load_from_file()
+func init() -> void:
 	for ability in config.possible_abilities:
 		ability_dict[ability.ability_key] = ability
 	for ability_key in save_data.unlocked_abilities:
 		unlock_ability(ability_dict[ability_key])
+
+
+func new_game() -> void:
+	save_data = create_new_save()
+	init()
+	switch_to_world_scene()
+
+
+func continue_game() -> void:
+	save_data = load_from_file()
+	init()
+	switch_to_world_scene()
+
+
+func switch_to_world_scene() -> void:
+	OverlayEffects.fade_out_finished.connect(go_to_world_scene)
+	OverlayEffects.fade_out()
+
+
+func go_to_world_scene() -> void:
+	get_tree().change_scene_to_packed(world_scene)
+	OverlayEffects.fade_in()
 
 
 func set_world(world: GameWorld) -> void:
