@@ -1,0 +1,35 @@
+{dfcbac79-1127-459a-b4e5-439f2f05d523} bank:/Master
+{47d68cad-605c-09d8-32ac-c961def6d3bb} bank:/Master.strings
+{63c6a061-c8dc-480d-a202-f3f46dee3c07} bus:/
+{1c2715f9-3526-47ab-aa6c-85fb9c7c5bf9} bus:/Reverb
+{3920ea3d-3502-4304-a7b0-fbbb13210782} bus:/Subgroup
+{8a1eb657-4a4e-410b-ba0d-13b2b08b1eb4} bus:/Subgroup/Ambience
+{41167bc2-ed8f-4249-b039-46c520ebfa42} bus:/Subgroup/Enemy SFX
+{b82e9381-6410-4952-a61d-8cb32345dd37} bus:/Subgroup/Foley SFX
+{78e934b6-1991-4363-b20c-71daddb6c8be} bus:/Subgroup/Music
+{ff473b63-e533-4706-ba27-d76b6e70863e} bus:/Subgroup/Player SFX
+{b145a370-099b-40ff-9a9c-7bed0305d55f} bus:/Subgroup/UI SFX
+{5666c04d-34ba-4d69-9375-8cc4a7233411} event:/Enemies/Bat_Loop
+{15ba32d2-68b1-44c1-8309-ecb09e42fb9e} event:/Enemies/Boss Attack
+{3b6a43a6-14c3-4a5b-89c9-d73601de3b4f} event:/Enemies/Crab_Loop
+{a631eb36-41fe-495b-b5b9-47f9ee1a5b2e} event:/Enemies/Enemy_Hit
+{9cd55707-13bb-4289-8167-6c5a83dc22a4} event:/Environment/Clam Deposit
+{ff25eac8-c5ea-434a-8e88-80b7cd740ca9} event:/Environment/Clam Open
+{e0437226-a106-4243-8627-e28bd15fbb1a} event:/Music/Level Music
+{7265b98f-67a4-4ab1-a23d-946eddbbb4e0} event:/Player/Player Death
+{d3f41a99-9998-401a-9ab6-270da90d10bf} event:/Player/Player FS Grass
+{fd7c8726-73c0-4be4-9e6c-c479b5c04eb7} event:/Player/Player FS Sand
+{5b98edf4-1eb2-49fe-b828-df637fa009ce} event:/Player/Player FS Stone
+{d7dabb45-8b96-484f-9bac-7554b16e3801} event:/Player/Player Jump
+{82ee20ce-be92-4d71-b266-2932ab63fac7} event:/Player/Player Melee Spell
+{23f46a14-1ff5-4316-98fd-b5ad509d68f6} event:/Player/Player Melee Swipe
+{778c261e-956b-4734-bb38-36f674508e85} event:/Player/Player Swim
+{73a207b9-0602-4f23-88e9-7d6a764dfb09} event:/Player/Player Transform
+{24693673-1685-4b61-9832-4a737d613192} event:/Player/Player_Hit
+{ed03c050-39b6-451c-9bec-776a8ff125e2} event:/Player/Player_Pickup_Pearl
+{a921e08e-c3f9-42d3-b08d-c103566b41f9} event:/Player/Player_Save
+{505da43a-2818-44bc-8b83-6045f3ab5e1a} event:/UI SFX/UI Hover
+{e649ce9c-e752-4ea3-95ca-a25fc912e406} event:/UI SFX/UI Return
+{af0e1bbb-5261-463f-b2a6-3372c2e51b91} event:/UI SFX/UI Select
+{46882ddd-8d6c-49ff-bdf4-b85f8580ce49} parameter:/Music Switch
+{6dd41bf2-c785-4b16-be7a-bf905d74f8cd} parameter:/Underwater
