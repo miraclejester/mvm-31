@@ -15,6 +15,9 @@ size = Vector2(20, 282)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_djgcq"]
 size = Vector2(221, 27)
 
+[sub_resource type="LabelSettings" id="LabelSettings_g4usg"]
+font_color = Color(0.056291588, 0.056291603, 0.056291573, 1)
+
 [node name="002_BeachShaft" unique_id=399359172 instance=ExtResource("1_xenga")]
 
 [node name="HorizontalBeachBackground" parent="ParallaxBackground" parent_id_path=PackedInt32Array(181560860) index="0" unique_id=1550229274 instance=ExtResource("2_qoo2t")]
@@ -64,6 +67,14 @@ shape = SubResource("RectangleShape2D_djgcq")
 
 [node name="Crab" parent="Enemies" parent_id_path=PackedInt32Array(1450376257) index="0" unique_id=1487671488 instance=ExtResource("5_g4usg")]
 position = Vector2(368, 160)
+
+[node name="Label" type="Label" parent="." index="9" unique_id=1510315226]
+offset_top = 72.0
+offset_right = 257.0
+offset_bottom = 121.0
+text = "Use X or J to do a Melee Attack.
+Use C or K to do a Ranged Attack."
+label_settings = SubResource("LabelSettings_g4usg")
 
 [editable path="CameraBounds"]
 [editable path="Transitions/LeftEntrance"]

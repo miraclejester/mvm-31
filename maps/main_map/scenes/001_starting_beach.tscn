@@ -8,6 +8,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6av6j"]
 size = Vector2(20, 320)
 
+[sub_resource type="LabelSettings" id="LabelSettings_xi1wm"]
+font_color = Color(0.05490196, 0.05490196, 0.05490196, 1)
+
 [node name="GameWorldRoom" unique_id=399359172 instance=ExtResource("1_w75n4")]
 
 [node name="HorizontalBeachBackground" parent="ParallaxBackground" parent_id_path=PackedInt32Array(181560860) index="0" unique_id=1550229274 instance=ExtResource("2_xi1wm")]
@@ -35,6 +38,15 @@ position = Vector2(-56, 0)
 [node name="CollisionShape2D" parent="Transitions/RightEntrance" index="1" unique_id=550180330]
 position = Vector2(0, -104)
 shape = SubResource("RectangleShape2D_6av6j")
+
+[node name="MovementInstructions" type="Label" parent="." index="9" unique_id=895639344]
+offset_left = 67.0
+offset_top = 156.0
+offset_right = 316.0
+offset_bottom = 205.0
+text = "Use Arrow Keys / WASD to move
+Use Spacebar or Z to jump."
+label_settings = SubResource("LabelSettings_xi1wm")
 
 [editable path="CameraBounds"]
 [editable path="Transitions/RightEntrance"]

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dxm3x54i2hfke"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_03f7v"]
+font_color = Color(0.26657522, 0.2665752, 0.2665752, 1)
+
+[node name="InstructionsText" type="CanvasLayer" unique_id=2145870162]
+
+[node name="Label" type="Label" parent="." unique_id=1315416717]
+offset_right = 40.0
+offset_bottom = 23.0
+label_settings = SubResource("LabelSettings_03f7v")

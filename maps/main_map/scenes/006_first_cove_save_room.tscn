@@ -69,6 +69,13 @@ position = Vector2(56, 0)
 position = Vector2(0, -39)
 shape = SubResource("RectangleShape2D_pbodf")
 
+[node name="Label" type="Label" parent="." index="9" unique_id=588218523]
+offset_left = 104.0
+offset_top = 48.0
+offset_right = 570.0
+offset_bottom = 71.0
+text = "The clam pickup will give you the ability to swim underwater"
+
 [editable path="CameraBounds"]
 [editable path="Interactables/RemoveMermaidPickup"]
 [editable path="Interactables/RemoveMermaidPickup/SetupBehaviour/RemovePickupIfSwitch"]
