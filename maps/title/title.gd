@@ -6,7 +6,7 @@ extends CanvasLayer
 @onready var hover_sfx: FmodEventEmitter2D = %ui_hover
 
 func _ready() -> void:
-	AudioManager.play_bgm("Beach")
+	AudioManager.play_bgm("Title")
 	new_game_button.button_down.connect(new_game_clicked)
 	continue_button.button_down.connect(continue_clicked)
 	new_game_button.mouse_entered.connect(button_hovered)
