@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://ec8107fdrqtj"]
+
+[ext_resource type="Texture2D" uid="uid://b0wl2nj3s2mb4" path="res://pixel_assets/props/coralsAndStuff.png" id="1_r48a0"]
+
+[node name="Multiprops" type="Sprite2D" unique_id=125322975]
+texture = ExtResource("1_r48a0")
+hframes = 5
+vframes = 2

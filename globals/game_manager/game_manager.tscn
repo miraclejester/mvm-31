@@ -3,9 +3,11 @@
 [ext_resource type="Script" uid="uid://bbriiha0sjn3r" path="res://globals/game_manager/game_manager.gd" id="1_dmcod"]
 [ext_resource type="Resource" uid="uid://y5hfyntixuct" path="res://globals/game_manager/game_manager_config.tres" id="2_ctu20"]
 [ext_resource type="PackedScene" uid="uid://b36m53l2v4cpo" path="res://game_world.tscn" id="3_q5eha"]
+[ext_resource type="PackedScene" uid="uid://d4g8nyypd3wx4" path="res://maps/ending/ending.tscn" id="4_qfmkk"]
 
 [node name="GameManager" type="Node" unique_id=1195116369]
 process_mode = 3
 script = ExtResource("1_dmcod")
 config = ExtResource("2_ctu20")
 world_scene = ExtResource("3_q5eha")
+ending_scene = ExtResource("4_qfmkk")

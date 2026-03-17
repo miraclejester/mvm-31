@@ -32,6 +32,8 @@ z_index = 1
 material = ExtResource("4_4fglm")
 tile_set = ExtResource("5_4fglm")
 
+[node name="Props" type="Node2D" parent="." unique_id=533577089]
+
 [node name="ProjectilesParent" type="Node2D" parent="." unique_id=976289283]
 unique_name_in_owner = true
 

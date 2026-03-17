@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://41fhjyvb565o"]
+
+[ext_resource type="Texture2D" uid="uid://4nyn7vcjn7bt" path="res://pixel_assets/props/wipProps1.png" id="1_yhn01"]
+
+[node name="PalmTree" type="Sprite2D" unique_id=1309344879]
+texture = ExtResource("1_yhn01")
+region_enabled = true
+region_rect = Rect2(66, 21, 62, 77)

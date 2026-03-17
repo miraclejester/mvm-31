@@ -6,6 +6,7 @@ signal game_saved()
 @export var config: GameManagerConfig
 @export var start_new: bool = false
 @export var world_scene: PackedScene
+@export var ending_scene: PackedScene
 
 var current_world: GameWorld
 var ability_dict: Dictionary[AbilityData.EAbilityKey, AbilityData] = {}
@@ -34,6 +35,10 @@ func continue_game() -> void:
 func switch_to_world_scene() -> void:
 	OverlayEffects.fade_out_finished.connect(go_to_world_scene)
 	OverlayEffects.fade_out()
+
+
+func go_to_ending_scene() -> void:
+	get_tree().change_scene_to_packed(ending_scene)
 
 
 func go_to_world_scene() -> void:

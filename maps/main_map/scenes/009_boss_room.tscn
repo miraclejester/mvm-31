@@ -8,10 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://dto1etc05oivl" path="res://systems/interactables/standard/standard_interactable.tscn" id="3_dts7s"]
 [ext_resource type="PackedScene" uid="uid://dlcssb4x7r0fi" path="res://systems/world/rooms/room_transition.tscn" id="3_ekmnh"]
 [ext_resource type="PackedScene" uid="uid://c1h52flsaty6g" path="res://interactables/wall.tscn" id="3_xn5am"]
-[ext_resource type="PackedScene" uid="uid://d4g8nyypd3wx4" path="res://maps/ending/ending.tscn" id="4_burkc"]
 [ext_resource type="PackedScene" uid="uid://caqfq51gueoim" path="res://systems/behaviours/sequence/behaviour_sequence.tscn" id="4_c06nw"]
 [ext_resource type="PackedScene" uid="uid://dguk1l368orko" path="res://systems/behaviours/spawn_actor_behaviour/spawn_actor_behaviour.tscn" id="5_it02w"]
 [ext_resource type="PackedScene" uid="uid://bqg5pep6gnwgo" path="res://systems/behaviours/audio_play_bgm/audio_play_bgm.tscn" id="5_pgpcv"]
+[ext_resource type="PackedScene" uid="uid://ec8107fdrqtj" path="res://pixel_assets/props/multiprops.tscn" id="6_burkc"]
 [ext_resource type="PackedScene" uid="uid://bwfojncre050s" path="res://systems/behaviours/actor_erase_actor/actor_erase_actor.tscn" id="7_c06nw"]
 [ext_resource type="PackedScene" uid="uid://deh3jqi5rkep7" path="res://systems/behaviours/state_machine_enter_state/state_machine_enter_state.tscn" id="8_gw8os"]
 [ext_resource type="PackedScene" uid="uid://b5kdxqxe2iwvk" path="res://characters/enemies/boss/boss.tscn" id="9_it02w"]
@@ -23,7 +23,7 @@ size = Vector2(10, 344)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82ddp"]
 size = Vector2(10, 82)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ajv4v"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iwv8a"]
 resource_local_to_scene = true
 shader = ExtResource("10_k05pv")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
@@ -32,7 +32,6 @@ shader_parameter/enabled = false
 [node name="009_BossRoom" unique_id=399359172 instance=ExtResource("1_e1bdg")]
 script = ExtResource("2_x118k")
 pearl_pickup = ExtResource("3_0k6jk")
-ending_scene = ExtResource("4_burkc")
 
 [node name="CoveBackground" parent="ParallaxBackground" parent_id_path=PackedInt32Array(181560860) index="0" unique_id=388293656 instance=ExtResource("2_ajv4v")]
 
@@ -46,7 +45,59 @@ tile_set = ExtResource("2_xn5am")
 [node name="NearForegroundLayer" parent="MapLayers" parent_id_path=PackedInt32Array(76465743) index="2" unique_id=561237308]
 tile_map_data = PackedByteArray("AAD9/wgAAAAAAAAAAAD9/wkAAAAAAAAAAAD9/woAAAAAAAAAAAD9/wsAAAAAAAAAAAD+/wsAAAAAAAAAAAD//wsAAAAAAAAAAAAAAAsAAAAAAAAAAAABAAsAAAAAAAAAAAACAAsAAAAAAAAAAAADAAsAAAAAAAAAAAAEAAsAAAAAAAAAAAAFAAsAAAAAAAAAAAAGAAsAAAAAAAAAAAAHAAsAAAAAAAAAAAAIAAsAAAAAAAAAAAAJAAsAAAAAAAAAAAAKAAsAAAAAAAAAAAALAAsAAAAAAAAAAAAMAAsAAAAAAAAAAAANAAsAAAAAAAAAAAAOAAsAAAAAAAAAAAAPAAsAAAAAAAAAAAAQAAsAAAAAAAAAAAARAAsAAAAAAAAAAAASAAsAAAAAAAAAAAATAAsAAAAAAAAAAAATAAoAAAAAAAAAAAATAAkAAAAAAAAAAAATAAgAAAAAAAAAAAATAAcAAAAAAAAAAAATAAYAAAAAAAAAAAATAAUAAAAAAAAAAAATAAQAAAAAAAAAAAATAAMAAAAAAAAAAAATAAIAAAAAAAAAAAATAAEAAAAAAAAAAAATAAAAAAAAAAAAAAASAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAANAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAADAAAAAAAAAAAAAAACAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAgAAAAAAAAAAAD//wgAAAAAAAAAAAD+/wgAAAAAAAAAAAAHAAUAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAMAAAAAAAAAAAAHAAIAAAAAAAAAAAAHAAEAAAAAAAAAAAAGAAEAAAAAAAAAAAAFAAEAAAAAAAAAAAAEAAEAAAAAAAAAAAADAAEAAAAAAAAAAAACAAEAAAAAAAAAAAABAAEAAAAAAAAAAAABAAIAAAAAAAAAAAABAAMAAAAAAAAAAAABAAQAAAAAAAAAAAABAAUAAAAAAAAAAAABAAYAAAAAAAAAAAABAAcAAAAAAAAAAAABAAgAAAAAAAAAAAABAAkAAAAAAAAAAAAAAAkAAAAAAAAAAAD//wkAAAAAAAAAAAD+/wkAAAAAAAAAAAD+/woAAAAAAAAAAAD//woAAAAAAAAAAAAAAAoAAAAAAAAAAAABAAoAAAAAAAAAAAACAAoAAAAAAAAAAAACAAkAAAAAAAAAAAACAAgAAAAAAAAAAAACAAcAAAAAAAAAAAACAAYAAAAAAAAAAAACAAUAAAAAAAAAAAACAAQAAAAAAAAAAAACAAMAAAAAAAAAAAACAAIAAAAAAAAAAAADAAIAAAAAAAAAAAADAAMAAAAAAAAAAAADAAQAAAAAAAAAAAADAAUAAAAAAAAAAAADAAYAAAAAAAAAAAADAAcAAAAAAAAAAAADAAgAAAAAAAAAAAADAAkAAAAAAAAAAAADAAoAAAAAAAAAAAAEAAoAAAAAAAAAAAAEAAkAAAAAAAAAAAAEAAgAAAAAAAAAAAAEAAcAAAAAAAAAAAAEAAYAAAAAAAAAAAAEAAUAAAAAAAAAAAAEAAQAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAIAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAMAAAAAAAAAAAAFAAQAAAAAAAAAAAAFAAUAAAAAAAAAAAAFAAYAAAAAAAAAAAAFAAcAAAAAAAAAAAAFAAgAAAAAAAAAAAAFAAkAAAAAAAAAAAAFAAoAAAAAAAAAAAAGAAoAAAAAAAAAAAAGAAkAAAAAAAAAAAAGAAgAAAAAAAAAAAAGAAcAAAAAAAAAAAAGAAYAAAAAAAAAAAAGAAUAAAAAAAAAAAAGAAQAAAAAAAAAAAAGAAMAAAAAAAAAAAAGAAIAAAAAAAAAAAAHAAYAAAAAAAAAAAAHAAcAAAAAAAAAAAAHAAgAAAAAAAAAAAAHAAkAAAAAAAAAAAAHAAoAAAAAAAAAAAAIAAoAAAAAAAAAAAAIAAkAAAAAAAAAAAAIAAgAAAAAAAAAAAAIAAcAAAAAAAAAAAAIAAYAAAAAAAAAAAAIAAUAAAAAAAAAAAAIAAQAAAAAAAAAAAAIAAMAAAAAAAAAAAAIAAIAAAAAAAAAAAAIAAEAAAAAAAAAAAAJAAEAAAAAAAAAAAAJAAIAAAAAAAAAAAAJAAMAAAAAAAAAAAAJAAQAAAAAAAAAAAAJAAUAAAAAAAAAAAAJAAYAAAAAAAAAAAAJAAcAAAAAAAAAAAAJAAgAAAAAAAAAAAAJAAkAAAAAAAAAAAAJAAoAAAAAAAAAAAAKAAoAAAAAAAAAAAAKAAkAAAAAAAAAAAAKAAgAAAAAAAAAAAAKAAcAAAAAAAAAAAAKAAYAAAAAAAAAAAAKAAUAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAMAAAAAAAAAAAAKAAIAAAAAAAAAAAAKAAEAAAAAAAAAAAALAAEAAAAAAAAAAAALAAIAAAAAAAAAAAALAAMAAAAAAAAAAAALAAQAAAAAAAAAAAALAAUAAAAAAAAAAAALAAYAAAAAAAAAAAALAAcAAAAAAAAAAAALAAgAAAAAAAAAAAALAAkAAAAAAAAAAAALAAoAAAAAAAAAAAAMAAoAAAAAAAAAAAAMAAkAAAAAAAAAAAAMAAgAAAAAAAAAAAAMAAcAAAAAAAAAAAAMAAYAAAAAAAAAAAAMAAUAAAAAAAAAAAAMAAQAAAAAAAAAAAAMAAMAAAAAAAAAAAAMAAIAAAAAAAAAAAAMAAEAAAAAAAAAAAANAAEAAAAAAAAAAAANAAIAAAAAAAAAAAANAAMAAAAAAAAAAAANAAQAAAAAAAAAAAANAAUAAAAAAAAAAAANAAYAAAAAAAAAAAANAAcAAAAAAAAAAAANAAgAAAAAAAAAAAANAAkAAAAAAAAAAAANAAoAAAAAAAAAAAAOAAoAAAAAAAAAAAAOAAkAAAAAAAAAAAAOAAgAAAAAAAAAAAAOAAcAAAAAAAAAAAAOAAYAAAAAAAAAAAAOAAUAAAAAAAAAAAAOAAQAAAAAAAAAAAAOAAMAAAAAAAAAAAAOAAIAAAAAAAAAAAAOAAEAAAAAAAAAAAAPAAEAAAAAAAAAAAAPAAIAAAAAAAAAAAAPAAMAAAAAAAAAAAAPAAQAAAAAAAAAAAAPAAUAAAAAAAAAAAAPAAYAAAAAAAAAAAAPAAcAAAAAAAAAAAAPAAgAAAAAAAAAAAAPAAkAAAAAAAAAAAAPAAoAAAAAAAAAAAAQAAoAAAAAAAAAAAAQAAkAAAAAAAAAAAAQAAgAAAAAAAAAAAAQAAcAAAAAAAAAAAAQAAYAAAAAAAAAAAAQAAUAAAAAAAAAAAAQAAQAAAAAAAAAAAAQAAMAAAAAAAAAAAAQAAIAAAAAAAAAAAAQAAEAAAAAAAAAAAARAAEAAAAAAAAAAAARAAIAAAAAAAAAAAARAAMAAAAAAAAAAAARAAQAAAAAAAAAAAARAAUAAAAAAAAAAAARAAYAAAAAAAAAAAARAAcAAAAAAAAAAAARAAgAAAAAAAAAAAARAAkAAAAAAAAAAAARAAoAAAAAAAAAAAASAAoAAAAAAAAAAAASAAkAAAAAAAAAAAASAAgAAAAAAAAAAAASAAcAAAAAAAAAAAASAAYAAAAAAAAAAAASAAUAAAAAAAAAAAASAAQAAAAAAAAAAAASAAMAAAAAAAAAAAASAAIAAAAAAAAAAAASAAEAAAAAAAAAAAA=")
 
-[node name="PlayerSpawn" parent="." index="4" unique_id=548575327]
+[node name="Multiprops" parent="Props" parent_id_path=PackedInt32Array(533577089) index="0" unique_id=125322975 instance=ExtResource("6_burkc")]
+position = Vector2(384, 336)
+
+[node name="Multiprops2" parent="Props" parent_id_path=PackedInt32Array(533577089) index="1" unique_id=69979111 instance=ExtResource("6_burkc")]
+position = Vector2(304, 336)
+
+[node name="Multiprops3" parent="Props" parent_id_path=PackedInt32Array(533577089) index="2" unique_id=867377965 instance=ExtResource("6_burkc")]
+position = Vector2(344, 336)
+frame = 7
+
+[node name="Multiprops4" parent="Props" parent_id_path=PackedInt32Array(533577089) index="3" unique_id=563701406 instance=ExtResource("6_burkc")]
+position = Vector2(48, 160)
+rotation = 1.5707964
+frame = 6
+
+[node name="Multiprops5" parent="Props" parent_id_path=PackedInt32Array(533577089) index="4" unique_id=1149310083 instance=ExtResource("6_burkc")]
+position = Vector2(48, 224)
+rotation = 1.5707964
+frame = 6
+
+[node name="Multiprops6" parent="Props" parent_id_path=PackedInt32Array(533577089) index="5" unique_id=185459159 instance=ExtResource("6_burkc")]
+position = Vector2(48, 88)
+rotation = 1.5707964
+frame = 6
+
+[node name="Multiprops7" parent="Props" parent_id_path=PackedInt32Array(533577089) index="6" unique_id=357567418 instance=ExtResource("6_burkc")]
+position = Vector2(592, 88)
+rotation = 4.712389
+frame = 6
+
+[node name="Multiprops8" parent="Props" parent_id_path=PackedInt32Array(533577089) index="7" unique_id=1561109931 instance=ExtResource("6_burkc")]
+position = Vector2(592, 160)
+rotation = 4.712389
+frame = 6
+
+[node name="Multiprops9" parent="Props" parent_id_path=PackedInt32Array(533577089) index="8" unique_id=1712357217 instance=ExtResource("6_burkc")]
+position = Vector2(592, 232)
+rotation = 4.712389
+frame = 6
+
+[node name="Multiprops10" parent="Props" parent_id_path=PackedInt32Array(533577089) index="9" unique_id=1539885924 instance=ExtResource("6_burkc")]
+position = Vector2(592, 344)
+frame = 2
+
+[node name="Multiprops12" parent="Props" parent_id_path=PackedInt32Array(533577089) index="10" unique_id=959723953 instance=ExtResource("6_burkc")]
+position = Vector2(32, 24)
+frame = 2
+
+[node name="Multiprops13" parent="Props" parent_id_path=PackedInt32Array(533577089) index="11" unique_id=1740429342 instance=ExtResource("6_burkc")]
+position = Vector2(608, 24)
+frame = 2
+
+[node name="PlayerSpawn" parent="." index="5" unique_id=548575327]
 position = Vector2(0, 344)
 
 [node name="BossStartInteractable" parent="Interactables" parent_id_path=PackedInt32Array(817726722) index="0" unique_id=337649948 instance=ExtResource("3_dts7s")]
@@ -86,25 +137,6 @@ position = Vector2(48, 0)
 position = Vector2(-5, -31)
 shape = SubResource("RectangleShape2D_82ddp")
 
-[node name="Boss" parent="Enemies" parent_id_path=PackedInt32Array(1450376257) index="0" unique_id=1487671488 instance=ExtResource("9_it02w")]
-unique_name_in_owner = true
-position = Vector2(496, 240)
-
-[node name="FlipVisuals" parent="Enemies/Boss" index="0" unique_id=783290642]
-material = SubResource("ShaderMaterial_ajv4v")
-
-[node name="TopLeftRetriever" parent="Enemies/Boss/Data" parent_id_path=PackedInt32Array(1487671488, 1763860896) index="0" unique_id=786237967 node_paths=PackedStringArray("target")]
-target = NodePath("../../../../BossPositions/TopLeft")
-
-[node name="TopRightRetriever" parent="Enemies/Boss/Data" parent_id_path=PackedInt32Array(1487671488, 1763860896) index="1" unique_id=1925971475 node_paths=PackedStringArray("target")]
-target = NodePath("../../../../BossPositions/TopRight")
-
-[node name="BottomLeftRetriever" parent="Enemies/Boss/Data" parent_id_path=PackedInt32Array(1487671488, 1763860896) index="2" unique_id=981581618 node_paths=PackedStringArray("target")]
-target = NodePath("../../../../BossPositions/BottomLeft")
-
-[node name="BottomRightRetriever" parent="Enemies/Boss/Data" parent_id_path=PackedInt32Array(1487671488, 1763860896) index="3" unique_id=1150023431 node_paths=PackedStringArray("target")]
-target = NodePath("../../../../BossPositions/BottomRight")
-
 [node name="BossPositions" type="Node2D" parent="." index="9" unique_id=1876475256]
 
 [node name="TopRight" type="Marker2D" parent="BossPositions" index="0" unique_id=249106673]
@@ -122,6 +154,25 @@ position = Vector2(80, 312)
 [node name="PearlPosition" type="Marker2D" parent="." index="10" unique_id=623448752]
 unique_name_in_owner = true
 position = Vector2(320, 192)
+
+[node name="Boss" parent="Enemies" parent_id_path=PackedInt32Array(1450376257) index="0" unique_id=1487671488 instance=ExtResource("9_it02w")]
+unique_name_in_owner = true
+position = Vector2(496, 240)
+
+[node name="FlipVisuals" parent="Enemies/Boss" index="0" unique_id=783290642]
+material = SubResource("ShaderMaterial_iwv8a")
+
+[node name="TopLeftRetriever" parent="Enemies/Boss/Data" parent_id_path=PackedInt32Array(1487671488, 1763860896) index="0" unique_id=786237967 node_paths=PackedStringArray("target")]
+target = NodePath("../../../../BossPositions/TopLeft")
+
+[node name="TopRightRetriever" parent="Enemies/Boss/Data" parent_id_path=PackedInt32Array(1487671488, 1763860896) index="1" unique_id=1925971475 node_paths=PackedStringArray("target")]
+target = NodePath("../../../../BossPositions/TopRight")
+
+[node name="BottomLeftRetriever" parent="Enemies/Boss/Data" parent_id_path=PackedInt32Array(1487671488, 1763860896) index="2" unique_id=981581618 node_paths=PackedStringArray("target")]
+target = NodePath("../../../../BossPositions/BottomLeft")
+
+[node name="BottomRightRetriever" parent="Enemies/Boss/Data" parent_id_path=PackedInt32Array(1487671488, 1763860896) index="3" unique_id=1150023431 node_paths=PackedStringArray("target")]
+target = NodePath("../../../../BossPositions/BottomRight")
 
 [editable path="CameraBounds"]
 [editable path="Interactables/BossStartInteractable"]

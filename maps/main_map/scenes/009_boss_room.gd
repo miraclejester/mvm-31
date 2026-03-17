@@ -1,7 +1,6 @@
 extends GameWorldRoom
 
 @export var pearl_pickup: PackedScene
-@export var ending_scene: PackedScene
 
 @onready var boss: WorldCharacter = %Boss
 @onready var pearl_pos: Node2D = %PearlPosition
@@ -14,10 +13,10 @@ func _ready() -> void:
 
 
 func spawn_pearl() -> void:
-	AudioManager.play_bgm("Beach")
+	AudioManager.play_bgm("Title")
 	var p: Node = pearl_pickup.instantiate()
 	pearl_pos.add_child(p)
 
 
 func fade_out_finished() -> void:
-	get_tree().change_scene_to_packed(ending_scene)
+	GameManager.go_to_ending_scene()

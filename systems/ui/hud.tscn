@@ -8,3 +8,4 @@ script = ExtResource("1_6shcp")
 
 [node name="LifeBar" parent="." unique_id=1732989008 instance=ExtResource("1_4hta7")]
 unique_name_in_owner = true
+scale = Vector2(1.4, 1.4)
